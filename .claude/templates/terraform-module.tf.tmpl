@@ -1,0 +1,8 @@
+variable "name" { type = string }
+variable "environment" { type = string; default = "staging" }
+
+resource "null_resource" "server" {
+  triggers = { name = var.name, env = var.environment }
+}
+
+output "server_id" { value = null_resource.server.id }

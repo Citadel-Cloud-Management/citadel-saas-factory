@@ -1,0 +1,7 @@
+name: monitor
+description: Open monitoring dashboards
+usage: /monitor monitor [grafana|prometheus]
+steps:
+  - Check endpoints
+  - Open dashboard
+  - Report status

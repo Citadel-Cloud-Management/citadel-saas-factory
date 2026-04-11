@@ -1,0 +1,14 @@
+"""Data access repository."""
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+
+class ResourceRepository:
+    def __init__(self, session: AsyncSession):
+        self._session = session
+
+    async def find_all(self):
+        result = await self._session.execute(select(None))
+        return result.scalars().all()
+
+    async def find_by_id(self, id: str):
+        return await self._session.get(None, id)

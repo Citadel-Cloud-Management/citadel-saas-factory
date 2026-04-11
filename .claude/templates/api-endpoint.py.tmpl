@@ -1,0 +1,16 @@
+"""{{ resource_name }} API endpoints."""
+from fastapi import APIRouter, Depends, HTTPException, status
+
+router = APIRouter(prefix="/{{ resource_name }}s", tags=["{{ resource_name }}s"])
+
+@router.get("/")
+async def list_items():
+    return {"data": [], "meta": {"total": 0}}
+
+@router.get("/{id}")
+async def get_item(id: str):
+    return {"data": None}
+
+@router.post("/", status_code=status.HTTP_201_CREATED)
+async def create_item(data: dict):
+    return {"data": data}

@@ -1,0 +1,19 @@
+- rule: Shell in Container
+  desc: Detect shell spawned in a container
+  condition: >
+    spawned_process and container and
+    proc.name in (bash, sh, zsh, dash)
+  output: >
+    Shell spawned in container
+    (container=%container.name command=%proc.cmdline user=%user.name)
+  priority: WARNING
+
+- rule: Read Sensitive File
+  desc: Detect reads to sensitive files
+  condition: >
+    open_read and container and
+    fd.name in (/etc/shadow, /etc/passwd)
+  output: >
+    Sensitive file read in container
+    (container=%container.name file=%fd.name user=%user.name)
+  priority: ERROR

@@ -1,0 +1,9 @@
+"""Background worker template."""
+from celery import shared_task
+
+@shared_task(bind=True, max_retries=3, default_retry_delay=60)
+def worker_task(self, **kwargs):
+    try:
+        pass  # Task logic
+    except Exception as exc:
+        self.retry(exc=exc)

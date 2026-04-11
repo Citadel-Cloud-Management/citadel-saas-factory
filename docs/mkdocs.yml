@@ -1,0 +1,20 @@
+site_name: Citadel SaaS Factory
+site_url: https://docs.citadelcloudmanagement.com
+repo_url: https://github.com/kogunlowo123/citadel-saas-factory
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: blue
+
+nav:
+  - Home: index.md
+  - Quick Start: quickstart.md
+  - Architecture: architecture.md
+  - Agents: agents.md
+  - API Reference: api.md
+  - Deployment: deployment.md
+  - Security: security.md
+  - Obsidian Integration: obsidian-integration.md
+  - Contributing: contributing.md

@@ -1,0 +1,38 @@
+name: Nightly Security Scan
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Semgrep SAST
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: auto
+
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          severity: HIGH,CRITICAL
+
+      - name: TruffleHog secret scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+      - name: Python dependency audit
+        run: |
+          pip install pip-audit
+          cd backend && pip-audit 2>/dev/null || true
+
+      - name: Node dependency audit
+        run: cd frontend && npm audit --audit-level=high 2>/dev/null || true

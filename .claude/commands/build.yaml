@@ -1,0 +1,8 @@
+name: build
+description: Build Docker images
+usage: /build build [service]
+steps:
+  - Multi-stage build
+  - Tag with SHA
+  - Scan image
+  - Report

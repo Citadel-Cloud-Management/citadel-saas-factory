@@ -1,0 +1,14 @@
+"""Business logic service."""
+
+class ResourceService:
+    def __init__(self, repo):
+        self._repo = repo
+
+    async def list_all(self):
+        return await self._repo.find_all()
+
+    async def get_by_id(self, id: str):
+        return await self._repo.find_by_id(id)
+
+    async def create(self, data):
+        return await self._repo.create(data)

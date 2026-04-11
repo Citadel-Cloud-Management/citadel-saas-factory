@@ -1,0 +1,8 @@
+name: scaffold
+description: Generate code from templates
+usage: /scaffold scaffold <type> <name>
+steps:
+  - Select template
+  - Substitute variables
+  - Write files
+  - Run linter

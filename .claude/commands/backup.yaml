@@ -1,0 +1,8 @@
+name: backup
+description: Backup database and storage
+usage: /backup backup [--target db|storage]
+steps:
+  - Dump database
+  - Sync storage
+  - Verify integrity
+  - Log

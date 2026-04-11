@@ -1,0 +1,31 @@
+{
+  "dashboard": {
+    "title": "Citadel SaaS Factory — Overview",
+    "panels": [
+      {
+        "title": "Request Rate",
+        "type": "timeseries",
+        "targets": [{ "expr": "rate(http_requests_total[5m])" }],
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+      },
+      {
+        "title": "Error Rate",
+        "type": "timeseries",
+        "targets": [{ "expr": "rate(http_requests_total{status=~\"5..\"}[5m])" }],
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+      },
+      {
+        "title": "Latency (p95)",
+        "type": "timeseries",
+        "targets": [{ "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))" }],
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 }
+      },
+      {
+        "title": "Pod Restarts",
+        "type": "stat",
+        "targets": [{ "expr": "kube_pod_container_status_restarts_total{namespace=~\"staging|production\"}" }],
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
+      }
+    ]
+  }
+}

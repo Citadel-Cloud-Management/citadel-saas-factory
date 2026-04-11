@@ -1,0 +1,8 @@
+name: release
+description: Create tagged release
+usage: /release release [major|minor|patch]
+steps:
+  - Bump version
+  - Generate changelog
+  - Tag
+  - Push

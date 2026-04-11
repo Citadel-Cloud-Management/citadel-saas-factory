@@ -1,0 +1,6 @@
+apiVersion: v2
+name: citadel
+description: Citadel SaaS Factory Helm Chart
+type: application
+version: 3.0.0
+appVersion: "3.0.0"

@@ -1,0 +1,13 @@
+"""{{ ResourceName }} SQLAlchemy model."""
+from sqlalchemy import Column, String, DateTime, Boolean
+from sqlalchemy.dialects.postgresql import UUID
+from app.db.base import Base
+import uuid
+from datetime import datetime
+
+class ResourceModel(Base):
+    __tablename__ = "resources"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, onupdate=datetime.utcnow)
+    is_active = Column(Boolean, default=True)

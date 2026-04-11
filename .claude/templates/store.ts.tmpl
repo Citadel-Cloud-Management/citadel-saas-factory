@@ -1,0 +1,16 @@
+import { create } from "zustand";
+
+interface StoreState {
+  items: unknown[];
+  loading: boolean;
+  fetchItems: () => Promise<void>;
+}
+
+export const useStore = create<StoreState>((set) => ({
+  items: [],
+  loading: false,
+  fetchItems: async () => {
+    set({ loading: true });
+    set({ items: [], loading: false });
+  },
+}));

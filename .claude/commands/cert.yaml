@@ -1,0 +1,8 @@
+name: cert
+description: Manage TLS certificates
+usage: /cert cert [renew|status]
+steps:
+  - Check expiry
+  - Renew via ACME
+  - Verify chain
+  - Report

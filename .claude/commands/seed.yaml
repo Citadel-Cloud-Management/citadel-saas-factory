@@ -1,0 +1,8 @@
+name: seed
+description: Seed database with test data
+usage: /seed seed [--fresh]
+steps:
+  - Clear existing data
+  - Load fixtures
+  - Verify counts
+  - Report

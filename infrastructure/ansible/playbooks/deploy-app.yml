@@ -1,0 +1,26 @@
+---
+- name: Deploy Citadel SaaS Factory
+  hosts: all
+  become: true
+  vars:
+    app_dir: /opt/citadel
+  tasks:
+    - name: Create app directory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        owner: deploy
+
+    - name: Copy docker-compose
+      copy:
+        src: ../../../docker-compose.yml
+        dest: "{{ app_dir }}/docker-compose.yml"
+
+    - name: Copy environment file
+      copy:
+        src: ../../../.env
+        dest: "{{ app_dir }}/.env"
+        mode: "0600"
+
+    - name: Start services
+      shell: cd {{ app_dir }} && docker compose up -d

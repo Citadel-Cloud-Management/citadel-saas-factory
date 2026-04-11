@@ -1,0 +1,9 @@
+name: audit
+description: Run full security and quality audit
+usage: /audit audit [--fix]
+steps:
+  - SAST scan
+  - SCA scan
+  - Secret scan
+  - Quality check
+  - Report

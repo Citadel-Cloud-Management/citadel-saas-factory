@@ -1,0 +1,8 @@
+name: scan
+description: Run security scanners
+usage: /scan scan [--type sast|sca|secret]
+steps:
+  - Semgrep SAST
+  - Trivy SCA
+  - TruffleHog secrets
+  - Report

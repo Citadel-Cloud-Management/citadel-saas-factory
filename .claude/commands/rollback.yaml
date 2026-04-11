@@ -1,0 +1,7 @@
+name: rollback
+description: Emergency rollback to previous version
+usage: /rollback rollback.sh <environment>
+steps:
+  - Identify previous version
+  - Apply previous manifests
+  - Verify health

@@ -1,0 +1,8 @@
+{
+  "name": "prometheus",
+  "command": "npx",
+  "args": ["-y", "mcp-server-prometheus"],
+  "env": {
+    "PROMETHEUS_URL": "${PROMETHEUS_URL}"
+  }
+}
