@@ -1,21 +1,63 @@
-MIT License
+Citadel Cloud Management — Source Available License
+Version 1.0, April 2026
 
-Copyright (c) 2026 Kehinde Ogunlowo
+Copyright (c) 2026 Kehinde Ogunlowo / Citadel Cloud Management
+All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+TERMS AND CONDITIONS
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. GRANT OF LICENSE
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   You are granted a limited, non-exclusive, non-transferable, revocable
+   license to:
+
+   a) Clone and download this repository for personal evaluation and
+      internal business use.
+   b) Modify the software for your own internal use only.
+   c) Deploy the software for your own applications and services.
+
+2. RESTRICTIONS
+
+   You may NOT, without prior written consent from the copyright holder:
+
+   a) Redistribute, republish, or share this software or any derivative
+      works in any form (source code, compiled binaries, or otherwise).
+   b) Fork this repository and make the fork publicly available.
+   c) Sell, sublicense, lease, or rent this software or any portion thereof.
+   d) Remove or alter any copyright notices, license terms, or branding.
+   e) Use this software to create a competing product or service that
+      substantially replicates its functionality.
+   f) Claim authorship or ownership of this software or its components.
+
+3. ATTRIBUTION
+
+   Any permitted use of this software must include clear attribution to:
+   Citadel Cloud Management (citadelcloudmanagement.com)
+   Repository: github.com/kogunlowo123/citadel-saas-factory
+
+4. NO WARRANTY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+5. LIMITATION OF LIABILITY
+
+   IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES
+   OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+   ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+   OTHER DEALINGS IN THE SOFTWARE.
+
+6. TERMINATION
+
+   This license is automatically terminated if you violate any of the above
+   terms. Upon termination, you must destroy all copies of the software in
+   your possession.
+
+7. ENFORCEMENT
+
+   Any unauthorized duplication, redistribution, or forking of this
+   repository constitutes a violation of this license and may be subject
+   to legal action under applicable copyright law.
+
+For licensing inquiries or commercial use: contact@citadelcloudmanagement.com

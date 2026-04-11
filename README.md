@@ -146,7 +146,7 @@ See the full 10-step installation guide in `docs/installation.md`.
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+Source Available License. Clone and use freely. Redistribution and forking prohibited. See [LICENSE](LICENSE) for full terms.
 
 ---
 
