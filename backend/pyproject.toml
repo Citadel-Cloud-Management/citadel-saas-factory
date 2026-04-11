@@ -1,3 +1,10 @@
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
 [project]
 name = "citadel-saas-factory"
 version = "3.0.0"
@@ -20,6 +27,7 @@ dependencies = [
     "celery>=5.4.0",
     "python-multipart>=0.0.17",
     "structlog>=24.4.0",
+    "email-validator>=2.1.0",
 ]
 
 [project.optional-dependencies]
