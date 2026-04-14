@@ -1,0 +1,53 @@
+- rule: Reverse Shell Detected
+  desc: Detect reverse shell connections from containers
+  condition: >
+    spawned_process and container and
+    ((proc.name in (bash, sh, zsh, dash) and
+    proc.cmdline contains "/dev/tcp") or
+    (proc.name in (nc, ncat, nmap) and
+    proc.cmdline contains "-e"))
+  output: >
+    Reverse shell detected in container
+    (container=%container.name command=%proc.cmdline user=%user.name
+     image=%container.image.repository)
+  priority: CRITICAL
+  tags: [network, mitre_execution]
+
+- rule: Crypto Miner Process
+  desc: Detect cryptocurrency mining processes in containers
+  condition: >
+    spawned_process and container and
+    (proc.name in (xmrig, minerd, minergate, cpuminer) or
+    proc.cmdline contains "stratum+tcp" or
+    proc.cmdline contains "stratum+ssl")
+  output: >
+    Crypto miner detected in container
+    (container=%container.name command=%proc.cmdline user=%user.name
+     image=%container.image.repository)
+  priority: CRITICAL
+  tags: [crypto, mitre_resource_hijacking]
+
+- rule: Read Sensitive File
+  desc: Detect reads to sensitive files in containers
+  condition: >
+    open_read and container and
+    fd.name in (/etc/shadow, /etc/passwd, /etc/sudoers,
+    /root/.ssh/id_rsa, /root/.ssh/id_ed25519)
+  output: >
+    Sensitive file read in container
+    (container=%container.name file=%fd.name user=%user.name
+     image=%container.image.repository)
+  priority: ERROR
+  tags: [filesystem, mitre_credential_access]
+
+- rule: Container Escape via nsenter
+  desc: Detect container escape attempts using nsenter
+  condition: >
+    spawned_process and container and
+    proc.name = nsenter
+  output: >
+    Container escape attempt via nsenter
+    (container=%container.name command=%proc.cmdline user=%user.name
+     image=%container.image.repository)
+  priority: CRITICAL
+  tags: [container, mitre_privilege_escalation]

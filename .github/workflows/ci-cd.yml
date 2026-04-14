@@ -1,0 +1,133 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ghcr.io/${{ github.repository }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check backend/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: cd frontend && npm ci && npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: citadel
+          POSTGRES_PASSWORD: citadel
+          POSTGRES_DB: citadel_test
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: cd backend && pip install -e ".[dev]" && pytest --cov=app --cov-report=xml
+        env:
+          DATABASE_URL: postgresql://citadel:citadel@localhost:5432/citadel_test
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: cd frontend && npm ci && npm test -- --watchAll=false
+
+  sast:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          config: auto
+
+  sca:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [test, sast, sca, secret-scan]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: backend
+          push: true
+          tags: ${{ env.IMAGE_PREFIX }}/backend:${{ github.sha }},${{ env.IMAGE_PREFIX }}/backend:latest
+      - uses: docker/build-push-action@v5
+        with:
+          context: frontend
+          push: true
+          tags: ${{ env.IMAGE_PREFIX }}/frontend:${{ github.sha }},${{ env.IMAGE_PREFIX }}/frontend:latest
+
+  container-scan:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.IMAGE_PREFIX }}/backend:${{ github.sha }}
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: container-scan
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Deploy to staging via ArgoCD sync or kubectl apply -k gitops/overlays/staging"
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Deploy to production via ArgoCD sync or kubectl apply -k gitops/overlays/production"

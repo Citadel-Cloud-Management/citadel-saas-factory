@@ -1,0 +1,41 @@
+---
+- name: Setup server with Docker and K3s
+  hosts: all
+  become: true
+  tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install Docker
+      shell: curl -fsSL https://get.docker.com | bash
+      args:
+        creates: /usr/bin/docker
+
+    - name: Install K3s
+      shell: curl -sfL https://get.k3s.io | sh -
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Create app user
+      user:
+        name: deploy
+        groups: docker
+        shell: /bin/bash
+
+    - name: Configure firewall
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop:
+        - "22"
+        - "80"
+        - "443"
+        - "6443"
+
+    - name: Enable firewall
+      ufw:
+        state: enabled
+        policy: deny

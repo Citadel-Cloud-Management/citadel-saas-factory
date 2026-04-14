@@ -1,0 +1,90 @@
+# Custom Guardrails AI Validators for Citadel SaaS Factory
+# Mapped to the hallucination / safety problem matrix
+
+validators:
+  # ─── Hallucination Detection ───
+  - name: hallucination-detection
+    hub: hub://guardrails/hallucination_free
+    description: Detects fabricated facts in LLM outputs
+    on_fail: reask
+    threshold: 0.85
+    problem: "Model makes things up"
+    solution: "Validates against rules and source data"
+
+  # ─── Factuality Checking ───
+  - name: factuality-check
+    hub: hub://guardrails/provenance_llm
+    description: Verifies factual claims against authoritative sources
+    on_fail: reask
+    validation_method: sentence
+    threshold: 0.80
+    problem: "Incorrect factual claims"
+    solution: "Cross-reference with authoritative data"
+
+  # ─── Relevance Scoring ───
+  - name: relevance-scoring
+    hub: hub://guardrails/relevance_checker
+    description: Filters off-topic or irrelevant responses
+    on_fail: reask
+    threshold: 0.75
+    problem: "Off-topic responses"
+    solution: "Score relevance against the query context"
+
+  # ─── PII Detection ───
+  - name: pii-detection
+    hub: hub://guardrails/detect_pii
+    description: Masks personally identifiable information
+    on_fail: fix
+    pii_entities:
+      - EMAIL
+      - PHONE_NUMBER
+      - SSN
+      - CREDIT_CARD
+      - IP_ADDRESS
+    problem: "PII leakage in outputs"
+    solution: "Detect and mask PII before delivery"
+
+  # ─── Toxic Content Filter ───
+  - name: toxic-content-filter
+    hub: hub://guardrails/toxic_language
+    description: Blocks toxic, harmful, or offensive content
+    on_fail: reask
+    threshold: 0.50
+    problem: "Unsafe or toxic agent behavior"
+    solution: "Pre/post execution guardrails"
+
+# ─── Problem → Solution Matrix ───
+problem_matrix:
+  model_makes_things_up:
+    problem: "Model generates fabricated or unverified facts"
+    validator: hallucination-detection
+    solution: "Validate against rules and source data; reject below 0.85"
+
+  no_grounding:
+    problem: "Response lacks RAG context or provenance"
+    validator: factuality-check
+    solution: "RAG provenance validators with sentence-level grounding"
+
+  inconsistent_answers:
+    problem: "Model returns different answers to the same question"
+    validator: schema-enforcement
+    solution: "Structured output schema with deterministic validators"
+
+  unsafe_agent_behavior:
+    problem: "Agent produces toxic, harmful, or policy-violating content"
+    validator: toxic-content-filter
+    solution: "Pre/post execution guardrails on every LLM call"
+
+# ─── Thresholds ───
+thresholds:
+  hallucination_minimum: 0.85
+  factuality_minimum: 0.80
+  relevance_minimum: 0.75
+  toxicity_maximum: 0.50
+  max_retries: 3
+
+# ─── Fail Behavior ───
+fail_behavior:
+  production: fail-closed
+  development: fail-open-with-warning
+  audit_all: true

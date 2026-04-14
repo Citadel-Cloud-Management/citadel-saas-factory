@@ -1,0 +1,17 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "API Up",
+      "targets": [
+        {"expr": "up{job=\"api\"}", "refId": "A"}
+      ],
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 0}
+    }
+  ],
+  "schemaVersion": 39,
+  "title": "App Overview",
+  "version": 1
+}

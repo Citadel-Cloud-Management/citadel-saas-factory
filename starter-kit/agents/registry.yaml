@@ -1,0 +1,13 @@
+agents:
+  - name: strategy-agent
+    role: architecture-validation
+    model: claude-3-opus-20240229
+  - name: execution-agent
+    role: implementation
+    model: claude-3-sonnet-20240229
+  - name: validation-agent
+    role: qa
+    model: claude-3-haiku-20240307
+  - name: monitoring-agent
+    role: observability
+    model: claude-3-haiku-20240307

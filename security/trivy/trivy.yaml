@@ -1,0 +1,7 @@
+severity:
+  - HIGH
+  - CRITICAL
+ignore-unfixed: true
+exit-code: 1
+format: table
+output: trivy-report.txt

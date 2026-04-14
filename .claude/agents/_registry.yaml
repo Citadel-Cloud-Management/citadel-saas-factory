@@ -1,0 +1,1094 @@
+# Citadel SaaS Factory — Agent Registry
+# 265 Autonomous Business Agents across 15 Domains
+# Version 3.0
+
+agents:
+  # ─── Domain 1: Executive & Strategy (12) ───
+  - id: exec-ceo-strategist
+    name: CEO Strategist
+    domain: executive
+    description: Business strategy, OKR generation, competitive analysis, board decks
+  - id: exec-coo-operations
+    name: COO Operations
+    domain: executive
+    description: Process optimization, cross-department coordination, resource allocation
+  - id: exec-cfo-finance
+    name: CFO Finance
+    domain: executive
+    description: Financial modeling, revenue forecasting, burn rate, unit economics
+  - id: exec-cto-technology
+    name: CTO Technology
+    domain: executive
+    description: Tech stack decisions, architecture reviews, build vs buy, tech debt
+  - id: exec-cmo-marketing
+    name: CMO Marketing
+    domain: executive
+    description: Marketing strategy, brand positioning, channel mix, growth planning
+  - id: exec-cpo-product
+    name: CPO Product
+    domain: executive
+    description: Product vision, roadmap, feature prioritization (RICE/ICE), market fit
+  - id: exec-vp-engineering
+    name: VP Engineering
+    domain: executive
+    description: Engineering velocity, team structure, hiring plans, incident escalation
+  - id: exec-vp-sales
+    name: VP Sales
+    domain: executive
+    description: Sales strategy, pipeline analysis, territory planning, quota setting
+  - id: exec-okr-tracker
+    name: OKR Tracker
+    domain: executive
+    description: Company/team OKR tracking, progress reports, at-risk identification
+  - id: exec-board-reporter
+    name: Board Reporter
+    domain: executive
+    description: Board reports, investor updates, KPI dashboards, milestone tracking
+  - id: exec-competitive-intel
+    name: Competitive Intel
+    domain: executive
+    description: Competitor monitoring, market trends, competitive battle cards
+  - id: exec-decision-logger
+    name: Decision Logger
+    domain: executive
+    description: Strategic decision recording with context, rationale, and outcomes
+
+  # ─── Domain 2: Marketing & Growth (22) ───
+  - id: mktg-seo-strategist
+    name: SEO Strategist
+    domain: marketing
+    description: Keyword research, on-page optimization, technical SEO, content gaps
+  - id: mktg-content-writer
+    name: Content Writer
+    domain: marketing
+    description: Blog posts, landing pages, emails, case studies, whitepapers
+  - id: mktg-social-media
+    name: Social Media
+    domain: marketing
+    description: Post scheduling, captions, hashtags, engagement analysis
+  - id: mktg-email-marketer
+    name: Email Marketer
+    domain: marketing
+    description: Campaigns, subject lines, segmentation, A/B testing, flows
+  - id: mktg-ppc-manager
+    name: PPC Manager
+    domain: marketing
+    description: Ad copy, bid strategy, audience targeting, ROAS optimization
+  - id: mktg-analytics
+    name: Marketing Analytics
+    domain: marketing
+    description: UTM tracking, attribution, funnel analysis, conversion optimization
+  - id: mktg-landing-page
+    name: Landing Page
+    domain: marketing
+    description: High-conversion page design and copy, CTA optimization
+  - id: mktg-brand-voice
+    name: Brand Voice
+    domain: marketing
+    description: Brand consistency, tone guidelines, style guide enforcement
+  - id: mktg-pr-outreach
+    name: PR Outreach
+    domain: marketing
+    description: Press releases, journalist pitching, media lists, coverage tracking
+  - id: mktg-influencer
+    name: Influencer Agent
+    domain: marketing
+    description: Influencer ID, outreach scripts, partnership terms, ROI tracking
+  - id: mktg-video-scripting
+    name: Video Scriptwriter
+    domain: marketing
+    description: YouTube scripts, social hooks, demo scripts, webinar outlines
+  - id: mktg-podcast
+    name: Podcast Producer
+    domain: marketing
+    description: Episode outlines, show notes, guest research, transcripts
+  - id: mktg-community
+    name: Community Manager
+    domain: marketing
+    description: Community engagement, UGC curation, feedback collection
+  - id: mktg-growth-hacker
+    name: Growth Hacker
+    domain: marketing
+    description: Viral loops, referral programs, PLG mechanics, activation experiments
+  - id: mktg-ab-tester
+    name: A/B Test Designer
+    domain: marketing
+    description: Hypothesis generation, stat significance, result analysis
+  - id: mktg-competitor
+    name: Competitor Monitor
+    domain: marketing
+    description: Competitor marketing moves, pricing changes, feature launches
+  - id: mktg-newsletter
+    name: Newsletter Agent
+    domain: marketing
+    description: Content curation, subject lines, send time optimization
+  - id: mktg-webinar
+    name: Webinar Planner
+    domain: marketing
+    description: Planning, registration copy, follow-up sequences, engagement
+  - id: mktg-affiliate
+    name: Affiliate Manager
+    domain: marketing
+    description: Program setup, commissions, partner recruitment, payouts
+  - id: mktg-product-launch
+    name: Product Launch
+    domain: marketing
+    description: Launch playbook, announcement copy, drip campaigns, press
+  - id: mktg-persona
+    name: Persona Builder
+    domain: marketing
+    description: ICP definition, buyer personas, jobs-to-be-done analysis
+  - id: mktg-retention
+    name: Retention Agent
+    domain: marketing
+    description: Churn signals, re-engagement campaigns, NPS follow-up
+
+  # ─── Domain 3: Sales & Revenue (18) ───
+  - id: sales-lead-qualifier
+    name: Lead Qualifier
+    domain: sales
+    description: Lead scoring, data enrichment, ICP matching, routing
+  - id: sales-outbound-writer
+    name: Outbound Writer
+    domain: sales
+    description: Cold emails, LinkedIn messages, follow-ups, objection handling
+  - id: sales-proposal-gen
+    name: Proposal Generator
+    domain: sales
+    description: Custom proposals, SOWs, pricing tables, ROI calculations
+  - id: sales-crm-updater
+    name: CRM Updater
+    domain: sales
+    description: Deal stage updates, activity logging, pipeline hygiene
+  - id: sales-demo-prepper
+    name: Demo Prepper
+    domain: sales
+    description: Pre-demo research, custom scripts, competitive positioning
+  - id: sales-contract-drafter
+    name: Contract Drafter
+    domain: sales
+    description: MSA and order forms, redline tracking, approval routing
+  - id: sales-forecast
+    name: Forecast Analyst
+    domain: sales
+    description: Pipeline forecasting, deal velocity, revenue prediction
+  - id: sales-win-loss
+    name: Win/Loss Analyst
+    domain: sales
+    description: Post-deal analysis, pattern identification, CI extraction
+  - id: sales-pricing
+    name: Pricing Optimizer
+    domain: sales
+    description: Pricing models, discount impact, WTP estimation, tier optimization
+  - id: sales-territory
+    name: Territory Planner
+    domain: sales
+    description: Territory mapping, account distribution, quota allocation
+  - id: sales-upsell
+    name: Upsell Detector
+    domain: sales
+    description: Expansion opportunities, usage triggers, health signals
+  - id: sales-scheduler
+    name: Meeting Scheduler
+    domain: sales
+    description: Calendar coordination, timezone handling, no-show follow-up
+  - id: sales-objection
+    name: Objection Handler
+    domain: sales
+    description: Objection responses, battle cards, value proposition framing
+  - id: sales-referral
+    name: Referral Agent
+    domain: sales
+    description: Referral program, ask timing, reward fulfillment, tracking
+  - id: sales-partner
+    name: Partner Manager
+    domain: sales
+    description: Deal registration, co-selling, partner enablement content
+  - id: sales-call-analyzer
+    name: Call Analyzer
+    domain: sales
+    description: Transcript analysis, talk ratio, next-step extraction
+  - id: sales-pipeline-cleaner
+    name: Pipeline Cleaner
+    domain: sales
+    description: Stale deal ID, missing data alerts, stage-appropriate actions
+  - id: sales-commission
+    name: Commission Calculator
+    domain: sales
+    description: Commission calculation, plan modeling, quota attainment
+
+  # ─── Domain 4: Customer Success & Support (15) ───
+  - id: cs-onboarding
+    name: Onboarding Agent
+    domain: customer-success
+    description: Welcome sequences, setup guides, milestone tracking, TTV
+  - id: cs-ticket-router
+    name: Ticket Router
+    domain: customer-success
+    description: Auto-categorize, prioritize, route support tickets
+  - id: cs-response-drafter
+    name: Response Drafter
+    domain: customer-success
+    description: Draft support responses from knowledge base, tone consistency
+  - id: cs-escalation
+    name: Escalation Agent
+    domain: customer-success
+    description: Escalation signals, senior routing, escalation summaries
+  - id: cs-churn-predictor
+    name: Churn Predictor
+    domain: customer-success
+    description: Usage analysis, engagement scoring, risk flagging, save offers
+  - id: cs-health-scorer
+    name: Health Scorer
+    domain: customer-success
+    description: Account health scoring (usage, tickets, NPS, adoption)
+  - id: cs-nps
+    name: NPS Collector
+    domain: customer-success
+    description: Survey distribution, response collection, follow-up automation
+  - id: cs-knowledge
+    name: Knowledge Builder
+    domain: customer-success
+    description: FAQ generation, help articles, KB maintenance, search
+  - id: cs-chatbot
+    name: Chatbot Trainer
+    domain: customer-success
+    description: Support chatbot training, intent refinement, accuracy
+  - id: cs-feedback
+    name: Feedback Analyzer
+    domain: customer-success
+    description: Categorize feedback, trends, route feature requests
+  - id: cs-renewal
+    name: Renewal Manager
+    domain: customer-success
+    description: Renewal tracking, pricing prep, contract generation
+  - id: cs-qbr
+    name: QBR Generator
+    domain: customer-success
+    description: QBR deck generation with usage data and ROI metrics
+  - id: cs-adoption
+    name: Adoption Tracker
+    domain: customer-success
+    description: Feature adoption, usage depth, enablement gaps
+  - id: cs-sla
+    name: SLA Monitor
+    domain: customer-success
+    description: SLA compliance, breach alerts, response time monitoring
+  - id: cs-voc
+    name: Voice of Customer
+    domain: customer-success
+    description: Aggregate feedback across channels into actionable insights
+
+  # ─── Domain 5: Product & UI/UX Design (20) ───
+  - id: design-ui
+    name: UI Designer
+    domain: product-design
+    description: Component design, layout, spacing/typography, visual hierarchy
+  - id: design-ux-research
+    name: UX Researcher
+    domain: product-design
+    description: Interview scripts, surveys, usability tests, persona refinement
+  - id: design-wireframe
+    name: Wireframer
+    domain: product-design
+    description: Lo-fi wireframes, user flows, information architecture
+  - id: design-prototype
+    name: Prototype Builder
+    domain: product-design
+    description: Interactive prototype specs, click-through flows
+  - id: design-system
+    name: Design System
+    domain: product-design
+    description: Token management, component library, pattern docs
+  - id: design-a11y
+    name: Accessibility
+    domain: product-design
+    description: WCAG 2.1 AA audit, contrast, screen reader, ARIA
+  - id: design-responsive
+    name: Responsive Design
+    domain: product-design
+    description: Breakpoints, mobile-first, touch targets, viewport
+  - id: design-color
+    name: Color Palette
+    domain: product-design
+    description: Color theory, palette generation, dark/light theming
+  - id: design-typography
+    name: Typography
+    domain: product-design
+    description: Font pairing, type scale, readability, web font perf
+  - id: design-icon
+    name: Icon System
+    domain: product-design
+    description: Icon library, SVG optimization, consistent metaphors
+  - id: design-animation
+    name: Animation
+    domain: product-design
+    description: Micro-interactions, transitions, loading, skeletons
+  - id: design-illustration
+    name: Illustration
+    domain: product-design
+    description: Brand illustration style, spot illustrations, empty states
+  - id: design-data-viz
+    name: Data Visualization
+    domain: product-design
+    description: Chart selection, dashboard layout, data storytelling
+  - id: design-user-flow
+    name: User Flow
+    domain: product-design
+    description: Task flow mapping, happy path, error states, edge cases
+  - id: design-heuristic
+    name: Heuristic Eval
+    domain: product-design
+    description: Nielsen heuristics, usability scoring, recommendations
+  - id: design-onboarding
+    name: Onboarding UX
+    domain: product-design
+    description: First-run experience, progressive disclosure, tooltips
+  - id: design-form
+    name: Form UX
+    domain: product-design
+    description: Form optimization, validation, multi-step, autofill
+  - id: design-search
+    name: Search UX
+    domain: product-design
+    description: Search interface, filters, autocomplete, results display
+  - id: design-notification
+    name: Notification UX
+    domain: product-design
+    description: Notification design, frequency, channels, preferences
+  - id: design-mobile
+    name: Mobile UX
+    domain: product-design
+    description: Native patterns, gestures, thumb-zone, offline states
+
+  # ─── Domain 6: Engineering & Backend (25) ───
+  - id: eng-api-designer
+    name: API Designer
+    domain: engineering
+    description: REST/GraphQL design, OpenAPI spec, versioning
+  - id: eng-model-builder
+    name: Model Builder
+    domain: engineering
+    description: ORM models, relationships, constraints, indexes
+  - id: eng-schema-builder
+    name: Schema Builder
+    domain: engineering
+    description: Pydantic schemas, validation, serialization
+  - id: eng-service-builder
+    name: Service Builder
+    domain: engineering
+    description: Business logic, service layer patterns, DI
+  - id: eng-repo-builder
+    name: Repository Builder
+    domain: engineering
+    description: Data access, query builders, pagination, filtering
+  - id: eng-migration-gen
+    name: Migration Generator
+    domain: engineering
+    description: Schema migrations, safe rollback, zero-downtime
+  - id: eng-middleware
+    name: Middleware Builder
+    domain: engineering
+    description: Auth, rate limit, CORS, logging, metrics, headers
+  - id: eng-event-handler
+    name: Event Handler
+    domain: engineering
+    description: Event-driven, message bus, async, saga patterns
+  - id: eng-worker-builder
+    name: Worker Builder
+    domain: engineering
+    description: Background jobs, retry logic, DLQ, scheduling
+  - id: eng-auth-builder
+    name: Auth Builder
+    domain: engineering
+    description: JWT, OAuth2, RBAC, permission guards
+  - id: eng-cache-builder
+    name: Cache Builder
+    domain: engineering
+    description: Cache strategies, invalidation, TTL management
+  - id: eng-search-builder
+    name: Search Builder
+    domain: engineering
+    description: Full-text, vector (pgvector), hybrid ranking
+  - id: eng-webhook
+    name: Webhook Builder
+    domain: engineering
+    description: Dispatch, retry, signature verification, logging
+  - id: eng-email
+    name: Email Builder
+    domain: engineering
+    description: Transactional email, templates, queue, tracking
+  - id: eng-file-handler
+    name: File Handler
+    domain: engineering
+    description: Upload validation, scanning, storage, signed URLs
+  - id: eng-pagination
+    name: Pagination Agent
+    domain: engineering
+    description: Cursor/offset pagination, ordering, optimization
+  - id: eng-rate-limiter
+    name: Rate Limiter
+    domain: engineering
+    description: Per-endpoint/user limits, sliding window, token bucket
+  - id: eng-health
+    name: Health Builder
+    domain: engineering
+    description: Liveness, readiness, startup probes, dep checks
+  - id: eng-websocket
+    name: WebSocket Builder
+    domain: engineering
+    description: Real-time, rooms, broadcast, heartbeat, reconnect
+  - id: eng-graphql
+    name: GraphQL Builder
+    domain: engineering
+    description: Schema, resolvers, dataloaders, subscriptions
+  - id: eng-multi-tenant
+    name: Multi-Tenant
+    domain: engineering
+    description: RLS, tenant middleware, data isolation
+  - id: eng-error-handler
+    name: Error Handler
+    domain: engineering
+    description: Structured errors, exception hierarchy, codes
+  - id: eng-logging
+    name: Logging Agent
+    domain: engineering
+    description: JSON logging, correlation IDs, PII redaction
+  - id: eng-config
+    name: Config Manager
+    domain: engineering
+    description: Env config, feature flags, dynamic config
+  - id: eng-code-reviewer
+    name: Code Reviewer
+    domain: engineering
+    description: PR review, patterns, complexity, security checks
+
+  # ─── Domain 7: Frontend & Mobile (18) ───
+  - id: fe-component
+    name: Component Builder
+    domain: frontend
+    description: React scaffolding, props typing, composition
+  - id: fe-page
+    name: Page Builder
+    domain: frontend
+    description: Next.js pages, SSR/SSG, metadata, routing
+  - id: fe-layout
+    name: Layout Builder
+    domain: frontend
+    description: Navigation, sidebar, responsive shell
+  - id: fe-form
+    name: Form Builder
+    domain: frontend
+    description: RHF and Zod, multi-step, validation, errors
+  - id: fe-table
+    name: Table Builder
+    domain: frontend
+    description: Data tables, sorting, filtering, pagination, export
+  - id: fe-chart
+    name: Chart Builder
+    domain: frontend
+    description: Recharts/D3 visualizations, real-time updates
+  - id: fe-auth
+    name: Auth Flow
+    domain: frontend
+    description: Login, signup, reset, MFA, session management
+  - id: fe-state
+    name: State Manager
+    domain: frontend
+    description: Zustand stores, selectors, middleware
+  - id: fe-api-client
+    name: API Client
+    domain: frontend
+    description: TanStack Query hooks, errors, loading, optimistic
+  - id: fe-a11y
+    name: A11y Auditor
+    domain: frontend
+    description: axe-core, ARIA, keyboard nav, focus management
+  - id: fe-responsive
+    name: Responsive
+    domain: frontend
+    description: Mobile-first, breakpoints, touch, viewports
+  - id: fe-i18n
+    name: i18n Agent
+    domain: frontend
+    description: Translations, locale, RTL, date/number format
+  - id: fe-seo
+    name: SEO Agent
+    domain: frontend
+    description: Meta tags, structured data, sitemap, Open Graph
+  - id: fe-performance
+    name: Performance
+    domain: frontend
+    description: Bundle analysis, code splitting, lazy load, CWV
+  - id: fe-testing
+    name: Frontend Testing
+    domain: frontend
+    description: Vitest, Playwright E2E, visual regression
+  - id: fe-animation
+    name: Animation Builder
+    domain: frontend
+    description: CSS transitions, Framer Motion, scroll animations
+  - id: fe-error-boundary
+    name: Error Boundary
+    domain: frontend
+    description: Error boundaries, fallbacks, reporting, recovery
+  - id: fe-pwa
+    name: PWA Builder
+    domain: frontend
+    description: Service worker, offline, push notifications
+
+  # ─── Domain 8: DevOps & Infrastructure (28) ───
+  - id: devops-ci
+    name: CI Orchestrator
+    domain: devops
+    description: GitHub Actions pipeline, caching, stages
+  - id: devops-cd
+    name: CD Deployer
+    domain: devops
+    description: Deployment execution, promotion, health
+  - id: devops-gitops
+    name: GitOps Sync
+    domain: devops
+    description: ArgoCD management, sync policy, drift
+  - id: devops-image-build
+    name: Image Builder
+    domain: devops
+    description: Multi-stage Docker, layer optimization, hardening
+  - id: devops-image-scan
+    name: Image Scanner
+    domain: devops
+    description: Trivy/Grype CVE scanning, base image updates
+  - id: devops-image-sign
+    name: Image Signer
+    domain: devops
+    description: Cosign signing, SBOM generation (Syft)
+  - id: devops-helm
+    name: Helm Manager
+    domain: devops
+    description: Chart creation, values, release lifecycle
+  - id: devops-terraform
+    name: Terraform Ops
+    domain: devops
+    description: Plan, apply, state, modules, drift detection
+  - id: devops-ansible
+    name: Ansible Runner
+    domain: devops
+    description: Playbooks, roles, inventory management
+  - id: devops-k8s
+    name: K8s Manager
+    domain: devops
+    description: Deployments, services, configmaps, secrets
+  - id: devops-scaler
+    name: K8s Scaler
+    domain: devops
+    description: HPA tuning, VPA, cluster autoscaler
+  - id: devops-debugger
+    name: K8s Debugger
+    domain: devops
+    description: Pod diagnostics, log analysis, crash analysis
+  - id: devops-canary
+    name: Canary Manager
+    domain: devops
+    description: Progressive rollout 10/30/60/100 percent
+  - id: devops-rollback
+    name: Rollback Agent
+    domain: devops
+    description: Emergency rollback, version pinning, state restore
+  - id: devops-release
+    name: Release Manager
+    domain: devops
+    description: Semantic versioning, changelog, tags
+  - id: devops-cert
+    name: Cert Manager
+    domain: devops
+    description: TLS lifecycle, auto-renewal, ACME
+  - id: devops-dns
+    name: DNS Manager
+    domain: devops
+    description: DNS records, health checks, failover
+  - id: devops-backup
+    name: Backup Agent
+    domain: devops
+    description: DB backup, object storage backup, retention
+  - id: devops-restore
+    name: Restore Agent
+    domain: devops
+    description: Backup validation, restore, DR testing
+  - id: devops-monitoring
+    name: Monitoring Setup
+    domain: devops
+    description: Prometheus, Grafana, Loki, Tempo deployment
+  - id: devops-alerts
+    name: Alert Builder
+    domain: devops
+    description: Alert rules, routing, escalation, silencing
+  - id: devops-logs
+    name: Log Manager
+    domain: devops
+    description: Promtail/Loki pipeline, retention, format
+  - id: devops-mesh
+    name: Service Mesh
+    domain: devops
+    description: Linkerd deployment, mTLS, traffic policies
+  - id: devops-ingress
+    name: Ingress Manager
+    domain: devops
+    description: Traefik/NGINX, routing, rate limits, headers
+  - id: devops-storage
+    name: Storage Manager
+    domain: devops
+    description: PV/PVC, MinIO, backup storage
+  - id: devops-queue
+    name: Queue Manager
+    domain: devops
+    description: RabbitMQ/NATS, depth monitoring, DLQ
+  - id: devops-cost
+    name: Cost Analyzer
+    domain: devops
+    description: Utilization analysis, rightsizing recommendations
+  - id: devops-capacity
+    name: Capacity Planner
+    domain: devops
+    description: Growth forecasting, resource planning
+
+  # ─── Domain 9: Security & Compliance (22) ───
+  - id: sec-sast
+    name: SAST Scanner
+    domain: security
+    description: Semgrep static analysis, vulnerability finding
+  - id: sec-sca
+    name: SCA Scanner
+    domain: security
+    description: Trivy dependency scanning, CVE, license
+  - id: sec-dast
+    name: DAST Scanner
+    domain: security
+    description: OWASP ZAP dynamic testing, API fuzzing
+  - id: sec-secret
+    name: Secret Scanner
+    domain: security
+    description: TruffleHog detection, pre-commit, prevention
+  - id: sec-container
+    name: Container Scanner
+    domain: security
+    description: Image CVE scanning, base image audit
+  - id: sec-iac
+    name: IaC Scanner
+    domain: security
+    description: Checkov Terraform/K8s scanning
+  - id: sec-runtime
+    name: Runtime Monitor
+    domain: security
+    description: Falco anomaly detection, container escapes
+  - id: sec-policy
+    name: Policy Enforcer
+    domain: security
+    description: Kyverno admission, OPA/Rego rules
+  - id: sec-incident
+    name: Incident Responder
+    domain: security
+    description: IR automation, evidence, containment
+  - id: sec-vuln
+    name: Vuln Prioritizer
+    domain: security
+    description: CVSS, exploitability, risk prioritization
+  - id: sec-patch
+    name: Patch Manager
+    domain: security
+    description: Security patching, dep updates, rollout
+  - id: sec-access
+    name: Access Reviewer
+    domain: security
+    description: IAM audit, permission review, least privilege
+  - id: sec-rbac
+    name: RBAC Manager
+    domain: security
+    description: Role definitions, permissions, grants
+  - id: sec-encryption
+    name: Encryption Agent
+    domain: security
+    description: At-rest/transit encryption, key rotation
+  - id: sec-audit
+    name: Audit Logger
+    domain: security
+    description: Immutable audit log, compliance reporting
+  - id: sec-compliance
+    name: Compliance Checker
+    domain: security
+    description: SOC2, HIPAA, GDPR, PCI, ISO 27001
+  - id: sec-pentest
+    name: Pentest Runner
+    domain: security
+    description: Automated pentesting, Nuclei, validation
+  - id: sec-threat
+    name: Threat Hunter
+    domain: security
+    description: Proactive detection, IOC, SIGMA rules
+  - id: sec-network
+    name: Network Segmenter
+    domain: security
+    description: NetworkPolicies, micro-segmentation, zero-trust
+  - id: sec-waf
+    name: WAF Manager
+    domain: security
+    description: WAF rules, DDoS protection, bot detection
+  - id: sec-pii
+    name: PII Detector
+    domain: security
+    description: PII in logs/data, classification, masking
+  - id: sec-supply-chain
+    name: Supply Chain
+    domain: security
+    description: SBOM analysis, provenance, Cosign verification
+
+  # ─── Domain 10: Data & Analytics (18) ───
+  - id: data-schema
+    name: Schema Designer
+    domain: data-analytics
+    description: DB schema, normalization, relationships
+  - id: data-migration
+    name: Migration Builder
+    domain: data-analytics
+    description: Safe DDL, zero-downtime, rollback
+  - id: data-index
+    name: Index Optimizer
+    domain: data-analytics
+    description: Query plans, index recs, bloat detection
+  - id: data-query
+    name: Query Optimizer
+    domain: data-analytics
+    description: Slow queries, N+1, rewriting
+  - id: data-rls
+    name: RLS Manager
+    domain: data-analytics
+    description: Row-level security, tenant isolation
+  - id: data-backup
+    name: Backup Validator
+    domain: data-analytics
+    description: Integrity checks, restore testing
+  - id: data-etl
+    name: ETL Builder
+    domain: data-analytics
+    description: Data pipelines, transformations
+  - id: data-analytics
+    name: Analytics Builder
+    domain: data-analytics
+    description: Business metrics, KPI calculation
+  - id: data-vector
+    name: Vector Manager
+    domain: data-analytics
+    description: pgvector embeddings, similarity search
+  - id: data-warehouse
+    name: Warehouse Builder
+    domain: data-analytics
+    description: Star schema, materialized views
+  - id: data-report
+    name: Report Generator
+    domain: data-analytics
+    description: Automated reports, PDF, scheduling
+  - id: data-dashboard
+    name: Dashboard Builder
+    domain: data-analytics
+    description: Grafana/Metabase dashboards, drill-down
+  - id: data-events
+    name: Event Tracker
+    domain: data-analytics
+    description: Event schema, tracking, funnels
+  - id: data-cohort
+    name: Cohort Analyzer
+    domain: data-analytics
+    description: Retention curves, behavioral segmentation
+  - id: data-ab
+    name: A/B Analyzer
+    domain: data-analytics
+    description: Statistical significance, sample size
+  - id: data-forecast
+    name: Forecast Model
+    domain: data-analytics
+    description: Time series, trends, seasonality
+  - id: data-anomaly
+    name: Anomaly Detector
+    domain: data-analytics
+    description: Metric anomalies, baseline deviation
+  - id: data-privacy
+    name: Privacy Agent
+    domain: data-analytics
+    description: Anonymization, retention, GDPR
+
+  # ─── Domain 11: QA & Testing (22) ───
+  - id: qa-unit
+    name: Unit Test Writer
+    domain: qa-testing
+    description: Unit tests, assertions, edge cases, mocks
+  - id: qa-integration
+    name: Integration Writer
+    domain: qa-testing
+    description: DB/cache integration, fixtures
+  - id: qa-e2e
+    name: E2E Writer
+    domain: qa-testing
+    description: Playwright/Cypress E2E, user flows
+  - id: qa-api
+    name: API Tester
+    domain: qa-testing
+    description: REST/GraphQL testing, contract validation
+  - id: qa-load
+    name: Load Tester
+    domain: qa-testing
+    description: k6/Locust load tests, breakpoints
+  - id: qa-performance
+    name: Perf Tester
+    domain: qa-testing
+    description: Regression detection, benchmarks
+  - id: qa-security
+    name: Security Tester
+    domain: qa-testing
+    description: Auth bypass, injection, fuzzing
+  - id: qa-a11y
+    name: A11y Tester
+    domain: qa-testing
+    description: WCAG compliance, screen reader
+  - id: qa-visual
+    name: Visual Regression
+    domain: qa-testing
+    description: Screenshot diff, CSS regression
+  - id: qa-coverage
+    name: Coverage Analyzer
+    domain: qa-testing
+    description: Gaps, uncovered branches, dead code
+  - id: qa-mutation
+    name: Mutation Tester
+    domain: qa-testing
+    description: Mutation testing, test quality
+  - id: qa-contract
+    name: Contract Tester
+    domain: qa-testing
+    description: Consumer-driven contracts, Pact
+  - id: qa-chaos
+    name: Chaos Tester
+    domain: qa-testing
+    description: Failure injection, resilience
+  - id: qa-fixture
+    name: Fixture Builder
+    domain: qa-testing
+    description: Test data factories, fake data
+  - id: qa-mock
+    name: Mock Builder
+    domain: qa-testing
+    description: Mock/stub generation, service virtualization
+  - id: qa-regression
+    name: Regression Hunter
+    domain: qa-testing
+    description: Git bisect, regression ID, fix validation
+  - id: qa-flaky
+    name: Flaky Detector
+    domain: qa-testing
+    description: Flaky test ID, root cause, stabilization
+  - id: qa-prioritizer
+    name: Test Prioritizer
+    domain: qa-testing
+    description: Risk-based ordering, impact analysis
+  - id: qa-smoke
+    name: Smoke Tester
+    domain: qa-testing
+    description: Post-deploy smoke, critical paths
+  - id: qa-compat
+    name: Compat Tester
+    domain: qa-testing
+    description: Browser/device compatibility
+  - id: qa-data
+    name: Data Validator
+    domain: qa-testing
+    description: Data integrity, migration validation
+  - id: qa-reporter
+    name: Test Reporter
+    domain: qa-testing
+    description: Results, trends, quality metrics
+
+  # ─── Domain 12: HR & People Operations (12) ───
+  - id: hr-job-writer
+    name: Job Writer
+    domain: hr-people
+    description: Role descriptions, requirements, inclusive language
+  - id: hr-resume
+    name: Resume Screener
+    domain: hr-people
+    description: Parsing, skill matching, scoring
+  - id: hr-interview
+    name: Interview Prepper
+    domain: hr-people
+    description: Questions, scorecards, competencies
+  - id: hr-offer
+    name: Offer Drafter
+    domain: hr-people
+    description: Offer letters, comp benchmarking, equity
+  - id: hr-onboarding
+    name: Onboarding Manager
+    domain: hr-people
+    description: 30-60-90, checklists, buddy assignment
+  - id: hr-performance
+    name: Perf Reviewer
+    domain: hr-people
+    description: Review templates, goals, feedback
+  - id: hr-engagement
+    name: Engagement Survey
+    domain: hr-people
+    description: Pulse surveys, sentiment, action plans
+  - id: hr-policy
+    name: Policy Writer
+    domain: hr-people
+    description: Handbook, PTO, remote work guidelines
+  - id: hr-comp
+    name: Comp Analyst
+    domain: hr-people
+    description: Salary benchmarking, pay equity, bands
+  - id: hr-org-chart
+    name: Org Chart Builder
+    domain: hr-people
+    description: Structure, reporting lines, span
+  - id: hr-training
+    name: Training Planner
+    domain: hr-people
+    description: Learning paths, skill gaps, calendar
+  - id: hr-offboarding
+    name: Offboarding Agent
+    domain: hr-people
+    description: Exit checklist, knowledge transfer, access revocation
+
+  # ─── Domain 13: Finance & Billing (15) ───
+  - id: fin-billing
+    name: Billing Agent
+    domain: finance
+    description: Stripe integration, subscription mgmt, invoices
+  - id: fin-payment
+    name: Payment Processor
+    domain: finance
+    description: Payment flow, retry, dunning, refunds
+  - id: fin-subscription
+    name: Subscription Manager
+    domain: finance
+    description: Plan changes, proration, trials, cancellation
+  - id: fin-usage
+    name: Usage Metering
+    domain: finance
+    description: Usage tracking, metered billing, overage
+  - id: fin-invoice
+    name: Invoice Generator
+    domain: finance
+    description: PDF invoices, tax, multi-currency
+  - id: fin-revenue
+    name: Revenue Recognizer
+    domain: finance
+    description: ASC 606, deferred revenue, MRR/ARR
+  - id: fin-expense
+    name: Expense Tracker
+    domain: finance
+    description: Infra costs, vendor payments, budgets
+  - id: fin-tax
+    name: Tax Calculator
+    domain: finance
+    description: Sales tax, VAT, GST by jurisdiction
+  - id: fin-reports
+    name: Financial Reporter
+    domain: finance
+    description: P&L, cash flow, SaaS metrics (LTV, CAC)
+  - id: fin-budget
+    name: Budget Planner
+    domain: finance
+    description: Budgets, variance, forecast vs actual
+  - id: fin-ar
+    name: AR Agent
+    domain: finance
+    description: Outstanding invoices, collections, aging
+  - id: fin-pricing
+    name: Pricing Modeler
+    domain: finance
+    description: Pricing pages, tiers, feature gating
+  - id: fin-fraud
+    name: Fraud Detector
+    domain: finance
+    description: Payment fraud, velocity checks, risk
+  - id: fin-audit
+    name: Audit Preparer
+    domain: finance
+    description: Financial audit prep, documentation
+  - id: fin-runway
+    name: Runway Calculator
+    domain: finance
+    description: Burn rate, runway projection, scenarios
+
+  # ─── Domain 14: Legal & Governance (8) ───
+  - id: legal-tos
+    name: ToS Writer
+    domain: legal
+    description: Terms, privacy policy, acceptable use, cookies
+  - id: legal-dpa
+    name: DPA Drafter
+    domain: legal
+    description: Data processing agreements, sub-processors
+  - id: legal-contract
+    name: Contract Reviewer
+    domain: legal
+    description: Clause analysis, risk flagging, redlines
+  - id: legal-ip
+    name: IP Protector
+    domain: legal
+    description: License compliance, OSS audit, trademarks
+  - id: legal-gdpr
+    name: GDPR Agent
+    domain: legal
+    description: Data subject requests, consent, retention
+  - id: legal-soc2
+    name: SOC2 Preparer
+    domain: legal
+    description: Control docs, evidence, gap analysis
+  - id: legal-sla
+    name: SLA Drafter
+    domain: legal
+    description: SLA docs, uptime commitments, penalties
+  - id: legal-incident
+    name: Incident Notifier
+    domain: legal
+    description: Breach notifications, regulatory timelines
+
+  # ─── Domain 15: Content & Communications (10) ───
+  - id: content-tech-writer
+    name: Tech Writer
+    domain: content
+    description: API docs, guides, tutorials, SDK docs
+  - id: content-blog
+    name: Blog Writer
+    domain: content
+    description: SEO blogs, thought leadership, industry
+  - id: content-docs
+    name: Docs Builder
+    domain: content
+    description: MkDocs/Docusaurus site, nav, search
+  - id: content-changelog
+    name: Changelog Writer
+    domain: content
+    description: User-facing changelogs, release notes
+  - id: content-presentation
+    name: Presentations
+    domain: content
+    description: Slide decks, pitch decks, training
+  - id: content-internal
+    name: Internal Comms
+    domain: content
+    description: All-hands updates, newsletters, decisions
+  - id: content-status
+    name: Status Writer
+    domain: content
+    description: Incident updates, maintenance windows
+  - id: content-editor
+    name: Copy Editor
+    domain: content
+    description: Grammar, style, brand voice, proofing
+  - id: content-case-study
+    name: Case Study Writer
+    domain: content
+    description: Customer success stories, ROI metrics
+  - id: content-readme
+    name: README Generator
+    domain: content
+    description: Repo READMEs, quickstart, badges

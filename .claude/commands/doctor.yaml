@@ -1,0 +1,8 @@
+name: doctor
+description: Diagnose system health
+usage: /doctor doctor [--verbose]
+steps:
+  - Check prereqs
+  - Check services
+  - Check config
+  - Report

@@ -1,0 +1,70 @@
+---
+# Bootstrap Node — Install K3s with security hardening
+- name: Bootstrap K3s Node
+  hosts: all
+  become: true
+  vars:
+    k3s_version: "v1.29.0+k3s1"
+
+  tasks:
+    - name: Set kernel security parameters
+      ansible.posix.sysctl:
+        name: "{{ item.key }}"
+        value: "{{ item.value }}"
+        sysctl_set: true
+        reload: true
+      loop:
+        - { key: "net.ipv4.conf.all.rp_filter", value: "1" }
+        - { key: "net.ipv4.conf.default.rp_filter", value: "1" }
+        - { key: "net.ipv4.ip_forward", value: "1" }
+        - { key: "kernel.panic", value: "10" }
+        - { key: "kernel.panic_on_oops", value: "1" }
+
+    - name: Install K3s server
+      ansible.builtin.shell: |
+        curl -sfL https://get.k3s.io | \
+        INSTALL_K3S_VERSION={{ k3s_version }} \
+        K3S_KUBECONFIG_MODE="644" \
+        sh -s - server \
+          --disable traefik \
+          --kube-apiserver-arg="audit-log-path=/var/log/k3s-audit.log" \
+          --kube-apiserver-arg="audit-log-maxage=30" \
+          --kube-apiserver-arg="audit-log-maxbackup=10" \
+          --kube-apiserver-arg="encryption-provider-config=/etc/rancher/k3s/encryption-config.yaml"
+      args:
+        creates: /usr/local/bin/k3s
+      when: inventory_hostname in groups.get('servers', [])
+
+    - name: Install K3s agent
+      ansible.builtin.shell: |
+        curl -sfL https://get.k3s.io | \
+        INSTALL_K3S_VERSION={{ k3s_version }} \
+        K3S_URL="https://{{ hostvars[groups['servers'][0]].ansible_host }}:6443" \
+        K3S_TOKEN="{{ k3s_token }}" \
+        sh -s - agent
+      args:
+        creates: /usr/local/bin/k3s-agent
+      when: inventory_hostname in groups.get('agents', [])
+
+    - name: Create non-root service account
+      ansible.builtin.user:
+        name: citadel
+        shell: /bin/bash
+        create_home: true
+        system: true
+
+    - name: Harden SSH configuration
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: "^PermitRootLogin", line: "PermitRootLogin no" }
+        - { regexp: "^PasswordAuthentication", line: "PasswordAuthentication no" }
+      notify: Restart SSH
+
+  handlers:
+    - name: Restart SSH
+      ansible.builtin.service:
+        name: sshd
+        state: restarted

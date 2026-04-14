@@ -1,0 +1,20 @@
+providers:
+  anthropic:
+    api_key: ${ANTHROPIC_API_KEY}
+
+models:
+  strategy:
+    id: claude-3-opus-20240229
+  execution:
+    id: claude-3-sonnet-20240229
+  validation:
+    id: claude-3-haiku-20240307
+
+strategy:
+  system_prompt: >
+    Act as a deterministic full-stack AI system.
+    Use Opus for architecture validation, Sonnet for implementation,
+    and Haiku for validation. Do not dynamically invent systems.
+    Only compile, wire, and validate reusable project templates.
+    When UI work is requested, use a Stitch-style approach to maintain
+    reusable responsive templates mapped to backend APIs.

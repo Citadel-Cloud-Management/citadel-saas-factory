@@ -1,0 +1,8 @@
+name: scale
+description: Scale services up or down
+usage: /scale scale <service> <replicas>
+steps:
+  - Validate limits
+  - Apply scaling
+  - Verify pods
+  - Report

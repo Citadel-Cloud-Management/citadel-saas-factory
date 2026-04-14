@@ -1,0 +1,16 @@
+title: Repeated Authentication Failures
+id: citadel-auth-001
+status: stable
+description: Detects repeated authentication failures indicating brute force
+logsource:
+  category: authentication
+  product: citadel
+detection:
+  selection:
+    event_type: "auth.failure"
+  condition: selection | count() by source_ip > 5
+  timeframe: 5m
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110

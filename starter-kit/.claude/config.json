@@ -1,0 +1,24 @@
+{
+  "commands_enabled": true,
+  "command_priority": "high",
+  "supported_commands": [
+    "godmode",
+    "scout",
+    "artifacts",
+    "ui",
+    "critique",
+    "10x",
+    "pitch",
+    "ooda",
+    "brief",
+    "teacher"
+  ],
+  "tools": [
+    "stitch-ui-generator"
+  ],
+  "ui_generation": {
+    "enabled": true,
+    "tool": "stitch",
+    "frameworks": ["react", "nextjs", "tailwind"]
+  }
+}

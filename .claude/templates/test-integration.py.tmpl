@@ -1,0 +1,9 @@
+"""Integration test template."""
+import pytest
+from httpx import AsyncClient
+
+@pytest.mark.asyncio
+class TestResourceAPI:
+    async def test_create_and_retrieve(self, client: AsyncClient):
+        response = await client.post("/api/v1/resources", json={})
+        assert response.status_code == 201

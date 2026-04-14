@@ -1,0 +1,8 @@
+name: status
+description: Check system and agent status
+usage: /status status [service]
+steps:
+  - Check services
+  - Check agents
+  - Check deployments
+  - Report

@@ -1,0 +1,9 @@
+{
+  "name": "vault",
+  "command": "npx",
+  "args": ["-y", "mcp-server-vault"],
+  "env": {
+    "VAULT_ADDR": "${VAULT_ADDR}",
+    "VAULT_TOKEN": "${VAULT_TOKEN}"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": false,
+  "showUnsupportedFiles": false,
+  "showInlineTitle": true,
+  "promptDelete": false,
+  "attachmentFolderPath": "attachments",
+  "enabledPlugins": ["backlink", "outgoing-link", "graph", "tag-pane", "dataview"],
+  "corePlugins": {
+    "backlink": true,
+    "outgoing-link": true,
+    "graph": true,
+    "tag-pane": true
+  },
+  "communityPlugins": {
+    "dataview": {
+      "enableDataviewJs": true,
+      "enableInlineDataview": true
+    }
+  }
+}

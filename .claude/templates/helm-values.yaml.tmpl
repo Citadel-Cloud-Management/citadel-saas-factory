@@ -1,0 +1,12 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/kogunlowo123/citadel-saas-factory/service
+  tag: latest
+service:
+  type: ClusterIP
+  port: 8000
+ingress:
+  enabled: true
+resources:
+  limits: { cpu: 500m, memory: 512Mi }
+  requests: { cpu: 100m, memory: 128Mi }

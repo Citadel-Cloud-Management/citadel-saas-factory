@@ -1,0 +1,5 @@
+{
+  "name": "docker",
+  "command": "npx",
+  "args": ["-y", "mcp-server-docker"]
+}

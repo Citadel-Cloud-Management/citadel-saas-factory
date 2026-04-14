@@ -1,0 +1,9 @@
+name: restore
+description: Restore from backup
+usage: /restore restore <backup-id>
+steps:
+  - Validate backup
+  - Stop services
+  - Restore data
+  - Verify
+  - Start services

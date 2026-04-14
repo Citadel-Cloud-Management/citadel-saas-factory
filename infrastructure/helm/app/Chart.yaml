@@ -1,0 +1,9 @@
+apiVersion: v2
+name: citadel-app
+description: Citadel SaaS Factory Application Helm Chart
+type: application
+version: 3.0.0
+appVersion: "3.0.0"
+maintainers:
+  - name: Citadel Cloud Management
+    url: https://citadelcloudmanagement.com

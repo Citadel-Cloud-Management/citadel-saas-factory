@@ -1,0 +1,15 @@
+"""Schema migration template."""
+from alembic import op
+import sqlalchemy as sa
+
+revision = "REVISION"
+down_revision = "PREV"
+
+def upgrade() -> None:
+    op.create_table("table_name",
+        sa.Column("id", sa.UUID(), primary_key=True),
+        sa.Column("created_at", sa.DateTime(), nullable=False),
+    )
+
+def downgrade() -> None:
+    op.drop_table("table_name")

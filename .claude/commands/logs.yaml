@@ -1,0 +1,7 @@
+name: logs
+description: Stream application logs
+usage: /logs logs [service] [--tail N]
+steps:
+  - Select service
+  - Stream logs
+  - Filter by level

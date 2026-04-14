@@ -1,0 +1,126 @@
+name: Engine Benchmark
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'engines/**'
+      - '.github/workflows/engine-bench.yml'
+  workflow_dispatch:
+    inputs:
+      engines:
+        description: 'Comma-separated engines to benchmark (paid,free,local)'
+        required: false
+        default: 'paid,free'
+
+permissions:
+  contents: read
+
+jobs:
+  bench:
+    name: Benchmark ${{ matrix.engine }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [paid, free]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Install bench harness deps
+        run: pip install anthropic httpx pyyaml rich
+
+      - name: Configure engine — paid
+        if: matrix.engine == 'paid'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> $GITHUB_ENV
+          echo "ANTHROPIC_MODEL=claude-sonnet-4-6" >> $GITHUB_ENV
+          echo "ANTHROPIC_SMALL_FAST_MODEL=claude-haiku-4-5-20251001" >> $GITHUB_ENV
+          echo "CITADEL_ENGINE=paid" >> $GITHUB_ENV
+
+      - name: Configure engine — free
+        if: matrix.engine == 'free'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          echo "ANTHROPIC_BASE_URL=https://openrouter.ai/api" >> $GITHUB_ENV
+          echo "ANTHROPIC_AUTH_TOKEN=$OPENROUTER_API_KEY" >> $GITHUB_ENV
+          echo "ANTHROPIC_MODEL=meta-llama/llama-3.3-70b-instruct:free" >> $GITHUB_ENV
+          echo "ANTHROPIC_SMALL_FAST_MODEL=qwen/qwen3-8b:free" >> $GITHUB_ENV
+          echo "CITADEL_ENGINE=free" >> $GITHUB_ENV
+
+      - name: Run benchmark harness
+        id: bench
+        run: |
+          mkdir -p .bench-results
+          python scripts/engine-bench.py \
+            --engine "${{ matrix.engine }}" \
+            --out ".bench-results/${{ matrix.engine }}.json" \
+            --dimensions reasoning,tokenization,management,research,brain,skill \
+            || echo "harness not yet implemented — emitting stub"
+          if [ ! -f ".bench-results/${{ matrix.engine }}.json" ]; then
+            cat > ".bench-results/${{ matrix.engine }}.json" <<EOF
+          {
+            "engine": "${{ matrix.engine }}",
+            "status": "stub",
+            "scores": {
+              "reasoning": null,
+              "tokenization": null,
+              "management": null,
+              "research": null,
+              "brain": null,
+              "skill": null
+            }
+          }
+          EOF
+          fi
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-${{ matrix.engine }}
+          path: .bench-results/${{ matrix.engine }}.json
+
+  publish:
+    name: Publish comparison matrix
+    needs: bench
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download all results
+        uses: actions/download-artifact@v4
+        with:
+          path: .bench-results
+
+      - name: Generate docs/benchmark-results.md
+        run: |
+          mkdir -p .bench-output
+          python scripts/render-bench-results.py \
+            --input .bench-results \
+            --out .bench-output/benchmark-results.md \
+            || echo "# Benchmark Results (stub)" > .bench-output/benchmark-results.md
+
+      - name: Upload benchmark report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: .bench-output/benchmark-results.md

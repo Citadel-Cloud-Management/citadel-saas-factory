@@ -1,0 +1,41 @@
+{
+  "$schema": "https://code.claude.com/settings.schema.json",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write(*.py)",
+        "hooks": [{ "type": "command", "command": "ruff check $file", "timeout": 10000 }]
+      },
+      {
+        "matcher": "Write(*.ts)|Write(*.tsx)",
+        "hooks": [{ "type": "command", "command": "npx eslint $file", "timeout": 10000 }]
+      },
+      {
+        "matcher": "Write(*.md)|Write(*.txt)|Write(*.json)",
+        "hooks": [{ "type": "command", "command": "guardrails validate --input $file 2>/dev/null || true", "timeout": 15000 }]
+      },
+      {
+        "matcher": "Grep|Glob",
+        "hooks": [{ "type": "command", "command": "test -f docs/vault/wiki/index.md && echo '[llm-wiki] Consult docs/vault/wiki/index.md before grepping raw sources — compiled knowledge is the first lookup (see .claude/rules/llm-wiki.md).' || true", "timeout": 2000 }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write(*.py)",
+        "hooks": [{ "type": "command", "command": "ruff format $file" }]
+      },
+      {
+        "matcher": "Write(*.ts)|Write(*.tsx)",
+        "hooks": [{ "type": "command", "command": "npx prettier --write $file" }]
+      },
+      {
+        "matcher": "Write(docs/vault/*.md)",
+        "hooks": [{ "type": "command", "command": "bash .claude/hooks/vault-autolink.sh $file", "timeout": 10000 }]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": ["Read", "Write", "Edit", "Bash(git *)", "Bash(npm *)", "Bash(make *)", "Bash(docker *)"],
+    "deny": ["Read(.env)", "Read(.env.*)", "Write(production.*)"]
+  }
+}

@@ -1,0 +1,8 @@
+name: lint
+description: Run all linters and formatters
+usage: /lint lint [--fix]
+steps:
+  - Python ruff
+  - TypeScript eslint
+  - YAML validate
+  - Report

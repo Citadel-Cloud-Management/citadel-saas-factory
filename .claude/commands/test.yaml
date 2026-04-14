@@ -1,0 +1,8 @@
+name: test
+description: Run test suite with coverage
+usage: /test test [--unit|--e2e]
+steps:
+  - Run tests
+  - Collect coverage
+  - Check threshold
+  - Report

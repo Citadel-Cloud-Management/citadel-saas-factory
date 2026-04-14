@@ -1,0 +1,8 @@
+name: migrate
+description: Run database migrations
+usage: /migrate migrate [up|down]
+steps:
+  - Check pending
+  - Apply migrations
+  - Verify schema
+  - Log result

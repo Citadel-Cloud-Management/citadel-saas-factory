@@ -1,0 +1,39 @@
+version: "3.5"
+project:
+  name: citadel-saas-factory
+  type: saas
+orchestration:
+  mode: parallel
+  max_concurrent_agents: 20
+  cycle_interval: 0
+  error_handling: auto-remediate
+  retry_count: 3
+swarm:
+  topology: mesh
+  consensus: byzantine
+  queen_type: strategic
+  worker_types:
+    - coder
+    - reviewer
+    - tester
+    - architect
+    - researcher
+    - analyst
+    - optimizer
+    - documenter
+hooks:
+  session_start:
+    - command: "ruflo check --global"
+      timeout: 30000
+mcp:
+  enabled: true
+  transport: stdio
+  tools: all
+memory:
+  backend: agentdb
+  persistence: true
+  vector_search: true
+security:
+  prompt_injection_protection: true
+  input_validation: strict
+  credential_handling: vault

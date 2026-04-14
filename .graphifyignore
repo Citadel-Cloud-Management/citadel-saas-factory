@@ -1,0 +1,12 @@
+node_modules/
+.next/
+__pycache__/
+*.pyc
+dist/
+build/
+.git/
+.env
+*.log
+coverage/
+.terraform/
+graphify-out/

@@ -1,0 +1,22 @@
+title: Brute Force Login Attempt
+id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+status: experimental
+description: Detects multiple failed login attempts from the same IP within a short time window
+author: Citadel Security
+date: 2026/04/11
+tags:
+  - attack.credential_access
+  - attack.t1110
+  - attack.t1110.001
+logsource:
+  category: authentication
+  product: keycloak
+detection:
+  selection:
+    event_type: LOGIN_ERROR
+  timeframe: 5m
+  condition: selection | count(source_ip) by source_ip > 10
+falsepositives:
+  - Shared NAT IP addresses
+  - Automated testing
+level: high

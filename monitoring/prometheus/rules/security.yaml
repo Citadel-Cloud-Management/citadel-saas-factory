@@ -1,0 +1,22 @@
+groups:
+  - name: security
+    rules:
+      - alert: FalcoCriticalEvent
+        expr: |
+          increase(falco_events{priority="Critical"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Falco critical security event detected"
+          description: "{{ $value }} critical Falco events in the last 5 minutes on {{ $labels.hostname }}."
+
+      - alert: CertificateExpiringSoon
+        expr: |
+          (probe_ssl_earliest_cert_expiry - time()) / 86400 < 7
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "TLS certificate expiring within 7 days"
+          description: "Certificate for {{ $labels.instance }} expires in {{ $value | humanize }} days."

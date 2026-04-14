@@ -1,0 +1,39 @@
+replicaCount: 3
+
+image:
+  repository: ghcr.io/citadel-cloud-management/citadel-saas-factory/backend
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8000
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 70
+
+probes:
+  liveness:
+    path: /health
+    port: 8000
+  readiness:
+    path: /ready
+    port: 8000
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+
+podDisruptionBudget:
+  minAvailable: 2

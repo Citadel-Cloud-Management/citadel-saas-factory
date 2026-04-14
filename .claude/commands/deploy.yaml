@@ -1,0 +1,8 @@
+name: deploy
+description: Deploy to target environment
+usage: /deploy deploy.sh <environment>
+steps:
+  - Build images
+  - Push to registry
+  - Apply GitOps manifests
+  - Verify health

@@ -1,0 +1,30 @@
+site_name: Citadel SaaS Factory
+site_url: https://docs.citadelcloudmanagement.com
+repo_url: https://github.com/Citadel-Cloud-Management/citadel-saas-factory
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: blue
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Architecture: architecture.md
+  - Agents: agents.md
+  - Deployment: deployment.md
+  - Security: security.md
+  - Operations: operations.md
+  - ADRs:
+    - ADR-001 FastAPI: adr/ADR-001-fastapi.md
+    - ADR-002 PostgreSQL: adr/ADR-002-postgresql.md
+    - ADR-003 K3s: adr/ADR-003-k3s.md
+    - ADR-004 ArgoCD: adr/ADR-004-argocd.md
+    - ADR-005 Linkerd: adr/ADR-005-linkerd.md
+  - Runbooks:
+    - Incident Response: runbooks/incident-response.md
+    - Deployment Rollback: runbooks/deployment-rollback.md
+  - API Reference: api.md
+  - Obsidian Integration: obsidian-integration.md
+  - Contributing: contributing.md

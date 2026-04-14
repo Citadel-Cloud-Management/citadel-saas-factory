@@ -1,0 +1,75 @@
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ─── Node.js ───
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+
+# ─── Environment ───
+.env
+.env.local
+.env.*.local
+
+# ─── IDE ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Docker ───
+docker-compose.override.yml
+*.pid
+
+# ─── Terraform ───
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan
+*.tfvars
+.terraform.lock.hcl
+
+# ─── Secrets ───
+*.pem
+*.key
+*.crt
+credentials.json
+secrets.yaml
+
+# ─── Logs ───
+logs/
+*.log
+
+# ─── Coverage ───
+coverage/
+
+# ─── Graphify ───
+graphify-out/
+
+# ─── Claude Local ───
+CLAUDE.local.md
+.claude/settings.local.json
+
+# ─── Build Artifacts ───
+*.tar.gz
+*.zip

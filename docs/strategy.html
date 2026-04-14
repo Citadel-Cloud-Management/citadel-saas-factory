@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Citadel SaaS Factory &#x2014; Strategy v3.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060810;
+    --panel: #0e1220;
+    --panel2: #151a2e;
+    --fg: #e6e9f5;
+    --muted: #8b92ab;
+    --accent: #5b8dff;
+    --accent2: #b5e0ae;
+    --border: #1f2540;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Sora', Calibri, Helvetica, sans-serif; font-weight: 300; line-height: 1.55; }
+  code, pre, .id code, .mono { font-family: 'DM Mono', Menlo, Consolas, monospace; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 56px 32px 96px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 32px; margin-bottom: 48px; }
+  h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
+  h1 .v { color: var(--muted); font-weight: 300; font-size: 0.6em; margin-left: 12px; }
+  .tagline { color: var(--muted); font-size: 18px; max-width: 780px; }
+  h2 { font-size: 28px; font-weight: 600; margin: 56px 0 20px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 20px; font-weight: 600; margin: 32px 0 12px; display: flex; align-items: center; gap: 16px; }
+  .badge { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .count { color: var(--muted); font-size: 14px; font-weight: 400; }
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 32px 0 48px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 700; color: var(--accent2); }
+  .stat-lbl { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .total-stat { background: linear-gradient(135deg, #1a2240, #0e1220); border: 1px solid var(--accent); grid-column: span 5; padding: 28px; }
+  .total-stat .stat-num { font-size: 56px; color: var(--accent); }
+  .total-stat .stat-lbl { font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-size: 13px; }
+  th { text-align: left; padding: 12px 16px; background: var(--panel2); color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+  td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.num { color: var(--muted); font-family: 'DM Mono', monospace; width: 48px; }
+  td.id code { color: var(--accent); font-size: 12px; }
+  td.name { font-weight: 500; color: var(--fg); white-space: nowrap; }
+  td.desc { color: #bfc5d9; }
+  .domain { margin-bottom: 40px; }
+  .tree { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 24px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--fg); white-space: pre; overflow-x: auto; line-height: 1.8; }
+  .tree .dir { color: var(--accent); }
+  .tree .file { color: var(--muted); }
+  .engines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 24px 0; }
+  .engine { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .engine h4 { margin: 0 0 12px; font-size: 18px; }
+  .engine .price { font-size: 28px; font-weight: 700; color: var(--accent2); margin: 8px 0; }
+  .engine ul { padding-left: 18px; color: #bfc5d9; margin: 12px 0; }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+  .tool { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; }
+  .tool .tool-name { font-weight: 600; color: var(--fg); }
+  .tool .tool-use { color: var(--muted); font-size: 12px; }
+  .note { background: var(--panel2); border-left: 3px solid var(--accent); padding: 16px 20px; margin: 24px 0; color: #bfc5d9; border-radius: 0 6px 6px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Citadel SaaS Factory <span class="v">v3.0</span></h1>
+  <p class="tagline">Universal Full-Stack SaaS Production Framework &#x2014; 265 autonomous business agents across 15 domains, three swappable LLM engine backends, Ruflo swarm orchestration, and Graphify knowledge graphs. Clone, configure, deploy on any infrastructure. $0 in software costs.</p>
+</header>
+
+<div class="stats">
+  <div class="stat total-stat">
+    <div class="stat-num">265</div>
+    <div class="stat-lbl">AUTONOMOUS BUSINESS AGENTS</div>
+  </div>
+<div class="stat"><div class="stat-num">12</div><div class="stat-lbl">Executive &amp; Strategy</div></div><div class="stat"><div class="stat-num">22</div><div class="stat-lbl">Marketing &amp; Growth</div></div><div class="stat"><div class="stat-num">18</div><div class="stat-lbl">Sales &amp; Revenue</div></div><div class="stat"><div class="stat-num">15</div><div class="stat-lbl">Customer Success</div></div><div class="stat"><div class="stat-num">20</div><div class="stat-lbl">Product &amp; UI/UX</div></div><div class="stat"><div class="stat-num">25</div><div class="stat-lbl">Engineering</div></div><div class="stat"><div class="stat-num">18</div><div class="stat-lbl">Frontend</div></div><div class="stat"><div class="stat-num">28</div><div class="stat-lbl">DevOps</div></div><div class="stat"><div class="stat-num">22</div><div class="stat-lbl">Security</div></div><div class="stat"><div class="stat-num">18</div><div class="stat-lbl">Data &amp; Analytics</div></div><div class="stat"><div class="stat-num">22</div><div class="stat-lbl">QA &amp; Testing</div></div><div class="stat"><div class="stat-num">12</div><div class="stat-lbl">HR &amp; People</div></div><div class="stat"><div class="stat-num">15</div><div class="stat-lbl">Finance &amp; Billing</div></div><div class="stat"><div class="stat-num">8</div><div class="stat-lbl">Legal &amp; Governance</div></div><div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Content &amp; Comms</div></div>
+</div>
+
+<h2>Agent Fleet &#x2014; All 265 Agents</h2>
+<p class="tagline">Every agent listed individually below. Each has a dedicated definition file under <code>.claude/agents/</code> with its own YAML frontmatter, toolset, model assignment, and prompt.</p>
+
+  <section class="domain" id="domain-executive">
+    <h3><span class="badge" style="background:#e8a5ff;color:#060810">Executive &amp; Strategy</span>
+        <span class="count">12 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>exec-ceo-strategist</code></td><td class="name">CEO Strategist</td><td class="desc">Business strategy, OKR generation, competitive analysis, board decks</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>exec-coo-operations</code></td><td class="name">COO Operations</td><td class="desc">Process optimization, cross-department coordination, resource allocation</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>exec-cfo-finance</code></td><td class="name">CFO Finance</td><td class="desc">Financial modeling, revenue forecasting, burn rate, unit economics</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>exec-cto-technology</code></td><td class="name">CTO Technology</td><td class="desc">Tech stack decisions, architecture reviews, build vs buy, tech debt</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>exec-cmo-marketing</code></td><td class="name">CMO Marketing</td><td class="desc">Marketing strategy, brand positioning, channel mix, growth planning</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>exec-cpo-product</code></td><td class="name">CPO Product</td><td class="desc">Product vision, roadmap, feature prioritization (RICE/ICE), market fit</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>exec-vp-engineering</code></td><td class="name">VP Engineering</td><td class="desc">Engineering velocity, team structure, hiring plans, incident escalation</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>exec-vp-sales</code></td><td class="name">VP Sales</td><td class="desc">Sales strategy, pipeline analysis, territory planning, quota setting</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>exec-okr-tracker</code></td><td class="name">OKR Tracker</td><td class="desc">Company/team OKR tracking, progress reports, at-risk identification</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>exec-board-reporter</code></td><td class="name">Board Reporter</td><td class="desc">Board reports, investor updates, KPI dashboards, milestone tracking</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>exec-competitive-intel</code></td><td class="name">Competitive Intel</td><td class="desc">Competitor monitoring, market trends, competitive battle cards</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>exec-decision-logger</code></td><td class="name">Decision Logger</td><td class="desc">Strategic decision recording with context, rationale, and outcomes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-marketing">
+    <h3><span class="badge" style="background:#ffa5c8;color:#060810">Marketing &amp; Growth</span>
+        <span class="count">22 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>mktg-seo-strategist</code></td><td class="name">SEO Strategist</td><td class="desc">Keyword research, on-page optimization, technical SEO, content gaps</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>mktg-content-writer</code></td><td class="name">Content Writer</td><td class="desc">Blog posts, landing pages, emails, case studies, whitepapers</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>mktg-social-media</code></td><td class="name">Social Media</td><td class="desc">Post scheduling, captions, hashtags, engagement analysis</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>mktg-email-marketer</code></td><td class="name">Email Marketer</td><td class="desc">Campaigns, subject lines, segmentation, A/B testing, flows</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>mktg-ppc-manager</code></td><td class="name">PPC Manager</td><td class="desc">Ad copy, bid strategy, audience targeting, ROAS optimization</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>mktg-analytics</code></td><td class="name">Marketing Analytics</td><td class="desc">UTM tracking, attribution, funnel analysis, conversion optimization</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>mktg-landing-page</code></td><td class="name">Landing Page</td><td class="desc">High-conversion page design and copy, CTA optimization</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>mktg-brand-voice</code></td><td class="name">Brand Voice</td><td class="desc">Brand consistency, tone guidelines, style guide enforcement</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>mktg-pr-outreach</code></td><td class="name">PR Outreach</td><td class="desc">Press releases, journalist pitching, media lists, coverage tracking</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>mktg-influencer</code></td><td class="name">Influencer Agent</td><td class="desc">Influencer ID, outreach scripts, partnership terms, ROI tracking</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>mktg-video-scripting</code></td><td class="name">Video Scriptwriter</td><td class="desc">YouTube scripts, social hooks, demo scripts, webinar outlines</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>mktg-podcast</code></td><td class="name">Podcast Producer</td><td class="desc">Episode outlines, show notes, guest research, transcripts</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>mktg-community</code></td><td class="name">Community Manager</td><td class="desc">Community engagement, UGC curation, feedback collection</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>mktg-growth-hacker</code></td><td class="name">Growth Hacker</td><td class="desc">Viral loops, referral programs, PLG mechanics, activation experiments</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>mktg-ab-tester</code></td><td class="name">A/B Test Designer</td><td class="desc">Hypothesis generation, stat significance, result analysis</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>mktg-competitor</code></td><td class="name">Competitor Monitor</td><td class="desc">Competitor marketing moves, pricing changes, feature launches</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>mktg-newsletter</code></td><td class="name">Newsletter Agent</td><td class="desc">Content curation, subject lines, send time optimization</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>mktg-webinar</code></td><td class="name">Webinar Planner</td><td class="desc">Planning, registration copy, follow-up sequences, engagement</td></tr>
+        <tr><td class="num">019</td><td class="id"><code>mktg-affiliate</code></td><td class="name">Affiliate Manager</td><td class="desc">Program setup, commissions, partner recruitment, payouts</td></tr>
+        <tr><td class="num">020</td><td class="id"><code>mktg-product-launch</code></td><td class="name">Product Launch</td><td class="desc">Launch playbook, announcement copy, drip campaigns, press</td></tr>
+        <tr><td class="num">021</td><td class="id"><code>mktg-persona</code></td><td class="name">Persona Builder</td><td class="desc">ICP definition, buyer personas, jobs-to-be-done analysis</td></tr>
+        <tr><td class="num">022</td><td class="id"><code>mktg-retention</code></td><td class="name">Retention Agent</td><td class="desc">Churn signals, re-engagement campaigns, NPS follow-up</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-sales">
+    <h3><span class="badge" style="background:#ffcf85;color:#060810">Sales &amp; Revenue</span>
+        <span class="count">18 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>sales-lead-qualifier</code></td><td class="name">Lead Qualifier</td><td class="desc">Lead scoring, data enrichment, ICP matching, routing</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>sales-outbound-writer</code></td><td class="name">Outbound Writer</td><td class="desc">Cold emails, LinkedIn messages, follow-ups, objection handling</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>sales-proposal-gen</code></td><td class="name">Proposal Generator</td><td class="desc">Custom proposals, SOWs, pricing tables, ROI calculations</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>sales-crm-updater</code></td><td class="name">CRM Updater</td><td class="desc">Deal stage updates, activity logging, pipeline hygiene</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>sales-demo-prepper</code></td><td class="name">Demo Prepper</td><td class="desc">Pre-demo research, custom scripts, competitive positioning</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>sales-contract-drafter</code></td><td class="name">Contract Drafter</td><td class="desc">MSA and order forms, redline tracking, approval routing</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>sales-forecast</code></td><td class="name">Forecast Analyst</td><td class="desc">Pipeline forecasting, deal velocity, revenue prediction</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>sales-win-loss</code></td><td class="name">Win/Loss Analyst</td><td class="desc">Post-deal analysis, pattern identification, CI extraction</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>sales-pricing</code></td><td class="name">Pricing Optimizer</td><td class="desc">Pricing models, discount impact, WTP estimation, tier optimization</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>sales-territory</code></td><td class="name">Territory Planner</td><td class="desc">Territory mapping, account distribution, quota allocation</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>sales-upsell</code></td><td class="name">Upsell Detector</td><td class="desc">Expansion opportunities, usage triggers, health signals</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>sales-scheduler</code></td><td class="name">Meeting Scheduler</td><td class="desc">Calendar coordination, timezone handling, no-show follow-up</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>sales-objection</code></td><td class="name">Objection Handler</td><td class="desc">Objection responses, battle cards, value proposition framing</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>sales-referral</code></td><td class="name">Referral Agent</td><td class="desc">Referral program, ask timing, reward fulfillment, tracking</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>sales-partner</code></td><td class="name">Partner Manager</td><td class="desc">Deal registration, co-selling, partner enablement content</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>sales-call-analyzer</code></td><td class="name">Call Analyzer</td><td class="desc">Transcript analysis, talk ratio, next-step extraction</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>sales-pipeline-cleaner</code></td><td class="name">Pipeline Cleaner</td><td class="desc">Stale deal ID, missing data alerts, stage-appropriate actions</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>sales-commission</code></td><td class="name">Commission Calculator</td><td class="desc">Commission calculation, plan modeling, quota attainment</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-customer-success">
+    <h3><span class="badge" style="background:#b5e0ae;color:#060810">Customer Success</span>
+        <span class="count">15 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>cs-onboarding</code></td><td class="name">Onboarding Agent</td><td class="desc">Welcome sequences, setup guides, milestone tracking, TTV</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>cs-ticket-router</code></td><td class="name">Ticket Router</td><td class="desc">Auto-categorize, prioritize, route support tickets</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>cs-response-drafter</code></td><td class="name">Response Drafter</td><td class="desc">Draft support responses from knowledge base, tone consistency</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>cs-escalation</code></td><td class="name">Escalation Agent</td><td class="desc">Escalation signals, senior routing, escalation summaries</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>cs-churn-predictor</code></td><td class="name">Churn Predictor</td><td class="desc">Usage analysis, engagement scoring, risk flagging, save offers</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>cs-health-scorer</code></td><td class="name">Health Scorer</td><td class="desc">Account health scoring (usage, tickets, NPS, adoption)</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>cs-nps</code></td><td class="name">NPS Collector</td><td class="desc">Survey distribution, response collection, follow-up automation</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>cs-knowledge</code></td><td class="name">Knowledge Builder</td><td class="desc">FAQ generation, help articles, KB maintenance, search</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>cs-chatbot</code></td><td class="name">Chatbot Trainer</td><td class="desc">Support chatbot training, intent refinement, accuracy</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>cs-feedback</code></td><td class="name">Feedback Analyzer</td><td class="desc">Categorize feedback, trends, route feature requests</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>cs-renewal</code></td><td class="name">Renewal Manager</td><td class="desc">Renewal tracking, pricing prep, contract generation</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>cs-qbr</code></td><td class="name">QBR Generator</td><td class="desc">QBR deck generation with usage data and ROI metrics</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>cs-adoption</code></td><td class="name">Adoption Tracker</td><td class="desc">Feature adoption, usage depth, enablement gaps</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>cs-sla</code></td><td class="name">SLA Monitor</td><td class="desc">SLA compliance, breach alerts, response time monitoring</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>cs-voc</code></td><td class="name">Voice of Customer</td><td class="desc">Aggregate feedback across channels into actionable insights</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-product-design">
+    <h3><span class="badge" style="background:#52c2f0;color:#060810">Product &amp; UI/UX</span>
+        <span class="count">20 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>design-ui</code></td><td class="name">UI Designer</td><td class="desc">Component design, layout, spacing/typography, visual hierarchy</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>design-ux-research</code></td><td class="name">UX Researcher</td><td class="desc">Interview scripts, surveys, usability tests, persona refinement</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>design-wireframe</code></td><td class="name">Wireframer</td><td class="desc">Lo-fi wireframes, user flows, information architecture</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>design-prototype</code></td><td class="name">Prototype Builder</td><td class="desc">Interactive prototype specs, click-through flows</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>design-system</code></td><td class="name">Design System</td><td class="desc">Token management, component library, pattern docs</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>design-a11y</code></td><td class="name">Accessibility</td><td class="desc">WCAG 2.1 AA audit, contrast, screen reader, ARIA</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>design-responsive</code></td><td class="name">Responsive Design</td><td class="desc">Breakpoints, mobile-first, touch targets, viewport</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>design-color</code></td><td class="name">Color Palette</td><td class="desc">Color theory, palette generation, dark/light theming</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>design-typography</code></td><td class="name">Typography</td><td class="desc">Font pairing, type scale, readability, web font perf</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>design-icon</code></td><td class="name">Icon System</td><td class="desc">Icon library, SVG optimization, consistent metaphors</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>design-animation</code></td><td class="name">Animation</td><td class="desc">Micro-interactions, transitions, loading, skeletons</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>design-illustration</code></td><td class="name">Illustration</td><td class="desc">Brand illustration style, spot illustrations, empty states</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>design-data-viz</code></td><td class="name">Data Visualization</td><td class="desc">Chart selection, dashboard layout, data storytelling</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>design-user-flow</code></td><td class="name">User Flow</td><td class="desc">Task flow mapping, happy path, error states, edge cases</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>design-heuristic</code></td><td class="name">Heuristic Eval</td><td class="desc">Nielsen heuristics, usability scoring, recommendations</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>design-onboarding</code></td><td class="name">Onboarding UX</td><td class="desc">First-run experience, progressive disclosure, tooltips</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>design-form</code></td><td class="name">Form UX</td><td class="desc">Form optimization, validation, multi-step, autofill</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>design-search</code></td><td class="name">Search UX</td><td class="desc">Search interface, filters, autocomplete, results display</td></tr>
+        <tr><td class="num">019</td><td class="id"><code>design-notification</code></td><td class="name">Notification UX</td><td class="desc">Notification design, frequency, channels, preferences</td></tr>
+        <tr><td class="num">020</td><td class="id"><code>design-mobile</code></td><td class="name">Mobile UX</td><td class="desc">Native patterns, gestures, thumb-zone, offline states</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-engineering">
+    <h3><span class="badge" style="background:#4a9fe2;color:#060810">Engineering</span>
+        <span class="count">25 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>eng-api-designer</code></td><td class="name">API Designer</td><td class="desc">REST/GraphQL design, OpenAPI spec, versioning</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>eng-model-builder</code></td><td class="name">Model Builder</td><td class="desc">ORM models, relationships, constraints, indexes</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>eng-schema-builder</code></td><td class="name">Schema Builder</td><td class="desc">Pydantic schemas, validation, serialization</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>eng-service-builder</code></td><td class="name">Service Builder</td><td class="desc">Business logic, service layer patterns, DI</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>eng-repo-builder</code></td><td class="name">Repository Builder</td><td class="desc">Data access, query builders, pagination, filtering</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>eng-migration-gen</code></td><td class="name">Migration Generator</td><td class="desc">Schema migrations, safe rollback, zero-downtime</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>eng-middleware</code></td><td class="name">Middleware Builder</td><td class="desc">Auth, rate limit, CORS, logging, metrics, headers</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>eng-event-handler</code></td><td class="name">Event Handler</td><td class="desc">Event-driven, message bus, async, saga patterns</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>eng-worker-builder</code></td><td class="name">Worker Builder</td><td class="desc">Background jobs, retry logic, DLQ, scheduling</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>eng-auth-builder</code></td><td class="name">Auth Builder</td><td class="desc">JWT, OAuth2, RBAC, permission guards</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>eng-cache-builder</code></td><td class="name">Cache Builder</td><td class="desc">Cache strategies, invalidation, TTL management</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>eng-search-builder</code></td><td class="name">Search Builder</td><td class="desc">Full-text, vector (pgvector), hybrid ranking</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>eng-webhook</code></td><td class="name">Webhook Builder</td><td class="desc">Dispatch, retry, signature verification, logging</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>eng-email</code></td><td class="name">Email Builder</td><td class="desc">Transactional email, templates, queue, tracking</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>eng-file-handler</code></td><td class="name">File Handler</td><td class="desc">Upload validation, scanning, storage, signed URLs</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>eng-pagination</code></td><td class="name">Pagination Agent</td><td class="desc">Cursor/offset pagination, ordering, optimization</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>eng-rate-limiter</code></td><td class="name">Rate Limiter</td><td class="desc">Per-endpoint/user limits, sliding window, token bucket</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>eng-health</code></td><td class="name">Health Builder</td><td class="desc">Liveness, readiness, startup probes, dep checks</td></tr>
+        <tr><td class="num">019</td><td class="id"><code>eng-websocket</code></td><td class="name">WebSocket Builder</td><td class="desc">Real-time, rooms, broadcast, heartbeat, reconnect</td></tr>
+        <tr><td class="num">020</td><td class="id"><code>eng-graphql</code></td><td class="name">GraphQL Builder</td><td class="desc">Schema, resolvers, dataloaders, subscriptions</td></tr>
+        <tr><td class="num">021</td><td class="id"><code>eng-multi-tenant</code></td><td class="name">Multi-Tenant</td><td class="desc">RLS, tenant middleware, data isolation</td></tr>
+        <tr><td class="num">022</td><td class="id"><code>eng-error-handler</code></td><td class="name">Error Handler</td><td class="desc">Structured errors, exception hierarchy, codes</td></tr>
+        <tr><td class="num">023</td><td class="id"><code>eng-logging</code></td><td class="name">Logging Agent</td><td class="desc">JSON logging, correlation IDs, PII redaction</td></tr>
+        <tr><td class="num">024</td><td class="id"><code>eng-config</code></td><td class="name">Config Manager</td><td class="desc">Env config, feature flags, dynamic config</td></tr>
+        <tr><td class="num">025</td><td class="id"><code>eng-code-reviewer</code></td><td class="name">Code Reviewer</td><td class="desc">PR review, patterns, complexity, security checks</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-frontend">
+    <h3><span class="badge" style="background:#4a8fe0;color:#060810">Frontend</span>
+        <span class="count">18 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>fe-component</code></td><td class="name">Component Builder</td><td class="desc">React scaffolding, props typing, composition</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>fe-page</code></td><td class="name">Page Builder</td><td class="desc">Next.js pages, SSR/SSG, metadata, routing</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>fe-layout</code></td><td class="name">Layout Builder</td><td class="desc">Navigation, sidebar, responsive shell</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>fe-form</code></td><td class="name">Form Builder</td><td class="desc">RHF and Zod, multi-step, validation, errors</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>fe-table</code></td><td class="name">Table Builder</td><td class="desc">Data tables, sorting, filtering, pagination, export</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>fe-chart</code></td><td class="name">Chart Builder</td><td class="desc">Recharts/D3 visualizations, real-time updates</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>fe-auth</code></td><td class="name">Auth Flow</td><td class="desc">Login, signup, reset, MFA, session management</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>fe-state</code></td><td class="name">State Manager</td><td class="desc">Zustand stores, selectors, middleware</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>fe-api-client</code></td><td class="name">API Client</td><td class="desc">TanStack Query hooks, errors, loading, optimistic</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>fe-a11y</code></td><td class="name">A11y Auditor</td><td class="desc">axe-core, ARIA, keyboard nav, focus management</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>fe-responsive</code></td><td class="name">Responsive</td><td class="desc">Mobile-first, breakpoints, touch, viewports</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>fe-i18n</code></td><td class="name">i18n Agent</td><td class="desc">Translations, locale, RTL, date/number format</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>fe-seo</code></td><td class="name">SEO Agent</td><td class="desc">Meta tags, structured data, sitemap, Open Graph</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>fe-performance</code></td><td class="name">Performance</td><td class="desc">Bundle analysis, code splitting, lazy load, CWV</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>fe-testing</code></td><td class="name">Frontend Testing</td><td class="desc">Vitest, Playwright E2E, visual regression</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>fe-animation</code></td><td class="name">Animation Builder</td><td class="desc">CSS transitions, Framer Motion, scroll animations</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>fe-error-boundary</code></td><td class="name">Error Boundary</td><td class="desc">Error boundaries, fallbacks, reporting, recovery</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>fe-pwa</code></td><td class="name">PWA Builder</td><td class="desc">Service worker, offline, push notifications</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-devops">
+    <h3><span class="badge" style="background:#1ac0b6;color:#060810">DevOps</span>
+        <span class="count">28 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>devops-ci</code></td><td class="name">CI Orchestrator</td><td class="desc">GitHub Actions pipeline, caching, stages</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>devops-cd</code></td><td class="name">CD Deployer</td><td class="desc">Deployment execution, promotion, health</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>devops-gitops</code></td><td class="name">GitOps Sync</td><td class="desc">ArgoCD management, sync policy, drift</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>devops-image-build</code></td><td class="name">Image Builder</td><td class="desc">Multi-stage Docker, layer optimization, hardening</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>devops-image-scan</code></td><td class="name">Image Scanner</td><td class="desc">Trivy/Grype CVE scanning, base image updates</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>devops-image-sign</code></td><td class="name">Image Signer</td><td class="desc">Cosign signing, SBOM generation (Syft)</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>devops-helm</code></td><td class="name">Helm Manager</td><td class="desc">Chart creation, values, release lifecycle</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>devops-terraform</code></td><td class="name">Terraform Ops</td><td class="desc">Plan, apply, state, modules, drift detection</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>devops-ansible</code></td><td class="name">Ansible Runner</td><td class="desc">Playbooks, roles, inventory management</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>devops-k8s</code></td><td class="name">K8s Manager</td><td class="desc">Deployments, services, configmaps, secrets</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>devops-scaler</code></td><td class="name">K8s Scaler</td><td class="desc">HPA tuning, VPA, cluster autoscaler</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>devops-debugger</code></td><td class="name">K8s Debugger</td><td class="desc">Pod diagnostics, log analysis, crash analysis</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>devops-canary</code></td><td class="name">Canary Manager</td><td class="desc">Progressive rollout 10/30/60/100 percent</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>devops-rollback</code></td><td class="name">Rollback Agent</td><td class="desc">Emergency rollback, version pinning, state restore</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>devops-release</code></td><td class="name">Release Manager</td><td class="desc">Semantic versioning, changelog, tags</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>devops-cert</code></td><td class="name">Cert Manager</td><td class="desc">TLS lifecycle, auto-renewal, ACME</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>devops-dns</code></td><td class="name">DNS Manager</td><td class="desc">DNS records, health checks, failover</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>devops-backup</code></td><td class="name">Backup Agent</td><td class="desc">DB backup, object storage backup, retention</td></tr>
+        <tr><td class="num">019</td><td class="id"><code>devops-restore</code></td><td class="name">Restore Agent</td><td class="desc">Backup validation, restore, DR testing</td></tr>
+        <tr><td class="num">020</td><td class="id"><code>devops-monitoring</code></td><td class="name">Monitoring Setup</td><td class="desc">Prometheus, Grafana, Loki, Tempo deployment</td></tr>
+        <tr><td class="num">021</td><td class="id"><code>devops-alerts</code></td><td class="name">Alert Builder</td><td class="desc">Alert rules, routing, escalation, silencing</td></tr>
+        <tr><td class="num">022</td><td class="id"><code>devops-logs</code></td><td class="name">Log Manager</td><td class="desc">Promtail/Loki pipeline, retention, format</td></tr>
+        <tr><td class="num">023</td><td class="id"><code>devops-mesh</code></td><td class="name">Service Mesh</td><td class="desc">Linkerd deployment, mTLS, traffic policies</td></tr>
+        <tr><td class="num">024</td><td class="id"><code>devops-ingress</code></td><td class="name">Ingress Manager</td><td class="desc">Traefik/NGINX, routing, rate limits, headers</td></tr>
+        <tr><td class="num">025</td><td class="id"><code>devops-storage</code></td><td class="name">Storage Manager</td><td class="desc">PV/PVC, MinIO, backup storage</td></tr>
+        <tr><td class="num">026</td><td class="id"><code>devops-queue</code></td><td class="name">Queue Manager</td><td class="desc">RabbitMQ/NATS, depth monitoring, DLQ</td></tr>
+        <tr><td class="num">027</td><td class="id"><code>devops-cost</code></td><td class="name">Cost Analyzer</td><td class="desc">Utilization analysis, rightsizing recommendations</td></tr>
+        <tr><td class="num">028</td><td class="id"><code>devops-capacity</code></td><td class="name">Capacity Planner</td><td class="desc">Growth forecasting, resource planning</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-security">
+    <h3><span class="badge" style="background:#d83030;color:#060810">Security</span>
+        <span class="count">22 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>sec-sast</code></td><td class="name">SAST Scanner</td><td class="desc">Semgrep static analysis, vulnerability finding</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>sec-sca</code></td><td class="name">SCA Scanner</td><td class="desc">Trivy dependency scanning, CVE, license</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>sec-dast</code></td><td class="name">DAST Scanner</td><td class="desc">OWASP ZAP dynamic testing, API fuzzing</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>sec-secret</code></td><td class="name">Secret Scanner</td><td class="desc">TruffleHog detection, pre-commit, prevention</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>sec-container</code></td><td class="name">Container Scanner</td><td class="desc">Image CVE scanning, base image audit</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>sec-iac</code></td><td class="name">IaC Scanner</td><td class="desc">Checkov Terraform/K8s scanning</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>sec-runtime</code></td><td class="name">Runtime Monitor</td><td class="desc">Falco anomaly detection, container escapes</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>sec-policy</code></td><td class="name">Policy Enforcer</td><td class="desc">Kyverno admission, OPA/Rego rules</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>sec-incident</code></td><td class="name">Incident Responder</td><td class="desc">IR automation, evidence, containment</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>sec-vuln</code></td><td class="name">Vuln Prioritizer</td><td class="desc">CVSS, exploitability, risk prioritization</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>sec-patch</code></td><td class="name">Patch Manager</td><td class="desc">Security patching, dep updates, rollout</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>sec-access</code></td><td class="name">Access Reviewer</td><td class="desc">IAM audit, permission review, least privilege</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>sec-rbac</code></td><td class="name">RBAC Manager</td><td class="desc">Role definitions, permissions, grants</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>sec-encryption</code></td><td class="name">Encryption Agent</td><td class="desc">At-rest/transit encryption, key rotation</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>sec-audit</code></td><td class="name">Audit Logger</td><td class="desc">Immutable audit log, compliance reporting</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>sec-compliance</code></td><td class="name">Compliance Checker</td><td class="desc">SOC2, HIPAA, GDPR, PCI, ISO 27001</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>sec-pentest</code></td><td class="name">Pentest Runner</td><td class="desc">Automated pentesting, Nuclei, validation</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>sec-threat</code></td><td class="name">Threat Hunter</td><td class="desc">Proactive detection, IOC, SIGMA rules</td></tr>
+        <tr><td class="num">019</td><td class="id"><code>sec-network</code></td><td class="name">Network Segmenter</td><td class="desc">NetworkPolicies, micro-segmentation, zero-trust</td></tr>
+        <tr><td class="num">020</td><td class="id"><code>sec-waf</code></td><td class="name">WAF Manager</td><td class="desc">WAF rules, DDoS protection, bot detection</td></tr>
+        <tr><td class="num">021</td><td class="id"><code>sec-pii</code></td><td class="name">PII Detector</td><td class="desc">PII in logs/data, classification, masking</td></tr>
+        <tr><td class="num">022</td><td class="id"><code>sec-supply-chain</code></td><td class="name">Supply Chain</td><td class="desc">SBOM analysis, provenance, Cosign verification</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-data-analytics">
+    <h3><span class="badge" style="background:#89638a;color:#060810">Data &amp; Analytics</span>
+        <span class="count">18 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>data-schema</code></td><td class="name">Schema Designer</td><td class="desc">DB schema, normalization, relationships</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>data-migration</code></td><td class="name">Migration Builder</td><td class="desc">Safe DDL, zero-downtime, rollback</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>data-index</code></td><td class="name">Index Optimizer</td><td class="desc">Query plans, index recs, bloat detection</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>data-query</code></td><td class="name">Query Optimizer</td><td class="desc">Slow queries, N+1, rewriting</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>data-rls</code></td><td class="name">RLS Manager</td><td class="desc">Row-level security, tenant isolation</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>data-backup</code></td><td class="name">Backup Validator</td><td class="desc">Integrity checks, restore testing</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>data-etl</code></td><td class="name">ETL Builder</td><td class="desc">Data pipelines, transformations</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>data-analytics</code></td><td class="name">Analytics Builder</td><td class="desc">Business metrics, KPI calculation</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>data-vector</code></td><td class="name">Vector Manager</td><td class="desc">pgvector embeddings, similarity search</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>data-warehouse</code></td><td class="name">Warehouse Builder</td><td class="desc">Star schema, materialized views</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>data-report</code></td><td class="name">Report Generator</td><td class="desc">Automated reports, PDF, scheduling</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>data-dashboard</code></td><td class="name">Dashboard Builder</td><td class="desc">Grafana/Metabase dashboards, drill-down</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>data-events</code></td><td class="name">Event Tracker</td><td class="desc">Event schema, tracking, funnels</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>data-cohort</code></td><td class="name">Cohort Analyzer</td><td class="desc">Retention curves, behavioral segmentation</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>data-ab</code></td><td class="name">A/B Analyzer</td><td class="desc">Statistical significance, sample size</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>data-forecast</code></td><td class="name">Forecast Model</td><td class="desc">Time series, trends, seasonality</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>data-anomaly</code></td><td class="name">Anomaly Detector</td><td class="desc">Metric anomalies, baseline deviation</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>data-privacy</code></td><td class="name">Privacy Agent</td><td class="desc">Anonymization, retention, GDPR</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-qa-testing">
+    <h3><span class="badge" style="background:#afa65d;color:#060810">QA &amp; Testing</span>
+        <span class="count">22 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>qa-unit</code></td><td class="name">Unit Test Writer</td><td class="desc">Unit tests, assertions, edge cases, mocks</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>qa-integration</code></td><td class="name">Integration Writer</td><td class="desc">DB/cache integration, fixtures</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>qa-e2e</code></td><td class="name">E2E Writer</td><td class="desc">Playwright/Cypress E2E, user flows</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>qa-api</code></td><td class="name">API Tester</td><td class="desc">REST/GraphQL testing, contract validation</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>qa-load</code></td><td class="name">Load Tester</td><td class="desc">k6/Locust load tests, breakpoints</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>qa-performance</code></td><td class="name">Perf Tester</td><td class="desc">Regression detection, benchmarks</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>qa-security</code></td><td class="name">Security Tester</td><td class="desc">Auth bypass, injection, fuzzing</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>qa-a11y</code></td><td class="name">A11y Tester</td><td class="desc">WCAG compliance, screen reader</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>qa-visual</code></td><td class="name">Visual Regression</td><td class="desc">Screenshot diff, CSS regression</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>qa-coverage</code></td><td class="name">Coverage Analyzer</td><td class="desc">Gaps, uncovered branches, dead code</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>qa-mutation</code></td><td class="name">Mutation Tester</td><td class="desc">Mutation testing, test quality</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>qa-contract</code></td><td class="name">Contract Tester</td><td class="desc">Consumer-driven contracts, Pact</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>qa-chaos</code></td><td class="name">Chaos Tester</td><td class="desc">Failure injection, resilience</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>qa-fixture</code></td><td class="name">Fixture Builder</td><td class="desc">Test data factories, fake data</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>qa-mock</code></td><td class="name">Mock Builder</td><td class="desc">Mock/stub generation, service virtualization</td></tr>
+        <tr><td class="num">016</td><td class="id"><code>qa-regression</code></td><td class="name">Regression Hunter</td><td class="desc">Git bisect, regression ID, fix validation</td></tr>
+        <tr><td class="num">017</td><td class="id"><code>qa-flaky</code></td><td class="name">Flaky Detector</td><td class="desc">Flaky test ID, root cause, stabilization</td></tr>
+        <tr><td class="num">018</td><td class="id"><code>qa-prioritizer</code></td><td class="name">Test Prioritizer</td><td class="desc">Risk-based ordering, impact analysis</td></tr>
+        <tr><td class="num">019</td><td class="id"><code>qa-smoke</code></td><td class="name">Smoke Tester</td><td class="desc">Post-deploy smoke, critical paths</td></tr>
+        <tr><td class="num">020</td><td class="id"><code>qa-compat</code></td><td class="name">Compat Tester</td><td class="desc">Browser/device compatibility</td></tr>
+        <tr><td class="num">021</td><td class="id"><code>qa-data</code></td><td class="name">Data Validator</td><td class="desc">Data integrity, migration validation</td></tr>
+        <tr><td class="num">022</td><td class="id"><code>qa-reporter</code></td><td class="name">Test Reporter</td><td class="desc">Results, trends, quality metrics</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-hr-people">
+    <h3><span class="badge" style="background:#d3577f;color:#060810">HR &amp; People</span>
+        <span class="count">12 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>hr-job-writer</code></td><td class="name">Job Writer</td><td class="desc">Role descriptions, requirements, inclusive language</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>hr-resume</code></td><td class="name">Resume Screener</td><td class="desc">Parsing, skill matching, scoring</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>hr-interview</code></td><td class="name">Interview Prepper</td><td class="desc">Questions, scorecards, competencies</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>hr-offer</code></td><td class="name">Offer Drafter</td><td class="desc">Offer letters, comp benchmarking, equity</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>hr-onboarding</code></td><td class="name">Onboarding Manager</td><td class="desc">30-60-90, checklists, buddy assignment</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>hr-performance</code></td><td class="name">Perf Reviewer</td><td class="desc">Review templates, goals, feedback</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>hr-engagement</code></td><td class="name">Engagement Survey</td><td class="desc">Pulse surveys, sentiment, action plans</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>hr-policy</code></td><td class="name">Policy Writer</td><td class="desc">Handbook, PTO, remote work guidelines</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>hr-comp</code></td><td class="name">Comp Analyst</td><td class="desc">Salary benchmarking, pay equity, bands</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>hr-org-chart</code></td><td class="name">Org Chart Builder</td><td class="desc">Structure, reporting lines, span</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>hr-training</code></td><td class="name">Training Planner</td><td class="desc">Learning paths, skill gaps, calendar</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>hr-offboarding</code></td><td class="name">Offboarding Agent</td><td class="desc">Exit checklist, knowledge transfer, access revocation</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-finance">
+    <h3><span class="badge" style="background:#64a569;color:#060810">Finance &amp; Billing</span>
+        <span class="count">15 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>fin-billing</code></td><td class="name">Billing Agent</td><td class="desc">Stripe integration, subscription mgmt, invoices</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>fin-payment</code></td><td class="name">Payment Processor</td><td class="desc">Payment flow, retry, dunning, refunds</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>fin-subscription</code></td><td class="name">Subscription Manager</td><td class="desc">Plan changes, proration, trials, cancellation</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>fin-usage</code></td><td class="name">Usage Metering</td><td class="desc">Usage tracking, metered billing, overage</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>fin-invoice</code></td><td class="name">Invoice Generator</td><td class="desc">PDF invoices, tax, multi-currency</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>fin-revenue</code></td><td class="name">Revenue Recognizer</td><td class="desc">ASC 606, deferred revenue, MRR/ARR</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>fin-expense</code></td><td class="name">Expense Tracker</td><td class="desc">Infra costs, vendor payments, budgets</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>fin-tax</code></td><td class="name">Tax Calculator</td><td class="desc">Sales tax, VAT, GST by jurisdiction</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>fin-reports</code></td><td class="name">Financial Reporter</td><td class="desc">P&amp;L, cash flow, SaaS metrics (LTV, CAC)</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>fin-budget</code></td><td class="name">Budget Planner</td><td class="desc">Budgets, variance, forecast vs actual</td></tr>
+        <tr><td class="num">011</td><td class="id"><code>fin-ar</code></td><td class="name">AR Agent</td><td class="desc">Outstanding invoices, collections, aging</td></tr>
+        <tr><td class="num">012</td><td class="id"><code>fin-pricing</code></td><td class="name">Pricing Modeler</td><td class="desc">Pricing pages, tiers, feature gating</td></tr>
+        <tr><td class="num">013</td><td class="id"><code>fin-fraud</code></td><td class="name">Fraud Detector</td><td class="desc">Payment fraud, velocity checks, risk</td></tr>
+        <tr><td class="num">014</td><td class="id"><code>fin-audit</code></td><td class="name">Audit Preparer</td><td class="desc">Financial audit prep, documentation</td></tr>
+        <tr><td class="num">015</td><td class="id"><code>fin-runway</code></td><td class="name">Runway Calculator</td><td class="desc">Burn rate, runway projection, scenarios</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-legal">
+    <h3><span class="badge" style="background:#8c8c8c;color:#060810">Legal &amp; Governance</span>
+        <span class="count">8 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>legal-tos</code></td><td class="name">ToS Writer</td><td class="desc">Terms, privacy policy, acceptable use, cookies</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>legal-dpa</code></td><td class="name">DPA Drafter</td><td class="desc">Data processing agreements, sub-processors</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>legal-contract</code></td><td class="name">Contract Reviewer</td><td class="desc">Clause analysis, risk flagging, redlines</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>legal-ip</code></td><td class="name">IP Protector</td><td class="desc">License compliance, OSS audit, trademarks</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>legal-gdpr</code></td><td class="name">GDPR Agent</td><td class="desc">Data subject requests, consent, retention</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>legal-soc2</code></td><td class="name">SOC2 Preparer</td><td class="desc">Control docs, evidence, gap analysis</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>legal-sla</code></td><td class="name">SLA Drafter</td><td class="desc">SLA docs, uptime commitments, penalties</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>legal-incident</code></td><td class="name">Incident Notifier</td><td class="desc">Breach notifications, regulatory timelines</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="domain" id="domain-content">
+    <h3><span class="badge" style="background:#dec27d;color:#060810">Content &amp; Comms</span>
+        <span class="count">10 agents</span></h3>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="num">001</td><td class="id"><code>content-tech-writer</code></td><td class="name">Tech Writer</td><td class="desc">API docs, guides, tutorials, SDK docs</td></tr>
+        <tr><td class="num">002</td><td class="id"><code>content-blog</code></td><td class="name">Blog Writer</td><td class="desc">SEO blogs, thought leadership, industry</td></tr>
+        <tr><td class="num">003</td><td class="id"><code>content-docs</code></td><td class="name">Docs Builder</td><td class="desc">MkDocs/Docusaurus site, nav, search</td></tr>
+        <tr><td class="num">004</td><td class="id"><code>content-changelog</code></td><td class="name">Changelog Writer</td><td class="desc">User-facing changelogs, release notes</td></tr>
+        <tr><td class="num">005</td><td class="id"><code>content-presentation</code></td><td class="name">Presentations</td><td class="desc">Slide decks, pitch decks, training</td></tr>
+        <tr><td class="num">006</td><td class="id"><code>content-internal</code></td><td class="name">Internal Comms</td><td class="desc">All-hands updates, newsletters, decisions</td></tr>
+        <tr><td class="num">007</td><td class="id"><code>content-status</code></td><td class="name">Status Writer</td><td class="desc">Incident updates, maintenance windows</td></tr>
+        <tr><td class="num">008</td><td class="id"><code>content-editor</code></td><td class="name">Copy Editor</td><td class="desc">Grammar, style, brand voice, proofing</td></tr>
+        <tr><td class="num">009</td><td class="id"><code>content-case-study</code></td><td class="name">Case Study Writer</td><td class="desc">Customer success stories, ROI metrics</td></tr>
+        <tr><td class="num">010</td><td class="id"><code>content-readme</code></td><td class="name">README Generator</td><td class="desc">Repo READMEs, quickstart, badges</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+<h2>Multi-Engine LLM Backends</h2>
+<p class="tagline">Pick the right quality/cost/privacy tradeoff per task. Same <code>.claude/</code> config, three different backends, zero application changes.</p>
+<div class="engines">
+  <div class="engine">
+    <h4>Paid &#x00B7; Anthropic</h4>
+    <div class="price">$20&#x2013;200/mo</div>
+    <ul>
+      <li>Claude Sonnet 4.6 (primary)</li>
+      <li>Claude Haiku 4.5 (small/fast)</li>
+      <li>~800 ms p50 latency</li>
+      <li>100% quality baseline</li>
+      <li>Best for production work</li>
+    </ul>
+    <code>make run-paid</code>
+  </div>
+  <div class="engine">
+    <h4>Free &#x00B7; OpenRouter</h4>
+    <div class="price">$0/mo</div>
+    <ul>
+      <li>Llama 3.3 70B (primary)</li>
+      <li>Qwen 3 8B (small/fast)</li>
+      <li>~2&#x2013;5 s p50 latency</li>
+      <li>~80% quality baseline</li>
+      <li>Rate-limited free tier</li>
+    </ul>
+    <code>make run-free</code>
+  </div>
+  <div class="engine">
+    <h4>Local &#x00B7; Ollama</h4>
+    <div class="price">$0/mo</div>
+    <ul>
+      <li>Qwen 2.5 Coder 32B</li>
+      <li>Via y-router proxy</li>
+      <li>~300 ms local latency</li>
+      <li>Zero data egress</li>
+      <li>Air-gapped capable</li>
+    </ul>
+    <code>make run-local</code>
+  </div>
+</div>
+
+<h2>.claude/ Folder Structure</h2>
+<div class="tree"><span class="dir">.claude/</span>
+&#x251C;&#x2500; <span class="file">CLAUDE.md</span>                 &#x2014; project identity, conventions, autonomous-execution
+&#x251C;&#x2500; <span class="file">settings.json</span>             &#x2014; hooks, permissions, tool allowlist
+&#x251C;&#x2500; <span class="file">settings.md</span>               &#x2014; hook documentation
+&#x251C;&#x2500; <span class="dir">agents/</span>                  &#x2014; all 265 agent definitions + _registry.yaml
+&#x251C;&#x2500; <span class="dir">skills/</span>                  &#x2014; code-review, security-audit, deploy, testing, llm-wiki, graphify, ...
+&#x251C;&#x2500; <span class="dir">commands/</span>                &#x2014; /review, /deploy, /fix-issue, /onboard, /wiki-ingest, ...
+&#x251C;&#x2500; <span class="dir">rules/</span>                   &#x2014; 18+ governance files (code-quality, security, architecture, ...)
+&#x251C;&#x2500; <span class="dir">templates/</span>               &#x2014; 20 scaffolding templates (.py.tmpl, .tsx.tmpl, .tf.tmpl, ...)
+&#x251C;&#x2500; <span class="dir">mcp/</span>                     &#x2014; 8 MCP reference configs (github, postgres, docker, k8s, ...)
+&#x251C;&#x2500; <span class="dir">memory/</span>                  &#x2014; project-context, architecture-decisions, agent-learnings
+&#x2514;&#x2500; <span class="dir">hooks/</span>                   &#x2014; vault-autolink, graphify pre-tool-use
+</div>
+
+<h2>Ruflo &#x00B7; Swarm Orchestration</h2>
+<p>Ruflo provides mesh-topology multi-agent coordination across 314 MCP tools. 8 worker types (coder, reviewer, tester, architect, researcher, analyst, optimizer, documenter) with byzantine consensus, auto-remediation, and AgentDB vector memory. Configured in <code>ruflo.config.yaml</code>.</p>
+<div class="note">CYCLE_INTERVAL=0 means agents execute in parallel, not on a timer. Ruflo consensus kicks in when two or more agents disagree on a change &#x2014; byzantine voting resolves the conflict before any write lands in the working tree.</div>
+
+<h2>Graphify &#x00B7; Codebase Knowledge Graph</h2>
+<p>Graphify parses the codebase with Tree-sitter (20 languages), builds a knowledge graph of entities and relationships, and exposes it to Claude via a PreToolUse hook that intercepts every <code>Glob</code>/<code>Grep</code> call. The result: 71&#x00D7; fewer tokens spent on repo exploration. Output lands at <code>graphify-out/GRAPH_REPORT.md</code> and in the Obsidian vault at <code>docs/vault/knowledge-graph/</code>.</p>
+
+<h2>LLM Wiki &#x00B7; Brain Memory</h2>
+<p>Citadel uses Andrej Karpathy's LLM Wiki pattern as persistent brain memory. Three layers: immutable <code>raw/</code> sources, LLM-maintained compiled <code>wiki/</code> (entities, concepts, comparisons, contradictions), and a co-evolved <code>SCHEMA.md</code>. Every agent session's valuable output files back into the wiki &#x2014; knowledge compounds across all 265 agents instead of dying with the chat session.</p>
+
+<h2>Free Toolchain</h2>
+<p class="tagline">30+ production-grade tools, $0 in software licensing.</p>
+<div class="tools-grid">
+  <div class="tool"><div class="tool-name">ArgoCD</div><div class="tool-use">GitOps continuous delivery</div></div>
+  <div class="tool"><div class="tool-name">K3s</div><div class="tool-use">Lightweight Kubernetes</div></div>
+  <div class="tool"><div class="tool-name">Traefik</div><div class="tool-use">Reverse proxy + TLS</div></div>
+  <div class="tool"><div class="tool-name">Linkerd</div><div class="tool-use">mTLS service mesh</div></div>
+  <div class="tool"><div class="tool-name">Keycloak</div><div class="tool-use">OAuth2 + RBAC + MFA</div></div>
+  <div class="tool"><div class="tool-name">HashiCorp Vault</div><div class="tool-use">Secrets management</div></div>
+  <div class="tool"><div class="tool-name">Prometheus</div><div class="tool-use">Metrics collection</div></div>
+  <div class="tool"><div class="tool-name">Grafana</div><div class="tool-use">Observability dashboards</div></div>
+  <div class="tool"><div class="tool-name">Loki</div><div class="tool-use">Log aggregation</div></div>
+  <div class="tool"><div class="tool-name">Falco</div><div class="tool-use">Runtime security</div></div>
+  <div class="tool"><div class="tool-name">Kyverno</div><div class="tool-use">Kubernetes policies</div></div>
+  <div class="tool"><div class="tool-name">Semgrep</div><div class="tool-use">SAST code scanning</div></div>
+  <div class="tool"><div class="tool-name">Trivy</div><div class="tool-use">Container + IaC scanning</div></div>
+  <div class="tool"><div class="tool-name">OWASP ZAP</div><div class="tool-use">DAST runtime scanning</div></div>
+  <div class="tool"><div class="tool-name">Flagsmith</div><div class="tool-use">Feature flags</div></div>
+  <div class="tool"><div class="tool-name">Grafana OnCall</div><div class="tool-use">Incident paging</div></div>
+  <div class="tool"><div class="tool-name">Velero</div><div class="tool-use">Cluster backup + restore</div></div>
+  <div class="tool"><div class="tool-name">MinIO</div><div class="tool-use">S3-compatible object store</div></div>
+  <div class="tool"><div class="tool-name">RabbitMQ</div><div class="tool-use">Message broker</div></div>
+  <div class="tool"><div class="tool-name">pgvector</div><div class="tool-use">Postgres vector search</div></div>
+  <div class="tool"><div class="tool-name">Cosign</div><div class="tool-use">Container image signing</div></div>
+  <div class="tool"><div class="tool-name">Ansible</div><div class="tool-use">Node bootstrap + config</div></div>
+</div>
+
+<h2>Infrastructure Agnostic</h2>
+<div class="note">Citadel runs on <strong>any Linux host with SSH + Docker</strong>: VPS, bare metal, on-prem, edge devices, home lab, any cloud. No vendor lock-in, no proprietary APIs. The infrastructure layer is Terraform modules targeting a generic <code>ssh://user@host</code> provider.</div>
+
+<footer>
+  <div>Citadel Cloud Management &#x00B7; MIT License &#x00B7; 2026</div>
+  <div>Generated from <code>.claude/agents/_registry.yaml</code></div>
+</footer>
+
+</div>
+</body>
+</html>
