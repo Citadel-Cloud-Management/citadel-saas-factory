@@ -4,12 +4,13 @@
 
 ### Universal Full-Stack SaaS Production Framework
 
-**265 Autonomous Business Agents | Multi-Model AI | Cross-IDE Support**
+**385+ Autonomous Business Agents | 12 Model Providers | 22 Domains | Cross-IDE**
 
 [![npm](https://img.shields.io/npm/v/@citadelcloud/saas-factory?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/@citadelcloud/saas-factory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Agents](https://img.shields.io/badge/Agents-265-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
-[![Models](https://img.shields.io/badge/Models-9_Providers-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](models/catalog.yaml)
+[![Agents](https://img.shields.io/badge/Agents-385+-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
+[![Models](https://img.shields.io/badge/Models-12_Providers-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](models/catalog.yaml)
+[![Domains](https://img.shields.io/badge/Domains-22-E91E63?style=for-the-badge&logo=target&logoColor=white)](#-all-385-agents--22-domains)
 [![IDEs](https://img.shields.io/badge/IDEs-12_Supported-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#-cross-ide-support)
 [![Cost](https://img.shields.io/badge/Cost-$0/month-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](#-free-toolchain)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
@@ -134,17 +135,22 @@ claude                                # Or open in Cursor, Antigravity, Copilot,
 
 | Tier | Primary | Fallbacks | Use Case |
 |------|---------|-----------|----------|
-| 🧠 `reasoning_deep` | Claude Opus 4.6 | Gemini 3 Pro, DeepSeek R1, GPT-5 | Architecture, critical decisions |
+| 🧠 `reasoning_deep` | Claude Opus 4.6 | Gemini 3 Pro, DeepSeek R1, GPT-5.4 | Architecture, critical decisions |
 | ⚡ `reasoning_fast` | Claude Sonnet 4.6 | Gemini 3 Pro, GPT-5, DeepSeek V3.1 | Default coding tasks |
 | 💨 `cheap_fast` | Claude Haiku 4.5 | Gemini 3 Flash, GPT-5 Mini | Completion, boilerplate |
 | 📚 `long_context` | Gemini 3.1 Pro | Gemini 3 Pro, Claude Opus, GPT-4.1 | Full codebase analysis (2M tokens) |
 | 🔧 `code_specialist` | Codestral 25 | Qwen 2.5 Coder, DeepSeek V3.1 | Code generation and review |
-| 👁️ `vision` | Claude Opus 4.6 | Gemini 3 Pro, GPT-5 | Screenshot/design to code |
-| 🏠 `local_only` | Llama 3.3 70B | DeepSeek V3.1, Qwen 2.5 Coder | Air-gapped, zero cost |
+| 👁️ `vision` | Claude Opus 4.6 | Gemini 3 Pro, GPT-5, Llama 4 Maverick | Screenshot/design to code |
+| 🏠 `local_only` | Llama 4 Maverick | Llama 4 Scout, DeepSeek V3.1, Qwen 3 | Air-gapped, zero cost |
+| 🔭 `ultra_context` | Llama 4 Scout | Gemini 3.1 Pro, GPT-4.1, Grok 4 | Massive full-repo analysis (10M tokens) |
+| 🔗 `reasoning_chain` | o4 | DeepSeek R1-0528, DeepSeek R1, Opus | Multi-step chain-of-thought |
+| 🌍 `multilingual` | Mistral Large 2 | Qwen 3.5, Gemini 3 Pro, Sonnet | Non-English, translation |
+| 📖 `rag_specialist` | Command A | Command R+, Sonnet, Gemini 3 Pro | RAG with source grounding |
+| 🏆 `open_frontier` | GLM-5 | MiniMax M2.5, Qwen 3.5, Llama 4 Maverick | Best open-weights, matches closed models |
 
 <div align="center">
 
-**9 providers** &nbsp;·&nbsp; **8 gateways** &nbsp;·&nbsp; **5 local runtimes**
+**12 providers** &nbsp;·&nbsp; **8 gateways** &nbsp;·&nbsp; **5 local runtimes** &nbsp;·&nbsp; **40+ models**
 
 <img src="https://img.shields.io/badge/Anthropic-D97757?style=flat-square&logo=anthropic&logoColor=white" />
 <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" />
@@ -153,7 +159,10 @@ claude                                # Or open in Cursor, Antigravity, Copilot,
 <img src="https://img.shields.io/badge/DeepSeek-4D6BFF?style=flat-square" />
 <img src="https://img.shields.io/badge/Mistral-FF7000?style=flat-square" />
 <img src="https://img.shields.io/badge/Cohere-39594D?style=flat-square" />
-<img src="https://img.shields.io/badge/Meta-0467DF?style=flat-square&logo=meta&logoColor=white" />
+<img src="https://img.shields.io/badge/Meta_Llama_4-0467DF?style=flat-square&logo=meta&logoColor=white" />
+<img src="https://img.shields.io/badge/Qwen_3.5-FF6A00?style=flat-square" />
+<img src="https://img.shields.io/badge/GLM--5-00B4D8?style=flat-square" />
+<img src="https://img.shields.io/badge/MiniMax-8B5CF6?style=flat-square" />
 <img src="https://img.shields.io/badge/Ollama-000000?style=flat-square" />
 
 </div>
@@ -195,27 +204,34 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 
 ---
 
-## 🤖 All 265 Agents — 15 Domains
+## 🤖 All 385+ Agents — 22 Domains
 
 <div align="center">
 
 | Domain | Agents | Highlights |
 |--------|--------|------------|
-| 👔 **Executive & Strategy** | 12 | CEO Strategist, CTO Technology, OKR Tracker |
-| 📈 **Marketing & Growth** | 22 | SEO, Content, Social, Email, PPC, PR |
-| 💰 **Sales & Revenue** | 18 | Lead Qualifier, Proposals, CRM, Forecast |
-| 🎯 **Customer Success** | 15 | Onboarding, Tickets, Churn Predictor, NPS |
-| 🎨 **Product & UI/UX** | 20 | UI Designer, Wireframes, Design System, A11y |
-| ⚙️ **Engineering** | 25 | API, Models, Auth, Cache, Search, WebSocket |
-| 🖥️ **Frontend** | 18 | Components, Pages, Forms, Charts, State, PWA |
-| 🚀 **DevOps** | 28 | CI/CD, GitOps, K8s, Helm, Terraform, Canary |
-| 🔒 **Security** | 22 | SAST, DAST, Secrets, Falco, Kyverno, Pentest |
-| 📊 **Data & Analytics** | 18 | Schema, ETL, Dashboards, Forecasting, Vector |
-| 🧪 **QA & Testing** | 22 | Unit, E2E, Load, Chaos, Mutation, Visual |
-| 👥 **HR & People** | 12 | Jobs, Interviews, Onboarding, Performance |
-| 💳 **Finance & Billing** | 15 | Stripe, Subscriptions, Tax, Revenue, Runway |
-| ⚖️ **Legal & Governance** | 8 | ToS, DPA, GDPR, SOC2, SLA |
-| ✍️ **Content & Comms** | 10 | Tech Writing, Docs, Changelogs, Case Studies |
+| 👔 **Executive & Strategy** | 15 | CEO Strategist, CTO Technology, OKR Tracker, Board Reporter, M&A Analyst |
+| 📈 **Marketing & Growth** | 26 | SEO, Content, Social, Email, PPC, PR, PLG, ABM, Podcast, Influencer |
+| 💰 **Sales & Revenue** | 22 | Lead Qualifier, Proposals, CRM, Forecast, Revenue Ops, Deal Desk |
+| 🎯 **Customer Success** | 18 | Onboarding, Tickets, Churn Predictor, NPS, QBR, Health Score |
+| 🎨 **Product & UI/UX** | 24 | UI Designer, Wireframes, Design System, A11y, Micro-interactions, User Research |
+| ⚙️ **Engineering** | 30 | API, Models, Auth, Cache, Search, WebSocket, GraphQL, gRPC, Event Sourcing |
+| 🖥️ **Frontend** | 22 | Components, Pages, Forms, Charts, State, PWA, i18n, Micro-frontends |
+| 🚀 **DevOps** | 32 | CI/CD, GitOps, K8s, Helm, Terraform, Canary, FinOps, Platform Eng |
+| 🔒 **Security** | 26 | SAST, DAST, Secrets, Falco, Kyverno, Pentest, Zero Trust, SBOM |
+| 📊 **Data & Analytics** | 22 | Schema, ETL, Dashboards, Forecasting, Vector, Lakehouse, dbt |
+| 🧪 **QA & Testing** | 26 | Unit, E2E, Load, Chaos, Mutation, Visual, Contract, Property-based |
+| 👥 **HR & People** | 15 | Jobs, Interviews, Onboarding, Performance, DEI, L&D, Culture |
+| 💳 **Finance & Billing** | 18 | Stripe, Subscriptions, Tax, Revenue, Runway, FP&A, Treasury |
+| ⚖️ **Legal & Governance** | 12 | ToS, DPA, GDPR, SOC2, SLA, AI Ethics, IP, Export Control |
+| ✍️ **Content & Comms** | 14 | Tech Writing, Docs, Changelogs, Case Studies, Video Scripts, Podcasts |
+| 📦 **Supply Chain & Procurement** | 12 | Vendor Scoring, RFP Generator, Inventory Optimizer, Demand Forecast, Logistics |
+| 🏗️ **Platform Engineering** | 10 | IDP Builder, Service Catalog, Golden Paths, Developer Portal, Backstage |
+| 🌐 **Internationalization** | 8 | i18n Manager, Locale Sync, RTL Adapter, Currency Converter, Translation QA |
+| 🤖 **AI/ML Operations** | 14 | Model Registry, Feature Store, Experiment Tracker, Prompt Optimizer, Eval Runner |
+| 📡 **IoT & Edge** | 8 | Device Manager, Telemetry Collector, Edge Deployer, OTA Updater, Fleet Monitor |
+| 🎓 **Education & Training** | 6 | Course Builder, Quiz Generator, Skill Assessor, Learning Path, Cert Tracker |
+| 🏥 **Compliance & Risk** | 10 | Risk Scorer, Audit Trail, Policy Enforcer, Incident Reporter, Vendor Risk |
 
 </div>
 

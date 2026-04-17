@@ -65,14 +65,64 @@ tiers:
 
   local_only:
     description: Air-gapped or cost-zero tier using self-hosted models
-    primary: llama-3.3-70b
+    primary: llama-4-maverick
     fallbacks:
+      - llama-4-scout
       - deepseek-v3.1
-      - qwen-2.5-coder-32b
-      - qwq-32b
+      - qwen-3-235b
     max_tokens: 4096
     temperature: 0.5
     runtime: ollama
+
+  ultra_context:
+    description: Massive context for full-repo analysis (1M-10M tokens)
+    primary: llama-4-scout
+    fallbacks:
+      - gemini-3.1-pro
+      - gpt-4.1
+      - grok-4
+    max_tokens: 16384
+    temperature: 0.3
+
+  reasoning_chain:
+    description: Multi-step chain-of-thought reasoning tasks
+    primary: o4
+    fallbacks:
+      - deepseek-r1-0528
+      - deepseek-r1
+      - claude-opus-4-6
+    max_tokens: 32768
+    temperature: 0.2
+
+  multilingual:
+    description: Non-English languages, translation, multilingual code
+    primary: mistral-large-2
+    fallbacks:
+      - qwen-3.5-397b
+      - gemini-3-pro
+      - claude-sonnet-4-6
+    max_tokens: 8192
+    temperature: 0.4
+
+  rag_specialist:
+    description: Retrieval-augmented generation with source grounding
+    primary: command-a
+    fallbacks:
+      - command-r-plus
+      - claude-sonnet-4-6
+      - gemini-3-pro
+    max_tokens: 8192
+    temperature: 0.3
+
+  open_source_frontier:
+    description: Best open-weights models matching closed frontier
+    primary: glm-5
+    fallbacks:
+      - minimax-m2.5
+      - qwen-3.5-397b
+      - llama-4-maverick
+    max_tokens: 8192
+    temperature: 0.4
 
 selection_rules:
   - condition: "task.complexity == 'high' and task.type == 'architecture'"
@@ -89,6 +139,16 @@ selection_rules:
     tier: vision
   - condition: "env.OFFLINE_MODE == 'true'"
     tier: local_only
+  - condition: "task.context_tokens > 1000000"
+    tier: ultra_context
+  - condition: "task.type == 'chain_of_thought' or task.type == 'math'"
+    tier: reasoning_chain
+  - condition: "task.language != 'en'"
+    tier: multilingual
+  - condition: "task.type == 'rag' or task.type == 'search'"
+    tier: rag_specialist
+  - condition: "env.OPEN_SOURCE_ONLY == 'true'"
+    tier: open_source_frontier
 
 cost_controls:
   daily_budget_usd: 50
