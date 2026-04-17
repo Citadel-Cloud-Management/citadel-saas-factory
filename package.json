@@ -7,7 +7,7 @@
   "homepage": "https://github.com/Citadel-Cloud-Management/citadel-saas-factory",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git"
+    "url": "git+https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git"
   },
   "bugs": {
     "url": "https://github.com/Citadel-Cloud-Management/citadel-saas-factory/issues"
@@ -31,7 +31,7 @@
     "mcp"
   ],
   "bin": {
-    "citadel-factory": "./bin/cli.js"
+    "citadel-factory": "bin/cli.js"
   },
   "files": [
     "bin/",
