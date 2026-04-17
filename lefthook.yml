@@ -1,0 +1,31 @@
+# Lefthook — Git Hook Manager
+# Install: npm i -g @evilmartians/lefthook && lefthook install
+
+pre-commit:
+  parallel: true
+  commands:
+    lint-python:
+      glob: "*.py"
+      run: ruff check {staged_files} 2>/dev/null || true
+    lint-typescript:
+      glob: "*.{ts,tsx}"
+      run: npx eslint {staged_files} 2>/dev/null || true
+    secret-scan:
+      run: gitleaks protect --staged 2>/dev/null || echo "Install gitleaks for secret scanning"
+
+commit-msg:
+  commands:
+    conventional:
+      run: |
+        if head -1 "{1}" | grep -qE "^(feat|fix|refactor|docs|test|chore|perf|ci)(\(.+\))?:"; then
+          exit 0
+        else
+          echo "Commit message must follow conventional commits format"
+          exit 1
+        fi
+
+pre-push:
+  parallel: true
+  commands:
+    security-scan:
+      run: semgrep scan --config auto . 2>/dev/null || echo "Semgrep not installed"

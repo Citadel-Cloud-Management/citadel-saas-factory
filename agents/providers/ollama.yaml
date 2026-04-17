@@ -1,0 +1,20 @@
+# Ollama Local Provider Configuration
+provider: ollama
+api_base: http://localhost:11434
+env_var: null  # No API key needed
+models:
+  - id: llama-3.3-70b
+    ollama_tag: "llama3.3:70b"
+  - id: qwen-2.5-coder-32b
+    ollama_tag: "qwen2.5-coder:32b"
+  - id: deepseek-r1
+    ollama_tag: "deepseek-r1:latest"
+  - id: nomic-embed-text
+    ollama_tag: "nomic-embed-text:latest"
+features:
+  tool_use: false
+  vision: false
+  local: true
+  cost: 0
+limits:
+  depends_on: local_hardware

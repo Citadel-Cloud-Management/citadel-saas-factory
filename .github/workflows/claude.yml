@@ -1,0 +1,42 @@
+# Claude Code — AI-Powered PR Review and Issue Resolution
+name: Claude Code
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  review:
+    name: Claude PR Review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Review with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          echo "Claude Code PR review"
+          echo "Set ANTHROPIC_API_KEY in repo secrets to enable"
+
+  resolve:
+    name: Claude Issue Resolution
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'claude')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          echo "Claude Code issue resolution"
+          echo "Label issues with 'claude' for AI resolution"

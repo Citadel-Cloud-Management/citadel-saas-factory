@@ -1,0 +1,18 @@
+# Anthropic Provider Configuration
+provider: anthropic
+api_base: https://api.anthropic.com
+env_var: ANTHROPIC_API_KEY
+models:
+  - claude-opus-4-6
+  - claude-sonnet-4-6
+  - claude-haiku-4-5
+features:
+  tool_use: true
+  vision: true
+  extended_thinking: true
+  prompt_caching: true
+  batch_api: true
+  computer_use: true
+limits:
+  max_tokens: 128000
+  rate_limit_rpm: 4000

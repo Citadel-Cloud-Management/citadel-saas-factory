@@ -1,0 +1,33 @@
+# Antigravity Agent Manager Configuration
+# Controls parallel agent slots in the Agent Manager view
+
+slots:
+  - name: planner
+    model: gemini-3.1-pro
+    role: Plan generation and architecture
+    artifacts: [plan, diff]
+
+  - name: coder-1
+    model: claude-sonnet-4-6
+    role: Primary code generation
+    artifacts: [diff, screenshot]
+
+  - name: coder-2
+    model: claude-sonnet-4-6
+    role: Parallel code generation
+    artifacts: [diff, screenshot]
+
+  - name: reviewer
+    model: claude-opus-4-6
+    role: Code review and security audit
+    artifacts: [plan]
+
+  - name: tester
+    model: gemini-3-flash
+    role: Test generation and execution
+    artifacts: [diff, screenshot]
+
+settings:
+  max_parallel: 5
+  auto_assign: true
+  artifact_retention: 30d

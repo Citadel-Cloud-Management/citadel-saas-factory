@@ -1,0 +1,129 @@
+# Subagent Catalog — Drop-in Parallel Workers
+# Each subagent runs under a parent agent with its own context and tools
+
+subagents:
+  - id: code-searcher
+    description: Ripgrep plus semantic search across codebase
+    tools: [grep, glob, read]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: symbol-resolver
+    description: Cross-file symbol graph traversal
+    tools: [grep, glob, read]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: dependency-resolver
+    description: Build-graph traversal and dependency analysis
+    tools: [bash, read, grep]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: dead-code-finder
+    description: Unused code detection via static analysis
+    tools: [bash, grep, glob]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: test-runner
+    description: Parallel test execution and reporting
+    tools: [bash, read]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: linter
+    description: Multi-linter orchestration (ruff, eslint, semgrep)
+    tools: [bash, read]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: formatter
+    description: Multi-formatter orchestration (ruff format, prettier)
+    tools: [bash, read, write]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: git-archaeologist
+    description: Blame and log analysis for code archaeology
+    tools: [bash, read]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: pr-drafter
+    description: Diff to PR description generator
+    tools: [bash, read]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: changelog-writer
+    description: Commit history to changelog generator
+    tools: [bash, read, write]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: security-auditor
+    description: SAST + SCA + secret scanning
+    tools: [bash, read, grep]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: performance-profiler
+    description: Benchmark orchestration and analysis
+    tools: [bash, read]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: accessibility-auditor
+    description: axe-core plus manual accessibility checks
+    tools: [bash, read, browser]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: browser-driver
+    description: Playwright browser automation
+    tools: [bash, browser]
+    model_tier: reasoning_fast
+    parallel_safe: false
+
+  - id: api-caller
+    description: OpenAPI-driven HTTP requests
+    tools: [bash, fetch]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: sql-runner
+    description: Read-only SQL query execution
+    tools: [bash, read]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: docs-updater
+    description: API docs and README updater
+    tools: [read, write, edit]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: translation-agent
+    description: Multi-locale sync and translation
+    tools: [read, write]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: compliance-checker
+    description: Policy and regulation validator
+    tools: [read, grep]
+    model_tier: reasoning_fast
+    parallel_safe: true
+
+  - id: cost-estimator
+    description: Token and infrastructure cost calculator
+    tools: [read, bash]
+    model_tier: cheap_fast
+    parallel_safe: true
+
+  - id: model-router
+    description: Per-task model selection
+    tools: [read]
+    model_tier: cheap_fast
+    parallel_safe: true

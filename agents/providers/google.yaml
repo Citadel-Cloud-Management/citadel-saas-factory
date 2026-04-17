@@ -1,0 +1,18 @@
+# Google Provider Configuration
+provider: google
+api_base: https://generativelanguage.googleapis.com
+env_var: GOOGLE_API_KEY
+models:
+  - gemini-3-pro
+  - gemini-3.1-pro
+  - gemini-3-flash
+  - gemini-2.5-pro
+features:
+  tool_use: true
+  vision: true
+  code_execution: true
+  grounding: true
+  context_caching: true
+limits:
+  max_context: 2000000
+  rate_limit_rpm: 2000

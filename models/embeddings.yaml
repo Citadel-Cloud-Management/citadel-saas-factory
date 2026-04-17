@@ -1,0 +1,57 @@
+# Embedding Models — Retrieval and Indexing
+# Used by RAG pipelines, vector search, and codebase indexing
+
+models:
+  cloud:
+    - id: text-embedding-3-large
+      provider: openai
+      dimensions: 3072
+      role: Default retrieval
+      env_var: OPENAI_API_KEY
+    - id: voyage-3
+      provider: voyageai
+      dimensions: 1024
+      role: Premium retrieval
+      env_var: VOYAGE_API_KEY
+    - id: voyage-code-3
+      provider: voyageai
+      dimensions: 1024
+      role: Code-specific retrieval
+      env_var: VOYAGE_API_KEY
+    - id: cohere-embed-v3
+      provider: cohere
+      dimensions: 1024
+      role: Enterprise retrieval
+      env_var: COHERE_API_KEY
+    - id: jina-embeddings-v3
+      provider: jina
+      dimensions: 1024
+      role: Multi-task retrieval
+      env_var: JINA_API_KEY
+
+  self_hosted:
+    - id: nomic-embed-text
+      runtime: ollama
+      dimensions: 768
+      role: Self-hosted retrieval (default local)
+    - id: bge-large-en-v1.5
+      runtime: ollama
+      dimensions: 1024
+      role: Open retrieval
+    - id: mxbai-embed-large
+      runtime: ollama
+      dimensions: 1024
+      role: Open retrieval
+
+  code_specific:
+    - id: codebert-base
+      runtime: local
+      role: Code-specific open embeddings
+    - id: unixcoder-base
+      runtime: local
+      role: Cross-lingual code embeddings
+
+defaults:
+  cloud: text-embedding-3-large
+  self_hosted: nomic-embed-text
+  code: voyage-code-3

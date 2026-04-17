@@ -1,0 +1,34 @@
+# Agent Model Router Configuration
+# Routes agent tasks to the best available model
+
+router:
+  strategy: tier_based  # tier_based | cost_optimized | latency_optimized | round_robin
+  fallback_enabled: true
+  retry_on_failure: true
+  max_retries: 3
+
+  health_check:
+    enabled: true
+    interval_seconds: 300
+    timeout_seconds: 10
+
+  cost_tracking:
+    enabled: true
+    daily_budget_usd: 50
+    alert_webhook: ""
+
+  latency_tracking:
+    enabled: true
+    p95_threshold_ms: 5000
+
+  provider_priority:
+    - anthropic
+    - google
+    - openai
+    - openrouter
+    - ollama
+
+  tier_overrides: {}
+  # Example: force a specific model for a tier
+  # tier_overrides:
+  #   reasoning_deep: gemini-3.1-pro

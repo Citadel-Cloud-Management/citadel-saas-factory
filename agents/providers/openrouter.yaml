@@ -1,0 +1,10 @@
+# OpenRouter Gateway Configuration
+provider: openrouter
+api_base: https://openrouter.ai/api/v1
+env_var: OPENROUTER_API_KEY
+description: 300+ models through one endpoint
+features:
+  tool_use: true
+  vision: true
+  fallback_routing: true
+  cost_tracking: true

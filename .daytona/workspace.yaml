@@ -1,0 +1,17 @@
+# Daytona Workspace Configuration
+# Activation: daytona create <repo-url>
+# Docs: https://docs.daytona.io
+
+name: citadel-saas-factory
+image: python:3.12-slim
+
+setup:
+  - apt-get update && apt-get install -y nodejs npm
+  - pip install -r backend/requirements.txt 2>/dev/null || true
+  - npm ci --prefix frontend 2>/dev/null || true
+
+ports:
+  - 8000  # FastAPI
+  - 3000  # Next.js
+  - 5432  # PostgreSQL
+  - 6379  # Redis

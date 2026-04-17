@@ -1,0 +1,160 @@
+# MCP Server Registry — Universal Catalog
+# Every MCP server available for agent tool invocation
+# Activate by setting the required env var
+
+servers:
+  # ─── Core ───
+  filesystem:
+    package: "@modelcontextprotocol/server-filesystem"
+    description: File system operations
+    required: true
+  fetch:
+    package: "@modelcontextprotocol/server-fetch"
+    description: HTTP fetch
+    required: true
+  memory:
+    package: "@modelcontextprotocol/server-memory"
+    description: Persistent memory
+  sequential-thinking:
+    package: "@modelcontextprotocol/server-sequential-thinking"
+    description: Step-by-step reasoning
+
+  # ─── Version Control ───
+  github:
+    package: "@modelcontextprotocol/server-github"
+    env_var: GITHUB_TOKEN
+    description: GitHub API operations
+  gitlab:
+    package: "@modelcontextprotocol/server-gitlab"
+    env_var: GITLAB_TOKEN
+
+  # ─── Search ───
+  brave-search:
+    package: "@modelcontextprotocol/server-brave-search"
+    env_var: BRAVE_API_KEY
+  exa:
+    package: "exa-mcp-server"
+    env_var: EXA_API_KEY
+  tavily:
+    package: "tavily-mcp"
+    env_var: TAVILY_API_KEY
+
+  # ─── Browser ───
+  playwright:
+    package: "@anthropic/mcp-playwright"
+    description: Browser automation
+  browserbase:
+    package: "browserbase-mcp"
+    env_var: BROWSERBASE_API_KEY
+
+  # ─── Communications ───
+  slack:
+    package: "@modelcontextprotocol/server-slack"
+    env_var: SLACK_BOT_TOKEN
+  discord:
+    package: "discord-mcp"
+    env_var: DISCORD_TOKEN
+  gmail:
+    package: "gmail-mcp"
+    env_var: GMAIL_CREDENTIALS
+
+  # ─── Project Management ───
+  linear:
+    package: "linear-mcp"
+    env_var: LINEAR_API_KEY
+  jira:
+    package: "jira-mcp"
+    env_var: JIRA_TOKEN
+  notion:
+    package: "notion-mcp"
+    env_var: NOTION_API_KEY
+  asana:
+    package: "asana-mcp"
+    env_var: ASANA_TOKEN
+
+  # ─── Observability ───
+  datadog:
+    package: "datadog-mcp"
+    env_var: DD_API_KEY
+  sentry:
+    package: "sentry-mcp"
+    env_var: SENTRY_AUTH_TOKEN
+  grafana:
+    package: "grafana-mcp"
+    env_var: GRAFANA_API_KEY
+
+  # ─── Databases ───
+  postgres:
+    package: "@modelcontextprotocol/server-postgres"
+    env_var: DATABASE_URL
+  redis:
+    package: "redis-mcp"
+    env_var: REDIS_URL
+  supabase:
+    package: "supabase-mcp"
+    env_var: SUPABASE_URL
+  mongodb:
+    package: "mongodb-mcp"
+    env_var: MONGODB_URL
+
+  # ─── Vector DBs ───
+  qdrant:
+    package: "qdrant-mcp"
+    env_var: QDRANT_URL
+  chroma:
+    package: "chroma-mcp"
+  pinecone:
+    package: "pinecone-mcp"
+    env_var: PINECONE_API_KEY
+  weaviate:
+    package: "weaviate-mcp"
+    env_var: WEAVIATE_URL
+
+  # ─── Cloud ───
+  aws:
+    package: "aws-mcp"
+    env_var: AWS_ACCESS_KEY_ID
+  cloudflare:
+    package: "cloudflare-mcp"
+    env_var: CLOUDFLARE_API_TOKEN
+  docker:
+    package: "docker-mcp"
+  kubernetes:
+    package: "kubernetes-mcp"
+
+  # ─── Payments ───
+  stripe:
+    package: "stripe-mcp"
+    env_var: STRIPE_SECRET_KEY
+
+  # ─── AI Infrastructure ───
+  anthropic:
+    package: "anthropic-mcp"
+    env_var: ANTHROPIC_API_KEY
+  openai:
+    package: "openai-mcp"
+    env_var: OPENAI_API_KEY
+  huggingface:
+    package: "huggingface-mcp"
+    env_var: HF_TOKEN
+  replicate:
+    package: "replicate-mcp"
+    env_var: REPLICATE_API_TOKEN
+
+  # ─── Design ───
+  figma:
+    package: "figma-mcp"
+    env_var: FIGMA_TOKEN
+  mermaid:
+    package: "mermaid-mcp"
+
+  # ─── Knowledge ───
+  obsidian:
+    package: "obsidian-mcp"
+  context7:
+    package: "context7-mcp"
+
+  # ─── Self-Hosted AI ───
+  ollama:
+    package: "ollama-mcp"
+    description: Local model server

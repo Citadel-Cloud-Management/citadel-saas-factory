@@ -1,0 +1,51 @@
+# Promptfoo Evaluation Configuration
+# Run: npx promptfoo eval -c evals/promptfoo.yaml
+# Docs: https://promptfoo.dev
+
+description: Citadel SaaS Factory — Model Evaluation Suite
+
+providers:
+  - id: anthropic:claude-sonnet-4-6
+    label: Claude Sonnet 4.6
+  - id: openai:gpt-5
+    label: GPT-5
+  - id: google:gemini-3-pro
+    label: Gemini 3 Pro
+
+prompts:
+  - "Given the following code, identify bugs and suggest fixes:\n\n{{code}}"
+  - "Generate a unit test for this function:\n\n{{code}}"
+  - "Review this code for security vulnerabilities:\n\n{{code}}"
+
+tests:
+  - vars:
+      code: "def divide(a, b): return a / b"
+    assert:
+      - type: contains
+        value: "zero"
+      - type: llm-rubric
+        value: "The response identifies the division by zero bug"
+
+  - vars:
+      code: "def get_user(id): return db.execute(f'SELECT * FROM users WHERE id = {id}')"
+    assert:
+      - type: contains-any
+        value: ["SQL injection", "parameterized", "prepared statement"]
+      - type: llm-rubric
+        value: "The response identifies the SQL injection vulnerability"
+
+  - vars:
+      code: |
+        async function fetchUser(id) {
+          const res = await fetch('/api/users/' + id);
+          return res.json();
+        }
+    assert:
+      - type: llm-rubric
+        value: "The response generates a working test with assertions"
+
+evaluateOptions:
+  maxConcurrency: 4
+  showProgressBar: true
+
+outputPath: evals/results/latest.json

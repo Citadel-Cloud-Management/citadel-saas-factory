@@ -1,0 +1,22 @@
+# Devin Configuration
+# Activation: Connect repo in Devin dashboard at devin.ai
+# Docs: https://docs.devin.ai
+
+project:
+  name: citadel-saas-factory
+  description: 265-agent SaaS framework
+  instructions: AGENTS.md
+
+environment:
+  python: "3.12"
+  node: "20"
+  docker: true
+
+setup:
+  - pip install -r backend/requirements.txt 2>/dev/null || true
+  - npm ci --prefix frontend 2>/dev/null || true
+
+conventions:
+  commits: conventional
+  tests: tdd
+  coverage_min: 80

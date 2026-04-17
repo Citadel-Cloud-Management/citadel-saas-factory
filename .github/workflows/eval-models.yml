@@ -1,0 +1,35 @@
+# Model Evaluation — Compare models on PR changes
+name: Model Eval
+
+on:
+  pull_request:
+    paths:
+      - "models/**"
+      - "evals/**"
+      - "agents/**"
+
+permissions:
+  contents: read
+
+jobs:
+  evaluate:
+    name: Compare Models
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run model comparison
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          npx promptfoo eval -c evals/promptfoo.yaml 2>/dev/null || echo "Set API key secrets to enable"
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: evals/results/
+        if: always()

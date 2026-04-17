@@ -1,0 +1,48 @@
+# Indexing Stack Configuration
+# Each indexer runs in parallel during bootstrap
+
+indexers:
+  graphify:
+    enabled: true
+    command: graphify index .
+    output: docs/vault/knowledge-graph/
+    description: Tree-sitter AST knowledge graph
+
+  treesitter:
+    enabled: true
+    grammars:
+      - python
+      - typescript
+      - javascript
+      - yaml
+      - json
+      - markdown
+      - bash
+      - dockerfile
+      - hcl
+
+  semgrep:
+    enabled: true
+    config: auto
+    output: indexing/results/semgrep.json
+
+  vector:
+    enabled: false  # Requires Qdrant/Chroma running
+    provider: qdrant
+    embedding_model: nomic-embed-text
+    output: indexing/results/vector-index/
+
+  fulltext:
+    enabled: false  # Requires Meilisearch running
+    provider: meilisearch
+    output: indexing/results/fulltext-index/
+
+exclusions:
+  - node_modules/
+  - .git/
+  - __pycache__/
+  - "*.pyc"
+  - dist/
+  - build/
+  - .next/
+  - vendor/

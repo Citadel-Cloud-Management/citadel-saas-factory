@@ -1,0 +1,24 @@
+# OpenAI Codex Cloud Configuration
+# Activation: Push to GitHub, then use Codex Cloud via codex.openai.com
+# Required env: OPENAI_API_KEY
+# Docs: https://docs.openai.com/codex
+
+[project]
+name = "citadel-saas-factory"
+description = "265-agent SaaS framework — FastAPI + Next.js + PostgreSQL + K3s"
+instructions = "AGENTS.md"
+
+[agent]
+model = "codex-1"
+sandbox = true
+approval_mode = "suggest"
+
+[tools]
+shell = true
+file_read = true
+file_write = true
+browser = false
+
+[environment]
+python_version = "3.12"
+node_version = "20"

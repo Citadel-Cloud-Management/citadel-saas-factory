@@ -1,0 +1,30 @@
+# Reranker Models — Second-Stage Retrieval
+# Applied after initial retrieval to improve relevance
+
+models:
+  cloud:
+    - id: cohere-rerank-3
+      provider: cohere
+      role: Best general reranking
+      env_var: COHERE_API_KEY
+    - id: jina-reranker-v2
+      provider: jina
+      role: Multi-lingual reranking
+      env_var: JINA_API_KEY
+
+  self_hosted:
+    - id: bge-reranker-v2-m3
+      runtime: local
+      role: Self-hosted reranking
+    - id: mxbai-rerank-large
+      runtime: local
+      role: Open reranking
+
+defaults:
+  cloud: cohere-rerank-3
+  self_hosted: bge-reranker-v2-m3
+
+pipeline:
+  top_k_initial: 50
+  top_k_reranked: 10
+  score_threshold: 0.5

@@ -2,7 +2,7 @@
 
 **Universal Full-Stack SaaS Production Framework — 265 Autonomous Business Agents**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-blueviolet)](https://claude.ai/code) [![Agents](https://img.shields.io/badge/Agents-265-orange)](.claude/agents/_registry.yaml) [![Free Tools](https://img.shields.io/badge/Tools-$0/month-brightgreen)](#free-toolchain) [![Infrastructure](https://img.shields.io/badge/Infrastructure-Any-blue)](#infrastructure-agnostic)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-blueviolet)](https://claude.ai/code) [![Agents](https://img.shields.io/badge/Agents-265-orange)](.claude/agents/_registry.yaml) [![Free Tools](https://img.shields.io/badge/Tools-$0/month-brightgreen)](#free-toolchain) [![Infrastructure](https://img.shields.io/badge/Infrastructure-Any-blue)](#infrastructure-agnostic) [![Multi-Model](https://img.shields.io/badge/Models-9_Providers-purple)](models/catalog.yaml) [![Cross-IDE](https://img.shields.io/badge/IDEs-8_Supported-blue)](#cross-ide-support)
 
 **Clone. Configure. Deploy. Any infrastructure. Zero software cost.**
 
@@ -13,10 +13,18 @@
 ```bash
 git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git
 cd citadel-saas-factory
-cp .env.example .env
-./scripts/bootstrap.sh
-./scripts/verify-install.sh
-claude
+cp .env.example .env          # Set your API keys (at minimum one provider)
+./scripts/parallel-bootstrap.sh   # Parallel install: models, MCP, hooks, agents
+./scripts/verify-install.sh       # Green/red verification report
+claude                            # Or open in Cursor, Antigravity, Copilot, Codex, Jules...
+```
+
+### Alternative: Just
+
+```bash
+just bootstrap   # Same as parallel-bootstrap.sh
+just status      # System health check
+just eval        # Run model evaluations
 ```
 
 ---
@@ -80,6 +88,49 @@ claude
 | Service Mesh | Linkerd | mTLS, traffic policies, observability |
 | Secrets | HashiCorp Vault | Secret management, rotation, encryption |
 | Monitoring | Prometheus + Grafana + Loki | Metrics, dashboards, log aggregation |
+
+---
+
+## Multi-Model Support
+
+Agents reference model **tiers**, not specific models. Swap providers by changing one env var.
+
+| Tier | Primary | Fallbacks | Use Case |
+|------|---------|-----------|----------|
+| `reasoning_deep` | Claude Opus 4.6 | Gemini 3 Pro, DeepSeek R1, GPT-5 | Architecture, critical decisions |
+| `reasoning_fast` | Claude Sonnet 4.6 | Gemini 3 Pro, GPT-5, DeepSeek V3.1 | Default coding tasks |
+| `cheap_fast` | Claude Haiku 4.5 | Gemini 3 Flash, GPT-5 Mini | Completion, boilerplate |
+| `long_context` | Gemini 3.1 Pro | Gemini 3 Pro, Claude Opus, GPT-4.1 | Full codebase analysis (2M tokens) |
+| `code_specialist` | Codestral 25 | Qwen 2.5 Coder, DeepSeek V3.1 | Code generation and review |
+| `vision` | Claude Opus 4.6 | Gemini 3 Pro, GPT-5 | Screenshot/design to code |
+| `local_only` | Llama 3.3 70B | DeepSeek V3.1, Qwen 2.5 Coder | Air-gapped, zero cost |
+
+**9 providers**: Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Cohere, Meta, Alibaba
+**8 gateways**: OpenRouter, LiteLLM, Groq, Together, Fireworks, Cerebras, Bedrock, Vertex
+**5 local runtimes**: Ollama, vLLM, llama.cpp, LocalAI, LM Studio
+
+See [`models/catalog.yaml`](models/catalog.yaml), [`models/routing.yaml`](models/routing.yaml), [`models/embeddings.yaml`](models/embeddings.yaml).
+
+---
+
+## Cross-IDE Support
+
+This repo is recognized as a first-class project by every major AI coding tool:
+
+| Tool | Config File | Status |
+|------|-------------|--------|
+| Claude Code | `.claude/CLAUDE.md` | Native |
+| Cursor | `.cursor/rules/`, `AGENT.md` | Native |
+| GitHub Copilot | `.github/copilot-instructions.md` | Native |
+| OpenAI Codex | `.codex/config.toml`, `AGENTS.md` | Native |
+| Google Jules | `.jules/config.yml`, `GEMINI.md` | Native |
+| Antigravity | `.antigravity/rules.md` | Native |
+| Windsurf/Codeium | `.windsurf/rules/` | Native |
+| Continue.dev | `.continue/config.json` | Native |
+| Devin | `.devin/config.yml` | Ready |
+| CodeRabbit | `.coderabbit.yml` | Ready |
+| Factory AI | `.factory/droids.yml` | Ready |
+| OpenHands | `openhands/config.toml` | Ready |
 
 ---
 

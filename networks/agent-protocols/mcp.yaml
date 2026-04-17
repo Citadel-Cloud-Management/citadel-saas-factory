@@ -1,0 +1,17 @@
+# MCP (Model Context Protocol) — Anthropic
+# Primary tool protocol for LLM agent tool invocation
+
+protocol: mcp
+version: "1.0"
+transport:
+  - stdio
+  - sse
+  - streamable-http
+
+config_files:
+  claude_code: ".mcp.json"
+  cursor: ".cursor/mcp.json"
+  vscode: ".vscode/mcp.json"
+  antigravity: ".antigravity/mcp.json"
+
+registry: mcp/registry.yaml

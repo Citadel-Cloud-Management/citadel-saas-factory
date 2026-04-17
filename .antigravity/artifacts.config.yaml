@@ -1,0 +1,19 @@
+# Antigravity Artifacts Configuration
+
+artifact_types:
+  plan:
+    format: markdown
+    storage: docs/artifacts/plans/
+  diff:
+    format: unified_diff
+    storage: docs/artifacts/diffs/
+  screenshot:
+    format: png
+    storage: docs/artifacts/screenshots/
+  recording:
+    format: webm
+    storage: docs/artifacts/recordings/
+
+retention:
+  default: 30d
+  plans: 90d

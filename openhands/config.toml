@@ -1,0 +1,15 @@
+# OpenHands (OpenDevin) Configuration
+# Activation: Run OpenHands with this repo mounted
+# Docs: https://docs.all-hands.dev
+
+[core]
+workspace_base = "."
+max_iterations = 100
+
+[llm]
+model = "claude-sonnet-4-6"
+api_key_env = "ANTHROPIC_API_KEY"
+
+[sandbox]
+container_image = "python:3.12-slim"
+enable_auto_lint = true
