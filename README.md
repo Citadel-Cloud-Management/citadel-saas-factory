@@ -313,109 +313,209 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 
 ## 🔗 Ruflo — Multi-Agent Swarm Orchestration
 
-> [github.com/ruvnet/ruflo](https://github.com/ruvnet/ruflo)
+> [github.com/ruvnet/ruflo](https://github.com/ruvnet/ruflo) &nbsp;·&nbsp; [npm: claude-flow](https://www.npmjs.com/package/claude-flow) &nbsp;·&nbsp; [MCP Market](https://mcpmarket.com/server/ruflo)
 
 ```bash
 curl -fsSL https://cdn.jsdelivr.net/gh/ruvnet/ruflo@main/scripts/install.sh | bash
 ruflo init
 ```
 
-- 🕸️ **Mesh topology** — Agents communicate peer-to-peer, no central bottleneck
-- 🧰 **314 MCP tools** — Pre-built tool integrations for Claude Code
-- 🧠 **Hive-mind intelligence** — Shared context and memory across all agents
-- 🎯 **Self-learning neural routing** — Automatic task-to-agent matching
-- ⚡ **CYCLE_INTERVAL=0** — Zero-latency agent activation
+> [!TIP]
+> Most adopted open-source multi-agent platform of 2026 — **84.8% SWE-bench solve rate**, **75% API cost savings** vs direct Claude Code.
+
+| Feature | Description |
+|---------|-------------|
+| 🕸️ **Mesh topology** | Peer-to-peer agent communication, no central bottleneck |
+| 🧰 **87 native MCP tools** | Orchestration, swarm coordination, neural processing, system management |
+| 🧠 **SONA neural routing** | Sub-millisecond HNSW vector memory with 9 reinforcement learning algorithms |
+| 🎯 **16 specialist agent roles** | Pre-built + custom types in coordinated swarms |
+| 🔄 **Self-learning swarms** | Fault-tolerant consensus with enterprise-grade security |
+| ⚡ **CYCLE_INTERVAL=0** | Zero-latency agent activation |
+| 📊 **RAG integration** | Built-in retrieval-augmented generation pipelines |
+| 🔌 **Claude Code + Codex native** | MCP namespace `mcp__claude-flow__` for direct tool access |
+| 🛡️ **Enterprise security** | Distributed swarm intelligence with access controls |
+| 💾 **Memory persistence** | Agent learnings persist across sessions via hive-mind |
 
 ---
 
 ## 🕸️ Graphify — Codebase Knowledge Graph
 
-> [github.com/safishamsi/graphify](https://github.com/safishamsi/graphify)
+> [github.com/safishamsi/graphify](https://github.com/safishamsi/graphify) &nbsp;·&nbsp; [PyPI: graphifyy](https://pypi.org/project/graphifyy/) &nbsp;·&nbsp; [graphify.net](https://graphify.net/)
 
 ```bash
 pip install graphifyy && graphify install && graphify index .
 ```
 
-- 🌳 **Tree-sitter AST parsing** — 20 language support
-- 🔍 **Semantic search** — Find code by meaning, not just text
-- 📊 **Architecture visualization** — Generate dependency diagrams
-- 🔗 **Symbol resolution** — Cross-file dependency tracking
+> [!TIP]
+> **71.5x fewer tokens** per query vs reading raw files. Code processed locally via Tree-sitter — no file contents leave your machine.
+
+| Feature | Description |
+|---------|-------------|
+| 🌳 **Tree-sitter AST parsing** | 25 languages: Python, JS, TS, Go, Rust, Java, C, C++, Ruby, C#, Kotlin, Scala, PHP, Swift, Lua, Zig, PowerShell, Elixir, Obj-C, Julia, Verilog, SystemVerilog, Vue, Svelte, Dart |
+| 🔍 **Semantic search** | Find code by meaning, not just text — concept-based queries |
+| 📊 **Architecture visualization** | Auto-generate dependency diagrams and community clusters |
+| 🔗 **Symbol resolution** | Cross-file dependency tracking with call graphs |
+| 📝 **Wiki export** (`--wiki`) | Wikipedia-style markdown articles per community with `index.md` entry point |
+| 👁️ **Vision support** | LLMs extract concepts from prose; vision models read diagrams |
+| 🔄 **Auto-sync** (`--watch`) | Graph updates live as your codebase changes — instant AST rebuilds |
+| 🔒 **Privacy-first** | Code files parsed locally via Tree-sitter — zero data exfiltration |
+| 🌐 **Cross-IDE** | Works with Claude Code, Codex, Cursor, Gemini CLI, Copilot CLI, Antigravity, OpenClaw, Factory Droid, Trae |
+| 📈 **Leiden clustering** | NetworkX + Leiden community detection for god-node and surprising-connection discovery |
 
 ---
 
 ## 📖 LLM Wiki — Brain Memory (Karpathy Pattern)
 
-> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory.
+> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Knowledge **compounds** across all 385+ agents — every ingest adds, every query answer is filed back.
+
+> [!NOTE]
+> **Why not RAG?** Karpathy's insight: treat knowledge like code compilation. The LLM reads sources, extracts key info, and integrates it into the wiki — updating entities, revising summaries, noting contradictions. Unlike RAG, knowledge compounds instead of being re-retrieved from scratch every session.
 
 ```
 docs/vault/
 ├── 📂 raw/        → Layer 1: immutable source documents (LLM reads, never modifies)
+│                     Articles, papers, transcripts, architecture docs, meeting notes,
+│                     customer feedback, incidents, Obsidian Web Clipper output
 ├── 📂 wiki/       → Layer 2: LLM-maintained compiled knowledge
 │   ├── index.md         — content-oriented catalog (first lookup)
+│   ├── log.md           — append-only chronological activity log
+│   ├── overview.md      — evolving synthesis of everything known
 │   ├── entities/        — one page per agent, service, tool, component
-│   ├── concepts/        — cross-cutting topics
+│   ├── concepts/        — cross-cutting topics (multi-tenancy, canary-deploys, ...)
+│   ├── sources/         — one summary per ingested raw source
+│   ├── comparisons/     — analysis pages generated from queries
 │   ├── contradictions/  — flagged conflicts between sources
-│   └── knowledge-graph/ — Graphify AST output
+│   └── knowledge-graph/ — Graphify AST output, feeds entity/concept pages
 └── 📄 SCHEMA.md   → Layer 3: governance, co-evolved between human and LLM
 ```
 
 | Operation | Command | What it does |
 |-----------|---------|--------------|
-| 📥 **Ingest** | `make wiki-ingest FILE=raw/<path>` | Read raw source, update 10-15 wiki pages |
-| 🔍 **Query** | `/project:wiki-query <question>` | Consult wiki first, file answers back |
-| 🧹 **Lint** | `make wiki-lint` | Health-check for orphans and gaps |
+| 📥 **Ingest** | `make wiki-ingest FILE=raw/<path>` | Read raw source, update 10-15 wiki pages, flag contradictions |
+| 🔍 **Query** | `/project:wiki-query <question>` | Consult wiki first, file valuable answers back as new pages |
+| 🧹 **Lint** | `make wiki-lint` | Health-check for orphans, stale claims, missing cross-refs |
+| 🔄 **Sync** | `make wiki-sync` | Refresh Graphify output + run lint pass |
+
+**Key principle:** LLMs don't get bored. They don't forget to update cross-references. They can touch 15 files in one pass. The tedious bookkeeping that makes humans abandon wikis is exactly what LLMs excel at.
 
 ---
 
 ## 🛡️ Hallucination Prevention
 
-> Every LLM call routes through a **Guardrails AI** validation layer. No agent output reaches users without passing guardrails.
+> Every LLM call routes through a **triple-layer guardrails stack**. No agent output reaches users without passing validation. Cuts hallucination risk **71-89%** when all layers are active.
 
 ```
-Agent Output → Guardrails Validator → Schema Check → Hallucination Score (≥0.85)
-    → Factuality Check → Provenance Verification → ✅ Validated Output
-                                                  → ❌ Retry (max 3) → Reject
+Agent Output
+    ↓
+┌─────────────────────────────────────────┐
+│  Layer 1: Guardrails AI                 │
+│  Schema enforcement + hub validators    │
+│  (hallucination_free, provenance_llm,   │
+│   toxic_language, detect_pii)           │
+├─────────────────────────────────────────┤
+│  Layer 2: NVIDIA NeMo Guardrails        │
+│  Colang dialogue control + Cleanlab TLM │
+│  Trustworthiness scoring via            │
+│  uncertainty estimation                 │
+├─────────────────────────────────────────┤
+│  Layer 3: DeepEval Continuous Eval      │
+│  Hallucination rate monitoring in CI/CD │
+│  Faithfulness + relevance + toxicity    │
+└─────────────┬───────────────────────────┘
+              ↓
+    Score ≥ 0.85 → ✅ Validated Output
+    Score < 0.85 → 🔄 Retry with grounding (max 3) → ❌ Reject
 ```
 
-| Problem | Solution |
-|---------|----------|
-| 🤥 Model makes things up | Validates against rules and source data |
-| 📭 No grounding | RAG provenance validators |
-| 🔀 Inconsistent answers | Schema enforcement with deterministic outputs |
-| ⚠️ Unsafe agent behavior | Pre/post execution guardrails |
+| Problem | Solution | Tool |
+|---------|----------|------|
+| 🤥 Model makes things up | Validates against rules and source data | Guardrails AI |
+| 📭 No grounding | RAG provenance validators | Guardrails Hub |
+| 🔀 Inconsistent answers | Schema enforcement with deterministic outputs | Guardrails AI |
+| ⚠️ Unsafe agent behavior | Colang dialogue management, behavioral constraints | NeMo Guardrails |
+| 🔐 PII leakage | Automatic PII detection and masking | detect_pii validator |
+| 📊 Drift detection | Continuous hallucination rate monitoring in CI | DeepEval |
+| 💰 Cost optimization | Validator caching — same input skips re-scan | All layers |
+| ⏱️ Low latency | GPU-accelerated (50-200ms), Haiku 4.5 for validators | NeMo + Guardrails |
+
+---
+
+## 🔌 MCP — Model Context Protocol
+
+> **5,000+ MCP servers** available. Any MCP server works in Claude Code, Cursor, Windsurf, and every tool supporting the protocol. Configure once, portable everywhere.
+
+| Category | Servers | Purpose |
+|----------|---------|---------|
+| 🔧 **Core** | filesystem, fetch, memory, sequential-thinking | Foundation tools |
+| 🔀 **Version Control** | github, gitlab, bitbucket | Repos, PRs, issues |
+| 🔍 **Search** | brave-search, exa, tavily, perplexity | Web research |
+| 🌐 **Browser** | playwright, browserbase, chrome-devtools | Browser automation |
+| 💬 **Comms** | slack, discord, gmail, teams | Messaging |
+| 📋 **Project** | linear, jira, notion, asana | Task management |
+| 📊 **Observability** | datadog, sentry, grafana, prometheus | Monitoring |
+| 🗄️ **Database** | postgres, redis, supabase, mongodb, snowflake | Data access |
+| 🧠 **Vector** | qdrant, chroma, pinecone, weaviate | Embeddings |
+| ☁️ **Cloud** | aws, cloudflare, docker, kubernetes | Infrastructure |
+| 💳 **Payments** | stripe, paddle | Billing |
+| 🤖 **AI** | anthropic, openai, huggingface, replicate, ollama | Model access |
+| 🎨 **Design** | figma, mermaid | Design tools |
+| 📚 **Knowledge** | obsidian, context7 | Documentation |
+
+See [`mcp/registry.yaml`](mcp/registry.yaml) for the full catalog with env vars and install commands.
 
 ---
 
 ## 💰 Free Toolchain
 
-> Total monthly software cost: **$0**
+> Total monthly software cost: **$0** — replaces **$5,000+/mo** in paid SaaS
 
 <details>
-<summary><b>💎 View the full free toolchain (21 tools, replaces $1000+/mo in SaaS)</b></summary>
+<summary><b>💎 View the full free toolchain (30 tools)</b></summary>
 
-| Name | License | Replaces |
-|------|---------|----------|
-| ArgoCD | Apache-2.0 | Spinnaker, Harness ($$$) |
-| K3s | Apache-2.0 | EKS, GKE, AKS ($75-300/mo) |
-| Traefik | MIT | AWS ALB, Cloudflare ($20+/mo) |
-| Linkerd | Apache-2.0 | Istio, AWS App Mesh |
-| Keycloak | Apache-2.0 | Auth0 ($23-240/mo), Okta ($2/user) |
-| HashiCorp Vault | BUSL-1.1 | AWS Secrets Manager ($0.40/secret) |
-| Prometheus | Apache-2.0 | Datadog ($15/host/mo) |
-| Grafana | AGPL-3.0 | Datadog dashboards ($15/host/mo) |
-| Loki | AGPL-3.0 | Splunk ($150+/GB), Datadog Logs |
-| Tempo | AGPL-3.0 | Jaeger SaaS, Datadog APM |
-| Falco | Apache-2.0 | Sysdig ($$$), Aqua Security |
-| Kyverno | Apache-2.0 | OPA Gatekeeper, Styra DAS |
-| Semgrep | LGPL-2.1 | SonarQube ($150+/mo), Snyk Code |
-| Trivy | Apache-2.0 | Snyk Container ($25+/mo) |
-| OWASP ZAP | Apache-2.0 | Burp Suite Pro ($449/yr) |
-| Flagsmith | BSD-3 | LaunchDarkly ($10/seat/mo) |
-| Grafana OnCall | AGPL-3.0 | PagerDuty ($21/user/mo) |
-| Velero | Apache-2.0 | Kasten K10, Portworx Backup |
-| MinIO | AGPL-3.0 | AWS S3 ($0.023/GB/mo) |
-| Ansible | GPL-3.0 | Puppet, Chef, SaltStack |
-| TruffleHog | AGPL-3.0 | GitGuardian ($30/dev/mo) |
+| Name | License | Replaces | Savings |
+|------|---------|----------|---------|
+| **Orchestration** | | | |
+| ArgoCD | Apache-2.0 | Spinnaker, Harness | $500+/mo |
+| K3s | Apache-2.0 | EKS, GKE, AKS | $75-300/mo |
+| Flux CD | Apache-2.0 | GitLab Premium CI/CD | $400/mo |
+| **Networking** | | | |
+| Traefik | MIT | AWS ALB, Cloudflare | $20+/mo |
+| Linkerd | Apache-2.0 | Istio, AWS App Mesh | $200+/mo |
+| **Identity** | | | |
+| Keycloak | Apache-2.0 | Auth0 ($23-240/mo), Okta ($2/user) | $240+/mo |
+| Authentik | BUSL | Auth0, Clerk alternatives | $100+/mo |
+| **Secrets** | | | |
+| HashiCorp Vault | BUSL-1.1 | AWS Secrets Manager ($0.40/secret) | $50+/mo |
+| **Observability** | | | |
+| Prometheus | Apache-2.0 | Datadog metrics ($15/host/mo) | $300+/mo |
+| Grafana | AGPL-3.0 | Datadog dashboards ($15/host/mo) | $300+/mo |
+| Loki | AGPL-3.0 | Splunk ($150+/GB), Datadog Logs | $500+/mo |
+| Tempo | AGPL-3.0 | Jaeger SaaS, Datadog APM | $200+/mo |
+| Grafana OnCall | AGPL-3.0 | PagerDuty ($21/user/mo) | $100+/mo |
+| OpenSearch | Apache-2.0 | Elasticsearch/Elastic Cloud | $200+/mo |
+| **Security** | | | |
+| Falco | Apache-2.0 | Sysdig, Aqua Security | $500+/mo |
+| Kyverno | Apache-2.0 | OPA Gatekeeper, Styra DAS | $200+/mo |
+| Semgrep | LGPL-2.1 | SonarQube ($150+/mo), Snyk Code | $150+/mo |
+| Trivy | Apache-2.0 | Snyk Container ($25+/mo) | $100+/mo |
+| OWASP ZAP | Apache-2.0 | Burp Suite Pro ($449/yr) | $37/mo |
+| TruffleHog | AGPL-3.0 | GitGuardian ($30/dev/mo) | $150+/mo |
+| **Feature Management** | | | |
+| Flagsmith | BSD-3 | LaunchDarkly ($10/seat/mo) | $100+/mo |
+| **Backup** | | | |
+| Velero | Apache-2.0 | Kasten K10, Portworx Backup | $200+/mo |
+| **Storage** | | | |
+| MinIO | AGPL-3.0 | AWS S3 ($0.023/GB/mo) | $50+/mo |
+| **Automation** | | | |
+| Ansible | GPL-3.0 | Puppet, Chef, SaltStack | $100+/mo |
+| n8n | Sustainable-Use | Zapier ($20+/mo), Make | $50+/mo |
+| **AI Infrastructure** | | | |
+| Ollama | MIT | OpenAI API (pay-per-token) | $200+/mo |
+| vLLM | Apache-2.0 | Hosted inference APIs | $500+/mo |
+| LiteLLM | MIT | Multi-provider management | $50+/mo |
+| **Testing** | | | |
+| Playwright | Apache-2.0 | Cypress Cloud ($75+/mo) | $75+/mo |
+| Certbot | Apache-2.0 | Commercial TLS certs ($100+/yr) | $8/mo |
 
 </details>
 
@@ -424,25 +524,33 @@ Agent Output → Guardrails Validator → Schema Check → Hallucination Score (
 ## 🐳 Docker Compose — Local Development
 
 ```bash
-docker compose up -d
+docker compose up -d                        # Core stack
+docker compose --profile monitoring up -d   # + Observability
+docker compose --profile ai up -d           # + Ollama local AI
 ```
+
+> [!TIP]
+> Run apps on your host for hot-reload; use Docker only for infrastructure (databases, caches, identity) that stays stable.
 
 | Service | Port | Description |
 |---------|------|-------------|
-| 🐘 PostgreSQL 16 | 5432 | Primary database |
-| 🔴 Redis 7 | 6379 | Cache and session store |
-| 🔐 Keycloak 24 | 8080 | Auth server (admin console) |
-| 📦 MinIO | 9000 / 9001 | Object storage / console |
-| 🐰 RabbitMQ | 5672 / 15672 | Message broker / management |
+| 🐘 PostgreSQL 16 | 5432 | Primary database with pgvector |
+| 🔴 Redis 7 | 6379 | Cache, sessions, rate limiting, pub/sub |
+| 🔐 Keycloak 24 | 8080 | Auth server — OAuth2, RBAC, MFA, SSO |
+| 📦 MinIO | 9000 / 9001 | S3-compatible object storage / console |
+| 🐰 RabbitMQ | 5672 / 15672 | Message broker / management UI |
 | 📧 Mailpit | 1025 / 8025 | Local email capture / web UI |
-| 🌐 Traefik | 80 / 443 / 8082 | Proxy / TLS / dashboard |
+| 🌐 Traefik | 80 / 443 / 8082 | Reverse proxy / TLS / dashboard |
+| 📊 Prometheus | 9090 | Metrics collection (monitoring profile) |
+| 📈 Grafana | 3001 | Dashboards and alerting (monitoring profile) |
+| 🤖 Ollama | 11434 | Local LLM inference (ai profile) |
 
 ---
 
 ## 🔑 Token Setup
 
 > [!NOTE]
-> At minimum you need **one** model provider API key. Set it in `.env`.
+> At minimum you need **one** model provider API key. Set it in `.env`. Everything else is optional — activate providers as needed.
 
 ### Required
 
@@ -451,18 +559,31 @@ docker compose up -d
 | `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com) | Powers Claude Code, Ruflo, and Graphify |
 | `GITHUB_TOKEN` | [github.com/settings/tokens](https://github.com/settings/tokens) | GitHub CLI, GHCR, Actions, MCP server |
 
-### Optional
+### Model Providers (set any for multi-model routing)
 
 | Token | Source | Purpose |
 |-------|--------|---------|
-| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com) | GPT-5 fallback models |
-| `GOOGLE_API_KEY` | [aistudio.google.com](https://aistudio.google.com) | Gemini long-context models |
+| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com) | GPT-5.4, o4 reasoning, GPT-4.1 long-context |
+| `GOOGLE_API_KEY` | [aistudio.google.com](https://aistudio.google.com) | Gemini 3.1 Pro (2M context), Gemini 3 Flash |
+| `XAI_API_KEY` | [console.x.ai](https://console.x.ai) | Grok 4 (2M context, real-time X data) |
+| `DEEPSEEK_API_KEY` | [platform.deepseek.com](https://platform.deepseek.com) | DeepSeek R1 reasoning (90% cheaper than GPT) |
+| `MISTRAL_API_KEY` | [console.mistral.ai](https://console.mistral.ai) | Codestral 25 (code), Mistral Large 2 (EU-hosted) |
+| `COHERE_API_KEY` | [dashboard.cohere.com](https://dashboard.cohere.com) | Command A (agentic), Command R+ (RAG) |
+| `OPENROUTER_API_KEY` | [openrouter.ai](https://openrouter.ai) | 300+ models through one endpoint |
+| `GROQ_API_KEY` | [console.groq.com](https://console.groq.com) | LPU-accelerated Llama, Qwen, DeepSeek |
+
+### Services (optional)
+
+| Token | Source | Purpose |
+|-------|--------|---------|
 | `STRIPE_SECRET_KEY` | [dashboard.stripe.com](https://dashboard.stripe.com) | Payment processing (billing agents) |
 | `SENDGRID_API_KEY` | [sendgrid.com](https://sendgrid.com) | Transactional email delivery |
+| `SENTRY_DSN` | [sentry.io](https://sentry.io) | Error tracking and monitoring |
+| `SLACK_WEBHOOK_URL` | [api.slack.com](https://api.slack.com) | Deployment and alert notifications |
 
 ```bash
 cp .env.example .env
-# Edit .env with your tokens
+# Edit .env with your tokens — set at minimum one model provider
 ```
 
 ---
