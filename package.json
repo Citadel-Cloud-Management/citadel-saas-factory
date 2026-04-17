@@ -64,6 +64,10 @@
     "README.md",
     "LICENSE"
   ],
+  "funding": {
+    "type": "custom",
+    "url": "https://cash.app/$KennyOgunlowo"
+  },
   "engines": {
     "node": ">=18.0.0"
   }

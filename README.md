@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![npm](https://img.shields.io/npm/v/@citadelcloud/saas-factory)](https://www.npmjs.com/package/@citadelcloud/saas-factory) [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-blueviolet)](https://claude.ai/code) [![Agents](https://img.shields.io/badge/Agents-265-orange)](.claude/agents/_registry.yaml) [![Free Tools](https://img.shields.io/badge/Tools-$0/month-brightgreen)](#free-toolchain) [![Infrastructure](https://img.shields.io/badge/Infrastructure-Any-blue)](#infrastructure-agnostic) [![Multi-Model](https://img.shields.io/badge/Models-9_Providers-purple)](models/catalog.yaml) [![Cross-IDE](https://img.shields.io/badge/IDEs-8_Supported-blue)](#cross-ide-support)
 
-[Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) | [npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) | [citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+[Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) | [npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) | [Sponsor](https://cash.app/$KennyOgunlowo) | [citadelcloudmanagement.com](https://citadelcloudmanagement.com)
 
 **Clone. Configure. Deploy. Any infrastructure. Zero software cost.**
 
@@ -991,7 +991,7 @@ citadel-factory init my-saas
 
 ## Author
 
-**Kehinde Ogunlowo** — [LinkedIn](https://www.linkedin.com/in/kehinde-ogunlowo/) | [Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/)
+**Kehinde Ogunlowo** — [LinkedIn](https://www.linkedin.com/in/kehinde-ogunlowo/) | [Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) | [Sponsor via Cash App](https://cash.app/$KennyOgunlowo)
 
 ## License
 
