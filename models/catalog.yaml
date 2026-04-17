@@ -26,6 +26,10 @@ providers:
         name: GPT-5
         context: 256000
         role: Complex reasoning alternative
+      - id: gpt-5.4
+        name: GPT-5.4
+        context: 256000
+        role: Latest frontier reasoning (March 2026)
       - id: gpt-5-mini
         name: GPT-5 Mini
         context: 128000
@@ -68,8 +72,12 @@ providers:
     models:
       - id: grok-4
         name: Grok 4
-        context: 256000
-        role: Alternate large-context reasoning
+        context: 2000000
+        role: Real-time X data access, large-context reasoning
+      - id: grok-4.20-beta
+        name: Grok 4.20 Beta 2
+        context: 2000000
+        role: Latest frontier reasoning (March 2026)
       - id: grok-code-fast
         name: Grok Code Fast
         context: 128000
@@ -81,11 +89,15 @@ providers:
       - id: deepseek-v3.1
         name: DeepSeek V3.1
         context: 128000
-        role: Open-weights reasoning, cost-optimal
+        role: Open-weights reasoning, cost-optimal (90% cheaper than GPT)
       - id: deepseek-r1
         name: DeepSeek R1
         context: 128000
-        role: Reasoning-tuned open model
+        role: Reasoning-tuned, 87.5% on AIME
+      - id: deepseek-r1-0528
+        name: DeepSeek R1-0528
+        context: 128000
+        role: Latest reasoning model at $7/M tokens
 
   mistral:
     env_var: MISTRAL_API_KEY
@@ -94,10 +106,14 @@ providers:
         name: Mistral Large 2
         context: 128000
         role: EU-hosted option
+      - id: mistral-small-4
+        name: Mistral Small 4
+        context: 128000
+        role: Fast EU-hosted (March 2026)
       - id: codestral-25
         name: Codestral 25
         context: 256000
-        role: Code-tuned Mistral
+        role: Code-tuned Mistral, best multilingual code
 
   cohere:
     env_var: COHERE_API_KEY
@@ -106,14 +122,26 @@ providers:
         name: Command R+
         context: 128000
         role: RAG specialist
+      - id: command-a
+        name: Command A
+        context: 256000
+        role: Enterprise agentic tasks, fine-tuning at $3/M
 
   meta:
     self_hosted: true
     models:
+      - id: llama-4-scout
+        name: Llama 4 Scout
+        context: 10000000
+        role: 10M context, 17B active params, MoE 16 experts, fits single H100
+      - id: llama-4-maverick
+        name: Llama 4 Maverick
+        context: 1000000
+        role: 400B total params, 128 experts, beats GPT-4o on coding
       - id: llama-3.3-70b
         name: Llama 3.3 70B
         context: 128000
-        role: Open-weights fallback
+        role: Open-weights fallback, proven stable
       - id: llama-3.2-vision
         name: Llama 3.2 Vision
         context: 128000
@@ -122,14 +150,34 @@ providers:
   alibaba:
     self_hosted: true
     models:
+      - id: qwen-3.5-397b
+        name: Qwen 3.5 397B-A17B
+        context: 256000
+        role: Flagship MoE, multimodal reasoning, agentic workloads
+      - id: qwen-3-235b
+        name: Qwen 3 235B
+        context: 131000
+        role: Dense general-purpose, strong multilingual
       - id: qwen-2.5-coder-32b
         name: Qwen 2.5 Coder 32B
-        context: 128000
+        context: 131000
         role: Code specialist
-      - id: qwq-32b
-        name: QwQ 32B
+
+  zhipu:
+    self_hosted: true
+    models:
+      - id: glm-5
+        name: GLM-5 744B-A40B
         context: 128000
-        role: Open reasoning model
+        role: 77.8% SWE-bench, top Chatbot Arena Elo 1451
+
+  minimax:
+    env_var: MINIMAX_API_KEY
+    models:
+      - id: minimax-m2.5
+        name: MiniMax M2.5
+        context: 256000
+        role: 80.2% SWE-bench, matches closed frontier models
 
 gateways:
   openrouter:
