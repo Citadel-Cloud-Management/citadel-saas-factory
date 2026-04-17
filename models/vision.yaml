@@ -1,0 +1,73 @@
+# Vision and Multi-Modal Models
+# Screenshot-to-code, design-to-code, image analysis, speech, video
+
+vision:
+  - id: claude-opus-4-6
+    provider: anthropic
+    role: Design-to-code, screenshot analysis
+  - id: gemini-3-pro
+    provider: google
+    role: Long-context vision, UI reasoning
+  - id: gpt-5
+    provider: openai
+    role: Alternative vision
+  - id: llama-3.2-vision
+    runtime: ollama
+    role: Local vision-language
+
+image_generation:
+  - id: stable-diffusion-3.5
+    runtime: local
+    role: Open image generation
+  - id: flux-1
+    runtime: replicate
+    role: High-quality generation
+
+speech_to_text:
+  - id: whisper-large-v3
+    runtime: local
+    role: Primary STT
+  - id: distil-whisper
+    runtime: local
+    role: Fast STT
+
+text_to_speech:
+  - id: piper
+    runtime: local
+    role: Free TTS
+  - id: coqui-xtts
+    runtime: local
+    role: Voice cloning TTS
+  - id: elevenlabs
+    provider: elevenlabs
+    env_var: ELEVENLABS_API_KEY
+    role: Premium TTS
+
+ocr:
+  - id: surya
+    runtime: local
+    role: Primary OCR
+  - id: tesseract-5
+    runtime: local
+    role: Fallback OCR
+  - id: paddleocr
+    runtime: local
+    role: Multi-lingual OCR
+
+document_understanding:
+  - id: nougat
+    runtime: local
+    role: PDF to structured text
+  - id: marker
+    runtime: local
+    role: PDF to markdown
+  - id: donut
+    runtime: local
+    role: Document understanding
+
+defaults:
+  vision: claude-opus-4-6
+  image_gen: stable-diffusion-3.5
+  stt: whisper-large-v3
+  tts: piper
+  ocr: surya

@@ -1,0 +1,17 @@
+# OpenAI Provider Configuration
+provider: openai
+api_base: https://api.openai.com/v1
+env_var: OPENAI_API_KEY
+models:
+  - gpt-5
+  - gpt-5-mini
+  - gpt-5-nano
+  - gpt-4.1
+  - o4
+features:
+  tool_use: true
+  vision: true
+  realtime_api: true
+  batch_api: true
+limits:
+  rate_limit_rpm: 10000

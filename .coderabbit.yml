@@ -1,0 +1,34 @@
+# CodeRabbit Configuration
+# Activation: Install CodeRabbit GitHub App
+# Docs: https://docs.coderabbit.ai
+
+language: en-US
+tone_instructions: "Be concise and actionable. Focus on security, performance, and correctness."
+
+reviews:
+  auto_review:
+    enabled: true
+    drafts: false
+
+  profile: assertive
+  request_changes_workflow: true
+
+  path_instructions:
+    - path: "backend/**"
+      instructions: "Review for Python best practices, type hints, parameterized queries, error handling"
+    - path: "frontend/**"
+      instructions: "Review for React best practices, TypeScript strict mode, accessibility, performance"
+    - path: "security/**"
+      instructions: "Review for security policy compliance, no hardcoded secrets"
+    - path: "infrastructure/**"
+      instructions: "Review for resource limits, security contexts, no privileged containers"
+    - path: "models/**"
+      instructions: "Review for valid YAML, correct model IDs, sensible defaults"
+
+  tools:
+    ruff:
+      enabled: true
+    eslint:
+      enabled: true
+    semgrep:
+      enabled: true

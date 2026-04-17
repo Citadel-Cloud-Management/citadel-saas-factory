@@ -1,0 +1,31 @@
+# GitHub Copilot Coding Agent Setup Steps
+# Runs when Copilot Coding Agent is assigned to an issue
+name: copilot-setup
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt 2>/dev/null || echo "No backend requirements yet"
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci 2>/dev/null || echo "No frontend package.json yet"

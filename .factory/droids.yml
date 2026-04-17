@@ -1,0 +1,28 @@
+# Factory AI Droids Configuration
+# Activation: Install Factory AI GitHub App
+# Docs: https://factory.ai/docs
+
+project:
+  name: citadel-saas-factory
+  instructions: AGENTS.md
+
+droids:
+  - name: code-reviewer
+    trigger: pull_request
+    model: claude-sonnet-4-6
+    rules: ".claude/rules/"
+
+  - name: bug-fixer
+    trigger: issue.labeled.bug
+    model: claude-sonnet-4-6
+    auto_pr: true
+
+  - name: test-writer
+    trigger: pull_request.labeled.needs-tests
+    model: claude-sonnet-4-6
+    coverage_target: 80
+
+  - name: docs-updater
+    trigger: pull_request.merged
+    model: claude-haiku-4-5
+    paths: ["docs/"]

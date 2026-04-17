@@ -1,0 +1,22 @@
+# DeepEval Configuration
+# Run: deepeval test run
+# Docs: https://docs.deepeval.com
+
+metrics:
+  - hallucination:
+      threshold: 0.85
+  - faithfulness:
+      threshold: 0.8
+  - relevance:
+      threshold: 0.7
+  - toxicity:
+      threshold: 0.95
+
+test_suites:
+  - name: agent_responses
+    description: Test agent response quality
+    test_cases_dir: evals/deepeval/test_cases/
+
+  - name: rag_retrieval
+    description: Test RAG pipeline accuracy
+    test_cases_dir: evals/deepeval/rag_cases/

@@ -1,0 +1,21 @@
+# Google Jules Configuration
+# Activation: Connect repo via Jules dashboard, assign to issues
+# Required env: GOOGLE_API_KEY
+# Docs: https://jules.google.com/docs
+
+project:
+  name: citadel-saas-factory
+  instructions: GEMINI.md
+
+model:
+  primary: gemini-3.1-pro
+  context_window: 2000000
+
+setup:
+  steps:
+    - pip install -r backend/requirements.txt 2>/dev/null || true
+    - npm ci --prefix frontend 2>/dev/null || true
+
+rules:
+  source: ".claude/rules/"
+  additional: ".antigravity/rules.md"

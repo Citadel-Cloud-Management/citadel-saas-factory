@@ -1,0 +1,180 @@
+# Multi-Model Catalog — Universal Reference
+# Every model available across providers for agent execution
+# Config-driven model selection: set provider env vars to activate
+
+providers:
+  anthropic:
+    env_var: ANTHROPIC_API_KEY
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6
+        context: 1000000
+        role: Deep reasoning, architecture, long refactors
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6
+        context: 200000
+        role: Default agent mode, balanced coding
+      - id: claude-haiku-4-5
+        name: Claude Haiku 4.5
+        context: 200000
+        role: Fast completion, lightweight edits
+
+  openai:
+    env_var: OPENAI_API_KEY
+    models:
+      - id: gpt-5
+        name: GPT-5
+        context: 256000
+        role: Complex reasoning alternative
+      - id: gpt-5-mini
+        name: GPT-5 Mini
+        context: 128000
+        role: Fast agent fallback
+      - id: gpt-5-nano
+        name: GPT-5 Nano
+        context: 32000
+        role: Autocomplete speed tier
+      - id: gpt-4.1
+        name: GPT-4.1
+        context: 1000000
+        role: Long-context fallback
+      - id: o4
+        name: o4 Reasoning
+        context: 200000
+        role: Chain-of-thought tasks
+
+  google:
+    env_var: GOOGLE_API_KEY
+    models:
+      - id: gemini-3-pro
+        name: Gemini 3 Pro
+        context: 2000000
+        role: Long-context codebase reasoning
+      - id: gemini-3.1-pro
+        name: Gemini 3.1 Pro
+        context: 2000000
+        role: Primary agent, 2M-token context
+      - id: gemini-3-flash
+        name: Gemini 3 Flash
+        context: 1000000
+        role: Fast autocomplete and boilerplate
+      - id: gemini-2.5-pro
+        name: Gemini 2.5 Pro
+        context: 1000000
+        role: Cost-optimized long context
+
+  xai:
+    env_var: XAI_API_KEY
+    models:
+      - id: grok-4
+        name: Grok 4
+        context: 256000
+        role: Alternate large-context reasoning
+      - id: grok-code-fast
+        name: Grok Code Fast
+        context: 128000
+        role: Code-tuned speed tier
+
+  deepseek:
+    env_var: DEEPSEEK_API_KEY
+    models:
+      - id: deepseek-v3.1
+        name: DeepSeek V3.1
+        context: 128000
+        role: Open-weights reasoning, cost-optimal
+      - id: deepseek-r1
+        name: DeepSeek R1
+        context: 128000
+        role: Reasoning-tuned open model
+
+  mistral:
+    env_var: MISTRAL_API_KEY
+    models:
+      - id: mistral-large-2
+        name: Mistral Large 2
+        context: 128000
+        role: EU-hosted option
+      - id: codestral-25
+        name: Codestral 25
+        context: 256000
+        role: Code-tuned Mistral
+
+  cohere:
+    env_var: COHERE_API_KEY
+    models:
+      - id: command-r-plus
+        name: Command R+
+        context: 128000
+        role: RAG specialist
+
+  meta:
+    self_hosted: true
+    models:
+      - id: llama-3.3-70b
+        name: Llama 3.3 70B
+        context: 128000
+        role: Open-weights fallback
+      - id: llama-3.2-vision
+        name: Llama 3.2 Vision
+        context: 128000
+        role: Visual reasoning open-weights
+
+  alibaba:
+    self_hosted: true
+    models:
+      - id: qwen-2.5-coder-32b
+        name: Qwen 2.5 Coder 32B
+        context: 128000
+        role: Code specialist
+      - id: qwq-32b
+        name: QwQ 32B
+        context: 128000
+        role: Open reasoning model
+
+gateways:
+  openrouter:
+    env_var: OPENROUTER_API_KEY
+    endpoint: https://openrouter.ai/api/v1
+    description: 300+ models including Nemotron, Perplexity Sonar, Hermes
+  litellm:
+    endpoint: http://localhost:4000
+    description: Any of 100+ providers routed through a single endpoint
+  groq:
+    env_var: GROQ_API_KEY
+    endpoint: https://api.groq.com/openai/v1
+    description: LPU-accelerated Llama, Qwen, DeepSeek
+  together:
+    env_var: TOGETHER_API_KEY
+    endpoint: https://api.together.xyz/v1
+    description: Hosted open models with low-latency inference
+  fireworks:
+    env_var: FIREWORKS_API_KEY
+    endpoint: https://api.fireworks.ai/inference/v1
+    description: Hosted open models with low-latency inference
+  cerebras:
+    env_var: CEREBRAS_API_KEY
+    endpoint: https://api.cerebras.ai/v1
+    description: Wafer-scale Llama inference
+  bedrock:
+    env_var: AWS_ACCESS_KEY_ID
+    description: Anthropic, Meta, AI21, Cohere, Amazon Titan via AWS
+  vertex:
+    env_var: GOOGLE_APPLICATION_CREDENTIALS
+    description: Gemini, Anthropic, Llama, Mistral via GCP
+
+local_runtimes:
+  - id: ollama
+    command: ollama serve
+    description: Local multi-model server
+  - id: vllm
+    command: vllm serve
+    description: Paged-attention inference at scale
+  - id: llamacpp
+    command: llama-server
+    description: GGUF quantized models
+  - id: localai
+    command: local-ai
+    description: OpenAI-compatible local multi-modal
+  - id: lmstudio
+    command: lms server start
+    description: GUI plus headless local

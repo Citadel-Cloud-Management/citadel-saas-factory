@@ -1,0 +1,33 @@
+---
+description: Multi-model routing rules for agent execution
+globs: ["models/**", "agents/**", ".claude/agents/**"]
+alwaysApply: false
+---
+
+# Multi-Model Routing
+
+When selecting a model for a task:
+
+1. Read `models/routing.yaml` for tier definitions
+2. Match task type to the appropriate tier
+3. Use the primary model; fall back in order if unavailable
+4. Respect cost controls in `models/routing.yaml`
+
+## Tier Quick Reference
+
+| Tier | Primary | Use Case |
+|------|---------|----------|
+| reasoning_deep | Claude Opus 4.6 | Architecture, critical decisions |
+| reasoning_fast | Claude Sonnet 4.6 | Default coding |
+| cheap_fast | Claude Haiku 4.5 | Completion, boilerplate |
+| long_context | Gemini 3.1 Pro | Full codebase analysis (2M) |
+| code_specialist | Codestral 25 | Code gen and review |
+| vision | Claude Opus 4.6 | Screenshot/design to code |
+| local_only | Llama 3.3 70B | Air-gapped, zero cost |
+
+## Provider Priority
+1. Anthropic (Claude)
+2. Google (Gemini)
+3. OpenAI (GPT)
+4. OpenRouter (300+ models)
+5. Ollama (local, free)

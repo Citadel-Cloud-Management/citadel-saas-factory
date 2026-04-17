@@ -1,4 +1,4 @@
-.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status
+.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks render-agents eval status
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -84,3 +84,38 @@ engine-status: ## Print the currently configured LLM engine
 
 strategy-html: ## Regenerate docs/strategy.html from .claude/agents/_registry.yaml
 	python scripts/generate-strategy-html.py
+
+# ─── Multi-Model & Cross-IDE Targets ───
+
+bootstrap-parallel: ## Run parallel bootstrap (models, MCP, hooks, agents)
+	./scripts/parallel-bootstrap.sh
+
+bootstrap-dry: ## Dry-run parallel bootstrap
+	./scripts/parallel-bootstrap.sh --dry-run
+
+detect-business: ## Detect business vertical and generate BUSINESS_PROFILE.yaml
+	./scripts/detect-business.sh
+
+install-models: ## Install Ollama and open-weights models
+	./scripts/install-models.sh
+
+install-mcp: ## Install MCP server dependencies
+	./scripts/install-mcp.sh
+
+install-hooks: ## Install git hooks via Lefthook
+	./scripts/install-hooks.sh
+
+render-agents: ## Render agents to Cursor and Antigravity formats
+	./scripts/render-agents.sh
+
+eval: ## Run model evaluation suite (promptfoo)
+	npx promptfoo eval -c evals/promptfoo.yaml
+
+status: ## System status (agents, models, rules, skills, providers)
+	@echo "=== Citadel SaaS Factory Status ==="
+	@echo "Agents:    $$(grep -c '^  - id:' .claude/agents/_registry.yaml 2>/dev/null || echo 0)"
+	@echo "Models:    $$(grep -c '    - id:' models/catalog.yaml 2>/dev/null || echo 0)"
+	@echo "Rules:     $$(ls .claude/rules/*.md 2>/dev/null | wc -l || echo 0)"
+	@echo "Skills:    $$(ls -d .claude/skills/*/ 2>/dev/null | wc -l || echo 0)"
+	@echo "Providers: $$(ls agents/providers/*.yaml 2>/dev/null | wc -l || echo 0)"
+	@echo "Scripts:   $$(ls scripts/*.sh 2>/dev/null | wc -l || echo 0)"

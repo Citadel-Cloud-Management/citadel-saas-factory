@@ -1,0 +1,9 @@
+{
+  "id": "citadel-saas-factory",
+  "start_cmd": "echo 'Citadel SaaS Factory sandbox ready'",
+  "description": "Sandbox for Citadel SaaS Factory development",
+  "env_vars": {
+    "PYTHON_VERSION": "3.12",
+    "NODE_VERSION": "20"
+  }
+}

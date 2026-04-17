@@ -1,0 +1,13 @@
+# Codegen.com Configuration
+# Activation: Connect repo at codegen.com
+# Docs: https://docs.codegen.com
+
+project:
+  name: citadel-saas-factory
+  instructions: AGENTS.md
+  language: [python, typescript]
+
+agent:
+  model: claude-sonnet-4-6
+  auto_pr: true
+  review_before_merge: true

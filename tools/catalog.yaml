@@ -1,0 +1,83 @@
+# Tool Catalog — Universal Agent Tool Registry
+# Every tool an agent can invoke, grouped by category
+
+categories:
+  filesystem:
+    - {id: read, description: "Read file contents"}
+    - {id: write, description: "Create or overwrite file"}
+    - {id: edit, description: "Structured edit (find/replace)"}
+    - {id: glob, description: "File pattern matching"}
+    - {id: watch, description: "Watch for file changes"}
+
+  shell:
+    - {id: bash, description: "Execute shell command (Unix)"}
+    - {id: powershell, description: "Windows PowerShell"}
+
+  git:
+    - {id: git-status, description: "Working tree status"}
+    - {id: git-diff, description: "Show changes"}
+    - {id: git-log, description: "Commit history"}
+    - {id: git-blame, description: "Line-by-line authorship"}
+    - {id: git-bisect, description: "Binary search for bugs"}
+    - {id: git-worktree, description: "Parallel work directories"}
+
+  http:
+    - {id: fetch, description: "HTTP GET/POST"}
+    - {id: graphql, description: "GraphQL query"}
+
+  browser:
+    - {id: playwright, description: "Full browser automation"}
+    - {id: screenshot, description: "Page screenshot"}
+
+  database:
+    - {id: psql, description: "PostgreSQL client"}
+    - {id: redis-cli, description: "Redis client"}
+    - {id: mongosh, description: "MongoDB client"}
+
+  cloud:
+    - {id: aws-cli, description: "AWS operations"}
+    - {id: gcloud, description: "GCP operations"}
+    - {id: az, description: "Azure operations"}
+    - {id: cloudflared, description: "Cloudflare tunnel"}
+
+  container:
+    - {id: docker, description: "Container operations"}
+    - {id: kubectl, description: "Kubernetes operations"}
+    - {id: helm, description: "Helm chart operations"}
+    - {id: k9s, description: "Kubernetes TUI"}
+
+  iac:
+    - {id: terraform, description: "Infrastructure as Code"}
+    - {id: pulumi, description: "IaC with real languages"}
+    - {id: ansible, description: "Configuration management"}
+
+  security:
+    - {id: trivy, description: "Container/code scanning"}
+    - {id: semgrep, description: "SAST scanning"}
+    - {id: gitleaks, description: "Secret detection"}
+    - {id: trufflehog, description: "Secret scanning"}
+    - {id: zap, description: "DAST scanning"}
+
+  observability:
+    - {id: promql, description: "Prometheus queries"}
+    - {id: logql, description: "Loki log queries"}
+    - {id: tempo, description: "Distributed tracing"}
+
+  docs:
+    - {id: mkdocs, description: "Documentation build"}
+    - {id: typedoc, description: "TypeScript API docs"}
+    - {id: sphinx, description: "Python docs"}
+    - {id: redoc, description: "OpenAPI docs"}
+
+  data:
+    - {id: pandas, description: "Python data analysis"}
+    - {id: polars, description: "Fast data analysis"}
+    - {id: duckdb, description: "Embedded analytics"}
+
+  images:
+    - {id: imagemagick, description: "Image processing"}
+    - {id: ffmpeg, description: "Video/audio processing"}
+
+  ocr:
+    - {id: tesseract, description: "OCR text extraction"}
+    - {id: surya, description: "Multi-lingual OCR"}

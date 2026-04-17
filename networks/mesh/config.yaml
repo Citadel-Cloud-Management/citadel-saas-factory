@@ -1,0 +1,25 @@
+# Agent Mesh Configuration
+# Multi-agent coordination topology
+
+topologies:
+  ruflo:
+    type: mesh
+    config: ruflo.config.yaml
+    description: Full mesh with memory and routing
+
+  hierarchical:
+    type: tree
+    tools: [crewai, langgraph]
+    description: Manager delegates to workers
+
+  pipeline:
+    type: dag
+    tools: [dspy, haystack]
+    description: Sequential processing chain
+
+  actor:
+    type: actor
+    tools: [temporal, ray]
+    description: Durable async workflows
+
+default: ruflo

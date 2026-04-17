@@ -1,0 +1,35 @@
+{
+  "models": [
+    {
+      "title": "Claude Sonnet 4.6",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6",
+      "apiKey": "${ANTHROPIC_API_KEY}"
+    },
+    {
+      "title": "GPT-5",
+      "provider": "openai",
+      "model": "gpt-5",
+      "apiKey": "${OPENAI_API_KEY}"
+    },
+    {
+      "title": "Gemini 3 Pro",
+      "provider": "google",
+      "model": "gemini-3-pro",
+      "apiKey": "${GOOGLE_API_KEY}"
+    },
+    {
+      "title": "Ollama Local",
+      "provider": "ollama",
+      "model": "llama3.3:70b"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Claude Haiku 4.5",
+    "provider": "anthropic",
+    "model": "claude-haiku-4-5"
+  },
+  "docs": [
+    {"title": "Project Docs", "startUrl": "file://docs/index.md"}
+  ]
+}

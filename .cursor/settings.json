@@ -1,0 +1,8 @@
+{
+  "agent.model": "claude-sonnet-4-6",
+  "agent.background.enabled": true,
+  "agent.background.model": "claude-sonnet-4-6",
+  "codebase.indexing.enabled": true,
+  "mcp.enabled": true,
+  "rules.alwaysApply": true
+}

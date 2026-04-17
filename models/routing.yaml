@@ -1,0 +1,96 @@
+# Model Routing — Tier-Based Selection
+# Each tier defines a primary model with ordered fallbacks
+# Agents reference tiers, not specific models
+
+tiers:
+  reasoning_deep:
+    description: Complex architecture, long refactors, critical decisions
+    primary: claude-opus-4-6
+    fallbacks:
+      - gemini-3-pro
+      - deepseek-r1
+      - gpt-5
+    max_tokens: 16384
+    temperature: 0.3
+
+  reasoning_fast:
+    description: Default agent mode, balanced coding tasks
+    primary: claude-sonnet-4-6
+    fallbacks:
+      - gemini-3-pro
+      - gpt-5
+      - deepseek-v3.1
+    max_tokens: 8192
+    temperature: 0.5
+
+  cheap_fast:
+    description: Tab completion, lightweight edits, boilerplate
+    primary: claude-haiku-4-5
+    fallbacks:
+      - gemini-3-flash
+      - gpt-5-mini
+      - qwen-2.5-coder-32b
+    max_tokens: 4096
+    temperature: 0.7
+
+  long_context:
+    description: Full-codebase reasoning, large file analysis
+    primary: gemini-3.1-pro
+    fallbacks:
+      - gemini-3-pro
+      - claude-opus-4-6
+      - gpt-4.1
+    max_tokens: 16384
+    temperature: 0.3
+
+  code_specialist:
+    description: Code-tuned models for generation and review
+    primary: codestral-25
+    fallbacks:
+      - qwen-2.5-coder-32b
+      - deepseek-v3.1
+      - claude-sonnet-4-6
+    max_tokens: 8192
+    temperature: 0.4
+
+  vision:
+    description: Screenshot-to-code, UI reasoning, design-to-code
+    primary: claude-opus-4-6
+    fallbacks:
+      - gemini-3-pro
+      - gpt-5
+      - llama-3.2-vision
+    max_tokens: 8192
+    temperature: 0.4
+
+  local_only:
+    description: Air-gapped or cost-zero tier using self-hosted models
+    primary: llama-3.3-70b
+    fallbacks:
+      - deepseek-v3.1
+      - qwen-2.5-coder-32b
+      - qwq-32b
+    max_tokens: 4096
+    temperature: 0.5
+    runtime: ollama
+
+selection_rules:
+  - condition: "task.complexity == 'high' and task.type == 'architecture'"
+    tier: reasoning_deep
+  - condition: "task.type == 'code_generation'"
+    tier: reasoning_fast
+  - condition: "task.type == 'completion' or task.type == 'boilerplate'"
+    tier: cheap_fast
+  - condition: "task.context_tokens > 200000"
+    tier: long_context
+  - condition: "task.type == 'code_review' or task.type == 'refactor'"
+    tier: code_specialist
+  - condition: "task.has_image or task.type == 'design_to_code'"
+    tier: vision
+  - condition: "env.OFFLINE_MODE == 'true'"
+    tier: local_only
+
+cost_controls:
+  daily_budget_usd: 50
+  alert_threshold_pct: 80
+  fallback_on_budget_exceeded: local_only
