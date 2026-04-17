@@ -1,0 +1,47 @@
+# Development files
+.git/
+.github/
+.claude/
+.cursor/
+.antigravity/
+.windsurf/
+.continue/
+.codex/
+.devin/
+.jules/
+.factory/
+.codegen/
+.daytona/
+openhands/
+e2b/
+compliance/
+backbone/
+backend/
+frontend/
+gitops/
+infrastructure/
+monitoring/
+security/
+starter-kit/
+engines/
+docs/vault/
+docs/adr/
+docs/runbooks/
+logs/
+
+# Config files not needed in package
+.cursorindexignore
+.coderabbit.yml
+docker-compose.yml
+ruflo.config.yaml
+BUSINESS_PROFILE.yaml
+
+# Dev artifacts
+*.pyc
+__pycache__/
+node_modules/
+.next/
+dist/
+build/
+.env
+.env.local
