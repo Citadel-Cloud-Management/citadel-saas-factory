@@ -1,0 +1,94 @@
+# GDPR — General Data Protection Regulation
+# ==========================================
+# Required when processing personal data of EU residents.
+
+framework: gdpr
+version: "2016/679"
+jurisdiction: "European Union"
+description: "Data protection and privacy regulation for EU residents"
+
+principles:
+  - id: art5_lawfulness
+    name: "Lawfulness, Fairness, Transparency"
+    implementation:
+      - "Privacy policy with clear legal basis"
+      - "Consent management system"
+      - "Data processing records"
+
+  - id: art5_purpose_limitation
+    name: "Purpose Limitation"
+    implementation:
+      - "Data only collected for specified purposes"
+      - "No secondary use without consent"
+
+  - id: art5_data_minimization
+    name: "Data Minimization"
+    implementation:
+      - "Collect only necessary data"
+      - "Regular data audit"
+      - "PII detection via guardrails"
+
+  - id: art5_accuracy
+    name: "Accuracy"
+    implementation:
+      - "Data correction mechanisms"
+      - "Validation at input"
+
+  - id: art5_storage_limitation
+    name: "Storage Limitation"
+    implementation:
+      - "Retention policies per data type"
+      - "Automated deletion schedules"
+      - "compliance/policies/retention.yaml"
+
+  - id: art5_integrity
+    name: "Integrity and Confidentiality"
+    implementation:
+      - "Encryption at rest (AES-256)"
+      - "Encryption in transit (TLS 1.2+)"
+      - "Access controls (RBAC)"
+      - "Audit logging"
+
+data_subject_rights:
+  - id: art15_access
+    name: "Right of Access"
+    description: "Data subjects can request a copy of their data"
+    endpoint: "GET /api/v1/privacy/data-export"
+    implementation: "Export all user data in machine-readable format"
+
+  - id: art17_erasure
+    name: "Right to Erasure (Right to be Forgotten)"
+    description: "Data subjects can request deletion of their data"
+    endpoint: "DELETE /api/v1/privacy/data-erasure"
+    implementation: "Cascade delete all PII, retain anonymized analytics"
+
+  - id: art20_portability
+    name: "Right to Data Portability"
+    description: "Data subjects can export data in structured format"
+    endpoint: "GET /api/v1/privacy/data-export?format=json"
+    implementation: "JSON/CSV export of all personal data"
+
+  - id: art21_object
+    name: "Right to Object"
+    description: "Data subjects can object to processing"
+    endpoint: "POST /api/v1/privacy/opt-out"
+    implementation: "Opt-out flags per processing activity"
+
+cross_border_transfers:
+  mechanism: "Standard Contractual Clauses (SCCs)"
+  documentation: "Data Processing Agreement (DPA)"
+  adequacy_decisions: "Check EU Commission adequacy list"
+
+data_protection_officer:
+  required: "If processing special categories at scale"
+  contact: "dpo@citadelcloudmanagement.com"
+
+breach_notification:
+  authority_deadline_hours: 72
+  subject_notification: "Without undue delay if high risk"
+  documentation: "Breach register with timeline, scope, remediation"
+
+records_of_processing:
+  controller_records: true
+  processor_records: true
+  template: "compliance/evidence/processing_records.json"

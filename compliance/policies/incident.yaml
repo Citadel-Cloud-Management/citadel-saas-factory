@@ -1,0 +1,86 @@
+# Incident Response Plan
+# ======================
+
+policy:
+  name: "Incident Response Plan"
+  version: "1.0"
+  effective_date: "2024-01-01"
+  review_cycle: "Annual + after every major incident"
+  owner: "Security Team"
+
+severity_levels:
+  - level: "SEV1 — Critical"
+    description: "Data breach, complete service outage, active exploitation"
+    response_time: "15 minutes"
+    escalation: "Immediate executive notification"
+    communication: "Status page + customer email within 1 hour"
+
+  - level: "SEV2 — High"
+    description: "Partial outage, degraded performance, potential data exposure"
+    response_time: "30 minutes"
+    escalation: "Engineering lead notification"
+    communication: "Status page within 2 hours"
+
+  - level: "SEV3 — Medium"
+    description: "Non-critical service degradation, failed security control"
+    response_time: "4 hours"
+    escalation: "On-call engineer"
+
+  - level: "SEV4 — Low"
+    description: "Minor issue, informational security event"
+    response_time: "Next business day"
+
+phases:
+  preparation:
+    - "Incident response team defined with roles and contacts"
+    - "Communication templates prepared"
+    - "Runbooks for common scenarios (docs/runbooks/)"
+    - "Monitoring and alerting configured"
+    - "Regular tabletop exercises (quarterly)"
+
+  detection:
+    tools:
+      - "Prometheus alerting rules"
+      - "Falco runtime detection"
+      - "Sigma SIEM rules"
+      - "backbone/observability/tracer.py"
+    sources:
+      - "Automated monitoring alerts"
+      - "Customer reports"
+      - "Security scanner findings"
+      - "Third-party notifications"
+
+  containment:
+    short_term:
+      - "Isolate affected systems"
+      - "Block malicious IPs/accounts"
+      - "Activate kill switch if agent-related (backbone/policies/safety.py)"
+    long_term:
+      - "Patch vulnerability"
+      - "Rotate compromised credentials"
+      - "Rebuild affected systems from clean images"
+
+  eradication:
+    - "Remove root cause"
+    - "Verify complete removal via scanning"
+    - "Update detection rules"
+
+  recovery:
+    - "Restore from clean backups"
+    - "Gradual service restoration"
+    - "Enhanced monitoring for 72 hours"
+    - "Verify normal operations"
+
+  post_incident:
+    - "Blameless post-mortem within 48 hours"
+    - "Root cause analysis documented"
+    - "Lessons learned distributed"
+    - "Action items tracked to completion"
+    - "Detection rules updated"
+
+communication:
+  internal: "Dedicated incident Slack channel"
+  external_status_page: true
+  regulatory:
+    gdpr_authority: "Within 72 hours if personal data involved"
+    hipaa: "Within 60 days if PHI involved"

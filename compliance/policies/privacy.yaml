@@ -1,0 +1,70 @@
+# Data Privacy Policy
+# ====================
+
+policy:
+  name: "Data Privacy Policy"
+  version: "1.0"
+  effective_date: "2024-01-01"
+  review_cycle: "Annual"
+  owner: "DPO / Legal"
+  frameworks: ["GDPR", "CCPA/CPRA", "LGPD", "PIPEDA"]
+
+data_collection:
+  personal_data_categories:
+    - category: "Account Information"
+      fields: ["name", "email", "company", "job title"]
+      legal_basis: "Contract performance"
+      retention: "Duration of account + 30 days"
+
+    - category: "Usage Data"
+      fields: ["IP address", "browser type", "pages visited", "features used"]
+      legal_basis: "Legitimate interest"
+      retention: "12 months"
+
+    - category: "Payment Data"
+      fields: ["Stripe customer ID", "subscription ID"]
+      legal_basis: "Contract performance"
+      retention: "Duration of subscription + tax retention period"
+      note: "No raw card data stored — Stripe handles tokenization"
+
+    - category: "Support Data"
+      fields: ["Support tickets", "chat transcripts"]
+      legal_basis: "Contract performance"
+      retention: "24 months after resolution"
+
+consent_management:
+  cookie_consent: "Required before non-essential cookies"
+  marketing_consent: "Explicit opt-in required"
+  analytics_consent: "Opt-out available"
+
+data_subject_rights:
+  request_channel: "privacy@citadelcloudmanagement.com"
+  response_sla_days: 30
+  identity_verification: "Required before fulfilling requests"
+  rights:
+    - "Access: Export all personal data"
+    - "Rectification: Correct inaccurate data"
+    - "Erasure: Delete personal data (right to be forgotten)"
+    - "Portability: Export in machine-readable format"
+    - "Restriction: Limit processing"
+    - "Objection: Opt out of specific processing"
+
+third_party_sharing:
+  policy: "No selling of personal data"
+  processors:
+    - name: "Stripe"
+      purpose: "Payment processing"
+      data: "Payment information"
+      dpa: true
+
+    - name: "Cloud infrastructure provider"
+      purpose: "Hosting"
+      data: "All application data"
+      dpa: true
+
+breach_response:
+  detection: "Automated monitoring + manual review"
+  assessment_hours: 24
+  authority_notification_hours: 72
+  subject_notification: "Without undue delay if high risk"
+  documentation: "Breach register maintained"

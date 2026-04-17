@@ -1,0 +1,84 @@
+# Data Retention Policy
+# =====================
+
+policy:
+  name: "Data Retention and Deletion Policy"
+  version: "1.0"
+  effective_date: "2024-01-01"
+  review_cycle: "Annual"
+  owner: "DPO / Engineering"
+
+retention_schedule:
+  - data_type: "Account Data"
+    description: "User profiles, organization details"
+    classification: "PII"
+    retention: "Duration of account + 30 days"
+    deletion_method: "Hard delete with cascade"
+    legal_basis: "Contract performance"
+
+  - data_type: "Authentication Logs"
+    description: "Login events, MFA events, session data"
+    classification: "PII"
+    retention: "12 months"
+    deletion_method: "Automated purge"
+    legal_basis: "Security (legitimate interest)"
+
+  - data_type: "Application Logs"
+    description: "Request logs, error logs, performance metrics"
+    classification: "May contain PII (redacted)"
+    retention: "90 days"
+    deletion_method: "Log rotation + automated purge"
+    legal_basis: "Operational necessity"
+
+  - data_type: "Audit Trail"
+    description: "Security events, compliance events, agent actions"
+    classification: "Internal"
+    retention: "7 years"
+    deletion_method: "Archived then purged"
+    legal_basis: "Legal/regulatory obligation"
+
+  - data_type: "Payment Records"
+    description: "Stripe customer IDs, invoice records, transaction history"
+    classification: "Financial PII"
+    retention: "7 years (tax compliance)"
+    deletion_method: "Archived then purged"
+    legal_basis: "Legal/tax obligation"
+
+  - data_type: "Support Tickets"
+    description: "Customer support interactions"
+    classification: "May contain PII"
+    retention: "24 months after resolution"
+    deletion_method: "Anonymized then archived"
+    legal_basis: "Legitimate interest"
+
+  - data_type: "Analytics Data"
+    description: "Usage metrics, feature adoption, cohort data"
+    classification: "Aggregated (no PII)"
+    retention: "Indefinite (anonymized)"
+    deletion_method: "N/A — anonymized at collection"
+    legal_basis: "Legitimate interest"
+
+  - data_type: "Backups"
+    description: "Database snapshots, file system backups"
+    classification: "Contains all data types"
+    retention: "30 days rolling"
+    deletion_method: "Automated rotation"
+    legal_basis: "Business continuity"
+
+right_to_erasure:
+  process:
+    - "Verify identity of requestor"
+    - "Identify all data stores containing their data"
+    - "Execute deletion across all stores"
+    - "Verify deletion from backups within 30 days"
+    - "Confirm deletion to requestor"
+  exceptions:
+    - "Legal/regulatory obligation to retain"
+    - "Ongoing legal proceedings"
+    - "Anonymized aggregate data (not personal data)"
+  sla_days: 30
+
+automated_deletion:
+  enabled: true
+  schedule: "Daily at 02:00 UTC"
+  notification: "7 days before automated deletion of account data"

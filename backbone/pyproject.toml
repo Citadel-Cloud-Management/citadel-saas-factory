@@ -1,0 +1,35 @@
+[project]
+name = "citadel-backbone"
+version = "1.0.0"
+description = "Autonomous Agent Backbone — 10-layer architecture for the Citadel SaaS Factory"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+
+dependencies = [
+    "structlog>=24.4.0",
+    "pyyaml>=6.0.0",
+    "redis[hiredis]>=5.2.0",
+    "httpx>=0.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.0",
+]
+
+[project.scripts]
+backbone = "backbone.cli:main"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "S", "B", "A", "C4", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

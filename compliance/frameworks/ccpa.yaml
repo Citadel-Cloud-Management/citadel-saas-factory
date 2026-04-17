@@ -1,0 +1,55 @@
+# CCPA/CPRA — California Consumer Privacy Act
+# =============================================
+# Required when processing personal data of California residents.
+
+framework: ccpa
+version: "CPRA Amendment 2023"
+jurisdiction: "California, USA"
+description: "Consumer privacy rights for California residents"
+
+consumer_rights:
+  - id: right_to_know
+    name: "Right to Know"
+    description: "Consumers can request what PI is collected and how it's used"
+    endpoint: "GET /api/v1/privacy/data-disclosure"
+
+  - id: right_to_delete
+    name: "Right to Delete"
+    description: "Consumers can request deletion of personal information"
+    endpoint: "DELETE /api/v1/privacy/data-erasure"
+
+  - id: right_to_opt_out
+    name: "Right to Opt-Out of Sale/Sharing"
+    description: "Do Not Sell My Personal Information"
+    endpoint: "POST /api/v1/privacy/opt-out-sale"
+    ui_requirement: "Clear 'Do Not Sell' link on homepage"
+
+  - id: right_to_correct
+    name: "Right to Correct"
+    description: "Consumers can correct inaccurate personal information"
+    endpoint: "PATCH /api/v1/privacy/correct"
+
+  - id: right_to_limit
+    name: "Right to Limit Use of Sensitive PI"
+    description: "Limit use and disclosure of sensitive personal information"
+    endpoint: "POST /api/v1/privacy/limit-sensitive"
+
+business_requirements:
+  - "Privacy policy updated annually"
+  - "Do Not Sell link visible on homepage"
+  - "Respond to requests within 45 days"
+  - "Verify consumer identity before fulfilling requests"
+  - "No discrimination against consumers exercising rights"
+  - "Service provider agreements with CCPA clauses"
+
+data_categories:
+  - identifiers: "Name, email, account name, IP address"
+  - commercial: "Products/services purchased, usage history"
+  - internet_activity: "Browsing history, search history, interaction data"
+  - geolocation: "Approximate location from IP"
+  - professional: "Job title, company name"
+
+thresholds:
+  annual_revenue: "$25M+"
+  consumer_records: "100,000+"
+  revenue_from_data: "50%+ from selling/sharing PI"

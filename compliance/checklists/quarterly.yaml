@@ -1,0 +1,45 @@
+# Quarterly Compliance Review
+# ============================
+
+checklist:
+  name: "Quarterly Compliance Review"
+  version: "1.0"
+  frequency: "Every 90 days"
+
+access_review:
+  - "Review all user accounts — disable dormant accounts (90+ days inactive)"
+  - "Verify RBAC assignments match current roles"
+  - "Review service account permissions"
+  - "Audit admin access — minimize count"
+  - "Verify MFA enabled for all accounts"
+
+vulnerability_management:
+  - "Review and resolve all critical/high vulnerabilities"
+  - "Update dependency versions"
+  - "Run full SAST/DAST/SCA scan"
+  - "Review Trivy container scan results"
+  - "Verify patching SLA compliance"
+
+data_management:
+  - "Verify data retention schedules executing correctly"
+  - "Review and process any data deletion requests"
+  - "Audit PII handling across services"
+  - "Verify backup and restore procedures"
+
+policy_review:
+  - "Review security policy for updates needed"
+  - "Review privacy policy for regulatory changes"
+  - "Review incident response plan contacts and procedures"
+  - "Update vendor/third-party risk assessments"
+
+ai_governance:
+  - "Review guardrails threshold and validator performance"
+  - "Audit agent autonomy levels"
+  - "Review kill switch test results"
+  - "Check for model drift or degradation"
+
+compliance_evidence:
+  - "Collect evidence artifacts for SOC 2 auditor"
+  - "Update risk register"
+  - "Document any exceptions or compensating controls"
+  - "File quarterly compliance summary"

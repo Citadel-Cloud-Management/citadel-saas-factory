@@ -1,0 +1,65 @@
+# Access Control Policy
+# =====================
+
+policy:
+  name: "Access Control Policy"
+  version: "1.0"
+  effective_date: "2024-01-01"
+  review_cycle: "Quarterly"
+  owner: "Security Team"
+
+principles:
+  - "Least privilege: minimum access needed for role"
+  - "Separation of duties: no single person controls critical processes"
+  - "Need-to-know: access only to information required for job"
+  - "Defense in depth: multiple layers of access control"
+
+authentication:
+  method: "Keycloak SSO (OAuth2/OIDC)"
+  mfa: "Required for all accounts"
+  password_policy:
+    min_length: 12
+    complexity: "Upper, lower, number, special character"
+    history: "Last 10 passwords cannot be reused"
+    max_age_days: 90
+    lockout_attempts: 5
+    lockout_duration_minutes: 30
+
+  session_management:
+    idle_timeout_minutes: 30
+    absolute_timeout_hours: 12
+    concurrent_sessions: 3
+
+authorization:
+  model: "Role-Based Access Control (RBAC)"
+  roles:
+    - name: "viewer"
+      description: "Read-only access to dashboards and reports"
+      permissions: ["read"]
+
+    - name: "member"
+      description: "Standard team member access"
+      permissions: ["read", "write"]
+
+    - name: "admin"
+      description: "Organization admin with full access"
+      permissions: ["read", "write", "admin"]
+
+    - name: "super_admin"
+      description: "Platform-level admin (internal only)"
+      permissions: ["read", "write", "admin", "platform"]
+
+  agent_roles:
+    reference: "backbone/governance/rbac.py"
+    levels: ["observer", "worker", "operator", "supervisor", "admin"]
+
+provisioning:
+  onboarding: "Access request → manager approval → provisioned within 24h"
+  offboarding: "Access revoked within 4 hours of termination"
+  transfers: "Access reviewed and adjusted within 48 hours"
+
+reviews:
+  frequency: "Quarterly"
+  scope: "All user accounts and service accounts"
+  process: "Manager certifies each direct report's access"
+  dormant_accounts: "Disabled after 90 days of inactivity"

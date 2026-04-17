@@ -1,0 +1,90 @@
+# HIPAA — Health Insurance Portability and Accountability Act
+# ===========================================================
+# Conditional: only required if serving healthcare customers with PHI.
+
+framework: hipaa
+version: "2013 Omnibus Rule"
+jurisdiction: "United States"
+description: "Protection of Protected Health Information (PHI)"
+conditional: true
+condition: "Only required if SaaS processes, stores, or transmits PHI"
+
+safeguards:
+  administrative:
+    - id: admin_1
+      name: "Security Management Process"
+      implementation:
+        - "Risk analysis and risk management"
+        - "Sanction policy for violations"
+        - "Information system activity review"
+      evidence:
+        - "compliance/policies/security.yaml"
+        - "backbone/observability/tracer.py"
+
+    - id: admin_2
+      name: "Workforce Security"
+      implementation:
+        - "Authorization and supervision procedures"
+        - "Clearance procedures for PHI access"
+        - "Termination procedures"
+
+    - id: admin_3
+      name: "Information Access Management"
+      implementation:
+        - "Access authorization policies"
+        - "RBAC with PHI-specific roles"
+        - "Minimum necessary standard"
+      evidence:
+        - "backbone/governance/rbac.py"
+
+    - id: admin_4
+      name: "Contingency Plan"
+      implementation:
+        - "Data backup plan (Velero)"
+        - "Disaster recovery procedures"
+        - "Emergency mode operations"
+      evidence:
+        - "docs/runbooks/"
+
+  physical:
+    - id: physical_1
+      name: "Facility Access Controls"
+      implementation:
+        - "Cloud provider physical security (shared responsibility)"
+        - "Workstation security policies"
+
+  technical:
+    - id: tech_1
+      name: "Access Control"
+      implementation:
+        - "Unique user identification (Keycloak)"
+        - "Emergency access procedures"
+        - "Automatic logoff"
+        - "Encryption and decryption"
+
+    - id: tech_2
+      name: "Audit Controls"
+      implementation:
+        - "Hardware, software, procedural audit mechanisms"
+        - "Immutable audit logs"
+        - "Activity monitoring"
+      evidence:
+        - "backend/app/middleware/audit.py"
+
+    - id: tech_3
+      name: "Integrity Controls"
+      implementation:
+        - "Data validation"
+        - "Error correction"
+        - "Checksums for data integrity"
+
+    - id: tech_4
+      name: "Transmission Security"
+      implementation:
+        - "TLS 1.2+ for all PHI in transit"
+        - "End-to-end encryption for sensitive data"
+
+baa_requirements:
+  description: "Business Associate Agreement required with all vendors handling PHI"
+  subcontractors: "BAA required down the chain"
+  breach_notification: "60 days to covered entity, 60 days to HHS for 500+ individuals"

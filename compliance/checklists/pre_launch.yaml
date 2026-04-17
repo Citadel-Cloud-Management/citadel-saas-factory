@@ -1,0 +1,120 @@
+# Pre-Launch Compliance Checklist
+# ================================
+
+checklist:
+  name: "Pre-Launch Compliance Review"
+  version: "1.0"
+  description: "Must pass before any production deployment"
+
+security:
+  - id: sec_01
+    check: "No hardcoded secrets in source code"
+    tool: "TruffleHog / compliance scanner"
+    blocking: true
+
+  - id: sec_02
+    check: "All API endpoints require authentication"
+    tool: "Manual review + auth middleware"
+    blocking: true
+
+  - id: sec_03
+    check: "Rate limiting enabled on all endpoints"
+    tool: "Rate limit middleware active"
+    blocking: true
+
+  - id: sec_04
+    check: "CORS configured per environment (not wildcard)"
+    tool: "Review CORS_ORIGINS env var"
+    blocking: true
+
+  - id: sec_05
+    check: "Security headers configured (HSTS, CSP, X-Frame-Options)"
+    tool: "Security headers middleware"
+    blocking: true
+
+  - id: sec_06
+    check: "TLS 1.2+ enforced on all endpoints"
+    tool: "SSL Labs test"
+    blocking: true
+
+  - id: sec_07
+    check: "Container images scanned for vulnerabilities"
+    tool: "Trivy"
+    blocking: true
+
+  - id: sec_08
+    check: "No containers running as root"
+    tool: "Kyverno require-non-root policy"
+    blocking: true
+
+privacy:
+  - id: priv_01
+    check: "Privacy policy published and accessible"
+    blocking: true
+
+  - id: priv_02
+    check: "Cookie consent banner implemented"
+    blocking: true
+
+  - id: priv_03
+    check: "Data subject rights endpoints available"
+    blocking: false
+
+  - id: priv_04
+    check: "DPA template available for customers"
+    blocking: false
+
+  - id: priv_05
+    check: "PII detection enabled in guardrails"
+    blocking: true
+
+legal:
+  - id: legal_01
+    check: "Terms of Service published"
+    blocking: true
+
+  - id: legal_02
+    check: "Acceptable Use Policy published"
+    blocking: false
+
+  - id: legal_03
+    check: "SLA documented"
+    blocking: false
+
+infrastructure:
+  - id: infra_01
+    check: "Backups configured and tested"
+    blocking: true
+
+  - id: infra_02
+    check: "Monitoring and alerting active"
+    blocking: true
+
+  - id: infra_03
+    check: "Health check endpoints responding"
+    blocking: true
+
+  - id: infra_04
+    check: "Rollback procedure documented and tested"
+    blocking: true
+
+  - id: infra_05
+    check: "Resource limits set on all containers"
+    blocking: true
+
+ai_safety:
+  - id: ai_01
+    check: "Guardrails middleware active on all LLM calls"
+    blocking: true
+
+  - id: ai_02
+    check: "Kill switch mechanism tested"
+    blocking: true
+
+  - id: ai_03
+    check: "AI disclosure to users (transparency)"
+    blocking: true
+
+  - id: ai_04
+    check: "Hallucination threshold configured (>=0.85)"
+    blocking: true

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr  # requires: pip install pydantic[email]
 
 
 class HealthResponse(BaseModel):

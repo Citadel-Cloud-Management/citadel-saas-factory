@@ -1,0 +1,125 @@
+# OWASP Top 10 — 2021
+# ====================
+# Application security baseline for all SaaS.
+
+framework: owasp_top10
+version: "2021"
+description: "Top 10 web application security risks"
+
+risks:
+  - id: A01
+    name: "Broken Access Control"
+    severity: critical
+    mitigations:
+      - "RBAC via Keycloak + backbone RBAC"
+      - "Row-level security for multi-tenant isolation"
+      - "Deny by default — explicit allow-list"
+      - "Rate limiting on all endpoints"
+    evidence:
+      - "backbone/governance/rbac.py"
+      - "backend/app/middleware/tenant.py"
+      - "backend/app/middleware/rate_limit.py"
+
+  - id: A02
+    name: "Cryptographic Failures"
+    severity: critical
+    mitigations:
+      - "TLS 1.2+ enforced (no SSL, no TLS 1.0/1.1)"
+      - "AES-256 for data at rest"
+      - "HashiCorp Vault for key management"
+      - "No secrets in source code"
+    evidence:
+      - "backend/app/middleware/security_headers.py"
+      - ".claude/rules/secrets.md"
+
+  - id: A03
+    name: "Injection"
+    severity: critical
+    mitigations:
+      - "SQLAlchemy ORM — parameterized queries only"
+      - "Pydantic input validation"
+      - "No raw SQL in application code"
+      - "Prompt injection detection in guardrails"
+    evidence:
+      - "backbone/validation/validator.py"
+      - "backend/app/middleware/guardrails.py"
+
+  - id: A04
+    name: "Insecure Design"
+    severity: high
+    mitigations:
+      - "Threat modeling in design phase"
+      - "Architecture Decision Records"
+      - "Security review agent"
+      - "Clean architecture with domain isolation"
+    evidence:
+      - "docs/adr/"
+      - ".claude/rules/architecture.md"
+
+  - id: A05
+    name: "Security Misconfiguration"
+    severity: high
+    mitigations:
+      - "Kyverno policies enforce secure defaults"
+      - "CIS Benchmarks for containers"
+      - "Trivy misconfiguration scanning"
+      - "No default credentials"
+    evidence:
+      - "security/kyverno/"
+      - "security/trivy/"
+
+  - id: A06
+    name: "Vulnerable and Outdated Components"
+    severity: high
+    mitigations:
+      - "SCA scanning (Trivy)"
+      - "Dependabot/Renovate for dependency updates"
+      - "Lock files committed"
+      - "License compliance checks"
+    evidence:
+      - ".claude/rules/dependencies.md"
+
+  - id: A07
+    name: "Identification and Authentication Failures"
+    severity: high
+    mitigations:
+      - "Keycloak for identity (OAuth2, OIDC)"
+      - "MFA enforced"
+      - "JWT validation with JWKS"
+      - "Session management"
+    evidence:
+      - "backend/app/middleware/auth.py"
+
+  - id: A08
+    name: "Software and Data Integrity Failures"
+    severity: high
+    mitigations:
+      - "Container image signing (Cosign)"
+      - "GitOps — immutable deployments"
+      - "Kyverno image signature verification"
+      - "Supply chain security"
+    evidence:
+      - "security/kyverno/require-image-signature.yaml"
+
+  - id: A09
+    name: "Security Logging and Monitoring Failures"
+    severity: medium
+    mitigations:
+      - "Structured JSON logging with correlation IDs"
+      - "Prometheus + Grafana + Loki stack"
+      - "Falco runtime detection"
+      - "Sigma detection rules"
+    evidence:
+      - "backend/app/middleware/audit.py"
+      - "monitoring/"
+      - "security/sigma/"
+
+  - id: A10
+    name: "Server-Side Request Forgery (SSRF)"
+    severity: medium
+    mitigations:
+      - "URL allowlisting for external calls"
+      - "Network segmentation"
+      - "No user-controlled URLs to internal services"
+    evidence:
+      - "security/kyverno/"
