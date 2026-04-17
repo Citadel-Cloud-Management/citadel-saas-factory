@@ -1,0 +1,51 @@
+# Citadel Agent Backbone Configuration
+# ======================================
+# This file configures the autonomous agent backbone.
+# Override values via environment variables prefixed with BACKBONE_.
+
+orchestrator:
+  autonomy_level: approval_gate  # assistant, suggest, low_risk, approval_gate, autonomous, closed_loop
+  max_concurrent_tasks: 5
+  default_timeout_seconds: 300
+
+agents:
+  registry_path: .claude/agents/_registry.yaml
+  default_role: worker
+  max_retries: 3
+
+memory:
+  storage_dir: backbone/memory/store
+  working_ttl_seconds: 3600
+  session_ttl_seconds: 86400
+  persist_interval_seconds: 300
+
+tools:
+  default_rate_limit_per_minute: 60
+  default_timeout_seconds: 30
+  sandbox_mode: false
+
+safety:
+  max_tokens_per_run: 500000
+  max_tool_calls_per_run: 100
+  max_cost_usd_per_run: 10.0
+  min_confidence_threshold: 0.7
+  kill_switch_enabled: true
+  require_dual_approval_above_risk: high
+
+observability:
+  log_level: INFO
+  trace_export: stdout  # stdout, otlp, jaeger
+  metrics_port: 9100
+
+governance:
+  default_roles:
+    - observer
+    - worker
+    - operator
+    - supervisor
+    - admin
+  audit_retention_days: 90
+  compliance_frameworks:
+    - soc2
+    - gdpr
+    - iso27001

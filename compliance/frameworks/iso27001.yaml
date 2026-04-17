@@ -1,0 +1,105 @@
+# ISO/IEC 27001 — Information Security Management System
+# =======================================================
+
+framework: iso27001
+version: "2022"
+description: "Information security management system (ISMS) certification"
+
+annex_a_controls:
+  organizational:
+    - id: A5.1
+      name: "Information Security Policies"
+      implementation:
+        - "compliance/policies/security.yaml"
+        - "Annual policy review"
+
+    - id: A5.2
+      name: "Information Security Roles and Responsibilities"
+      implementation:
+        - "RBAC definitions in backbone/governance/rbac.py"
+        - "Agent-level access boundaries"
+
+    - id: A5.7
+      name: "Threat Intelligence"
+      implementation:
+        - "Sigma detection rules"
+        - "Falco runtime monitoring"
+        - "security/sigma/"
+
+  people:
+    - id: A6.1
+      name: "Screening"
+      implementation:
+        - "Background checks for personnel with system access"
+
+    - id: A6.3
+      name: "Information Security Awareness"
+      implementation:
+        - "Security training program"
+        - "Documented in onboarding process"
+
+  physical:
+    - id: A7.1
+      name: "Physical Security Perimeters"
+      implementation:
+        - "Cloud infrastructure — CSP physical security"
+        - "Shared responsibility model"
+
+  technological:
+    - id: A8.1
+      name: "User Endpoint Devices"
+      implementation:
+        - "Device management policy"
+        - "Encryption required on all endpoints"
+
+    - id: A8.5
+      name: "Secure Authentication"
+      implementation:
+        - "Keycloak with MFA"
+        - "JWT validation middleware"
+        - "backend/app/middleware/auth.py"
+
+    - id: A8.9
+      name: "Configuration Management"
+      implementation:
+        - "GitOps — all config in version control"
+        - "Kyverno policy enforcement"
+        - "gitops/"
+
+    - id: A8.12
+      name: "Data Leakage Prevention"
+      implementation:
+        - "PII detection in guardrails"
+        - "Secret scanning in pre-commit"
+        - "backbone/validation/validator.py"
+
+    - id: A8.16
+      name: "Monitoring Activities"
+      implementation:
+        - "Prometheus metrics"
+        - "Grafana dashboards"
+        - "Loki log aggregation"
+        - "monitoring/"
+
+    - id: A8.24
+      name: "Use of Cryptography"
+      implementation:
+        - "TLS 1.2+ for transit"
+        - "AES-256 for rest"
+        - "HashiCorp Vault for key management"
+
+    - id: A8.25
+      name: "Secure Development Life Cycle"
+      implementation:
+        - "TDD mandatory"
+        - "Code review gates"
+        - "SAST/DAST/SCA in CI"
+        - ".claude/rules/security.md"
+
+    - id: A8.28
+      name: "Secure Coding"
+      implementation:
+        - "OWASP Top 10 compliance"
+        - "Semgrep rules"
+        - "Input validation (Pydantic)"
+        - "Parameterized queries (SQLAlchemy)"

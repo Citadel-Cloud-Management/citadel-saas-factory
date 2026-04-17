@@ -1,0 +1,62 @@
+# Information Security Policy
+# ============================
+
+policy:
+  name: "Information Security Policy"
+  version: "1.0"
+  effective_date: "2024-01-01"
+  review_cycle: "Annual"
+  owner: "CISO / CTO"
+
+scope: "All systems, data, personnel, and third parties"
+
+principles:
+  - "Confidentiality: Protect information from unauthorized disclosure"
+  - "Integrity: Ensure accuracy and completeness of information"
+  - "Availability: Ensure authorized users have access when needed"
+
+access_control:
+  authentication:
+    - "MFA required for all accounts with system access"
+    - "Strong password policy (12+ chars, complexity requirements)"
+    - "SSO via Keycloak (OAuth2/OIDC)"
+    - "Session timeout: 30 minutes inactive"
+
+  authorization:
+    - "RBAC with least privilege principle"
+    - "Quarterly access reviews"
+    - "Immediate revocation on termination"
+    - "No shared accounts"
+
+encryption:
+  at_rest: "AES-256"
+  in_transit: "TLS 1.2+"
+  key_management: "HashiCorp Vault"
+  rotation: "Every 90 days"
+
+logging:
+  - "Structured JSON logs with correlation IDs"
+  - "PII redaction in logs"
+  - "90-day retention minimum"
+  - "Immutable audit trail for security events"
+  - "Alerting on anomalous patterns"
+
+vulnerability_management:
+  scanning_frequency: "Every CI/CD pipeline run"
+  tools:
+    - "Semgrep (SAST)"
+    - "Trivy (SCA + container scanning)"
+    - "ZAP (DAST)"
+    - "TruffleHog (secret scanning)"
+  patching_sla:
+    critical: "24 hours"
+    high: "7 days"
+    medium: "30 days"
+    low: "90 days"
+
+change_management:
+  - "All changes via version control (GitOps)"
+  - "PR required with at least 1 approval"
+  - "CI must pass (lint, test, security scan)"
+  - "Conventional commit messages"
+  - "Rollback plan for every deployment"

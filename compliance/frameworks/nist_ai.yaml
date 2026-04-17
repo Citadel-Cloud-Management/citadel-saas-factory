@@ -1,0 +1,83 @@
+# NIST AI RMF + EU AI Act
+# ========================
+# Required when SaaS uses AI/LLM capabilities.
+
+framework: nist_ai_rmf
+version: "1.0"
+description: "AI Risk Management Framework + EU AI Act compliance"
+
+nist_ai_rmf:
+  govern:
+    - id: GOV-1
+      name: "AI Governance Structure"
+      implementation:
+        - "Agent backbone with defined autonomy levels (0-5)"
+        - "RBAC for AI agent access control"
+        - "Kill switch mechanism"
+      evidence:
+        - "backbone/orchestrator/supervisor.py"
+        - "backbone/policies/safety.py"
+
+    - id: GOV-2
+      name: "AI Risk Management Policies"
+      implementation:
+        - "Guardrails middleware on all LLM calls"
+        - "Hallucination threshold (0.85)"
+        - "Budget and token governors"
+
+  map:
+    - id: MAP-1
+      name: "AI System Context"
+      implementation:
+        - "265 agents with defined roles and boundaries"
+        - "Domain-scoped agent permissions"
+        - "Input/output schemas per agent"
+
+  measure:
+    - id: MEASURE-1
+      name: "AI Performance Metrics"
+      implementation:
+        - "Confidence scoring on all outputs"
+        - "Hallucination detection"
+        - "Factuality and relevance scoring"
+      evidence:
+        - "backend/app/middleware/guardrails.py"
+        - "backbone/validation/validator.py"
+
+    - id: MEASURE-2
+      name: "Bias Assessment"
+      implementation:
+        - "Output validation for toxic language"
+        - "PII detection and masking"
+        - "Regular bias audits"
+
+  manage:
+    - id: MANAGE-1
+      name: "AI Risk Response"
+      implementation:
+        - "Automatic retry with grounding (max 3)"
+        - "Fail-closed when guardrails unavailable"
+        - "Immutable audit trail"
+        - "Kill switch for immediate halt"
+      evidence:
+        - "backbone/policies/safety.py"
+
+eu_ai_act:
+  risk_classification: "Limited Risk"
+  note: "Most B2B SaaS AI falls under limited risk unless used in hiring, credit, or law enforcement"
+
+  transparency_requirements:
+    - "Clearly disclose AI-generated content"
+    - "Users informed when interacting with AI"
+    - "Model transparency documentation"
+
+  prohibited_practices:
+    - "No social scoring"
+    - "No real-time biometric identification"
+    - "No subliminal manipulation"
+
+  documentation:
+    - "Technical documentation of AI system"
+    - "Risk assessment"
+    - "Human oversight mechanisms"
+    - "Data governance practices"
