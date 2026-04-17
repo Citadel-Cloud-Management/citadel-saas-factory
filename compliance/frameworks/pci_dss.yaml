@@ -1,0 +1,105 @@
+# PCI DSS — Payment Card Industry Data Security Standard
+# =======================================================
+# Required when processing, storing, or transmitting cardholder data.
+
+framework: pci_dss
+version: "4.0"
+description: "Security standards for payment card processing"
+
+scope_reduction:
+  strategy: "Stripe tokenization — no raw card data touches our systems"
+  saq_type: "SAQ-A (hosted payment page) or SAQ-A-EP (API-based)"
+  note: "Using Stripe Elements / Checkout reduces PCI scope significantly"
+
+requirements:
+  - id: req1
+    name: "Install and Maintain Network Security Controls"
+    implementation:
+      - "VPC/network segmentation via Terraform"
+      - "Kyverno network policies"
+      - "Traefik as reverse proxy with WAF rules"
+    evidence:
+      - "infrastructure/terraform/modules/network/"
+      - "security/kyverno/"
+
+  - id: req2
+    name: "Apply Secure Configurations"
+    implementation:
+      - "CIS Benchmarks for container images"
+      - "Kyverno policies enforce non-root, resource limits"
+      - "Trivy scanning for misconfigurations"
+    evidence:
+      - "security/kyverno/"
+      - "security/trivy/"
+
+  - id: req3
+    name: "Protect Stored Account Data"
+    implementation:
+      - "No raw card data stored — Stripe handles tokenization"
+      - "Only Stripe customer/subscription IDs stored"
+      - "Encryption at rest for all databases"
+
+  - id: req4
+    name: "Protect Data in Transit"
+    implementation:
+      - "TLS 1.2+ on all connections"
+      - "mTLS via Linkerd for internal traffic"
+      - "HSTS headers enforced"
+    evidence:
+      - "backend/app/middleware/security_headers.py"
+
+  - id: req6
+    name: "Develop and Maintain Secure Systems"
+    implementation:
+      - "SAST scanning (Semgrep)"
+      - "SCA scanning (Trivy)"
+      - "DAST scanning (ZAP)"
+      - "Secure SDLC with code review gates"
+    evidence:
+      - ".github/workflows/"
+      - ".claude/rules/security.md"
+
+  - id: req7
+    name: "Restrict Access by Business Need"
+    implementation:
+      - "RBAC via Keycloak"
+      - "Least privilege principle"
+      - "backbone/governance/rbac.py"
+
+  - id: req8
+    name: "Identify Users and Authenticate Access"
+    implementation:
+      - "MFA via Keycloak"
+      - "Strong password policies"
+      - "Session management"
+    evidence:
+      - "backend/app/middleware/auth.py"
+
+  - id: req10
+    name: "Log and Monitor All Access"
+    implementation:
+      - "Structured audit logging"
+      - "Prometheus + Grafana monitoring"
+      - "Falco runtime detection"
+    evidence:
+      - "backend/app/middleware/audit.py"
+      - "monitoring/"
+
+  - id: req11
+    name: "Test Security Regularly"
+    implementation:
+      - "Automated vulnerability scanning in CI"
+      - "Penetration testing (annual)"
+      - "Container image scanning"
+    evidence:
+      - "security/trivy/"
+      - ".github/workflows/"
+
+  - id: req12
+    name: "Support Security with Policies and Programs"
+    implementation:
+      - "Security policy documented"
+      - "Incident response plan"
+      - "Security awareness training"
+    evidence:
+      - "compliance/policies/"

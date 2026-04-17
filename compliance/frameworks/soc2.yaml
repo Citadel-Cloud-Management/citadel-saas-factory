@@ -1,0 +1,171 @@
+# SOC 2 Type I & Type II — Trust Services Criteria
+# =================================================
+# Required for B2B SaaS selling to businesses.
+
+framework: soc2
+version: "2017"
+type: "Type II"
+description: "Service Organization Control 2 — Security, Availability, Processing Integrity, Confidentiality, Privacy"
+
+trust_service_criteria:
+
+  security:
+    description: "Protection against unauthorized access"
+    controls:
+      - id: CC1.1
+        name: "COSO Principle 1 — Integrity and Ethical Values"
+        description: "Demonstrate commitment to integrity and ethical values"
+        implementation:
+          - "Code of conduct documented"
+          - "Security awareness training for all personnel"
+        evidence:
+          - "policies/security.yaml"
+          - "Training completion records"
+        status: required
+
+      - id: CC6.1
+        name: "Logical and Physical Access Controls"
+        description: "Restrict logical access to systems and data"
+        implementation:
+          - "RBAC via Keycloak (backbone/governance/rbac.py)"
+          - "MFA enforced for all admin access"
+          - "Least privilege principle"
+          - "SSH key-only access to infrastructure"
+        evidence:
+          - "Keycloak access policies"
+          - "backbone/governance/rbac.py"
+          - "infrastructure/ansible/playbooks/setup-server.yml"
+        status: implemented
+
+      - id: CC6.3
+        name: "Role-Based Access Control"
+        description: "Manage access based on role assignments"
+        implementation:
+          - "5-level RBAC: observer, worker, operator, supervisor, admin"
+          - "Agent-level access control via backbone RBAC"
+          - "Database RLS for multi-tenant isolation"
+        evidence:
+          - "backbone/governance/rbac.py"
+          - "backend/app/middleware/tenant.py"
+        status: implemented
+
+      - id: CC6.6
+        name: "Encryption in Transit"
+        description: "Protect data in transit via TLS"
+        implementation:
+          - "TLS 1.2+ enforced via Traefik"
+          - "mTLS via Linkerd service mesh"
+          - "HSTS headers via security middleware"
+        evidence:
+          - "backend/app/middleware/security_headers.py"
+          - "gitops/base/"
+        status: implemented
+
+      - id: CC6.7
+        name: "Encryption at Rest"
+        description: "Protect stored data via AES-256"
+        implementation:
+          - "PostgreSQL TDE or volume-level encryption"
+          - "MinIO server-side encryption"
+          - "Vault for secrets at rest"
+        evidence:
+          - "infrastructure/terraform/"
+          - "security/guardrails/"
+        status: implemented
+
+      - id: CC7.2
+        name: "Monitoring and Detection"
+        description: "Detect anomalies and security events"
+        implementation:
+          - "Prometheus + Grafana for metrics"
+          - "Falco for runtime security"
+          - "Sigma rules for SIEM"
+          - "Structured logging via structlog"
+        evidence:
+          - "monitoring/"
+          - "security/falco/"
+          - "security/sigma/"
+        status: implemented
+
+      - id: CC8.1
+        name: "Change Management"
+        description: "Manage changes to infrastructure and software"
+        implementation:
+          - "GitOps via ArgoCD — all changes via git"
+          - "PR-required workflow with CI gates"
+          - "Conventional commits"
+          - "Code review required"
+        evidence:
+          - "gitops/"
+          - ".claude/rules/git.md"
+          - ".claude/rules/review.md"
+        status: implemented
+
+  availability:
+    description: "System availability per SLA commitments"
+    controls:
+      - id: A1.1
+        name: "Capacity Planning"
+        description: "Monitor and manage system capacity"
+        implementation:
+          - "HPA for auto-scaling"
+          - "Resource limits on all containers"
+          - "Capacity planner agent"
+        evidence:
+          - "infrastructure/helm/citadel/templates/hpa.yaml"
+          - "monitoring/prometheus/rules.yml"
+        status: implemented
+
+      - id: A1.2
+        name: "Disaster Recovery"
+        description: "Recovery procedures and backup"
+        implementation:
+          - "Velero for Kubernetes backup"
+          - "PostgreSQL WAL archiving"
+          - "Multi-region capability via Terraform"
+        evidence:
+          - "infrastructure/terraform/"
+          - "docs/runbooks/"
+        status: implemented
+
+  confidentiality:
+    description: "Protect confidential information"
+    controls:
+      - id: C1.1
+        name: "Data Classification"
+        description: "Classify data by sensitivity"
+        implementation:
+          - "PII detection in guardrails"
+          - "Data classification tags in schema"
+        evidence:
+          - "backend/app/middleware/guardrails.py"
+          - "compliance/policies/retention.yaml"
+        status: implemented
+
+  processing_integrity:
+    description: "System processing is complete and accurate"
+    controls:
+      - id: PI1.1
+        name: "Input Validation"
+        description: "Validate all system inputs"
+        implementation:
+          - "Pydantic schema validation"
+          - "backbone/validation/validator.py"
+          - "Input sanitization middleware"
+        evidence:
+          - "backend/app/schemas/"
+          - "backbone/validation/validator.py"
+        status: implemented
+
+  privacy:
+    description: "Personal information handling"
+    controls:
+      - id: P1.1
+        name: "Privacy Notice"
+        description: "Communicate privacy practices"
+        implementation:
+          - "Privacy policy document"
+          - "Cookie consent management"
+        evidence:
+          - "compliance/policies/privacy.yaml"
+        status: required

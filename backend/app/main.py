@@ -4,12 +4,15 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
 from app.middleware.audit import AuditMiddleware
+from app.middleware.auth import AuthMiddleware
+from app.middleware.cors import setup_cors
 from app.middleware.metrics import MetricsMiddleware
+from app.middleware.rate_limit import RateLimitMiddleware
 from app.middleware.request_id import RequestIDMiddleware
 from app.middleware.security_headers import SecurityHeadersMiddleware
+from app.middleware.tenant import TenantMiddleware
 
 
 @asynccontextmanager
@@ -27,18 +30,17 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Middleware stack (executed bottom-to-top)
-app.add_middleware(AuditMiddleware)
-app.add_middleware(MetricsMiddleware)
+# Middleware stack — add_middleware wraps bottom-to-top, so the LAST added
+# is the OUTERMOST (first to see the request).
+# Inbound order: CORS → RequestID → SecurityHeaders → Auth → RateLimit → Tenant → Metrics → Audit
+app.add_middleware(AuditMiddleware)          # innermost: has user/tenant context
+app.add_middleware(MetricsMiddleware)        # records all requests including 429s
+app.add_middleware(TenantMiddleware)         # sets tenant context after auth
+app.add_middleware(RateLimitMiddleware)      # rate limit after auth (per-user possible)
+app.add_middleware(AuthMiddleware)           # auth runs before rate limit
 app.add_middleware(SecurityHeadersMiddleware)
-app.add_middleware(RequestIDMiddleware)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Configure per environment via CORS_ORIGINS
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app.add_middleware(RequestIDMiddleware)      # outermost custom middleware
+setup_cors(app)                             # outermost: handles preflight
 
 
 @app.get("/health")
