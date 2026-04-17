@@ -1,37 +1,70 @@
-# Citadel SaaS Factory
+<div align="center">
 
-**Universal Full-Stack SaaS Production Framework — 265 Autonomous Business Agents**
+# 🏰 Citadel SaaS Factory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![npm](https://img.shields.io/npm/v/@citadelcloud/saas-factory)](https://www.npmjs.com/package/@citadelcloud/saas-factory) [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-blueviolet)](https://claude.ai/code) [![Agents](https://img.shields.io/badge/Agents-265-orange)](.claude/agents/_registry.yaml) [![Free Tools](https://img.shields.io/badge/Tools-$0/month-brightgreen)](#free-toolchain) [![Infrastructure](https://img.shields.io/badge/Infrastructure-Any-blue)](#infrastructure-agnostic) [![Multi-Model](https://img.shields.io/badge/Models-9_Providers-purple)](models/catalog.yaml) [![Cross-IDE](https://img.shields.io/badge/IDEs-8_Supported-blue)](#cross-ide-support)
+### Universal Full-Stack SaaS Production Framework
 
-[Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) | [npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) | [**❤️ Sponsor**](https://cash.app/$KennyOgunlowo) | [citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+**265 Autonomous Business Agents | Multi-Model AI | Cross-IDE Support**
+
+[![npm](https://img.shields.io/npm/v/@citadelcloud/saas-factory?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/@citadelcloud/saas-factory)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Agents](https://img.shields.io/badge/Agents-265-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
+[![Models](https://img.shields.io/badge/Models-9_Providers-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](models/catalog.yaml)
+[![IDEs](https://img.shields.io/badge/IDEs-12_Supported-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#-cross-ide-support)
+[![Cost](https://img.shields.io/badge/Cost-$0/month-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](#-free-toolchain)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
+
+<br/>
+
+[🌐 Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) &nbsp;|&nbsp; [📦 npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) &nbsp;|&nbsp; [**❤️ Sponsor**](https://cash.app/$KennyOgunlowo) &nbsp;|&nbsp; [🏢 citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+
+<br/>
 
 **Clone. Configure. Deploy. Any infrastructure. Zero software cost.**
 
+<br/>
+
+<img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
+<img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js" />
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+<img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis" />
+<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white" alt="K8s" />
+<img src="https://img.shields.io/badge/ArgoCD-EF7B4D?style=flat-square&logo=argo&logoColor=white" alt="ArgoCD" />
+<img src="https://img.shields.io/badge/Keycloak-4D4D4D?style=flat-square&logo=keycloak&logoColor=white" alt="Keycloak" />
+<img src="https://img.shields.io/badge/Vault-FFEC6E?style=flat-square&logo=vault&logoColor=black" alt="Vault" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
+<img src="https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white" alt="Prometheus" />
+<img src="https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white" alt="Grafana" />
+<img src="https://img.shields.io/badge/Traefik-24A1C1?style=flat-square&logo=traefikproxy&logoColor=white" alt="Traefik" />
+
+</div>
+
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
+# Option 1: npm (recommended)
+npx @citadelcloud/saas-factory init my-saas
+cd my-saas
+
+# Option 2: git clone
 git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git
 cd citadel-saas-factory
-cp .env.example .env          # Set your API keys (at minimum one provider)
-./scripts/parallel-bootstrap.sh   # Parallel install: models, MCP, hooks, agents
-./scripts/verify-install.sh       # Green/red verification report
-claude                            # Or open in Cursor, Antigravity, Copilot, Codex, Jules...
+
+# Then:
+cp .env.example .env                  # Set your API keys (at minimum one provider)
+./scripts/parallel-bootstrap.sh       # Parallel install: models, MCP, hooks, agents
+./scripts/verify-install.sh           # Green/red verification report
+claude                                # Or open in Cursor, Antigravity, Copilot, Codex, Jules...
 ```
 
-### Alternative: Just
-
-```bash
-just bootstrap   # Same as parallel-bootstrap.sh
-just status      # System health check
-just eval        # Run model evaluations
-```
+> [!TIP]
+> You can also use `just bootstrap` if you have [just](https://github.com/casey/just) installed.
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -40,12 +73,12 @@ just eval        # Run model evaluations
 └──────────────────────────┬──────────────────────────────────────┘
                            │
 ┌──────────────────────────▼──────────────────────────────────────┐
-│                     REVERSE PROXY                               │
+│                  🌐 REVERSE PROXY                               │
 │                  Traefik (TLS, Routing)                          │
 └──────────┬───────────────┬───────────────┬──────────────────────┘
            │               │               │
 ┌──────────▼───┐  ┌────────▼───┐  ┌────────▼──────────┐
-│   FRONTEND   │  │  BACKEND   │  │    AUTH GATEWAY    │
+│  🖥️ FRONTEND │  │ ⚙️ BACKEND │  │   🔐 AUTH GATEWAY  │
 │  Next.js 14  │  │  FastAPI   │  │   Keycloak 24      │
 │  TypeScript  │  │ Python 3.12│  │ OAuth2/RBAC/MFA    │
 └──────────────┘  └─────┬──────┘  └────────────────────┘
@@ -53,28 +86,28 @@ just eval        # Run model evaluations
         ┌───────────────┼───────────────┐
         │               │               │
 ┌───────▼───┐  ┌────────▼───┐  ┌───────▼────────┐
-│ DATABASE  │  │   CACHE    │  │   MESSAGING    │
-│ Postgres  │  │  Redis 7   │  │   RabbitMQ     │
-│    16     │  │            │  │                │
+│ 🗄️ DATABASE│  │ 💾 CACHE   │  │ 📨 MESSAGING   │
+│ Postgres 16│  │  Redis 7   │  │   RabbitMQ     │
 └───────────┘  └────────────┘  └────────────────┘
         │
 ┌───────▼───────────────────────────────────────────────┐
-│                    STORAGE & SECRETS                    │
+│              📦 STORAGE  &  🔑 SECRETS                 │
 │          MinIO (S3-compatible)  |  HashiCorp Vault      │
 └───────────────────────────────────────────────────────┘
         │
 ┌───────▼───────────────────────────────────────────────┐
-│                   ORCHESTRATION                        │
+│                 ☸️ ORCHESTRATION                        │
 │     K3s + ArgoCD (GitOps) | Linkerd (mTLS mesh)       │
 └───────────────────────────────────────────────────────┘
         │
 ┌───────▼───────────────────────────────────────────────┐
-│                    OBSERVABILITY                       │
+│                 📊 OBSERVABILITY                       │
 │       Prometheus | Grafana | Loki | Tempo | Falco     │
 └───────────────────────────────────────────────────────┘
 ```
 
-### Tech Stack
+<details>
+<summary><b>📋 Full Tech Stack Table</b></summary>
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
@@ -91,194 +124,105 @@ just eval        # Run model evaluations
 | Secrets | HashiCorp Vault | Secret management, rotation, encryption |
 | Monitoring | Prometheus + Grafana + Loki | Metrics, dashboards, log aggregation |
 
+</details>
+
 ---
 
-## Multi-Model Support
+## 🤖 Multi-Model Support
 
-Agents reference model **tiers**, not specific models. Swap providers by changing one env var.
+> Agents reference model **tiers**, not specific models. Swap providers by changing one env var.
 
 | Tier | Primary | Fallbacks | Use Case |
 |------|---------|-----------|----------|
-| `reasoning_deep` | Claude Opus 4.6 | Gemini 3 Pro, DeepSeek R1, GPT-5 | Architecture, critical decisions |
-| `reasoning_fast` | Claude Sonnet 4.6 | Gemini 3 Pro, GPT-5, DeepSeek V3.1 | Default coding tasks |
-| `cheap_fast` | Claude Haiku 4.5 | Gemini 3 Flash, GPT-5 Mini | Completion, boilerplate |
-| `long_context` | Gemini 3.1 Pro | Gemini 3 Pro, Claude Opus, GPT-4.1 | Full codebase analysis (2M tokens) |
-| `code_specialist` | Codestral 25 | Qwen 2.5 Coder, DeepSeek V3.1 | Code generation and review |
-| `vision` | Claude Opus 4.6 | Gemini 3 Pro, GPT-5 | Screenshot/design to code |
-| `local_only` | Llama 3.3 70B | DeepSeek V3.1, Qwen 2.5 Coder | Air-gapped, zero cost |
+| 🧠 `reasoning_deep` | Claude Opus 4.6 | Gemini 3 Pro, DeepSeek R1, GPT-5 | Architecture, critical decisions |
+| ⚡ `reasoning_fast` | Claude Sonnet 4.6 | Gemini 3 Pro, GPT-5, DeepSeek V3.1 | Default coding tasks |
+| 💨 `cheap_fast` | Claude Haiku 4.5 | Gemini 3 Flash, GPT-5 Mini | Completion, boilerplate |
+| 📚 `long_context` | Gemini 3.1 Pro | Gemini 3 Pro, Claude Opus, GPT-4.1 | Full codebase analysis (2M tokens) |
+| 🔧 `code_specialist` | Codestral 25 | Qwen 2.5 Coder, DeepSeek V3.1 | Code generation and review |
+| 👁️ `vision` | Claude Opus 4.6 | Gemini 3 Pro, GPT-5 | Screenshot/design to code |
+| 🏠 `local_only` | Llama 3.3 70B | DeepSeek V3.1, Qwen 2.5 Coder | Air-gapped, zero cost |
 
-**9 providers**: Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Cohere, Meta, Alibaba
-**8 gateways**: OpenRouter, LiteLLM, Groq, Together, Fireworks, Cerebras, Bedrock, Vertex
-**5 local runtimes**: Ollama, vLLM, llama.cpp, LocalAI, LM Studio
+<div align="center">
 
-See [`models/catalog.yaml`](models/catalog.yaml), [`models/routing.yaml`](models/routing.yaml), [`models/embeddings.yaml`](models/embeddings.yaml).
+**9 providers** &nbsp;·&nbsp; **8 gateways** &nbsp;·&nbsp; **5 local runtimes**
+
+<img src="https://img.shields.io/badge/Anthropic-D97757?style=flat-square&logo=anthropic&logoColor=white" />
+<img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/Google-4285F4?style=flat-square&logo=google&logoColor=white" />
+<img src="https://img.shields.io/badge/xAI-000000?style=flat-square&logo=x&logoColor=white" />
+<img src="https://img.shields.io/badge/DeepSeek-4D6BFF?style=flat-square" />
+<img src="https://img.shields.io/badge/Mistral-FF7000?style=flat-square" />
+<img src="https://img.shields.io/badge/Cohere-39594D?style=flat-square" />
+<img src="https://img.shields.io/badge/Meta-0467DF?style=flat-square&logo=meta&logoColor=white" />
+<img src="https://img.shields.io/badge/Ollama-000000?style=flat-square" />
+
+</div>
+
+See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](models/routing.yaml) · [`models/embeddings.yaml`](models/embeddings.yaml)
 
 ---
 
-## Cross-IDE Support
+## 🔌 Cross-IDE Support
 
-This repo is recognized as a first-class project by every major AI coding tool:
+> This repo is recognized as a first-class project by every major AI coding tool.
 
 | Tool | Config File | Status |
 |------|-------------|--------|
-| Claude Code | `.claude/CLAUDE.md` | Native |
-| Cursor | `.cursor/rules/`, `AGENT.md` | Native |
-| GitHub Copilot | `.github/copilot-instructions.md` | Native |
-| OpenAI Codex | `.codex/config.toml`, `AGENTS.md` | Native |
-| Google Jules | `.jules/config.yml`, `GEMINI.md` | Native |
-| Antigravity | `.antigravity/rules.md` | Native |
-| Windsurf/Codeium | `.windsurf/rules/` | Native |
-| Continue.dev | `.continue/config.json` | Native |
-| Devin | `.devin/config.yml` | Ready |
-| CodeRabbit | `.coderabbit.yml` | Ready |
-| Factory AI | `.factory/droids.yml` | Ready |
-| OpenHands | `openhands/config.toml` | Ready |
+| <img src="https://img.shields.io/badge/Claude_Code-D97757?style=flat-square&logo=anthropic&logoColor=white" /> | `.claude/CLAUDE.md` | ✅ Native |
+| <img src="https://img.shields.io/badge/Cursor-000000?style=flat-square&logo=cursor&logoColor=white" /> | `.cursor/rules/`, `AGENT.md` | ✅ Native |
+| <img src="https://img.shields.io/badge/GitHub_Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white" /> | `.github/copilot-instructions.md` | ✅ Native |
+| <img src="https://img.shields.io/badge/OpenAI_Codex-412991?style=flat-square&logo=openai&logoColor=white" /> | `.codex/config.toml`, `AGENTS.md` | ✅ Native |
+| <img src="https://img.shields.io/badge/Google_Jules-4285F4?style=flat-square&logo=google&logoColor=white" /> | `.jules/config.yml`, `GEMINI.md` | ✅ Native |
+| <img src="https://img.shields.io/badge/Antigravity-8B5CF6?style=flat-square" /> | `.antigravity/rules.md` | ✅ Native |
+| <img src="https://img.shields.io/badge/Windsurf-06B6D4?style=flat-square" /> | `.windsurf/rules/` | ✅ Native |
+| <img src="https://img.shields.io/badge/Continue.dev-000000?style=flat-square" /> | `.continue/config.json` | ✅ Native |
+| <img src="https://img.shields.io/badge/Devin-FF6B35?style=flat-square" /> | `.devin/config.yml` | 🟢 Ready |
+| <img src="https://img.shields.io/badge/CodeRabbit-FF6B35?style=flat-square" /> | `.coderabbit.yml` | 🟢 Ready |
+| <img src="https://img.shields.io/badge/Factory_AI-000000?style=flat-square" /> | `.factory/droids.yml` | 🟢 Ready |
+| <img src="https://img.shields.io/badge/OpenHands-000000?style=flat-square" /> | `openhands/config.toml` | 🟢 Ready |
 
 ---
 
-## Infrastructure Agnostic
+## 🌍 Infrastructure Agnostic
 
-Runs on any Linux server with SSH and Docker. No cloud vendor lock-in.
+> Runs on **any Linux server** with SSH and Docker. No cloud vendor lock-in.
 
-- Any VPS provider (Hetzner, DigitalOcean, Linode, Vultr)
-- Bare metal servers
-- On-premises infrastructure
-- Edge deployments
-- Home lab
-
----
-
-## `.claude/` Directory Structure
-
-```
-.claude/
-├── CLAUDE.md                          # Master intelligence file
-├── settings.json                      # Claude Code configuration
-├── memory/
-│   ├── MEMORY.md                      # Auto-memory (persists across sessions)
-│   ├── project_citadel_saas_factory.md
-│   └── adrs/                          # Architecture Decision Records
-├── agents/
-│   ├── _registry.yaml                 # Master agent registry (265 agents)
-│   ├── executive/                     # 12 executive & strategy agents
-│   ├── marketing/                     # 22 marketing & growth agents
-│   ├── sales/                         # 18 sales & revenue agents
-│   ├── customer-success/              # 15 customer success agents
-│   ├── design/                        # 20 product & UI/UX agents
-│   ├── engineering/                   # 25 engineering agents
-│   ├── frontend/                      # 18 frontend agents
-│   ├── devops/                        # 28 DevOps agents
-│   ├── security/                      # 22 security agents
-│   ├── data/                          # 18 data & analytics agents
-│   ├── qa/                            # 22 QA & testing agents
-│   ├── hr/                            # 12 HR & people agents
-│   ├── finance/                       # 15 finance & billing agents
-│   ├── legal/                         # 8 legal & governance agents
-│   └── content/                       # 10 content & comms agents
-├── hooks/
-│   ├── pre-commit.sh                  # Secret scanning, lint, format
-│   ├── post-commit.sh                 # Coverage check, changelog update
-│   ├── pre-push.sh                    # Security scan, test run
-│   ├── pre-tool-use.sh                # Parameter validation
-│   ├── post-tool-use.sh               # Auto-format, checks
-│   ├── pre-deploy.sh                  # Image scan, smoke test
-│   ├── post-deploy.sh                 # Health check, notification
-│   ├── pre-rollback.sh                # State snapshot
-│   ├── post-rollback.sh               # Verification, alerting
-│   └── stop.sh                        # Final verification on session end
-├── rules/
-│   ├── accessibility.md               # WCAG 2.1 AA compliance
-│   ├── api-design.md                  # RESTful conventions, OpenAPI
-│   ├── architecture.md                # Clean architecture, DDD
-│   ├── code-quality.md                # Immutability, small files
-│   ├── database.md                    # Migrations, RLS, indexes
-│   ├── dependencies.md                # Lock files, audits
-│   ├── devops.md                      # GitOps, immutable infra
-│   ├── documentation.md               # API docs, ADRs
-│   ├── error-handling.md              # Structured errors, retry
-│   ├── frontend.md                    # Components, a11y, perf
-│   ├── git.md                         # Conventional commits
-│   ├── monitoring.md                  # Structured logging, RED
-│   ├── naming.md                      # snake_case, camelCase
-│   ├── performance.md                 # Caching, lazy loading
-│   ├── review.md                      # PR process, checklists
-│   ├── secrets.md                     # Vault, rotation, scanning
-│   ├── security.md                    # Input validation, XSS, CSRF
-│   └── testing.md                     # TDD, 80% coverage
-├── commands/
-│   ├── deploy.md                      # Deploy to environment
-│   ├── rollback.md                    # Emergency rollback
-│   ├── scaffold.md                    # Code generation
-│   ├── audit.md                       # Security & quality audit
-│   ├── status.md                      # System & agent status
-│   ├── migrate.md                     # Database migrations
-│   ├── seed.md                        # Seed data
-│   ├── test.md                        # Run test suites
-│   ├── lint.md                        # Run linters
-│   ├── format.md                      # Run formatters
-│   ├── build.md                       # Build artifacts
-│   ├── release.md                     # Create release
-│   ├── backup.md                      # Database backup
-│   ├── restore.md                     # Database restore
-│   ├── monitor.md                     # View dashboards
-│   ├── logs.md                        # View logs
-│   ├── secrets.md                     # Manage secrets
-│   ├── certs.md                       # Manage TLS certs
-│   ├── scale.md                       # Scale services
-│   └── perf.md                        # Performance profiling
-├── templates/
-│   ├── api-endpoint.py                # FastAPI endpoint template
-│   ├── model.py                       # SQLAlchemy model template
-│   ├── schema.py                      # Pydantic schema template
-│   ├── service.py                     # Service layer template
-│   ├── repository.py                  # Repository template
-│   ├── migration.py                   # Alembic migration template
-│   ├── test-unit.py                   # Unit test template
-│   ├── test-integration.py            # Integration test template
-│   ├── test-e2e.py                    # E2E test template
-│   ├── component.tsx                  # React component template
-│   ├── page.tsx                       # Next.js page template
-│   ├── form.tsx                       # Form component template
-│   ├── table.tsx                      # Data table template
-│   ├── hook.ts                        # Custom hook template
-│   ├── store.ts                       # Zustand store template
-│   ├── dockerfile                     # Multi-stage Dockerfile
-│   ├── helm-chart/                    # Helm chart template
-│   ├── github-action.yml              # CI/CD workflow template
-│   ├── kyverno-policy.yaml            # Admission policy template
-│   └── grafana-dashboard.json         # Dashboard template
-├── skills/
-│   ├── api-patterns.md                # API design patterns
-│   ├── auth-patterns.md               # Authentication flows
-│   ├── cache-patterns.md              # Caching strategies
-│   ├── db-patterns.md                 # Database patterns
-│   ├── event-patterns.md              # Event-driven architecture
-│   ├── frontend-patterns.md           # React/Next.js patterns
-│   ├── k8s-patterns.md               # Kubernetes patterns
-│   ├── security-patterns.md           # Security patterns
-│   ├── testing-patterns.md            # Testing strategies
-│   ├── monitoring-patterns.md         # Observability patterns
-│   ├── gitops-patterns.md             # GitOps workflows
-│   ├── multi-tenant-patterns.md       # Multi-tenancy patterns
-│   ├── migration-patterns.md          # Zero-downtime migrations
-│   ├── performance-patterns.md        # Performance optimization
-│   └── deployment-patterns.md         # Deployment strategies
-└── mcp/
-    ├── github.json                    # GitHub MCP server config
-    ├── filesystem.json                # Filesystem MCP server config
-    ├── postgres.json                  # PostgreSQL MCP server config
-    ├── docker.json                    # Docker MCP server config
-    ├── kubernetes.json                # Kubernetes MCP server config
-    ├── ruflo.json                     # Ruflo swarm MCP server config
-    ├── graphify.json                  # Graphify knowledge graph config
-    └── context7.json                  # Context7 docs MCP server config
-```
+- ☁️ Any VPS provider (Hetzner, DigitalOcean, Linode, Vultr)
+- 🖥️ Bare metal servers
+- 🏢 On-premises infrastructure
+- 📡 Edge deployments
+- 🏠 Home lab
 
 ---
 
-## All 265 Agents — 15 Domains
+## 🤖 All 265 Agents — 15 Domains
 
-### Domain 1: Executive & Strategy (12 Agents)
+<div align="center">
+
+| Domain | Agents | Highlights |
+|--------|--------|------------|
+| 👔 **Executive & Strategy** | 12 | CEO Strategist, CTO Technology, OKR Tracker |
+| 📈 **Marketing & Growth** | 22 | SEO, Content, Social, Email, PPC, PR |
+| 💰 **Sales & Revenue** | 18 | Lead Qualifier, Proposals, CRM, Forecast |
+| 🎯 **Customer Success** | 15 | Onboarding, Tickets, Churn Predictor, NPS |
+| 🎨 **Product & UI/UX** | 20 | UI Designer, Wireframes, Design System, A11y |
+| ⚙️ **Engineering** | 25 | API, Models, Auth, Cache, Search, WebSocket |
+| 🖥️ **Frontend** | 18 | Components, Pages, Forms, Charts, State, PWA |
+| 🚀 **DevOps** | 28 | CI/CD, GitOps, K8s, Helm, Terraform, Canary |
+| 🔒 **Security** | 22 | SAST, DAST, Secrets, Falco, Kyverno, Pentest |
+| 📊 **Data & Analytics** | 18 | Schema, ETL, Dashboards, Forecasting, Vector |
+| 🧪 **QA & Testing** | 22 | Unit, E2E, Load, Chaos, Mutation, Visual |
+| 👥 **HR & People** | 12 | Jobs, Interviews, Onboarding, Performance |
+| 💳 **Finance & Billing** | 15 | Stripe, Subscriptions, Tax, Revenue, Runway |
+| ⚖️ **Legal & Governance** | 8 | ToS, DPA, GDPR, SOC2, SLA |
+| ✍️ **Content & Comms** | 10 | Tech Writing, Docs, Changelogs, Case Studies |
+
+</div>
+
+<details>
+<summary><b>📋 View all 265 agents with IDs and descriptions</b></summary>
+
+### 👔 Domain 1: Executive & Strategy (12 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -295,7 +239,7 @@ Runs on any Linux server with SSH and Docker. No cloud vendor lock-in.
 | 11 | `exec-competitive-intel` | Competitive Intel | Competitor monitoring, market trends, competitive battle cards |
 | 12 | `exec-decision-logger` | Decision Logger | Strategic decision recording with context, rationale, and outcomes |
 
-### Domain 2: Marketing & Growth (22 Agents)
+### 📈 Domain 2: Marketing & Growth (22 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -322,7 +266,7 @@ Runs on any Linux server with SSH and Docker. No cloud vendor lock-in.
 | 21 | `mktg-persona` | Persona Builder | ICP definition, buyer personas, jobs-to-be-done analysis |
 | 22 | `mktg-retention` | Retention Agent | Churn signals, re-engagement campaigns, NPS follow-up |
 
-### Domain 3: Sales & Revenue (18 Agents)
+### 💰 Domain 3: Sales & Revenue (18 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -345,444 +289,93 @@ Runs on any Linux server with SSH and Docker. No cloud vendor lock-in.
 | 17 | `sales-pipeline-cleaner` | Pipeline Cleaner | Stale deal ID, missing data alerts, stage-appropriate actions |
 | 18 | `sales-commission` | Commission Calculator | Commission calculation, plan modeling, quota attainment |
 
-### Domain 4: Customer Success (15 Agents)
+### 🎯 Domain 4–15: See [`.claude/agents/_registry.yaml`](.claude/agents/_registry.yaml) for the complete registry
 
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `cs-onboarding` | Onboarding Agent | Welcome sequences, setup guides, milestone tracking, TTV |
-| 2 | `cs-ticket-router` | Ticket Router | Auto-categorize, prioritize, route support tickets |
-| 3 | `cs-response-drafter` | Response Drafter | Draft support responses from knowledge base, tone consistency |
-| 4 | `cs-escalation` | Escalation Agent | Escalation signals, senior routing, escalation summaries |
-| 5 | `cs-churn-predictor` | Churn Predictor | Usage analysis, engagement scoring, risk flagging, save offers |
-| 6 | `cs-health-scorer` | Health Scorer | Account health scoring (usage, tickets, NPS, adoption) |
-| 7 | `cs-nps` | NPS Collector | Survey distribution, response collection, follow-up automation |
-| 8 | `cs-knowledge` | Knowledge Builder | FAQ generation, help articles, KB maintenance, search |
-| 9 | `cs-chatbot` | Chatbot Trainer | Support chatbot training, intent refinement, accuracy |
-| 10 | `cs-feedback` | Feedback Analyzer | Categorize feedback, trends, route feature requests |
-| 11 | `cs-renewal` | Renewal Manager | Renewal tracking, pricing prep, contract generation |
-| 12 | `cs-qbr` | QBR Generator | QBR deck generation with usage data and ROI metrics |
-| 13 | `cs-adoption` | Adoption Tracker | Feature adoption, usage depth, enablement gaps |
-| 14 | `cs-sla` | SLA Monitor | SLA compliance, breach alerts, response time monitoring |
-| 15 | `cs-voc` | Voice of Customer | Aggregate feedback across channels into actionable insights |
-
-### Domain 5: Product & UI/UX Design (20 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `design-ui` | UI Designer | Component design, layout, spacing/typography, visual hierarchy |
-| 2 | `design-ux-research` | UX Researcher | Interview scripts, surveys, usability tests, persona refinement |
-| 3 | `design-wireframe` | Wireframer | Lo-fi wireframes, user flows, information architecture |
-| 4 | `design-prototype` | Prototype Builder | Interactive prototype specs, click-through flows |
-| 5 | `design-system` | Design System | Token management, component library, pattern docs |
-| 6 | `design-a11y` | Accessibility | WCAG 2.1 AA audit, contrast, screen reader, ARIA |
-| 7 | `design-responsive` | Responsive Design | Breakpoints, mobile-first, touch targets, viewport |
-| 8 | `design-color` | Color Palette | Color theory, palette generation, dark/light theming |
-| 9 | `design-typography` | Typography | Font pairing, type scale, readability, web font perf |
-| 10 | `design-icon` | Icon System | Icon library, SVG optimization, consistent metaphors |
-| 11 | `design-animation` | Animation | Micro-interactions, transitions, loading, skeletons |
-| 12 | `design-illustration` | Illustration | Brand illustration style, spot illustrations, empty states |
-| 13 | `design-data-viz` | Data Visualization | Chart selection, dashboard layout, data storytelling |
-| 14 | `design-user-flow` | User Flow | Task flow mapping, happy path, error states, edge cases |
-| 15 | `design-heuristic` | Heuristic Eval | Nielsen heuristics, usability scoring, recommendations |
-| 16 | `design-onboarding` | Onboarding UX | First-run experience, progressive disclosure, tooltips |
-| 17 | `design-form` | Form UX | Form optimization, validation, multi-step, autofill |
-| 18 | `design-search` | Search UX | Search interface, filters, autocomplete, results display |
-| 19 | `design-notification` | Notification UX | Notification design, frequency, channels, preferences |
-| 20 | `design-mobile` | Mobile UX | Native patterns, gestures, thumb-zone, offline states |
-
-### Domain 6: Engineering (25 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `eng-api-designer` | API Designer | REST/GraphQL design, OpenAPI spec, versioning |
-| 2 | `eng-model-builder` | Model Builder | ORM models, relationships, constraints, indexes |
-| 3 | `eng-schema-builder` | Schema Builder | Pydantic schemas, validation, serialization |
-| 4 | `eng-service-builder` | Service Builder | Business logic, service layer patterns, DI |
-| 5 | `eng-repo-builder` | Repository Builder | Data access, query builders, pagination, filtering |
-| 6 | `eng-migration-gen` | Migration Generator | Schema migrations, safe rollback, zero-downtime |
-| 7 | `eng-middleware` | Middleware Builder | Auth, rate limit, CORS, logging, metrics, headers |
-| 8 | `eng-event-handler` | Event Handler | Event-driven, message bus, async, saga patterns |
-| 9 | `eng-worker-builder` | Worker Builder | Background jobs, retry logic, DLQ, scheduling |
-| 10 | `eng-auth-builder` | Auth Builder | JWT, OAuth2, RBAC, permission guards |
-| 11 | `eng-cache-builder` | Cache Builder | Cache strategies, invalidation, TTL management |
-| 12 | `eng-search-builder` | Search Builder | Full-text, vector (pgvector), hybrid ranking |
-| 13 | `eng-webhook` | Webhook Builder | Dispatch, retry, signature verification, logging |
-| 14 | `eng-email` | Email Builder | Transactional email, templates, queue, tracking |
-| 15 | `eng-file-handler` | File Handler | Upload validation, scanning, storage, signed URLs |
-| 16 | `eng-pagination` | Pagination Agent | Cursor/offset pagination, ordering, optimization |
-| 17 | `eng-rate-limiter` | Rate Limiter | Per-endpoint/user limits, sliding window, token bucket |
-| 18 | `eng-health` | Health Builder | Liveness, readiness, startup probes, dep checks |
-| 19 | `eng-websocket` | WebSocket Builder | Real-time, rooms, broadcast, heartbeat, reconnect |
-| 20 | `eng-graphql` | GraphQL Builder | Schema, resolvers, dataloaders, subscriptions |
-| 21 | `eng-multi-tenant` | Multi-Tenant | RLS, tenant middleware, data isolation |
-| 22 | `eng-error-handler` | Error Handler | Structured errors, exception hierarchy, codes |
-| 23 | `eng-logging` | Logging Agent | JSON logging, correlation IDs, PII redaction |
-| 24 | `eng-config` | Config Manager | Env config, feature flags, dynamic config |
-| 25 | `eng-code-reviewer` | Code Reviewer | PR review, patterns, complexity, security checks |
-
-### Domain 7: Frontend (18 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `fe-component` | Component Builder | React scaffolding, props typing, composition |
-| 2 | `fe-page` | Page Builder | Next.js pages, SSR/SSG, metadata, routing |
-| 3 | `fe-layout` | Layout Builder | Navigation, sidebar, responsive shell |
-| 4 | `fe-form` | Form Builder | RHF and Zod, multi-step, validation, errors |
-| 5 | `fe-table` | Table Builder | Data tables, sorting, filtering, pagination, export |
-| 6 | `fe-chart` | Chart Builder | Recharts/D3 visualizations, real-time updates |
-| 7 | `fe-auth` | Auth Flow | Login, signup, reset, MFA, session management |
-| 8 | `fe-state` | State Manager | Zustand stores, selectors, middleware |
-| 9 | `fe-api-client` | API Client | TanStack Query hooks, errors, loading, optimistic |
-| 10 | `fe-a11y` | A11y Auditor | axe-core, ARIA, keyboard nav, focus management |
-| 11 | `fe-responsive` | Responsive | Mobile-first, breakpoints, touch, viewports |
-| 12 | `fe-i18n` | i18n Agent | Translations, locale, RTL, date/number format |
-| 13 | `fe-seo` | SEO Agent | Meta tags, structured data, sitemap, Open Graph |
-| 14 | `fe-performance` | Performance | Bundle analysis, code splitting, lazy load, CWV |
-| 15 | `fe-testing` | Frontend Testing | Vitest, Playwright E2E, visual regression |
-| 16 | `fe-animation` | Animation Builder | CSS transitions, Framer Motion, scroll animations |
-| 17 | `fe-error-boundary` | Error Boundary | Error boundaries, fallbacks, reporting, recovery |
-| 18 | `fe-pwa` | PWA Builder | Service worker, offline, push notifications |
-
-### Domain 8: DevOps (28 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `devops-ci` | CI Orchestrator | GitHub Actions pipeline, caching, stages |
-| 2 | `devops-cd` | CD Deployer | Deployment execution, promotion, health |
-| 3 | `devops-gitops` | GitOps Sync | ArgoCD management, sync policy, drift |
-| 4 | `devops-image-build` | Image Builder | Multi-stage Docker, layer optimization, hardening |
-| 5 | `devops-image-scan` | Image Scanner | Trivy/Grype CVE scanning, base image updates |
-| 6 | `devops-image-sign` | Image Signer | Cosign signing, SBOM generation (Syft) |
-| 7 | `devops-helm` | Helm Manager | Chart creation, values, release lifecycle |
-| 8 | `devops-terraform` | Terraform Ops | Plan, apply, state, modules, drift detection |
-| 9 | `devops-ansible` | Ansible Runner | Playbooks, roles, inventory management |
-| 10 | `devops-k8s` | K8s Manager | Deployments, services, configmaps, secrets |
-| 11 | `devops-scaler` | K8s Scaler | HPA tuning, VPA, cluster autoscaler |
-| 12 | `devops-debugger` | K8s Debugger | Pod diagnostics, log analysis, crash analysis |
-| 13 | `devops-canary` | Canary Manager | Progressive rollout 10/30/60/100 percent |
-| 14 | `devops-rollback` | Rollback Agent | Emergency rollback, version pinning, state restore |
-| 15 | `devops-release` | Release Manager | Semantic versioning, changelog, tags |
-| 16 | `devops-cert` | Cert Manager | TLS lifecycle, auto-renewal, ACME |
-| 17 | `devops-dns` | DNS Manager | DNS records, health checks, failover |
-| 18 | `devops-backup` | Backup Agent | DB backup, object storage backup, retention |
-| 19 | `devops-restore` | Restore Agent | Backup validation, restore, DR testing |
-| 20 | `devops-monitoring` | Monitoring Setup | Prometheus, Grafana, Loki, Tempo deployment |
-| 21 | `devops-alerts` | Alert Builder | Alert rules, routing, escalation, silencing |
-| 22 | `devops-logs` | Log Manager | Promtail/Loki pipeline, retention, format |
-| 23 | `devops-mesh` | Service Mesh | Linkerd deployment, mTLS, traffic policies |
-| 24 | `devops-ingress` | Ingress Manager | Traefik/NGINX, routing, rate limits, headers |
-| 25 | `devops-storage` | Storage Manager | PV/PVC, MinIO, backup storage |
-| 26 | `devops-queue` | Queue Manager | RabbitMQ/NATS, depth monitoring, DLQ |
-| 27 | `devops-cost` | Cost Analyzer | Utilization analysis, rightsizing recommendations |
-| 28 | `devops-capacity` | Capacity Planner | Growth forecasting, resource planning |
-
-### Domain 9: Security (22 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `sec-sast` | SAST Scanner | Semgrep static analysis, vulnerability finding |
-| 2 | `sec-sca` | SCA Scanner | Trivy dependency scanning, CVE, license |
-| 3 | `sec-dast` | DAST Scanner | OWASP ZAP dynamic testing, API fuzzing |
-| 4 | `sec-secret` | Secret Scanner | TruffleHog detection, pre-commit, prevention |
-| 5 | `sec-container` | Container Scanner | Image CVE scanning, base image audit |
-| 6 | `sec-iac` | IaC Scanner | Checkov Terraform/K8s scanning |
-| 7 | `sec-runtime` | Runtime Monitor | Falco anomaly detection, container escapes |
-| 8 | `sec-policy` | Policy Enforcer | Kyverno admission, OPA/Rego rules |
-| 9 | `sec-incident` | Incident Responder | IR automation, evidence, containment |
-| 10 | `sec-vuln` | Vuln Prioritizer | CVSS, exploitability, risk prioritization |
-| 11 | `sec-patch` | Patch Manager | Security patching, dep updates, rollout |
-| 12 | `sec-access` | Access Reviewer | IAM audit, permission review, least privilege |
-| 13 | `sec-rbac` | RBAC Manager | Role definitions, permissions, grants |
-| 14 | `sec-encryption` | Encryption Agent | At-rest/transit encryption, key rotation |
-| 15 | `sec-audit` | Audit Logger | Immutable audit log, compliance reporting |
-| 16 | `sec-compliance` | Compliance Checker | SOC2, HIPAA, GDPR, PCI, ISO 27001 |
-| 17 | `sec-pentest` | Pentest Runner | Automated pentesting, Nuclei, validation |
-| 18 | `sec-threat` | Threat Hunter | Proactive detection, IOC, SIGMA rules |
-| 19 | `sec-network` | Network Segmenter | NetworkPolicies, micro-segmentation, zero-trust |
-| 20 | `sec-waf` | WAF Manager | WAF rules, DDoS protection, bot detection |
-| 21 | `sec-pii` | PII Detector | PII in logs/data, classification, masking |
-| 22 | `sec-supply-chain` | Supply Chain | SBOM analysis, provenance, Cosign verification |
-
-### Domain 10: Data & Analytics (18 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `data-schema` | Schema Designer | DB schema, normalization, relationships |
-| 2 | `data-migration` | Migration Builder | Safe DDL, zero-downtime, rollback |
-| 3 | `data-index` | Index Optimizer | Query plans, index recs, bloat detection |
-| 4 | `data-query` | Query Optimizer | Slow queries, N+1, rewriting |
-| 5 | `data-rls` | RLS Manager | Row-level security, tenant isolation |
-| 6 | `data-backup` | Backup Validator | Integrity checks, restore testing |
-| 7 | `data-etl` | ETL Builder | Data pipelines, transformations |
-| 8 | `data-analytics` | Analytics Builder | Business metrics, KPI calculation |
-| 9 | `data-vector` | Vector Manager | pgvector embeddings, similarity search |
-| 10 | `data-warehouse` | Warehouse Builder | Star schema, materialized views |
-| 11 | `data-report` | Report Generator | Automated reports, PDF, scheduling |
-| 12 | `data-dashboard` | Dashboard Builder | Grafana/Metabase dashboards, drill-down |
-| 13 | `data-events` | Event Tracker | Event schema, tracking, funnels |
-| 14 | `data-cohort` | Cohort Analyzer | Retention curves, behavioral segmentation |
-| 15 | `data-ab` | A/B Analyzer | Statistical significance, sample size |
-| 16 | `data-forecast` | Forecast Model | Time series, trends, seasonality |
-| 17 | `data-anomaly` | Anomaly Detector | Metric anomalies, baseline deviation |
-| 18 | `data-privacy` | Privacy Agent | Anonymization, retention, GDPR |
-
-### Domain 11: QA & Testing (22 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `qa-unit` | Unit Test Writer | Unit tests, assertions, edge cases, mocks |
-| 2 | `qa-integration` | Integration Writer | DB/cache integration, fixtures |
-| 3 | `qa-e2e` | E2E Writer | Playwright/Cypress E2E, user flows |
-| 4 | `qa-api` | API Tester | REST/GraphQL testing, contract validation |
-| 5 | `qa-load` | Load Tester | k6/Locust load tests, breakpoints |
-| 6 | `qa-performance` | Perf Tester | Regression detection, benchmarks |
-| 7 | `qa-security` | Security Tester | Auth bypass, injection, fuzzing |
-| 8 | `qa-a11y` | A11y Tester | WCAG compliance, screen reader |
-| 9 | `qa-visual` | Visual Regression | Screenshot diff, CSS regression |
-| 10 | `qa-coverage` | Coverage Analyzer | Gaps, uncovered branches, dead code |
-| 11 | `qa-mutation` | Mutation Tester | Mutation testing, test quality |
-| 12 | `qa-contract` | Contract Tester | Consumer-driven contracts, Pact |
-| 13 | `qa-chaos` | Chaos Tester | Failure injection, resilience |
-| 14 | `qa-fixture` | Fixture Builder | Test data factories, fake data |
-| 15 | `qa-mock` | Mock Builder | Mock/stub generation, service virtualization |
-| 16 | `qa-regression` | Regression Hunter | Git bisect, regression ID, fix validation |
-| 17 | `qa-flaky` | Flaky Detector | Flaky test ID, root cause, stabilization |
-| 18 | `qa-prioritizer` | Test Prioritizer | Risk-based ordering, impact analysis |
-| 19 | `qa-smoke` | Smoke Tester | Post-deploy smoke, critical paths |
-| 20 | `qa-compat` | Compat Tester | Browser/device compatibility |
-| 21 | `qa-data` | Data Validator | Data integrity, migration validation |
-| 22 | `qa-reporter` | Test Reporter | Results, trends, quality metrics |
-
-### Domain 12: HR & People (12 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `hr-job-writer` | Job Writer | Role descriptions, requirements, inclusive language |
-| 2 | `hr-resume` | Resume Screener | Parsing, skill matching, scoring |
-| 3 | `hr-interview` | Interview Prepper | Questions, scorecards, competencies |
-| 4 | `hr-offer` | Offer Drafter | Offer letters, comp benchmarking, equity |
-| 5 | `hr-onboarding` | Onboarding Manager | 30-60-90, checklists, buddy assignment |
-| 6 | `hr-performance` | Perf Reviewer | Review templates, goals, feedback |
-| 7 | `hr-engagement` | Engagement Survey | Pulse surveys, sentiment, action plans |
-| 8 | `hr-policy` | Policy Writer | Handbook, PTO, remote work guidelines |
-| 9 | `hr-comp` | Comp Analyst | Salary benchmarking, pay equity, bands |
-| 10 | `hr-org-chart` | Org Chart Builder | Structure, reporting lines, span |
-| 11 | `hr-training` | Training Planner | Learning paths, skill gaps, calendar |
-| 12 | `hr-offboarding` | Offboarding Agent | Exit checklist, knowledge transfer, access revocation |
-
-### Domain 13: Finance & Billing (15 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `fin-billing` | Billing Agent | Stripe integration, subscription mgmt, invoices |
-| 2 | `fin-payment` | Payment Processor | Payment flow, retry, dunning, refunds |
-| 3 | `fin-subscription` | Subscription Manager | Plan changes, proration, trials, cancellation |
-| 4 | `fin-usage` | Usage Metering | Usage tracking, metered billing, overage |
-| 5 | `fin-invoice` | Invoice Generator | PDF invoices, tax, multi-currency |
-| 6 | `fin-revenue` | Revenue Recognizer | ASC 606, deferred revenue, MRR/ARR |
-| 7 | `fin-expense` | Expense Tracker | Infra costs, vendor payments, budgets |
-| 8 | `fin-tax` | Tax Calculator | Sales tax, VAT, GST by jurisdiction |
-| 9 | `fin-reports` | Financial Reporter | P&L, cash flow, SaaS metrics (LTV, CAC) |
-| 10 | `fin-budget` | Budget Planner | Budgets, variance, forecast vs actual |
-| 11 | `fin-ar` | AR Agent | Outstanding invoices, collections, aging |
-| 12 | `fin-pricing` | Pricing Modeler | Pricing pages, tiers, feature gating |
-| 13 | `fin-fraud` | Fraud Detector | Payment fraud, velocity checks, risk |
-| 14 | `fin-audit` | Audit Preparer | Financial audit prep, documentation |
-| 15 | `fin-runway` | Runway Calculator | Burn rate, runway projection, scenarios |
-
-### Domain 14: Legal & Governance (8 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `legal-tos` | ToS Writer | Terms, privacy policy, acceptable use, cookies |
-| 2 | `legal-dpa` | DPA Drafter | Data processing agreements, sub-processors |
-| 3 | `legal-contract` | Contract Reviewer | Clause analysis, risk flagging, redlines |
-| 4 | `legal-ip` | IP Protector | License compliance, OSS audit, trademarks |
-| 5 | `legal-gdpr` | GDPR Agent | Data subject requests, consent, retention |
-| 6 | `legal-soc2` | SOC2 Preparer | Control docs, evidence, gap analysis |
-| 7 | `legal-sla` | SLA Drafter | SLA docs, uptime commitments, penalties |
-| 8 | `legal-incident` | Incident Notifier | Breach notifications, regulatory timelines |
-
-### Domain 15: Content & Comms (10 Agents)
-
-| # | Agent ID | Name | Description |
-|---|----------|------|-------------|
-| 1 | `content-tech-writer` | Tech Writer | API docs, guides, tutorials, SDK docs |
-| 2 | `content-blog` | Blog Writer | SEO blogs, thought leadership, industry |
-| 3 | `content-docs` | Docs Builder | MkDocs/Docusaurus site, nav, search |
-| 4 | `content-changelog` | Changelog Writer | User-facing changelogs, release notes |
-| 5 | `content-presentation` | Presentations | Slide decks, pitch decks, training |
-| 6 | `content-internal` | Internal Comms | All-hands updates, newsletters, decisions |
-| 7 | `content-status` | Status Writer | Incident updates, maintenance windows |
-| 8 | `content-editor` | Copy Editor | Grammar, style, brand voice, proofing |
-| 9 | `content-case-study` | Case Study Writer | Customer success stories, ROI metrics |
-| 10 | `content-readme` | README Generator | Repo READMEs, quickstart, badges |
+</details>
 
 ---
 
-## Ruflo — Multi-Agent Swarm Orchestration
+## 🔗 Ruflo — Multi-Agent Swarm Orchestration
 
-[github.com/ruvnet/ruflo](https://github.com/ruvnet/ruflo)
+> [github.com/ruvnet/ruflo](https://github.com/ruvnet/ruflo)
 
 ```bash
 curl -fsSL https://cdn.jsdelivr.net/gh/ruvnet/ruflo@main/scripts/install.sh | bash
 ruflo init
 ```
 
-### Key Features
-
-- **Mesh topology** — Agents communicate peer-to-peer, no central bottleneck
-- **314 MCP tools** — Pre-built tool integrations for Claude Code
-- **Hive-mind intelligence** — Shared context and memory across all agents
-- **Self-learning neural routing** — Automatic task-to-agent matching
-- **CYCLE_INTERVAL=0** — Zero-latency agent activation
-- **Swarm orchestration** — Coordinate multiple agents on complex tasks
-- **Memory persistence** — Agent learnings persist across sessions
+- 🕸️ **Mesh topology** — Agents communicate peer-to-peer, no central bottleneck
+- 🧰 **314 MCP tools** — Pre-built tool integrations for Claude Code
+- 🧠 **Hive-mind intelligence** — Shared context and memory across all agents
+- 🎯 **Self-learning neural routing** — Automatic task-to-agent matching
+- ⚡ **CYCLE_INTERVAL=0** — Zero-latency agent activation
 
 ---
 
-## Graphify — Codebase Knowledge Graph
+## 🕸️ Graphify — Codebase Knowledge Graph
 
-[github.com/safishamsi/graphify](https://github.com/safishamsi/graphify)
+> [github.com/safishamsi/graphify](https://github.com/safishamsi/graphify)
 
 ```bash
-pip install graphifyy
-graphify install
-graphify index .
+pip install graphifyy && graphify install && graphify index .
 ```
 
-### Key Features
-
-- **Tree-sitter AST parsing** — 20 language support
-- **Knowledge graph** — Queryable code relationships
-- **Symbol resolution** — Cross-file dependency tracking
-- **Impact analysis** — Understand change propagation
-- **Architecture visualization** — Generate dependency diagrams
-- **Semantic search** — Find code by meaning, not just text
+- 🌳 **Tree-sitter AST parsing** — 20 language support
+- 🔍 **Semantic search** — Find code by meaning, not just text
+- 📊 **Architecture visualization** — Generate dependency diagrams
+- 🔗 **Symbol resolution** — Cross-file dependency tracking
 
 ---
 
-## LLM Wiki — Brain Memory (Karpathy Pattern)
+## 📖 LLM Wiki — Brain Memory (Karpathy Pattern)
 
-Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Instead of re-deriving knowledge from scratch on every session, the LLM maintains a **compiled wiki** that compounds across all 265 agents.
-
-### Three layers
+> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory.
 
 ```
 docs/vault/
-├── raw/        # Layer 1: immutable source documents
-│               #   (articles, papers, transcripts, architecture docs,
-│               #    meeting notes, customer feedback, incidents,
-│               #    Obsidian Web Clipper output)
-│               #   LLM reads, never modifies.
-│
-├── wiki/       # Layer 2: LLM-maintained compiled knowledge
+├── 📂 raw/        → Layer 1: immutable source documents (LLM reads, never modifies)
+├── 📂 wiki/       → Layer 2: LLM-maintained compiled knowledge
 │   ├── index.md         — content-oriented catalog (first lookup)
-│   ├── log.md           — append-only chronological log
-│   ├── overview.md      — evolving synthesis of everything
 │   ├── entities/        — one page per agent, service, tool, component
-│   ├── concepts/        — cross-cutting topics (multi-tenancy, canary-deploys, ...)
-│   ├── sources/         — one summary per ingested raw source
-│   ├── comparisons/     — analysis pages generated from queries
+│   ├── concepts/        — cross-cutting topics
 │   ├── contradictions/  — flagged conflicts between sources
-│   └── knowledge-graph/ — Graphify AST output, feeds entity/concept pages
-│
-└── SCHEMA.md   # Layer 3: governance, co-evolved between human and LLM
+│   └── knowledge-graph/ — Graphify AST output
+└── 📄 SCHEMA.md   → Layer 3: governance, co-evolved between human and LLM
 ```
-
-### The three operations
 
 | Operation | Command | What it does |
 |-----------|---------|--------------|
-| **Ingest** | `/project:wiki-ingest raw/<path>` | Read a raw source, write summary page, update 10–15 entity/concept/index/log pages in one pass, flag contradictions |
-| **Query** | `/project:wiki-query <question>` | Consult `wiki/index.md` first, synthesize an answer with wiki citations, file valuable answers back as new pages so explorations compound |
-| **Lint** | `/project:wiki-lint` | Health-check for orphans, stale claims, missing cross-references, concept gaps, and data gaps; suggest new questions and sources |
-
-### Integration points
-
-- **Obsidian graph view** — open `docs/vault/` as a vault; the graph is color-coded by layer (raw=gray, wiki=blue, SCHEMA=gold) and by agent domain. Dataview plugin enabled for querying YAML frontmatter across wiki pages.
-- **Graphify feeds the wiki** — `graphify . --obsidian-dir docs/vault/wiki/knowledge-graph` produces backlinked wiki pages from AST-parsed code structure. The `wiki-curator` agent cross-links these into the entity and concept pages.
-- **Agent sessions file back** — every valuable output from any of the 265 agents can be folded into the wiki via `/project:wiki-ingest`, so knowledge compounds across the whole fleet instead of dying with the chat session.
-- **PreToolUse hook** — the harness reminds Claude to consult `wiki/index.md` before grepping raw files, same pattern as the Graphify knowledge-graph hook.
-- **`wiki-curator` subagent** — owns the wiki layer entirely. Can touch 15 files in one pass without getting bored.
-
-### Make targets
-
-| Target | Purpose |
-|--------|---------|
-| `make wiki-ingest FILE=raw/<path>` | Ingest a raw source into the wiki |
-| `make wiki-lint` | Run a health check on the wiki |
-| `make wiki-sync` | Refresh Graphify output + run wiki lint |
-
-See [`.claude/skills/llm-wiki/SKILL.md`](.claude/skills/llm-wiki/SKILL.md), [`.claude/rules/llm-wiki.md`](.claude/rules/llm-wiki.md), [`.claude/agents/wiki-curator.md`](.claude/agents/wiki-curator.md), and [`docs/vault/SCHEMA.md`](docs/vault/SCHEMA.md) for details.
+| 📥 **Ingest** | `make wiki-ingest FILE=raw/<path>` | Read raw source, update 10-15 wiki pages |
+| 🔍 **Query** | `/project:wiki-query <question>` | Consult wiki first, file answers back |
+| 🧹 **Lint** | `make wiki-lint` | Health-check for orphans and gaps |
 
 ---
 
-## Obsidian Vault Integration
+## 🛡️ Hallucination Prevention
 
-Every file in this repository is cross-referenced through Obsidian `[[wikilinks]]`. The vault at `docs/vault/` is a complete, navigable knowledge graph of the entire 265-agent architecture.
-
-### What lives in the vault
+> Every LLM call routes through a **Guardrails AI** validation layer. No agent output reaches users without passing guardrails.
 
 ```
-docs/vault/
-├── _index.md                — vault home / Map of Content
-├── SCHEMA.md                — LLM Wiki governance (co-evolved)
-├── .obsidian/               — Obsidian config (graph view, Dataview, templates)
-├── raw/                     — immutable source documents (LLM Wiki layer 1)
-├── wiki/                    — LLM-maintained compiled knowledge (LLM Wiki layer 2)
-├── agents/                  — one note per agent (265 total) + per-domain indexes
-├── architecture/            — ADR notes, tech stack, system component notes
-├── runbooks/                — operational runbooks linked to agents/services
-├── memory/                  — mirrors of .claude/memory/ (project context, decisions, learnings…)
-└── knowledge-graph/         — Graphify-generated entity, god-node, community, surprising-connection notes
+Agent Output → Guardrails Validator → Schema Check → Hallucination Score (≥0.85)
+    → Factuality Check → Provenance Verification → ✅ Validated Output
+                                                  → ❌ Retry (max 3) → Reject
 ```
 
-### Open the vault in Obsidian
-
-1. Install [Obsidian](https://obsidian.md/).
-2. Open `docs/vault/` as a vault.
-3. Press `Ctrl/Cmd+G` to launch the graph view — every agent, ADR, runbook, and service appears as a node, color-coded by domain.
-4. Click any node and use the **Backlinks pane** to navigate to everything that references it.
-
-### Automatic backlinking
-
-- **Rule** — [`.claude/rules/obsidian-backlinks.md`](.claude/rules/obsidian-backlinks.md) requires every new `.md` file in the repo to include a `## Vault Links` section.
-- **Skill** — [`.claude/skills/obsidian-linker/SKILL.md`](.claude/skills/obsidian-linker/SKILL.md) scans new files, finds related vault notes by keyword and domain, and inserts bidirectional `[[wikilinks]]`.
-- **Slash command** — `/project:vault-link <file>` regenerates backlinks for any file on demand.
-- **Curator agent** — [`.claude/agents/obsidian-curator.md`](.claude/agents/obsidian-curator.md) audits the vault for orphan notes, broken wikilinks, and missing frontmatter.
-- **PostToolUse hook** — Every write to `docs/vault/*.md` triggers `scripts/vault-autolink.py`, which auto-inserts backlinks into the file's `<!-- linked-notes -->` block.
-
-### Graphify produces backlinked notes
-
-`scripts/bootstrap.sh` runs `graphify . --obsidian-dir docs/vault/knowledge-graph` during setup, so the entire codebase knowledge graph is immediately available as backlinked Obsidian notes — every entity, god node, community cluster, and surprising connection becomes a vault note linked into the rest of the graph.
-
-### Make targets
-
-| Target | Purpose |
-|--------|---------|
-| `make vault-generate` | Regenerate the 265 agent notes from `.claude/agents/_registry.yaml` |
-| `make vault-sync` | Refresh Graphify knowledge graph + memory mirrors |
-| `make vault-audit` | Invoke the obsidian-curator agent to check vault integrity |
+| Problem | Solution |
+|---------|----------|
+| 🤥 Model makes things up | Validates against rules and source data |
+| 📭 No grounding | RAG provenance validators |
+| 🔀 Inconsistent answers | Schema enforcement with deterministic outputs |
+| ⚠️ Unsafe agent behavior | Pre/post execution guardrails |
 
 ---
 
-## MCP Servers
+## 💰 Free Toolchain
 
-| Server | Purpose | Capabilities |
-|--------|---------|-------------|
-| `github` | GitHub integration | Repos, PRs, issues, Actions, GHCR |
-| `filesystem` | Local file access | Read, write, search, watch files |
-| `postgres` | Database access | Query, schema inspection, migrations |
-| `docker` | Container management | Build, run, inspect, logs |
-| `kubernetes` | Cluster management | Deployments, pods, services, logs |
-| `ruflo` | Swarm orchestration | Agent spawning, memory, routing |
+> Total monthly software cost: **$0**
 
----
-
-## Free Toolchain
-
-Total monthly software cost: **$0**
+<details>
+<summary><b>💎 View the full free toolchain (21 tools, replaces $1000+/mo in SaaS)</b></summary>
 
 | Name | License | Replaces |
 |------|---------|----------|
@@ -806,12 +399,13 @@ Total monthly software cost: **$0**
 | Velero | Apache-2.0 | Kasten K10, Portworx Backup |
 | MinIO | AGPL-3.0 | AWS S3 ($0.023/GB/mo) |
 | Ansible | GPL-3.0 | Puppet, Chef, SaltStack |
-| Certbot | Apache-2.0 | Commercial TLS certs ($100+/yr) |
 | TruffleHog | AGPL-3.0 | GitGuardian ($30/dev/mo) |
+
+</details>
 
 ---
 
-## Docker Compose — Local Development
+## 🐳 Docker Compose — Local Development
 
 ```bash
 docker compose up -d
@@ -819,17 +413,20 @@ docker compose up -d
 
 | Service | Port | Description |
 |---------|------|-------------|
-| PostgreSQL 16 | 5432 | Primary database |
-| Redis 7 | 6379 | Cache and session store |
-| Keycloak 24 | 8080 | Auth server (admin console) |
-| MinIO | 9000 / 9001 | Object storage / console |
-| RabbitMQ | 5672 / 15672 | Message broker / management |
-| Mailpit | 1025 / 8025 | Local email capture / web UI |
-| Traefik | 80 / 443 / 8082 | Proxy / TLS / dashboard |
+| 🐘 PostgreSQL 16 | 5432 | Primary database |
+| 🔴 Redis 7 | 6379 | Cache and session store |
+| 🔐 Keycloak 24 | 8080 | Auth server (admin console) |
+| 📦 MinIO | 9000 / 9001 | Object storage / console |
+| 🐰 RabbitMQ | 5672 / 15672 | Message broker / management |
+| 📧 Mailpit | 1025 / 8025 | Local email capture / web UI |
+| 🌐 Traefik | 80 / 443 / 8082 | Proxy / TLS / dashboard |
 
 ---
 
-## Token Setup
+## 🔑 Token Setup
+
+> [!NOTE]
+> At minimum you need **one** model provider API key. Set it in `.env`.
 
 ### Required
 
@@ -842,10 +439,10 @@ docker compose up -d
 
 | Token | Source | Purpose |
 |-------|--------|---------|
+| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com) | GPT-5 fallback models |
+| `GOOGLE_API_KEY` | [aistudio.google.com](https://aistudio.google.com) | Gemini long-context models |
 | `STRIPE_SECRET_KEY` | [dashboard.stripe.com](https://dashboard.stripe.com) | Payment processing (billing agents) |
 | `SENDGRID_API_KEY` | [sendgrid.com](https://sendgrid.com) | Transactional email delivery |
-| `SENTRY_DSN` | [sentry.io](https://sentry.io) | Error tracking and monitoring |
-| `SLACK_WEBHOOK_URL` | [api.slack.com](https://api.slack.com) | Deployment and alert notifications |
 
 ```bash
 cp .env.example .env
@@ -854,108 +451,7 @@ cp .env.example .env
 
 ---
 
-## Hallucination Prevention
-
-Every LLM call in Citadel SaaS Factory routes through a **Guardrails AI** validation layer. No agent output reaches users or downstream agents without passing through guardrails. Paired with **confident-ai/deepeval** for hallucination rate evaluation and **NVIDIA NeMo-Guardrails** for conversational and agent-level guardrails.
-
-### Quick Install
-
-```bash
-./scripts/setup-guardrails.sh
-```
-
-This installs `guardrails-ai` and `deepeval`, configures the guardrails CLI, and installs the core Hub validators (`hallucination_free`, `provenance_llm`, `toxic_language`, `detect_pii`).
-
-### Validation Flow
-
-```
-Agent Output
-    ↓
-Guardrails Validator
-    ↓
-Schema Check (structured output enforcement)
-    ↓
-Hallucination Score (threshold 0.85)
-    ↓
-Factuality Check (against source data / RAG context)
-    ↓
-Provenance Verification (RAG grounding validators)
-    ↓
-[PASS] → Validated Output
-[FAIL] → Retry with grounding (max 3) → Reject if still failing
-```
-
-### Problem → Solution Matrix
-
-| Problem | Solution |
-|---------|----------|
-| Model makes things up | Validates against rules and source data |
-| No grounding | RAG provenance validators |
-| Inconsistent answers | Schema enforcement with deterministic outputs |
-| Unsafe agent behavior | Pre/post execution guardrails |
-
-### Minimal Usage Example
-
-```python
-from guardrails import Guard
-from guardrails.hub import HallucinationFree, ProvenanceLLM
-
-guard = Guard.from_rail_string("""
-<rail version="0.1">
-<output>
-  <string name="answer" description="Factual answer grounded in sources" />
-</output>
-<prompt>
-  Answer the question using ONLY the provided sources.
-  Question: ${question}
-  Sources: ${sources}
-</prompt>
-</rail>
-""").use_many(
-    HallucinationFree(on_fail="reask"),
-    ProvenanceLLM(validation_method="sentence", on_fail="reask"),
-)
-
-validated = guard(
-    llm_api=openai.chat.completions.create,
-    prompt_params={"question": query, "sources": rag_docs},
-)
-# validated.validation_passed → True/False
-# validated.validated_output → structured, hallucination-free answer
-```
-
-In the backend, all LLM calls go through `backend/app/middleware/guardrails.py`:
-
-```python
-from app.middleware.guardrails import guard_llm_call
-
-answer = await guard_llm_call(
-    llm.complete,
-    prompt=user_query,
-    source_context=rag_docs,
-    schema={"type": "object", "properties": {"answer": {"type": "string"}}},
-)
-```
-
-### Integrated Stack
-
-| Tool | Purpose |
-|------|---------|
-| **guardrails-ai** | Structured output, hallucination detection, schema enforcement |
-| **deepeval** | Hallucination rate evaluation, LLM test suite, CI/CD integration |
-| **NVIDIA NeMo-Guardrails** | Conversational and agent-level guardrails |
-
-### Configuration
-
-- **Hub validators**: see `security/guardrails/validators.yaml`
-- **Backend middleware**: `backend/app/middleware/guardrails.py`
-- **Validator subagent**: `.claude/agents/guardrails-validator.md`
-- **Skill**: `.claude/skills/guardrails/SKILL.md`
-- **Rules**: `.claude/rules/guardrails.md`
-
----
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feat/your-feature`
@@ -968,11 +464,9 @@ answer = await guard_llm_call(
 9. Wait for CI to pass (lint, test, security scan)
 10. Get 1 approval minimum before merge
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
 ---
 
-## Install via npm
+## 📦 Install via npm
 
 ```bash
 npx @citadelcloud/saas-factory init my-saas
@@ -989,11 +483,19 @@ citadel-factory init my-saas
 
 ---
 
-## Author
+<div align="center">
 
-**Kehinde Ogunlowo** — [LinkedIn](https://www.linkedin.com/in/kehinde-ogunlowo/) | [Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) | [**❤️ Sponsor via Cash App**](https://cash.app/$KennyOgunlowo)
+## 👤 Author
 
-## License
+**Kehinde Ogunlowo**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kehinde-ogunlowo/)
+[![Architecture](https://img.shields.io/badge/Architecture_Diagram-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://kogunlowo123.github.io/kehinde-architecture-diagram/)
+[![Sponsor](https://img.shields.io/badge/❤️_Sponsor_via_Cash_App-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](https://cash.app/$KennyOgunlowo)
+
+---
+
+## 📄 License
 
 MIT License. See [LICENSE](LICENSE) for full terms.
 
@@ -1001,4 +503,6 @@ Copyright (c) Citadel Cloud Management
 
 ---
 
-Citadel Cloud Management | [citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+**Citadel Cloud Management** | [citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+
+</div>
