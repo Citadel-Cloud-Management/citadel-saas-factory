@@ -65,6 +65,265 @@ claude                                # Or open in Cursor, Antigravity, Copilot,
 
 ---
 
+## 🚀 Launch Your SaaS Business — Step-by-Step Guide
+
+> **Use this framework to launch any SaaS product.** Clone once, configure for your business, connect your AI tools, and deploy. Works with Claude Code, OpenAI Codex, Google Jules, GitHub Copilot, Cursor, and 6 more IDEs.
+
+### Step 1: Create Your Business Folder
+
+Create a dedicated project directory and initialize it from the Citadel factory:
+
+```bash
+# Option A: npm scaffold (creates a clean project folder)
+npx @citadelcloud/saas-factory init my-company-saas
+cd my-company-saas
+
+# Option B: git clone (full framework with all 385+ agents)
+git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git my-company-saas
+cd my-company-saas
+git remote rename origin upstream
+git remote add origin https://github.com/YOUR-ORG/my-company-saas.git
+
+# Option C: fork on GitHub (best for long-term tracking of upstream updates)
+# 1. Fork https://github.com/Citadel-Cloud-Management/citadel-saas-factory on GitHub
+# 2. Clone your fork:
+git clone https://github.com/YOUR-ORG/my-company-saas.git
+cd my-company-saas
+```
+
+Your project folder structure after init:
+
+```
+my-company-saas/
+├── .claude/              # AI intelligence layer (agents, rules, skills, hooks)
+├── .github/              # CI/CD workflows, Copilot instructions
+├── backend/              # FastAPI (Python 3.12) — API, business logic, guardrails
+├── frontend/             # Next.js 14 (TypeScript) — UI, components, state
+├── infrastructure/       # Terraform, Helm, K8s manifests
+├── monitoring/           # Prometheus rules, Grafana dashboards, Loki pipelines
+├── security/             # Semgrep, Trivy, Kyverno, guardrails validators
+├── scripts/              # Bootstrap, verify, migrate, deploy
+├── docs/vault/           # Obsidian knowledge vault + LLM Wiki
+├── models/               # Model catalog, routing config, embeddings
+├── mcp/                  # MCP server registry
+├── .env.example          # All environment variables with documentation
+├── docker-compose.yml    # Local dev stack (Postgres, Redis, Keycloak, etc.)
+└── Makefile              # Common commands: test, lint, deploy, wiki-ingest
+```
+
+### Step 2: Configure Your Environment
+
+```bash
+# Copy the environment template
+cp .env.example .env
+
+# Edit .env — set at minimum ONE model provider API key:
+# ANTHROPIC_API_KEY=sk-ant-...    (for Claude Code, Ruflo, agents)
+# OPENAI_API_KEY=sk-...           (for Codex, GPT-5, o4)
+# GOOGLE_API_KEY=...              (for Gemini, Jules)
+# GITHUB_TOKEN=ghp_...            (for GitHub CLI, Actions, MCP)
+```
+
+### Step 3: Connect Claude Code
+
+Claude Code is the primary AI coding agent. It reads `.claude/CLAUDE.md` automatically and activates all 385+ agents, rules, skills, and hooks.
+
+```bash
+# Install Claude Code (if not already installed)
+npm install -g @anthropic-ai/claude-code
+
+# Set your Anthropic API key
+export ANTHROPIC_API_KEY="sk-ant-your-key-here"
+
+# Launch Claude Code in your project folder
+cd my-company-saas
+claude
+
+# Claude Code automatically detects:
+#   .claude/CLAUDE.md        → project intelligence file
+#   .claude/agents/          → 385+ autonomous agents
+#   .claude/rules/           → coding standards, security, guardrails
+#   .claude/skills/          → specialist capabilities (TDD, API design, etc.)
+#   .claude/hooks/           → pre-commit, post-deploy, guardrails validation
+#   .claude/commands/        → /deploy, /rollback, /scaffold, /audit, /status
+```
+
+**Claude Code key commands inside your project:**
+
+```bash
+claude                            # Start interactive session
+claude "scaffold user auth"       # One-shot task
+claude "/deploy staging"          # Run a project command
+claude "/status"                  # Check system and agent status
+claude "/audit"                   # Run security + quality audit
+```
+
+**Enable advanced features** in `.claude/settings.json`:
+
+```json
+{
+  "model_routing": {
+    "default": "claude-sonnet-4-6",
+    "cheap": "claude-haiku-4-5-20251001",
+    "premium": "claude-opus-4-7"
+  },
+  "prompt_caching": true,
+  "guardrails": { "enabled": true, "hallucination_threshold": 0.85 }
+}
+```
+
+### Step 4: Connect OpenAI Codex
+
+OpenAI Codex reads `AGENTS.md` and `.codex/config.toml` — both ship with the factory.
+
+```bash
+# Install Codex CLI
+npm install -g @openai/codex
+
+# Set your OpenAI API key
+export OPENAI_API_KEY="sk-your-key-here"
+
+# Launch Codex in your project folder
+cd my-company-saas
+codex
+
+# Codex automatically detects:
+#   AGENTS.md              → agent instructions and project context
+#   .codex/config.toml     → Codex-specific configuration
+```
+
+**Codex config** (`.codex/config.toml`):
+
+```toml
+model = "o4-mini"               # or "gpt-5", "o4" for complex reasoning
+approval_mode = "suggest"       # "auto-edit" for autonomous mode
+provider = "openai"
+```
+
+### Step 5: Connect Google Jules & Gemini CLI
+
+Google Jules reads `.jules/config.yml` and `GEMINI.md` — both ship with the factory.
+
+```bash
+# Install Gemini CLI
+npm install -g @anthropic-ai/claude-code  # Jules uses similar CLI patterns
+
+# Set your Google API key
+export GOOGLE_API_KEY="your-key-here"
+
+# Jules automatically detects:
+#   GEMINI.md              → Gemini-specific instructions
+#   .jules/config.yml      → Jules project configuration
+```
+
+### Step 6: Connect GitHub Copilot
+
+GitHub Copilot reads `.github/copilot-instructions.md` — ships with the factory.
+
+```bash
+# Copilot activates automatically in VS Code / JetBrains
+# The factory includes:
+#   .github/copilot-instructions.md   → project-aware Copilot context
+#   .github/workflows/                → CI/CD pipelines
+```
+
+### Step 7: Bootstrap & Verify
+
+```bash
+# Run the parallel bootstrap (installs models, MCP servers, hooks, agents)
+./scripts/parallel-bootstrap.sh
+
+# Verify everything is connected (green/red status report)
+./scripts/verify-install.sh
+
+# Expected output:
+# ✅ Claude Code    — connected (claude-sonnet-4-6)
+# ✅ OpenAI Codex   — connected (o4-mini)
+# ✅ GitHub Copilot — detected (.github/copilot-instructions.md)
+# ✅ MCP servers    — 12 active (github, filesystem, postgres, ...)
+# ✅ Agents         — 385 registered, 42 enabled for your stack
+# ✅ Guardrails     — active (threshold: 0.85, validators: 4)
+# ✅ Docker stack   — running (postgres, redis, keycloak, minio, rabbitmq)
+```
+
+### Step 8: Start Building Your Product
+
+```bash
+# Start local infrastructure
+docker compose up -d
+
+# Launch your AI coding agent of choice
+claude                     # Claude Code (recommended — full agent integration)
+codex                      # OpenAI Codex
+# Or open in Cursor, Windsurf, Antigravity, Continue.dev...
+
+# Example first tasks:
+claude "scaffold the user authentication module with Keycloak"
+claude "create the Stripe billing integration with subscription tiers"
+claude "build the admin dashboard with usage analytics"
+claude "set up CI/CD pipeline for staging and production"
+```
+
+### Multi-IDE Workflow (Use All Three Together)
+
+You can run Claude Code, Codex, and Copilot simultaneously — each reads its own config file, and all share the same codebase:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    YOUR PROJECT FOLDER                       │
+│                                                             │
+│  Claude Code ←── .claude/CLAUDE.md (385+ agents, guardrails)│
+│  OpenAI Codex ←── AGENTS.md + .codex/config.toml           │
+│  Copilot ←── .github/copilot-instructions.md               │
+│  Cursor ←── .cursor/rules/ + AGENT.md                      │
+│  Jules ←── .jules/config.yml + GEMINI.md                   │
+│  Windsurf ←── .windsurf/rules/                             │
+│                                                             │
+│  All share: docker-compose.yml, .env, Makefile, git history │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Recommended workflow:**
+- **Claude Code** for architecture, multi-file features, agent orchestration, deployments
+- **OpenAI Codex** for rapid code generation, one-shot tasks, reasoning chains
+- **GitHub Copilot** for inline autocomplete while editing in VS Code/JetBrains
+- **Cursor** for visual AI-assisted editing with diff preview
+- **Jules** for long-running background tasks with Gemini's 2M context window
+
+### Using the Master Prompt (Advanced)
+
+For full autonomous factory integration, download the [Master Prompt v3](https://github.com/Citadel-Cloud-Management/citadel-saas-factory) and fill in the YAML configuration block:
+
+```yaml
+target_project:
+  name: "My SaaS Product"
+  slug: "my-saas-product"
+  repo_url: "https://github.com/my-org/my-saas-product"
+  stack:
+    primary_language: "python"           # python | typescript | go | rust
+    framework_backend: "FastAPI"         # FastAPI | NestJS | Django | Express
+    framework_frontend: "Next.js 14"    # Next.js 14 | React Native | Remix
+  infrastructure:
+    cloud_target: "Hetzner-VPS"         # AWS | Azure | GCP | Hetzner | bare-metal
+    compute: "K3s"                      # K3s | EKS | Docker | Lambda
+  data:
+    primary_db: "Postgres"
+    cache: "Redis"
+  ai_policy:
+    claude_code_enabled: true
+    model_routing:
+      default: "claude-sonnet-4-6"
+      cheap: "claude-haiku-4-5-20251001"
+      premium: "claude-opus-4-7"
+```
+
+Paste the filled YAML + master prompt into Claude Code, and it will execute a 10-phase autonomous pipeline: fetch, scaffold, install intelligence layers, extract aligned assets, gap analysis, integration plan, ship code, validate, execute, and enter continuous autonomous operation.
+
+> [!IMPORTANT]
+> **Minimum requirements:** One API key (Anthropic, OpenAI, or Google), Docker, Git, Node.js 20+, Python 3.12+. Total software cost: **$0/month** — you only pay for API usage.
+
+---
+
 ## 🏗️ Architecture
 
 ```
