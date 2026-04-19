@@ -45,23 +45,14 @@
 ## ⚡ Quick Start
 
 ```bash
-# Option 1: npm (recommended)
-npx @citadelcloud/saas-factory init my-saas
-cd my-saas
-
-# Option 2: git clone
-git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git
-cd citadel-saas-factory
-
-# Then:
-cp .env.example .env                  # Set your API keys (at minimum one provider)
-./scripts/parallel-bootstrap.sh       # Parallel install: models, MCP, hooks, agents
+git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git my-saas
+cd my-saas && cp .env.example .env    # Set at least one API key
+./scripts/parallel-bootstrap.sh       # Install models, MCP, hooks, agents
 ./scripts/verify-install.sh           # Green/red verification report
-claude                                # Or open in Cursor, Antigravity, Copilot, Codex, Jules...
+claude                                # Or open in Cursor, Codex, Jules, Copilot...
 ```
 
-> [!TIP]
-> You can also use `just bootstrap` if you have [just](https://github.com/casey/just) installed.
+> See the **[full step-by-step guide](#-launch-your-saas-business--step-by-step-guide)** below for detailed setup of Claude Code, OpenAI Codex, Google Jules, and GitHub Copilot.
 
 ---
 
@@ -206,12 +197,16 @@ Google Jules reads `.jules/config.yml` and `GEMINI.md` — both ship with the fa
 
 ```bash
 # Install Gemini CLI
-npm install -g @anthropic-ai/claude-code  # Jules uses similar CLI patterns
+npm install -g @anthropic-ai/gemini-cli
 
 # Set your Google API key
 export GOOGLE_API_KEY="your-key-here"
 
-# Jules automatically detects:
+# Launch Gemini CLI / Jules in your project folder
+cd my-company-saas
+gemini
+
+# Jules and Gemini CLI automatically detect:
 #   GEMINI.md              → Gemini-specific instructions
 #   .jules/config.yml      → Jules project configuration
 ```
@@ -495,9 +490,9 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 </div>
 
 <details>
-<summary><b>📋 View all 265 agents with IDs and descriptions</b></summary>
+<summary><b>📋 View all 385+ agents with IDs and descriptions</b></summary>
 
-### 👔 Domain 1: Executive & Strategy (12 Agents)
+### 👔 Domain 1: Executive & Strategy (15 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -514,7 +509,7 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 | 11 | `exec-competitive-intel` | Competitive Intel | Competitor monitoring, market trends, competitive battle cards |
 | 12 | `exec-decision-logger` | Decision Logger | Strategic decision recording with context, rationale, and outcomes |
 
-### 📈 Domain 2: Marketing & Growth (22 Agents)
+### 📈 Domain 2: Marketing & Growth (26 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -541,7 +536,7 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 | 21 | `mktg-persona` | Persona Builder | ICP definition, buyer personas, jobs-to-be-done analysis |
 | 22 | `mktg-retention` | Retention Agent | Churn signals, re-engagement campaigns, NPS follow-up |
 
-### 💰 Domain 3: Sales & Revenue (18 Agents)
+### 💰 Domain 3: Sales & Revenue (22 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -840,11 +835,6 @@ docker compose --profile ai up -d           # + Ollama local AI
 | `SENTRY_DSN` | [sentry.io](https://sentry.io) | Error tracking and monitoring |
 | `SLACK_WEBHOOK_URL` | [api.slack.com](https://api.slack.com) | Deployment and alert notifications |
 
-```bash
-cp .env.example .env
-# Edit .env with your tokens — set at minimum one model provider
-```
-
 ---
 
 ## 🤝 Contributing
@@ -859,23 +849,6 @@ cp .env.example .env
 8. Open a pull request
 9. Wait for CI to pass (lint, test, security scan)
 10. Get 1 approval minimum before merge
-
----
-
-## 📦 Install via npm
-
-```bash
-npx @citadelcloud/saas-factory init my-saas
-cd my-saas
-./scripts/parallel-bootstrap.sh
-```
-
-Or install globally:
-
-```bash
-npm install -g @citadelcloud/saas-factory
-citadel-factory init my-saas
-```
 
 ---
 
