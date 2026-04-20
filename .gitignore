@@ -70,6 +70,9 @@ graphify-out/
 CLAUDE.local.md
 .claude/settings.local.json
 
+# ─── Vendor (temporary clones) ───
+vendor/
+
 # ─── Build Artifacts ───
 *.tar.gz
 *.zip

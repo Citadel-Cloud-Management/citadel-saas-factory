@@ -118,11 +118,23 @@ render-agents: ## Render agents to Cursor and Antigravity formats
 eval: ## Run model evaluation suite (promptfoo)
 	npx promptfoo eval -c evals/promptfoo.yaml
 
+setup-skills: ## Verify and configure integrated skills library
+	./scripts/setup-skills.sh
+
+convert-skills: ## Convert skills to all agent formats (Cursor, Aider, Windsurf, etc.)
+	./scripts/convert.sh --tool all
+
+install-skills: ## Install converted skills into target project
+	@echo "Usage: make install-skills TOOL=cursor TARGET=."
+	./scripts/install.sh --tool $${TOOL:-cursor} --target $${TARGET:-.}
+
 status: ## System status (agents, models, rules, skills, providers)
 	@echo "=== Citadel SaaS Factory Status ==="
 	@echo "Agents:    $$(grep -c '^  - id:' .claude/agents/_registry.yaml 2>/dev/null || echo 0)"
 	@echo "Models:    $$(grep -c '    - id:' models/catalog.yaml 2>/dev/null || echo 0)"
 	@echo "Rules:     $$(ls .claude/rules/*.md 2>/dev/null | wc -l || echo 0)"
 	@echo "Skills:    $$(ls -d .claude/skills/*/ 2>/dev/null | wc -l || echo 0)"
+	@echo "Commands:  $$(ls .claude/commands/*.md .claude/commands/*.yaml 2>/dev/null | wc -l || echo 0)"
+	@echo "Personas:  $$(ls .claude/agents/personas/*.md 2>/dev/null | wc -l || echo 0)"
 	@echo "Providers: $$(ls agents/providers/*.yaml 2>/dev/null | wc -l || echo 0)"
 	@echo "Scripts:   $$(ls scripts/*.sh 2>/dev/null | wc -l || echo 0)"
