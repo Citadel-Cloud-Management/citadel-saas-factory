@@ -4,13 +4,13 @@
 
 ### Universal Full-Stack SaaS Production Framework
 
-**385+ Autonomous Business Agents | 12 Model Providers | 22 Domains | Cross-IDE**
+**500+ Autonomous Business Agents | 12 Model Providers | 30 Domains | Cross-IDE**
 
 [![npm](https://img.shields.io/npm/v/@citadelcloud/saas-factory?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/@citadelcloud/saas-factory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Agents](https://img.shields.io/badge/Agents-385+-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
+[![Agents](https://img.shields.io/badge/Agents-500+-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
 [![Models](https://img.shields.io/badge/Models-12_Providers-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](models/catalog.yaml)
-[![Domains](https://img.shields.io/badge/Domains-22-E91E63?style=for-the-badge&logo=target&logoColor=white)](#-all-385-agents--22-domains)
+[![Domains](https://img.shields.io/badge/Domains-30-E91E63?style=for-the-badge&logo=target&logoColor=white)](#-all-500-agents--30-domains)
 [![IDEs](https://img.shields.io/badge/IDEs-12_Supported-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#-cross-ide-support)
 [![Cost](https://img.shields.io/badge/Cost-$0/month-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](#-free-toolchain)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
@@ -69,7 +69,7 @@ Create a dedicated project directory and initialize it from the Citadel factory:
 npx @citadelcloud/saas-factory init my-company-saas
 cd my-company-saas
 
-# Option B: git clone (full framework with all 385+ agents)
+# Option B: git clone (full framework with all 500+ agents)
 git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git my-company-saas
 cd my-company-saas
 git remote rename origin upstream
@@ -117,7 +117,7 @@ cp .env.example .env
 
 ### Step 3: Connect Claude Code
 
-Claude Code is the primary AI coding agent. It reads `.claude/CLAUDE.md` automatically and activates all 385+ agents, rules, skills, and hooks.
+Claude Code is the primary AI coding agent. It reads `.claude/CLAUDE.md` automatically and activates all 500+ agents, rules, skills, and hooks.
 
 ```bash
 # Install Claude Code (if not already installed)
@@ -132,7 +132,7 @@ claude
 
 # Claude Code automatically detects:
 #   .claude/CLAUDE.md        → project intelligence file
-#   .claude/agents/          → 385+ autonomous agents
+#   .claude/agents/          → 500+ autonomous agents
 #   .claude/rules/           → coding standards, security, guardrails
 #   .claude/skills/          → specialist capabilities (TDD, API design, etc.)
 #   .claude/hooks/           → pre-commit, post-deploy, guardrails validation
@@ -197,7 +197,7 @@ Google Jules reads `.jules/config.yml` and `GEMINI.md` — both ship with the fa
 
 ```bash
 # Install Gemini CLI
-npm install -g @anthropic-ai/gemini-cli
+npm install -g @anthropic-ai/gemini-cli   # or: npx @anthropic-ai/gemini-cli
 
 # Set your Google API key
 export GOOGLE_API_KEY="your-key-here"
@@ -267,7 +267,7 @@ You can run Claude Code, Codex, and Copilot simultaneously — each reads its ow
 ┌─────────────────────────────────────────────────────────────┐
 │                    YOUR PROJECT FOLDER                       │
 │                                                             │
-│  Claude Code ←── .claude/CLAUDE.md (385+ agents, guardrails)│
+│  Claude Code ←── .claude/CLAUDE.md (500+ agents, guardrails)│
 │  OpenAI Codex ←── AGENTS.md + .codex/config.toml           │
 │  Copilot ←── .github/copilot-instructions.md               │
 │  Cursor ←── .cursor/rules/ + AGENT.md                      │
@@ -313,6 +313,18 @@ target_project:
 ```
 
 Paste the filled YAML + master prompt into Claude Code, and it will execute a 10-phase autonomous pipeline: fetch, scaffold, install intelligence layers, extract aligned assets, gap analysis, integration plan, ship code, validate, execute, and enter continuous autonomous operation.
+
+### Claude Code Master Operating Prompt
+
+This repo includes [`CLAUDE_CODE_MASTER_PROMPT.md`](CLAUDE_CODE_MASTER_PROMPT.md) — a drop-in system prompt and `CLAUDE.md` constitution for any Claude Code project. It covers the full 7-layer stack: Runtime, Memory, Skills, MCP, Commands, Orchestration, and Workflows, plus the Agent Development Kit, LLM API internals, RAG selection logic, security posture, and operational playbooks.
+
+```bash
+# Use as your project constitution (already included when you clone)
+cp CLAUDE_CODE_MASTER_PROMPT.md CLAUDE.md
+
+# Or use as your personal global defaults
+cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md
+```
 
 > [!IMPORTANT]
 > **Minimum requirements:** One API key (Anthropic, OpenAI, or Google), Docker, Git, Node.js 20+, Python 3.12+. Total software cost: **$0/month** — you only pay for API usage.
@@ -458,41 +470,51 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 
 ---
 
-## 🤖 All 385+ Agents — 22 Domains
+## 🤖 All 500+ Agents — 30 Domains
 
 <div align="center">
 
-| Domain | Agents | Highlights |
-|--------|--------|------------|
-| 👔 **Executive & Strategy** | 15 | CEO Strategist, CTO Technology, OKR Tracker, Board Reporter, M&A Analyst |
-| 📈 **Marketing & Growth** | 26 | SEO, Content, Social, Email, PPC, PR, PLG, ABM, Podcast, Influencer |
-| 💰 **Sales & Revenue** | 22 | Lead Qualifier, Proposals, CRM, Forecast, Revenue Ops, Deal Desk |
-| 🎯 **Customer Success** | 18 | Onboarding, Tickets, Churn Predictor, NPS, QBR, Health Score |
-| 🎨 **Product & UI/UX** | 24 | UI Designer, Wireframes, Design System, A11y, Micro-interactions, User Research |
-| ⚙️ **Engineering** | 30 | API, Models, Auth, Cache, Search, WebSocket, GraphQL, gRPC, Event Sourcing |
-| 🖥️ **Frontend** | 22 | Components, Pages, Forms, Charts, State, PWA, i18n, Micro-frontends |
-| 🚀 **DevOps** | 32 | CI/CD, GitOps, K8s, Helm, Terraform, Canary, FinOps, Platform Eng |
-| 🔒 **Security** | 26 | SAST, DAST, Secrets, Falco, Kyverno, Pentest, Zero Trust, SBOM |
-| 📊 **Data & Analytics** | 22 | Schema, ETL, Dashboards, Forecasting, Vector, Lakehouse, dbt |
-| 🧪 **QA & Testing** | 26 | Unit, E2E, Load, Chaos, Mutation, Visual, Contract, Property-based |
-| 👥 **HR & People** | 15 | Jobs, Interviews, Onboarding, Performance, DEI, L&D, Culture |
-| 💳 **Finance & Billing** | 18 | Stripe, Subscriptions, Tax, Revenue, Runway, FP&A, Treasury |
-| ⚖️ **Legal & Governance** | 12 | ToS, DPA, GDPR, SOC2, SLA, AI Ethics, IP, Export Control |
-| ✍️ **Content & Comms** | 14 | Tech Writing, Docs, Changelogs, Case Studies, Video Scripts, Podcasts |
-| 📦 **Supply Chain & Procurement** | 12 | Vendor Scoring, RFP Generator, Inventory Optimizer, Demand Forecast, Logistics |
-| 🏗️ **Platform Engineering** | 10 | IDP Builder, Service Catalog, Golden Paths, Developer Portal, Backstage |
-| 🌐 **Internationalization** | 8 | i18n Manager, Locale Sync, RTL Adapter, Currency Converter, Translation QA |
-| 🤖 **AI/ML Operations** | 14 | Model Registry, Feature Store, Experiment Tracker, Prompt Optimizer, Eval Runner |
-| 📡 **IoT & Edge** | 8 | Device Manager, Telemetry Collector, Edge Deployer, OTA Updater, Fleet Monitor |
-| 🎓 **Education & Training** | 6 | Course Builder, Quiz Generator, Skill Assessor, Learning Path, Cert Tracker |
-| 🏥 **Compliance & Risk** | 10 | Risk Scorer, Audit Trail, Policy Enforcer, Incident Reporter, Vendor Risk |
+| # | Domain | Agents | Highlights |
+|---|--------|--------|------------|
+| 1 | 👔 **Executive & Strategy** | 18 | CEO Strategist, CTO Technology, OKR Tracker, Board Reporter, M&A Analyst, Investor Relations |
+| 2 | 📈 **Marketing & Growth** | 28 | SEO, Content, Social, Email, PPC, PR, PLG, ABM, Podcast, Influencer, Events, Marketplace |
+| 3 | 💰 **Sales & Revenue** | 24 | Lead Qualifier, Proposals, CRM, Forecast, Deal Desk, Enterprise AE, Channel Sales, SDR Coach |
+| 4 | 🎯 **Customer Success** | 20 | Onboarding, Tickets, Churn Predictor, NPS, QBR, Health Score, Expansion, Advocacy |
+| 5 | 🎨 **Product & UI/UX** | 26 | UI Designer, Wireframes, Design System, A11y, Micro-interactions, User Research, Analytics |
+| 6 | ⚙️ **Engineering** | 35 | API, Models, Auth, Cache, Search, WebSocket, GraphQL, gRPC, Event Sourcing, CQRS, SDK |
+| 7 | 🖥️ **Frontend** | 24 | Components, Pages, Forms, Charts, State, PWA, i18n, Micro-frontends, Web Perf, SSR |
+| 8 | 📱 **Mobile Engineering** | 18 | React Native, Flutter, Native iOS, Native Android, Expo, OTA Updates, App Store, Deep Links |
+| 9 | 🚀 **DevOps** | 34 | CI/CD, GitOps, K8s, Helm, Terraform, Canary, FinOps, Container, Registry, Secrets Rotation |
+| 10 | 🔧 **SRE & Reliability** | 14 | SLO Manager, Error Budget, Incident Commander, Chaos Engineer, Capacity Planner, Postmortem |
+| 11 | 🔒 **Security** | 28 | SAST, DAST, Secrets, Falco, Kyverno, Pentest, Zero Trust, SBOM, Threat Model, Red Team |
+| 12 | 📊 **Data & Analytics** | 24 | Schema, ETL, Dashboards, Forecasting, Vector, Lakehouse, dbt, Data Quality, Lineage |
+| 13 | 🧠 **ML Engineering** | 16 | Model Training, Feature Store, Experiment Tracker, Hyperparameter Tuner, Data Labeling, MLflow |
+| 14 | 🧪 **QA & Testing** | 28 | Unit, E2E, Load, Chaos, Mutation, Visual, Contract, Property-based, Accessibility, API |
+| 15 | 👥 **HR & People** | 16 | Jobs, Interviews, Onboarding, Performance, DEI, L&D, Culture, Workforce Planning |
+| 16 | 💳 **Finance & Billing** | 20 | Stripe, Subscriptions, Tax, Revenue, Runway, FP&A, Treasury, Accounts Payable |
+| 17 | ⚖️ **Legal & Governance** | 14 | ToS, DPA, GDPR, SOC2, SLA, AI Ethics, IP, Export Control, Contract Review |
+| 18 | ✍️ **Content & Comms** | 16 | Tech Writing, Changelogs, Case Studies, Video Scripts, Podcasts, Internal Comms |
+| 19 | 📦 **Supply Chain & Procurement** | 12 | Vendor Scoring, RFP Generator, Inventory Optimizer, Demand Forecast, Logistics |
+| 20 | 🏗️ **Platform Engineering** | 12 | IDP Builder, Service Catalog, Golden Paths, Developer Portal, Backstage, Scaffolder |
+| 21 | 🌐 **Internationalization** | 10 | i18n Manager, Locale Sync, RTL Adapter, Currency Converter, Translation QA, Geo Routing |
+| 22 | 🤖 **AI/ML Operations** | 16 | Model Registry, Serving, Drift Detection, Prompt Optimizer, Eval Runner, Cost Tracker |
+| 23 | 📡 **IoT & Edge** | 10 | Device Manager, Telemetry Collector, Edge Deployer, OTA Updater, Fleet Monitor, Protocol |
+| 24 | 🎓 **Education & Training** | 8 | Course Builder, Quiz Generator, Skill Assessor, Learning Path, Cert Tracker, Lab Runner |
+| 25 | 🏥 **Compliance & Risk** | 12 | Risk Scorer, Audit Trail, Policy Enforcer, Incident Reporter, Vendor Risk, SOX Compliance |
+| 26 | 🎨 **Brand & Creative** | 10 | Brand Identity, Visual Language, Creative Director, Asset Library, Style Guide, Logo System |
+| 27 | 💹 **Revenue Operations** | 12 | Pipeline Analytics, Territory Design, Compensation Plans, CRM Hygiene, Attribution, Quota |
+| 28 | 📚 **Documentation & Knowledge** | 10 | API Docs, Runbook Writer, Architecture Docs, Onboarding Guides, Knowledge Base, ADR Writer |
+| 29 | 🛠️ **Developer Experience** | 10 | DX Tooling, Internal SDK, CLI Builder, Dev Onboarding, Sandbox Manager, API Playground |
+| 30 | 🔬 **Research & Intelligence** | 10 | Market Research, Competitive Analysis, Tech Radar, Patent Monitor, Trend Forecaster, Benchmarker |
 
 </div>
 
-<details>
-<summary><b>📋 View all 385+ agents with IDs and descriptions</b></summary>
+> **Total: 535 agents across 30 domains.** Each domain has distinct, non-overlapping responsibilities. See [`.claude/agents/_registry.yaml`](.claude/agents/_registry.yaml) for the full registry with IDs, models, and entrypoints.
 
-### 👔 Domain 1: Executive & Strategy (15 Agents)
+<details>
+<summary><b>📋 View all 500+ agents with IDs and descriptions (first 3 domains shown)</b></summary>
+
+### 👔 Domain 1: Executive & Strategy (18 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -508,8 +530,14 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 | 10 | `exec-board-reporter` | Board Reporter | Board reports, investor updates, KPI dashboards, milestone tracking |
 | 11 | `exec-competitive-intel` | Competitive Intel | Competitor monitoring, market trends, competitive battle cards |
 | 12 | `exec-decision-logger` | Decision Logger | Strategic decision recording with context, rationale, and outcomes |
+| 13 | `exec-ma-analyst` | M&A Analyst | Acquisition targets, due diligence checklists, valuation modeling, synergy analysis |
+| 14 | `exec-investor-relations` | Investor Relations | Investor communications, quarterly earnings, cap table management |
+| 15 | `exec-strategic-partnerships` | Strategic Partnerships | Partnership pipeline, joint ventures, ecosystem mapping, co-sell programs |
+| 16 | `exec-risk-officer` | Chief Risk Officer | Enterprise risk assessment, risk register, mitigation planning |
+| 17 | `exec-culture-architect` | Culture Architect | Values alignment, culture metrics, engagement programs, eNPS tracking |
+| 18 | `exec-transformation` | Digital Transformation | Transformation roadmaps, change management, innovation pipeline |
 
-### 📈 Domain 2: Marketing & Growth (26 Agents)
+### 📈 Domain 2: Marketing & Growth (28 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -535,8 +563,14 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 | 20 | `mktg-product-launch` | Product Launch | Launch playbook, announcement copy, drip campaigns, press |
 | 21 | `mktg-persona` | Persona Builder | ICP definition, buyer personas, jobs-to-be-done analysis |
 | 22 | `mktg-retention` | Retention Agent | Churn signals, re-engagement campaigns, NPS follow-up |
+| 23 | `mktg-plg-specialist` | PLG Specialist | Product-led growth funnels, activation metrics, self-serve optimization |
+| 24 | `mktg-abm-strategist` | ABM Strategist | Account-based marketing, target account lists, personalized campaigns |
+| 25 | `mktg-event-coordinator` | Event Coordinator | Event planning, sponsorship management, conference strategy |
+| 26 | `mktg-creative-director` | Creative Director | Creative briefs, visual campaign direction, ad creative review |
+| 27 | `mktg-marketplace` | Marketplace Manager | Listing optimization, marketplace SEO, multi-channel selling |
+| 28 | `mktg-partnerships` | Partnership Marketing | Co-marketing campaigns, partner content, joint webinars |
 
-### 💰 Domain 3: Sales & Revenue (22 Agents)
+### 💰 Domain 3: Sales & Revenue (24 Agents)
 
 | # | Agent ID | Name | Description |
 |---|----------|------|-------------|
@@ -558,8 +592,14 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 | 16 | `sales-call-analyzer` | Call Analyzer | Transcript analysis, talk ratio, next-step extraction |
 | 17 | `sales-pipeline-cleaner` | Pipeline Cleaner | Stale deal ID, missing data alerts, stage-appropriate actions |
 | 18 | `sales-commission` | Commission Calculator | Commission calculation, plan modeling, quota attainment |
+| 19 | `sales-revops-analyst` | RevOps Analyst | Pipeline analytics, revenue attribution, sales efficiency metrics |
+| 20 | `sales-deal-desk` | Deal Desk Manager | Deal structuring, discount approvals, non-standard contract negotiations |
+| 21 | `sales-enablement` | Sales Enablement | Training content, playbooks, competitive battle cards, onboarding |
+| 22 | `sales-channel` | Channel Sales | Partner recruitment, channel strategy, reseller programs, co-sell |
+| 23 | `sales-enterprise` | Enterprise AE | Enterprise account strategy, multi-threaded selling, procurement navigation |
+| 24 | `sales-sdr-coach` | SDR Coach | Outreach coaching, sequence optimization, meeting conversion analytics |
 
-### 🎯 Domain 4–15: See [`.claude/agents/_registry.yaml`](.claude/agents/_registry.yaml) for the complete registry
+### 🎯 Domains 4–30: See [`.claude/agents/_registry.yaml`](.claude/agents/_registry.yaml) for the complete registry with all 500+ agents
 
 </details>
 
@@ -620,7 +660,7 @@ pip install graphifyy && graphify install && graphify index .
 
 ## 📖 LLM Wiki — Brain Memory (Karpathy Pattern)
 
-> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Knowledge **compounds** across all 385+ agents — every ingest adds, every query answer is filed back.
+> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Knowledge **compounds** across all 500+ agents — every ingest adds, every query answer is filed back.
 
 > [!NOTE]
 > **Why not RAG?** Karpathy's insight: treat knowledge like code compilation. The LLM reads sources, extracts key info, and integrates it into the wiki — updating entities, revising summaries, noting contradictions. Unlike RAG, knowledge compounds instead of being re-retrieved from scratch every session.
