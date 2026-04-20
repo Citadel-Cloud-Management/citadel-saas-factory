@@ -158,8 +158,8 @@ make status                 # System health (agents, models, rules, skills, prov
 
 Full registry: `.claude/agents/_registry.yaml`
 
-| Domain | Agents | Folder |
-|--------|--------|--------|
+| Domain | Agents | Location |
+|--------|--------|----------|
 | Executive & Strategy | 18 | `.claude/agents/executive/` |
 | Marketing & Growth | 28 | `.claude/agents/marketing/` |
 | Sales & Revenue | 24 | `.claude/agents/sales/` |
@@ -167,29 +167,31 @@ Full registry: `.claude/agents/_registry.yaml`
 | Product & UI/UX | 26 | `.claude/agents/product-design/` |
 | Engineering | 35 | `.claude/agents/engineering/` |
 | Frontend | 24 | `.claude/agents/frontend/` |
-| Mobile Engineering | 18 | `.claude/agents/` |
 | DevOps | 34 | `.claude/agents/devops/` |
-| SRE & Reliability | 14 | `.claude/agents/` |
 | Security | 28 | `.claude/agents/security/` |
 | Data & Analytics | 24 | `.claude/agents/data-analytics/` |
-| ML Engineering | 16 | `.claude/agents/` |
 | QA & Testing | 28 | `.claude/agents/qa-testing/` |
 | HR & People | 16 | `.claude/agents/hr-people/` |
 | Finance & Billing | 20 | `.claude/agents/finance/` |
 | Legal & Governance | 14 | `.claude/agents/legal/` |
 | Content & Comms | 16 | `.claude/agents/content/` |
-| Supply Chain | 12 | `.claude/agents/` |
-| Platform Engineering | 12 | `.claude/agents/` |
-| Internationalization | 10 | `.claude/agents/` |
-| AI/ML Operations | 16 | `.claude/agents/` |
-| IoT & Edge | 10 | `.claude/agents/` |
-| Education & Training | 8 | `.claude/agents/` |
-| Compliance & Risk | 12 | `.claude/agents/` |
-| Brand & Creative | 10 | `.claude/agents/` |
-| Revenue Operations | 12 | `.claude/agents/` |
-| Documentation | 10 | `.claude/agents/` |
-| Developer Experience | 10 | `.claude/agents/` |
-| Research & Intelligence | 10 | `.claude/agents/` |
+| Mobile Engineering | 18 | `_registry.yaml` (scaffold with `make render-agents`) |
+| SRE & Reliability | 14 | `_registry.yaml` (scaffold with `make render-agents`) |
+| ML Engineering | 16 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Supply Chain | 12 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Platform Engineering | 12 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Internationalization | 10 | `_registry.yaml` (scaffold with `make render-agents`) |
+| AI/ML Operations | 16 | `_registry.yaml` (scaffold with `make render-agents`) |
+| IoT & Edge | 10 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Education & Training | 8 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Compliance & Risk | 12 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Brand & Creative | 10 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Revenue Operations | 12 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Documentation | 10 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Developer Experience | 10 | `_registry.yaml` (scaffold with `make render-agents`) |
+| Research & Intelligence | 10 | `_registry.yaml` (scaffold with `make render-agents`) |
+
+> **15 domains** have dedicated folders in `.claude/agents/`. The remaining 15 are defined in `_registry.yaml` and scaffolded on demand with `make render-agents`.
 
 ## Tool Integrations
 

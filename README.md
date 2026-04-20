@@ -256,7 +256,7 @@ GitHub Copilot reads `.github/copilot-instructions.md` — ships with the factor
 # ✅ OpenAI Codex   — connected (o4-mini)
 # ✅ GitHub Copilot — detected (.github/copilot-instructions.md)
 # ✅ MCP servers    — 12 active (github, filesystem, postgres, ...)
-# ✅ Agents         — 385 registered, 42 enabled for your stack
+# ✅ Agents         — 500+ registered, 42 enabled for your stack
 # ✅ Guardrails     — active (threshold: 0.85, validators: 4)
 # ✅ Docker stack   — running (postgres, redis, keycloak, minio, rabbitmq)
 ```
