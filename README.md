@@ -47,9 +47,18 @@
 ```bash
 git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git my-saas
 cd my-saas && cp .env.example .env    # Set at least one API key
+./scripts/setup-claude-code.sh        # Install master prompt + .claude/ scaffolding
 ./scripts/parallel-bootstrap.sh       # Install models, MCP, hooks, agents
-./scripts/verify-install.sh           # Green/red verification report
 claude                                # Or open in Cursor, Codex, Jules, Copilot...
+```
+
+**Install into an existing project** (no need to clone the full factory):
+
+```bash
+# One-liner: clone factory, run setup against your project, done
+git clone https://github.com/Citadel-Cloud-Management/citadel-saas-factory.git /tmp/citadel
+/tmp/citadel/scripts/setup-claude-code.sh /path/to/your/project
+cd /path/to/your/project && claude
 ```
 
 > See the **[full step-by-step guide](#-launch-your-saas-business--step-by-step-guide)** below for detailed setup of Claude Code, OpenAI Codex, Google Jules, and GitHub Copilot.
@@ -117,7 +126,7 @@ cp .env.example .env
 
 ### Step 3: Connect Claude Code
 
-Claude Code is the primary AI coding agent. It reads `.claude/CLAUDE.md` automatically and activates all 500+ agents, rules, skills, and hooks.
+Claude Code is the primary AI coding agent. The setup script installs the master prompt as `CLAUDE.md` and scaffolds the full `.claude/` intelligence layer.
 
 ```bash
 # Install Claude Code (if not already installed)
@@ -126,41 +135,52 @@ npm install -g @anthropic-ai/claude-code
 # Set your Anthropic API key
 export ANTHROPIC_API_KEY="sk-ant-your-key-here"
 
+# Run the setup script — installs CLAUDE.md, commands, hooks, settings, .claudeignore
+./scripts/setup-claude-code.sh
+
 # Launch Claude Code in your project folder
 cd my-company-saas
 claude
-
-# Claude Code automatically detects:
-#   .claude/CLAUDE.md        → project intelligence file
-#   .claude/agents/          → 500+ autonomous agents
-#   .claude/rules/           → coding standards, security, guardrails
-#   .claude/skills/          → specialist capabilities (TDD, API design, etc.)
-#   .claude/hooks/           → pre-commit, post-deploy, guardrails validation
-#   .claude/commands/        → /deploy, /rollback, /scaffold, /audit, /status
 ```
 
-**Claude Code key commands inside your project:**
+**What the setup script installs:**
+
+```
+my-company-saas/
+├── CLAUDE.md                  ← master operating prompt (project constitution)
+├── .claudeignore              ← excludes build artifacts, secrets, node_modules
+├── .mcp.json                  ← MCP server template (GitHub + filesystem)
+└── .claude/
+    ├── settings.json          ← model routing (Haiku/Sonnet/Opus) + guardrails
+    ├── commands/              ← /review, /test-all, /deploy, /security-audit
+    ├── hooks/                 ← auto-lint on file write
+    ├── agents/                ← ready for 500+ agent definitions
+    ├── rules/                 ← coding standards, security policies
+    ├── skills/                ← specialist capabilities
+    ├── memory/                ← persistent project memory
+    ├── mcp/                   ← MCP server configs
+    └── templates/             ← code generation templates
+```
+
+**Install into any existing project** (the key feature):
+
+```bash
+# From the factory repo, target any project on your machine
+./scripts/setup-claude-code.sh /path/to/any/project
+
+# Or use make
+make setup-claude-target TARGET=/path/to/any/project
+```
+
+**Claude Code commands after setup:**
 
 ```bash
 claude                            # Start interactive session
 claude "scaffold user auth"       # One-shot task
-claude "/deploy staging"          # Run a project command
-claude "/status"                  # Check system and agent status
-claude "/audit"                   # Run security + quality audit
-```
-
-**Enable advanced features** in `.claude/settings.json`:
-
-```json
-{
-  "model_routing": {
-    "default": "claude-sonnet-4-6",
-    "cheap": "claude-haiku-4-5-20251001",
-    "premium": "claude-opus-4-7"
-  },
-  "prompt_caching": true,
-  "guardrails": { "enabled": true, "hallucination_threshold": 0.85 }
-}
+/review                           # Code review on current diff
+/test-all                         # Run full test suite
+/deploy staging                   # Deploy to staging
+/security-audit                   # Security scan
 ```
 
 ### Step 4: Connect OpenAI Codex
@@ -316,14 +336,18 @@ Paste the filled YAML + master prompt into Claude Code, and it will execute a 10
 
 ### Claude Code Master Operating Prompt
 
-This repo includes [`CLAUDE_CODE_MASTER_PROMPT.md`](CLAUDE_CODE_MASTER_PROMPT.md) — a drop-in system prompt and `CLAUDE.md` constitution for any Claude Code project. It covers the full 7-layer stack: Runtime, Memory, Skills, MCP, Commands, Orchestration, and Workflows, plus the Agent Development Kit, LLM API internals, RAG selection logic, security posture, and operational playbooks.
+This repo includes [`CLAUDE_CODE_MASTER_PROMPT.md`](CLAUDE_CODE_MASTER_PROMPT.md) — a drop-in system prompt and `CLAUDE.md` constitution for any Claude Code project. It covers the full 7-layer stack: Runtime, Memory, Skills, MCP, Commands, Orchestration, and Workflows, plus the Agent Development Kit (ADK), LLM API internals, RAG architecture selection, security posture, and operational playbooks.
 
 ```bash
-# Use as your project constitution (already included when you clone)
-cp CLAUDE_CODE_MASTER_PROMPT.md CLAUDE.md
+# Automated: run the setup script (installs CLAUDE.md + full .claude/ scaffolding)
+./scripts/setup-claude-code.sh                     # current project
+./scripts/setup-claude-code.sh /path/to/project    # any other project
+make setup-claude                                   # via Makefile
+make setup-claude-target TARGET=/path/to/project    # any other project via Makefile
 
-# Or use as your personal global defaults
-cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md
+# Manual: just copy the file
+cp CLAUDE_CODE_MASTER_PROMPT.md CLAUDE.md           # project constitution
+cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md # personal global defaults
 ```
 
 > [!IMPORTANT]

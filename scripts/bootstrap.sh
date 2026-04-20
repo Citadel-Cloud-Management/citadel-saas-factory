@@ -5,6 +5,11 @@ echo "============================================"
 echo "  Citadel SaaS Factory — Bootstrap"
 echo "============================================"
 
+# Install Claude Code master prompt
+echo ""
+echo "Installing Claude Code master prompt..."
+bash "$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )/setup-claude-code.sh" "$(pwd)" 2>/dev/null || echo "  (skipped — run manually: ./scripts/setup-claude-code.sh)"
+
 # Check prerequisites
 echo ""
 echo "Checking prerequisites..."

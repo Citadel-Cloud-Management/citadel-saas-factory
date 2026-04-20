@@ -1,4 +1,4 @@
-.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks render-agents eval status
+.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks setup-claude setup-claude-target render-agents eval status
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -37,7 +37,7 @@ clean: ## Clean build artifacts
 	find . -type d -name .next -exec rm -rf {} + 2>/dev/null || true
 	docker compose down -v
 
-vault-generate: ## Regenerate the 265 agent notes in docs/vault/agents/
+vault-generate: ## Regenerate the 500+ agent notes in docs/vault/agents/
 	python scripts/generate-vault.py
 	python scripts/sync-vault-memory.py
 
@@ -104,6 +104,13 @@ install-mcp: ## Install MCP server dependencies
 
 install-hooks: ## Install git hooks via Lefthook
 	./scripts/install-hooks.sh
+
+setup-claude: ## Install Claude Code master prompt + .claude/ scaffolding into this project
+	./scripts/setup-claude-code.sh
+
+setup-claude-target: ## Install Claude Code master prompt into another project (usage: make setup-claude-target TARGET=/path/to/project)
+	@if [ -z "$(TARGET)" ]; then echo "Usage: make setup-claude-target TARGET=/path/to/project"; exit 1; fi
+	./scripts/setup-claude-code.sh "$(TARGET)"
 
 render-agents: ## Render agents to Cursor and Antigravity formats
 	./scripts/render-agents.sh

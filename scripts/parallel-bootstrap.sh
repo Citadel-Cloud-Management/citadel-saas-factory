@@ -37,6 +37,10 @@ log "Parallelism: $PARALLELISM"
 log "Dry run: ${DRY_RUN:-no}"
 log ""
 
+# Phase 0: Claude Code master prompt setup
+log "Phase 0: Claude Code master prompt"
+run_task "$REPO_ROOT/scripts/setup-claude-code.sh"
+
 # Phase 1: Detection (must run first)
 log "Phase 1: Business detection"
 run_task "$REPO_ROOT/scripts/detect-business.sh"
