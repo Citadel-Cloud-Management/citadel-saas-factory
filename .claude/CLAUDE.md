@@ -1,84 +1,109 @@
-# Citadel SaaS Factory — Master Intelligence File
+# Citadel SaaS Factory — .claude/ Intelligence Layer
 
-> Universal Full-Stack SaaS Production Framework with 265 Autonomous Business Agents
-> Version 3.0 | citadelcloudmanagement.com
+> This file extends the root [CLAUDE.md](../CLAUDE.md) with .claude/-specific context.
+> The root CLAUDE.md is the project constitution. This file covers the intelligence layer only.
 
-## Overview
+## Intelligence Layer Structure
 
-Citadel SaaS Factory is an infrastructure-agnostic SaaS framework. It runs on any Linux server with SSH and Docker. No cloud vendor lock-in. No proprietary APIs. Supports any VPS, bare metal, on-prem, edge, or home lab. Total software cost: $0/month.
+```
+.claude/
+├── agents/                    ← 500+ agent definitions across 30 domains
+│   ├── _registry.yaml         ← master registry (id, domain, model, enabled, entrypoint)
+│   ├── executive/             ← 18 agents (CEO Strategist, CTO, CFO, OKR, Board, M&A, etc.)
+│   ├── marketing/             ← 28 agents (SEO, Content, Social, Email, PPC, PLG, ABM, etc.)
+│   ├── sales/                 ← 24 agents (Lead Qualifier, Proposals, CRM, Deal Desk, etc.)
+│   ├── customer-success/      ← 20 agents
+│   ├── product-design/        ← 26 agents
+│   ├── engineering/           ← 35 agents
+│   ├── frontend/              ← 24 agents
+│   ├── devops/                ← 34 agents
+│   ├── security/              ← 28 agents
+│   ├── data-analytics/        ← 24 agents
+│   ├── qa-testing/            ← 28 agents
+│   ├── hr-people/             ← 16 agents
+│   ├── finance/               ← 20 agents
+│   ├── legal/                 ← 14 agents
+│   ├── content/               ← 16 agents
+│   └── (standalone agents)    ← api-tester, code-reviewer, deploy-agent, etc.
+├── commands/                  ← slash commands (34 total)
+│   ├── deploy.md, review.md, test.md, plan.md, debug.md
+│   ├── security-review.md, guardrails.md, simplify.md
+│   ├── wiki-ingest.md, wiki-query.md, wiki-lint.md, vault-link.md
+│   └── *.yaml (audit, backup, build, cert, lint, logs, migrate, etc.)
+├── hooks/                     ← lifecycle scripts (11 total)
+│   ├── pre-commit.sh, pre-push.sh
+│   ├── pre-agent.sh, post-agent.sh
+│   ├── pre-deploy.sh, post-deploy.sh
+│   ├── on-file-change.sh, on-error.sh, on-test-fail.sh
+│   ├── on-deploy-fail.sh, on-security-alert.sh
+│   └── vault-autolink.sh
+├── rules/                     ← 23 coding standards
+│   ├── code-quality.md, architecture.md, api-design.md
+│   ├── testing.md, security.md, secrets.md
+│   ├── database.md, frontend.md, devops.md
+│   ├── naming.md, error-handling.md, performance.md
+│   ├── monitoring.md, documentation.md, dependencies.md
+│   ├── accessibility.md, review.md, git.md
+│   ├── guardrails.md, llm-wiki.md, obsidian-backlinks.md
+│   └── (each rule is self-contained with enforcement details)
+├── skills/                    ← specialist capabilities
+│   ├── code-review/SKILL.md, testing/SKILL.md
+│   ├── guardrails/SKILL.md, llm-wiki/SKILL.md
+│   ├── obsidian-linker/SKILL.md, graphify/SKILL.md
+│   ├── deploy/SKILL.md, onboard/SKILL.md
+│   ├── database-migration/SKILL.md, security-audit/SKILL.md
+│   └── (14 standalone .md skills: api-design, debugging, etc.)
+├── memory/                    ← persistent project memory
+│   ├── project-context.md, architecture-decisions.md
+│   ├── agent-learnings.md, error-patterns.md
+│   ├── deployment-history.md, team-preferences.md
+│   └── (append-only, survives across sessions)
+├── mcp/                       ← 8 MCP server configs
+│   ├── github.json, postgres.json, docker.json
+│   ├── kubernetes.json, filesystem.json, redis.json
+│   ├── vault.json, prometheus.json
+│   └── (enable by adding to .mcp.json at root)
+├── templates/                 ← 20 code generation templates
+│   ├── api-endpoint.py.tmpl, model.py.tmpl, service.py.tmpl
+│   ├── component.tsx.tmpl, page.tsx.tmpl, hook.ts.tmpl
+│   ├── test-unit.py.tmpl, test-e2e.ts.tmpl
+│   ├── dockerfile.yml.tmpl, github-action.yml.tmpl
+│   ├── terraform-module.tf.tmpl, helm-values.yaml.tmpl
+│   └── migration.py.tmpl, worker.py.tmpl, schema.py.tmpl
+└── settings.json              ← hooks, permissions, model routing
+```
 
-## Architecture
+## Agent Registry Schema
 
-| Layer | Technology |
-|-------|-----------|
-| Backend | FastAPI (Python 3.12) |
-| Frontend | Next.js 14 (TypeScript) |
-| Database | PostgreSQL 16 |
-| Cache | Redis 7 |
-| Auth | Keycloak 24 (OAuth2, RBAC, MFA) |
-| Storage | MinIO (S3-compatible) |
-| Messaging | RabbitMQ |
-| Orchestration | K3s + ArgoCD (GitOps) |
-| Reverse Proxy | Traefik |
-| Service Mesh | Linkerd (mTLS) |
-| Secrets | HashiCorp Vault |
+Each agent in `_registry.yaml` follows:
 
-## Agent System
+```yaml
+- id: <domain-role>
+  domain: <one of 30 domains>
+  role: "<short description>"
+  model: claude-sonnet-4-6 | claude-haiku-4-5 | claude-opus-4-7
+  enabled: true | false
+  entrypoint: .claude/agents/<domain>/<id>.md
+  skills_required: [...]
+  mcp_required: [...]
+```
 
-265 specialized agents across 15 domains. Full registry: `agents/_registry.yaml`
+## Hook Execution Order
 
-| Domain | Count | Examples |
-|--------|-------|---------|
-| Executive & Strategy | 12 | CEO Strategist, CTO Technology, OKR Tracker |
-| Marketing & Growth | 22 | SEO, Content, Social, Email, PPC, PR |
-| Sales & Revenue | 18 | Lead Qualifier, Proposals, CRM, Forecast |
-| Customer Success | 15 | Onboarding, Tickets, Churn Predictor, NPS |
-| Product & UI/UX | 20 | UI Designer, Wireframes, Design System, A11y |
-| Engineering | 25 | API, Models, Auth, Cache, Search, WebSocket |
-| Frontend | 18 | Components, Pages, Forms, Charts, State, PWA |
-| DevOps | 28 | CI/CD, GitOps, K8s, Helm, Terraform, Canary |
-| Security | 22 | SAST, DAST, Secrets, Falco, Kyverno, Pentest |
-| Data & Analytics | 18 | Schema, ETL, Dashboards, Forecasting, Vector |
-| QA & Testing | 22 | Unit, E2E, Load, Chaos, Mutation, Visual |
-| HR & People | 12 | Jobs, Interviews, Onboarding, Performance |
-| Finance & Billing | 15 | Stripe, Subscriptions, Tax, Revenue, Runway |
-| Legal & Governance | 8 | ToS, DPA, GDPR, SOC2, SLA |
-| Content & Comms | 10 | Tech Writing, Docs, Changelogs, Case Studies |
+1. `pre-agent.sh` → before any agent spawns
+2. `pre-commit.sh` → before git commit (secret scan, lint, test)
+3. `pre-push.sh` → before git push
+4. `pre-deploy.sh` → before deployment
+5. `post-deploy.sh` → after deployment
+6. `post-agent.sh` → after agent completes
+7. `on-error.sh` → on any error
+8. `on-test-fail.sh` → on test failure
+9. `on-deploy-fail.sh` → on deploy failure
+10. `on-security-alert.sh` → on security finding
+11. `vault-autolink.sh` → after writing to docs/vault/
 
-## Tool Integrations
+## Settings (settings.json)
 
-- **Ruflo** — Multi-agent swarm orchestration (314 MCP tools, mesh topology)
-- **Graphify** — Codebase knowledge graph (Tree-sitter AST, 20 languages)
-- **GitHub Actions** — CI/CD with security gates (SAST, SCA, secret scan, container scan)
-
-## Free Toolchain
-
-ArgoCD, K3s, Traefik, Linkerd, Keycloak, Vault, Prometheus, Grafana, Loki, Falco, Kyverno, Semgrep, Trivy, ZAP, Flagsmith, Grafana OnCall, Velero, MinIO, Ansible.
-
-## Commands
-
-| Command | Purpose |
-|---------|---------|
-| `/deploy` | Deploy to target environment |
-| `/rollback` | Emergency rollback |
-| `/scaffold` | Generate code from templates |
-| `/audit` | Run security and quality audit |
-| `/status` | Check system and agent status |
-
-## Conventions
-
-- **Immutability**: Always create new objects, never mutate
-- **Small files**: 200-400 lines typical, 800 max
-- **TDD**: Write tests first, 80% minimum coverage
-- **Conventional commits**: feat, fix, refactor, docs, test, chore, perf, ci
-- **Error handling**: Handle errors at every level, never swallow silently
-
-## Security Rules
-
-- No hardcoded secrets — use environment variables or Vault
-- Validate all user input at system boundaries
-- Parameterized queries only — no SQL string concatenation
-- Rate limiting on all API endpoints
-- CORS, CSRF, XSS protection on all routes
-- Container image scanning before deployment
-- Secret scanning in pre-commit hooks
+- PreToolUse hooks: lint Python (ruff), lint TypeScript (eslint), LLM Wiki reminder
+- PostToolUse hooks: format Python (ruff), format TypeScript (prettier), vault autolink
+- Permissions: allow standard tools, deny reading .env files and writing production configs

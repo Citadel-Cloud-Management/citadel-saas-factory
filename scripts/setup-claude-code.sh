@@ -10,6 +10,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 FACTORY_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 MASTER_PROMPT="$FACTORY_ROOT/CLAUDE_CODE_MASTER_PROMPT.md"
+# Fallback to root CLAUDE.md if master prompt not found
+if [[ ! -f "$MASTER_PROMPT" ]]; then
+  MASTER_PROMPT="$FACTORY_ROOT/CLAUDE.md"
+fi
 TARGET_DIR="${1:-$FACTORY_ROOT}"
 
 # Resolve to absolute path

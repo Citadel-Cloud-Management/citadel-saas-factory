@@ -334,9 +334,9 @@ target_project:
 
 Paste the filled YAML + master prompt into Claude Code, and it will execute a 10-phase autonomous pipeline: fetch, scaffold, install intelligence layers, extract aligned assets, gap analysis, integration plan, ship code, validate, execute, and enter continuous autonomous operation.
 
-### Claude Code Master Operating Prompt
+### Claude Code Project Constitution
 
-This repo includes [`CLAUDE_CODE_MASTER_PROMPT.md`](CLAUDE_CODE_MASTER_PROMPT.md) — a drop-in system prompt and `CLAUDE.md` constitution for any Claude Code project. It covers the full 7-layer stack: Runtime, Memory, Skills, MCP, Commands, Orchestration, and Workflows, plus the Agent Development Kit (ADK), LLM API internals, RAG architecture selection, security posture, and operational playbooks.
+This repo ships with a unified [`CLAUDE.md`](CLAUDE.md) — the project constitution that Claude Code reads automatically. It covers the full stack, all 500+ agents, commands, rules, hooks, MCP connections, model routing, guardrails, and the knowledge layer. A separate [`CLAUDE_CODE_MASTER_PROMPT.md`](CLAUDE_CODE_MASTER_PROMPT.md) provides the deep-dive operating manual (7-layer stack, ADK, LLM API internals, RAG architecture, playbooks).
 
 ```bash
 # Automated: run the setup script (installs CLAUDE.md + full .claude/ scaffolding)
@@ -345,9 +345,10 @@ This repo includes [`CLAUDE_CODE_MASTER_PROMPT.md`](CLAUDE_CODE_MASTER_PROMPT.md
 make setup-claude                                   # via Makefile
 make setup-claude-target TARGET=/path/to/project    # any other project via Makefile
 
-# Manual: just copy the file
-cp CLAUDE_CODE_MASTER_PROMPT.md CLAUDE.md           # project constitution
-cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md # personal global defaults
+# Manual: just copy the files
+cp CLAUDE.md /path/to/project/CLAUDE.md                            # project constitution
+cp CLAUDE_CODE_MASTER_PROMPT.md /path/to/project/CLAUDE.md         # or use the deep-dive version
+cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md                 # personal global defaults
 ```
 
 > [!IMPORTANT]
