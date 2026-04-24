@@ -8,7 +8,7 @@
   "platforms": ["claude-code", "openclaw", "codex"],
   "category": "product",
   "tags": ["prd", "product-requirements", "reverse-engineering", "frontend", "backend", "fullstack", "documentation", "code-analysis", "react", "vue", "angular", "next-js", "nestjs", "django", "fastapi", "express"],
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "commands": {
     "code-to-prd": "/code-to-prd"
   }

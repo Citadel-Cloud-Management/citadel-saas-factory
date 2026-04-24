@@ -1,11 +1,11 @@
 ---
 name: karpathy-check
-description: Run Karpathy's 4-principle review on staged changes or the last commit. Checks complexity, diff noise, hidden assumptions, and goal verification. Usage /karpathy-check [--last-commit]
+description: Run Citadel's 4-principle code quality review on staged changes or the last commit. Checks complexity, diff noise, hidden assumptions, and goal verification. Usage /karpathy-check [--last-commit]
 ---
 
 # /karpathy-check
 
-Review your staged changes (or last commit) against Karpathy's 4 coding principles.
+Review your staged changes (or last commit) against Citadel's 4 coding quality principles.
 
 ## Usage
 
@@ -18,7 +18,7 @@ Review your staged changes (or last commit) against Karpathy's 4 coding principl
 
 1. **Principle #2 (Simplicity):** `scripts/complexity_checker.py` on all changed files — detects over-engineering, premature abstractions, deep nesting, long functions
 2. **Principle #3 (Surgical):** `scripts/diff_surgeon.py` on the diff — detects comment-only changes, whitespace noise, style drift, drive-by refactors
-3. **Principles #1 + #4 (Think + Goals):** The `karpathy-reviewer` agent reads the diff and applies human-judgment checks — hidden assumptions, missing verification
+3. **Principles #1 + #4 (Think + Goals):** The code quality reviewer agent reads the diff and applies human-judgment checks — hidden assumptions, missing verification
 
 ## Output
 

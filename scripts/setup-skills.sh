@@ -2,7 +2,7 @@
 # setup-skills.sh — Initialize the claude-skills integration after cloning
 # Usage: ./scripts/setup-skills.sh [--verify]
 #
-# This script ensures the integrated claude-skills library (from alirezarezvani/claude-skills)
+# This script ensures the integrated claude-skills library (from citadelcloud/claude-skills)
 # is properly configured and executable within the Citadel SaaS Factory.
 
 set -euo pipefail
@@ -25,7 +25,7 @@ error() { echo -e "${RED}[ERR]${NC} $1"; }
 
 echo "============================================"
 echo "  Citadel SaaS Factory — Skills Setup"
-echo "  Source: alirezarezvani/claude-skills v2.3.0"
+echo "  Source: citadelcloud/claude-skills v2.3.0"
 echo "============================================"
 echo ""
 

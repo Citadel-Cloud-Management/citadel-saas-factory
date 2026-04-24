@@ -1,6 +1,6 @@
 # karpathy-coder
 
-> **Active coding discipline enforcer** based on [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.
+> **Active coding discipline enforcer** based on Citadel engineering standards for LLM-assisted coding.
 
 Not just guidelines — ships Python tools that **detect** violations, a review agent, a slash command, and a pre-commit hook.
 
@@ -17,7 +17,7 @@ Not just guidelines — ships Python tools that **detect** violations, a review 
 
 ```bash
 # Install as Claude Code plugin
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 /plugin install karpathy-coder@claude-code-skills
 
 # Run before committing
@@ -97,7 +97,7 @@ The tools are pure Python stdlib. The principles work in any AGENTS.md-aware CLI
 
 ## Attribution
 
-Derived from [Andrej Karpathy's X post](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls. The principles are Karpathy's observations; the tooling, enforcement patterns, and anti-pattern gallery are original.
+These principles address common LLM coding pitfalls observed in the industry. The tooling, enforcement patterns, and anti-pattern gallery are original to Citadel engineering.
 
 ## License
 

@@ -1,6 +1,6 @@
 # Citadel SaaS Factory — Agent Registry
-# 265 Autonomous Business Agents across 15 Domains
-# Version 3.0
+# 500+ Autonomous Business Agents across 30 Domains
+# Version 4.0
 
 agents:
   # ─── Domain 1: Executive & Strategy (12) ───
@@ -1092,3 +1092,59 @@ agents:
     name: README Generator
     domain: content
     description: Repo READMEs, quickstart, badges
+
+  # ─── Council Framework (9 agents) ───
+  - id: council-researcher
+    name: Council Researcher
+    domain: council
+    description: Surfaces context, facts, precedents, threat intelligence, prior art
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-strategist
+    name: Council Strategist
+    domain: council
+    description: Structures plans, sequencing, phased execution, workstream design
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-creative
+    name: Council Creative
+    domain: council
+    description: Generates novel approaches, contrarian architecture, DX innovations
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-critic
+    name: Council Critic
+    domain: council
+    description: Challenges assumptions, audits interfaces, identifies hidden complexity
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-devils-advocate
+    name: Council Devil's Advocate
+    domain: council
+    description: Argues hardest against consensus, constructs breach scenarios, finds regressions
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-ethicist
+    name: Council Ethicist
+    domain: council
+    description: Evaluates data ethics, consent, fairness, compliance, unintended consequences
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-implementer
+    name: Council Implementer
+    domain: council
+    description: Produces complete working code, remediation fixes, parallel workstream execution
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-fact-checker
+    name: Council Fact-Checker
+    domain: council
+    description: Verifies accuracy, flags overconfidence, validates fixes, confidence calibration
+    model: claude-sonnet-4-6
+    skills_required: [council]
+  - id: council-orchestrator
+    name: Council Orchestrator
+    domain: council
+    description: Synthesizes all agents into final recommendation, manages merge sequences, deployment
+    model: claude-opus-4-7
+    skills_required: [council]

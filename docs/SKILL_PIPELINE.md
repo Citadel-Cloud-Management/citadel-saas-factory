@@ -156,9 +156,9 @@ skill-name/
   "name": "skill-name",
   "description": "One-line description",
   "version": "1.0.0",
-  "author": "alirezarezvani",
-  "homepage": "https://github.com/alirezarezvani/claude-skills",
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "author": "citadelcloud",
+  "homepage": "https://github.com/citadelcloud/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "license": "MIT",
   "skills": "./"
 }
@@ -200,7 +200,7 @@ skill-name/
 ```bash
 # Claude Code marketplace (via plugin in repo)
 # Users install with:
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 /plugin install skill-name@claude-code-skills
 ```
 
@@ -224,7 +224,7 @@ clawhub publish ./category/skill-name
 ### Codex CLI Registry
 ```bash
 # Users install with:
-npx agent-skills-cli add alirezarezvani/claude-skills --skill skill-name
+npx agent-skills-cli add citadelcloud/claude-skills --skill skill-name
 ```
 
 ---
@@ -270,7 +270,7 @@ description: <what this command does>
 ```bash
 # 1. Register marketplace (if not already)
 # In Claude Code:
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 
 # 2. Install the skill
 /plugin install <skill-name>@claude-code-skills

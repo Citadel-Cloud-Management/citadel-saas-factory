@@ -28,10 +28,6 @@
       "env": {
         "KUBECONFIG": "${KUBECONFIG}"
       }
-    },
-    "ruflo": {
-      "command": "npx",
-      "args": ["-y", "ruflo@latest", "mcp", "start"]
     }
   }
 }

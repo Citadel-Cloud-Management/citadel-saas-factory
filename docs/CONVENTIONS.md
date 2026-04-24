@@ -93,11 +93,11 @@ If your skill includes a `.claude-plugin/plugin.json`, use this **exact schema**
   "description": "One-line description matching SKILL.md",
   "version": "2.1.2",
   "author": {
-    "name": "Alireza Rezvani",
-    "url": "https://alirezarezvani.com"
+    "name": "Citadel Cloud",
+    "url": "https://citadelcloudmanagement.com"
   },
-  "homepage": "https://github.com/alirezarezvani/claude-skills/tree/main/<domain>/<skill>",
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "homepage": "https://github.com/citadelcloud/claude-skills/tree/main/<domain>/<skill>",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "license": "MIT",
   "skills": "./"
 }

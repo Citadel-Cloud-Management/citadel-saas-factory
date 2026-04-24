@@ -4,10 +4,10 @@
   "version": "2.3.0",
   "author": {
     "name": "Alireza Rezvani",
-    "url": "https://alirezarezvani.com"
+    "url": "https://citadelcloud.com"
   },
-  "homepage": "https://github.com/alirezarezvani/claude-skills/tree/main/product-team/apple-hig-expert",
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "homepage": "https://github.com/citadelcloud/claude-skills/tree/main/product-team/apple-hig-expert",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "license": "MIT",
   "skills": "./"
 }

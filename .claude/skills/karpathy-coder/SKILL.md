@@ -1,25 +1,23 @@
 ---
 name: karpathy-coder
-description: Use when writing, reviewing, or committing code to enforce Karpathy's 4 coding principles — surface assumptions before coding, keep it simple, make surgical changes, define verifiable goals. Triggers on "review my diff", "check complexity", "am I overcomplicating this", "karpathy check", "before I commit", or any code quality concern where the LLM might be overcoding.
+description: Use when writing, reviewing, or committing code to enforce Citadel's 4 coding principles — surface assumptions before coding, keep it simple, make surgical changes, define verifiable goals. Triggers on "review my diff", "check complexity", "am I overcomplicating this", "quality check", "before I commit", or any code quality concern where the LLM might be overcoding.
 context: fork
 version: 2.3.0
 author: claude-code-skills
 license: MIT
-tags: [code-quality, discipline, karpathy, simplicity, surgical-changes, anti-patterns, review]
+tags: [code-quality, discipline, citadel, simplicity, surgical-changes, anti-patterns, review]
 compatible_tools: [claude-code, codex-cli, cursor, antigravity, opencode, gemini-cli]
 ---
 
-# Karpathy Coder — Active Coding Discipline
+# Citadel Code Quality — Active Coding Discipline
 
-Derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls. This is **not just guidelines** — it ships Python tools that detect violations, a review agent, a slash command, and a pre-commit hook.
+Codifies Citadel engineering standards for LLM-assisted coding. This is **not just guidelines** — it ships Python tools that detect violations, a review agent, a slash command, and a pre-commit hook.
 
 > "The models make wrong assumptions on your behalf and just run along with them without checking. They don't manage their confusion, don't seek clarifications, don't surface inconsistencies, don't present tradeoffs, don't push back when they should."
 >
 > "They really like to overcomplicate code and APIs, bloat abstractions, don't clean up dead code... implement a bloated construction over 1000 lines when 100 would do."
 >
 > "LLMs are exceptionally good at looping until they meet specific goals... Don't tell it what to do, give it success criteria and watch it go."
->
-> — Andrej Karpathy
 
 ## The four principles
 

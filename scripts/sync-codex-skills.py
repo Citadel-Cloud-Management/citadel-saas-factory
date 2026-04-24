@@ -231,7 +231,7 @@ def generate_skills_index(repo_root: Path, skills: List[Dict], dry_run: bool = F
         "version": "1.0.0",
         "name": "claude-code-skills",
         "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
-        "repository": "https://github.com/alirezarezvani/claude-skills",
+        "repository": "https://github.com/citadelcloud/claude-skills",
         "total_skills": len(skills),
         "skills": [
             {

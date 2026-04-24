@@ -7,7 +7,7 @@ layer: raw
 
 # Raw Sources — Layer 1 of the LLM Wiki
 
-This directory is the **immutable source-of-truth layer** of the Citadel LLM Wiki (Karpathy pattern).
+This directory is the **immutable source-of-truth layer** of the Citadel LLM Wiki.
 
 ## Rules
 
@@ -33,9 +33,9 @@ raw/
 When a new source lands here, run:
 
 ```bash
-make wiki-ingest FILE=raw/articles/karpathy-llm-wiki.md
+make wiki-ingest FILE=raw/articles/llm-wiki-pattern.md
 # or inside Claude Code:
-# /project:wiki-ingest raw/articles/karpathy-llm-wiki.md
+# /project:wiki-ingest raw/articles/llm-wiki-pattern.md
 ```
 
 The [[../../../.claude/agents/wiki-curator|wiki-curator agent]] reads the source, writes a summary page to `wiki/sources/`, updates the entity and concept pages it touches, and appends an entry to `wiki/log.md`.

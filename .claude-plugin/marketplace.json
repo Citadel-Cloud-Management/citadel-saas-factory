@@ -1,12 +1,12 @@
 {
   "name": "claude-code-skills",
   "owner": {
-    "name": "Alireza Rezvani",
-    "url": "https://alirezarezvani.com"
+    "name": "Citadel Cloud",
+    "url": "https://citadelcloudmanagement.com"
   },
   "description": "235 production-ready skill packages for Claude AI across 9 domains: marketing (44), engineering (45+37), C-level advisory (34), regulatory/QMS (14), product (16), project management (9), business growth (5), and finance (4). Includes 314 Python tools, 435 reference documents, 28 agents, and 27 slash commands.",
-  "homepage": "https://github.com/alirezarezvani/claude-skills",
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "homepage": "https://github.com/citadelcloud/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "metadata": {
     "description": "235 production-ready skill packages across 9 domains with 314 Python tools, 435 reference documents, 28 agents, and 27 slash commands. Compatible with Claude Code, Codex CLI, Hermes Agent, Cursor, Antigravity, OpenCode, Gemini CLI, and OpenClaw.",
     "version": "2.3.0"
@@ -18,7 +18,7 @@
       "description": "44 marketing skills across 7 pods: Content, SEO, CRO, Channels, Growth, Intelligence, Sales enablement, and X/Twitter growth. 51 Python tools, 73 reference docs.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "marketing",
@@ -42,7 +42,7 @@
       "description": "28 C-level advisory skills: virtual board of directors (CEO, CTO, COO, CPO, CMO, CFO, CRO, CISO, CHRO), executive mentor, founder coach, orchestration (Chief of Staff, board meetings, decision logger), strategic capabilities (board deck builder, scenario war room, competitive intel, M&A playbook), and culture frameworks.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "ceo",
@@ -62,7 +62,7 @@
       "description": "44 advanced engineering skills: agent designer, agent workflow designer, AgentHub, RAG architect, database designer, focused-fix, browser-automation, spec-driven-workflow, secrets-vault-manager, sql-database-assistant, migration architect, observability designer, dependency auditor, release manager, API reviewer, CI/CD pipeline builder, MCP server builder, skill security auditor, performance profiler, Helm chart builder, Terraform patterns, self-eval, llm-cost-optimizer, prompt-governance, behuman, code-tour, demo-video, data-quality-auditor, statistical-analyst, llm-wiki (second brain for Obsidian + Claude Code, Karpathy pattern), and more.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "agent-design",
@@ -85,7 +85,7 @@
       "description": "36 engineering skills: architecture, frontend, backend, fullstack, QA, DevOps, security, AI/ML, data engineering, Playwright (9 sub-skills), self-improving agent, Stripe integration, TDD guide, tech stack evaluator, Google Workspace CLI, a11y audit (WCAG 2.2), Azure cloud architect, GCP cloud architect, security pen testing, Snowflake development, adversarial-reviewer, ai-security, cloud-security, incident-response, red-team, threat-detection.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "engineering",
@@ -112,7 +112,7 @@
       "description": "13 regulatory affairs & quality management skills for HealthTech/MedTech: ISO 13485 QMS, MDR 2017/745, FDA 510(k)/PMA, GDPR/DSGVO, ISO 27001 ISMS, CAPA management, risk management, clinical evaluation, SOC 2 compliance.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "regulatory",
@@ -132,7 +132,7 @@
       "description": "15 product skills with 17 Python tools: product manager toolkit (RICE, PRDs), agile product owner, product strategist, UX researcher, UI design system, competitive teardown, landing page generator, SaaS scaffolder, product analytics, experiment designer, product discovery, roadmap communicator, code-to-prd, research summarizer, apple-hig-expert.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "product",
@@ -159,7 +159,7 @@
       "description": "6 project management skills with 12 Python tools: senior PM, scrum master, Jira expert, Confluence expert, Atlassian admin, template creator.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "project-management",
@@ -177,7 +177,7 @@
       "description": "4 business & growth skills: customer success manager, sales engineer, revenue operations, contract & proposal writer.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "customer-success",
@@ -194,7 +194,7 @@
       "description": "3 finance skills: financial analyst (ratio analysis, DCF valuation, budgeting, forecasting), SaaS metrics coach (ARR, MRR, churn, CAC, LTV, NRR, Quick Ratio, projections), and business investment advisor. 7 Python automation tools.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "finance",
@@ -218,7 +218,7 @@
       "description": "Production-grade Playwright testing toolkit. 9 skills, 3 agents, 55 templates, TestRail + BrowserStack MCP integrations. Generate tests, fix flaky failures, migrate from Cypress/Selenium.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "playwright",
@@ -237,7 +237,7 @@
       "description": "Curate auto-memory, promote learnings to CLAUDE.md and rules, extract patterns into skills. Ships 5 slash commands (/si:review, /si:promote, /si:extract, /si:status, /si:remember) and 2 sub-agents (memory-analyst, skill-extractor).",
       "version": "2.3.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "memory",
@@ -253,7 +253,7 @@
       "description": "Autonomous experiment loop — optimize any file by a measurable metric. 5 slash commands (/ar:setup, /ar:run, /ar:loop, /ar:status, /ar:resume), 8 built-in evaluators, configurable loop intervals (10min to monthly).",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "autoresearch",
@@ -272,7 +272,7 @@
       "description": "SEO-optimized marketing content with brand voice analysis, content frameworks, and social media templates.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "content",
@@ -288,7 +288,7 @@
       "description": "Multi-channel demand generation, paid media optimization, SEO strategy, and partnership programs.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "demand-gen",
@@ -303,7 +303,7 @@
       "description": "Full-stack engineering with React, Node, databases, and deployment.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "fullstack",
@@ -319,7 +319,7 @@
       "description": "AWS serverless architecture design with IaC templates, cost optimization, and CI/CD pipelines.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "aws",
@@ -335,7 +335,7 @@
       "description": "Product management toolkit with RICE scoring, customer interview analysis, and PRD generation.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "product",
@@ -351,7 +351,7 @@
       "description": "Sprint health analysis, velocity tracking, and retrospective facilitation.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "scrum",
@@ -367,7 +367,7 @@
       "description": "Security audit and vulnerability scanner for AI agent skills. Scans for malicious patterns, prompt injection, data exfiltration, and unsafe file operations.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "security",
@@ -383,7 +383,7 @@
       "description": "Google Workspace administration via the gws CLI. Install, authenticate, and automate Gmail, Drive, Sheets, Calendar, Docs, Chat, and Tasks. 5 Python tools, 3 reference guides, 43 built-in recipes, 10 persona bundles.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "google-workspace",
@@ -402,7 +402,7 @@
       "description": "Reverse-engineer any codebase into a complete PRD. Frontend (React, Vue, Angular, Next.js), backend (NestJS, Django, Express, FastAPI), and fullstack. 2 Python scripts (codebase_analyzer, prd_scaffolder), 2 reference guides, /code-to-prd slash command.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "prd",
@@ -429,7 +429,7 @@
       "description": "Multi-agent collaboration — spawn N parallel subagents that compete on code optimization, content drafts, research approaches, or any task that benefits from diverse solutions. 7 slash commands (/hub:init, /hub:spawn, /hub:status, /hub:eval, /hub:merge, /hub:board, /hub:run), agent templates, DAG-based orchestration, LLM judge mode, message board coordination.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "multi-agent",
@@ -451,7 +451,7 @@
       "description": "WCAG 2.2 accessibility audit and fix for React, Next.js, Vue, Angular, Svelte, and HTML. Static scanner detecting 20+ violation types, contrast checker with suggest mode, framework-specific fix patterns, /a11y-audit slash command.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "accessibility",
@@ -470,7 +470,7 @@
       "description": "Adversarial thinking partner for founders and executives. Stress-tests plans, prepares for board meetings, navigates hard calls, runs postmortems. 5 sub-skills with slash commands.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "executive",
@@ -488,7 +488,7 @@
       "description": "Docker and container development — Dockerfile optimization, docker-compose orchestration, multi-stage builds, security hardening, and CI/CD container pipelines.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "docker",
@@ -505,7 +505,7 @@
       "description": "Helm chart development — chart scaffolding, values design, template patterns, dependency management, and Kubernetes deployment strategies.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "helm",
@@ -522,7 +522,7 @@
       "description": "Terraform infrastructure-as-code — module design patterns, state management, provider configuration, CI/CD integration, and multi-environment strategies.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "terraform",
@@ -539,7 +539,7 @@
       "description": "Structured research summarization — summarize academic papers, market research, user interviews, and competitive analysis into actionable insights.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "research",
@@ -556,7 +556,7 @@
       "description": "Create CodeTour .tour files — persona-targeted, step-by-step walkthroughs that link to real files and line numbers. 10 developer personas, all CodeTour step types, SMIG description formula.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "codetour",
@@ -573,7 +573,7 @@
       "description": "Create polished demo videos from screenshots and scene descriptions. Orchestrates playwright, ffmpeg, and edge-tts with story structure, scene design system, and narration guidance.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "video",
@@ -591,7 +591,7 @@
       "description": "Audit datasets for completeness, consistency, accuracy, and validity. 3 stdlib-only Python tools: data profiler with DQS scoring, missing value analyzer with MCAR/MAR/MNAR classification, and multi-method outlier detector.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "data-quality",
@@ -608,7 +608,7 @@
       "description": "Hypothesis testing, A/B experiment analysis, sample size calculation, and confidence intervals. 3 stdlib-only Python tools: Z-test/t-test/chi-square with effect sizes, sample size calculator with power tradeoffs, and Wilson score confidence intervals.",
       "version": "2.2.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "statistics",
@@ -625,7 +625,7 @@
       "description": "Master Apple's Human Interface Guidelines (HIG) with focus on 2026 Liquid Glass aesthetics. Design and audit iOS, macOS, and visionOS apps for full compliance and premium feel. Includes hig_checker Python tool for tap targets and contrast.",
       "version": "2.3.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "apple-hig",
@@ -645,7 +645,7 @@
       "description": "A second brain for Claude Code + Obsidian inspired by Karpathy's LLM Wiki gist. Turn any LLM CLI into a disciplined wiki maintainer: incrementally ingest sources into a persistent, interlinked markdown vault; update entity/concept/source pages; flag contradictions; maintain index and append-only log. Knowledge compounds instead of being re-derived by RAG on every query. Ships 3 sub-agents (wiki-ingestor, wiki-librarian, wiki-linter), 5 slash commands (/wiki-init, /wiki-ingest, /wiki-query, /wiki-lint, /wiki-log), 8 Python tools (stdlib only: init_vault, ingest_source, update_index, append_log, wiki_search BM25, lint_wiki, graph_analyzer, export_marp), 8 reference docs, full vault templates (CLAUDE.md, AGENTS.md, cursorrules, 5 page templates), and a worked example vault. Cross-tool compatible with Claude Code, Codex CLI, Cursor, Antigravity, OpenCode, and Gemini CLI.",
       "version": "2.3.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "knowledge-management",
@@ -667,7 +667,7 @@
       "description": "Active coding discipline enforcer based on Karpathy's 4 principles: surface assumptions, simplify, make surgical changes, define verifiable goals. Ships 4 Python tools (complexity_checker, diff_surgeon, assumption_linter, goal_verifier), a review agent, /karpathy-check command, and pre-commit hook. All stdlib-only.",
       "version": "2.3.0",
       "author": {
-        "name": "Alireza Rezvani"
+        "name": "Citadel Cloud"
       },
       "keywords": [
         "code-quality",

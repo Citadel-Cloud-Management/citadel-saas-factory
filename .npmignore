@@ -33,7 +33,6 @@ logs/
 .cursorindexignore
 .coderabbit.yml
 docker-compose.yml
-ruflo.config.yaml
 BUSINESS_PROFILE.yaml
 
 # Dev artifacts

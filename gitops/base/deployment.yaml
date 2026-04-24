@@ -22,7 +22,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: backend
-          image: ghcr.io/kogunlowo123/citadel-saas-factory/backend:latest
+          image: ghcr.io/Citadel-Cloud-Management/citadel-saas-factory/backend:latest
           ports:
             - containerPort: 8000
           livenessProbe:

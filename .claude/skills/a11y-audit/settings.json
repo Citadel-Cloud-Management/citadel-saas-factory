@@ -8,7 +8,7 @@
   "platforms": ["claude-code", "openclaw", "codex"],
   "category": "engineering",
   "tags": ["accessibility", "a11y", "wcag", "aria", "screen-reader", "keyboard-navigation", "contrast", "react", "vue", "angular", "nextjs", "svelte"],
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "commands": {
     "a11y-audit": "/a11y-audit"
   }

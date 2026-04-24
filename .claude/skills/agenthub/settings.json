@@ -8,7 +8,7 @@
   "platforms": ["claude-code", "openclaw", "codex"],
   "category": "engineering",
   "tags": ["multi-agent", "collaboration", "parallel", "git-dag", "orchestration", "competition", "content-generation", "research", "optimization"],
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "commands": {
     "init": "/hub:init",
     "spawn": "/hub:spawn",

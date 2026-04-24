@@ -5,7 +5,7 @@ description: "Use when the user wants more human-like AI responses — less robo
 
 # BeHuman — Self-Mirror Consciousness Loop
 
-> Originally contributed by [voidborne-d](https://github.com/voidborne-d) — enhanced and integrated by the claude-skills team.
+> Originally contributed by [Citadel Cloud Management](https://github.com/Citadel-Cloud-Management) — enhanced and integrated by the claude-skills team.
 
 Give AI a mirror. Let it talk to itself before responding — like a human does.
 

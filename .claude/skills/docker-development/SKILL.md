@@ -342,7 +342,7 @@ Flag these without being asked:
 
 ### One-liner (any tool)
 ```bash
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cp -r claude-skills/engineering/docker-development ~/.claude/skills/
 ```
 

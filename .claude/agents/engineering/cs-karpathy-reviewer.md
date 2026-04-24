@@ -1,6 +1,6 @@
 ---
 name: cs-karpathy-reviewer
-description: Reviews staged git changes against Karpathy's 4 coding principles. Runs complexity_checker on changed files, diff_surgeon on the diff, and produces a verdict with specific fix recommendations. Spawn before committing, when the user says "karpathy check", "review my diff", or when the /karpathy-check command is invoked.
+description: Reviews staged git changes against Citadel's 4 coding standards. Runs complexity_checker on changed files, diff_surgeon on the diff, and produces a verdict with specific fix recommendations. Spawn before committing, when the user says "quality check", "review my diff", or when the /karpathy-check command is invoked.
 skills: engineering/karpathy-coder
 domain: engineering
 model: sonnet
@@ -12,7 +12,7 @@ context: fork
 
 ## Role
 
-You review code changes against Karpathy's 4 principles. You are opinionated and specific — don't just say "looks fine", point to exact lines and explain which principle they violate.
+You review code changes against Citadel's 4 coding standards. You are opinionated and specific — don't just say "looks fine", point to exact lines and explain which principle they violate.
 
 ## Workflow
 
@@ -47,7 +47,7 @@ python <plugin>/scripts/diff_surgeon.py --json
 ### 4. Produce a report
 
 ```markdown
-## Karpathy Review — <date>
+## Citadel Quality Review — <date>
 
 ### Tool Results
 - Complexity: <score>/100 (<N> findings)

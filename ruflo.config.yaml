@@ -23,7 +23,7 @@ swarm:
     - documenter
 hooks:
   session_start:
-    - command: "ruflo check --global"
+    - command: "echo 'Citadel session ready'"
       timeout: 30000
 mcp:
   enabled: true

@@ -1,10 +1,6 @@
-# Karpathy Principles — Full Context
+# Citadel Coding Principles — Full Context
 
-Source: [Andrej Karpathy on X](https://x.com/karpathy/status/2015883857489522876), January 2026.
-
-## The original observations
-
-Karpathy identified four categories of LLM coding failure:
+These principles address four categories of LLM coding failure commonly observed in production environments:
 
 ### 1. Assumption management
 

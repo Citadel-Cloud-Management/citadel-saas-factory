@@ -13,11 +13,11 @@
 [![Domains](https://img.shields.io/badge/Domains-30-E91E63?style=for-the-badge&logo=target&logoColor=white)](#-all-500-agents--30-domains)
 [![IDEs](https://img.shields.io/badge/IDEs-12_Supported-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#-cross-ide-support)
 [![Cost](https://img.shields.io/badge/Cost-$0/month-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](#-free-toolchain)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
+[![AI Powered](https://img.shields.io/badge/AI-Powered-blueviolet?style=for-the-badge)](#)
 
 <br/>
 
-[🌐 Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) &nbsp;|&nbsp; [📦 npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) &nbsp;|&nbsp; [**❤️ Sponsor**](https://cash.app/$KennyOgunlowo) &nbsp;|&nbsp; [🏢 citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+[📦 npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) &nbsp;|&nbsp; [🏢 citadelcloudmanagement.com](https://citadelcloudmanagement.com)
 
 <br/>
 
@@ -630,65 +630,12 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 
 ---
 
-## 🔗 Ruflo — Multi-Agent Swarm Orchestration
+## 📖 LLM Wiki — Brain Memory
 
-> [github.com/ruvnet/ruflo](https://github.com/ruvnet/ruflo) &nbsp;·&nbsp; [npm: claude-flow](https://www.npmjs.com/package/claude-flow) &nbsp;·&nbsp; [MCP Market](https://mcpmarket.com/server/ruflo)
-
-```bash
-curl -fsSL https://cdn.jsdelivr.net/gh/ruvnet/ruflo@main/scripts/install.sh | bash
-ruflo init
-```
-
-> [!TIP]
-> Most adopted open-source multi-agent platform of 2026 — **84.8% SWE-bench solve rate**, **75% API cost savings** vs direct Claude Code.
-
-| Feature | Description |
-|---------|-------------|
-| 🕸️ **Mesh topology** | Peer-to-peer agent communication, no central bottleneck |
-| 🧰 **87 native MCP tools** | Orchestration, swarm coordination, neural processing, system management |
-| 🧠 **SONA neural routing** | Sub-millisecond HNSW vector memory with 9 reinforcement learning algorithms |
-| 🎯 **16 specialist agent roles** | Pre-built + custom types in coordinated swarms |
-| 🔄 **Self-learning swarms** | Fault-tolerant consensus with enterprise-grade security |
-| ⚡ **CYCLE_INTERVAL=0** | Zero-latency agent activation |
-| 📊 **RAG integration** | Built-in retrieval-augmented generation pipelines |
-| 🔌 **Claude Code + Codex native** | MCP namespace `mcp__claude-flow__` for direct tool access |
-| 🛡️ **Enterprise security** | Distributed swarm intelligence with access controls |
-| 💾 **Memory persistence** | Agent learnings persist across sessions via hive-mind |
-
----
-
-## 🕸️ Graphify — Codebase Knowledge Graph
-
-> [github.com/safishamsi/graphify](https://github.com/safishamsi/graphify) &nbsp;·&nbsp; [PyPI: graphifyy](https://pypi.org/project/graphifyy/) &nbsp;·&nbsp; [graphify.net](https://graphify.net/)
-
-```bash
-pip install graphifyy && graphify install && graphify index .
-```
-
-> [!TIP]
-> **71.5x fewer tokens** per query vs reading raw files. Code processed locally via Tree-sitter — no file contents leave your machine.
-
-| Feature | Description |
-|---------|-------------|
-| 🌳 **Tree-sitter AST parsing** | 25 languages: Python, JS, TS, Go, Rust, Java, C, C++, Ruby, C#, Kotlin, Scala, PHP, Swift, Lua, Zig, PowerShell, Elixir, Obj-C, Julia, Verilog, SystemVerilog, Vue, Svelte, Dart |
-| 🔍 **Semantic search** | Find code by meaning, not just text — concept-based queries |
-| 📊 **Architecture visualization** | Auto-generate dependency diagrams and community clusters |
-| 🔗 **Symbol resolution** | Cross-file dependency tracking with call graphs |
-| 📝 **Wiki export** (`--wiki`) | Wikipedia-style markdown articles per community with `index.md` entry point |
-| 👁️ **Vision support** | LLMs extract concepts from prose; vision models read diagrams |
-| 🔄 **Auto-sync** (`--watch`) | Graph updates live as your codebase changes — instant AST rebuilds |
-| 🔒 **Privacy-first** | Code files parsed locally via Tree-sitter — zero data exfiltration |
-| 🌐 **Cross-IDE** | Works with Claude Code, Codex, Cursor, Gemini CLI, Copilot CLI, Antigravity, OpenClaw, Factory Droid, Trae |
-| 📈 **Leiden clustering** | NetworkX + Leiden community detection for god-node and surprising-connection discovery |
-
----
-
-## 📖 LLM Wiki — Brain Memory (Karpathy Pattern)
-
-> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Knowledge **compounds** across all 500+ agents — every ingest adds, every query answer is filed back.
+> Citadel's agent fleet uses the LLM Wiki pattern as persistent brain memory. Knowledge **compounds** across all 500+ agents — every ingest adds, every query answer is filed back.
 
 > [!NOTE]
-> **Why not RAG?** Karpathy's insight: treat knowledge like code compilation. The LLM reads sources, extracts key info, and integrates it into the wiki — updating entities, revising summaries, noting contradictions. Unlike RAG, knowledge compounds instead of being re-retrieved from scratch every session.
+> **Why not RAG?** The LLM Wiki treats knowledge like code compilation. The LLM reads sources, extracts key info, and integrates it into the wiki — updating entities, revising summaries, noting contradictions. Unlike RAG, knowledge compounds instead of being re-retrieved from scratch every session.
 
 ```
 docs/vault/
@@ -924,7 +871,7 @@ docker compose --profile ai up -d           # + Ollama local AI
 **Kehinde Ogunlowo**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kehinde-ogunlowo/)
-[![Architecture](https://img.shields.io/badge/Architecture_Diagram-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://kogunlowo123.github.io/kehinde-architecture-diagram/)
+[![Architecture](https://img.shields.io/badge/Architecture_Diagram-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://citadelcloudmanagement.com/architecture-diagram/)
 [![Sponsor](https://img.shields.io/badge/❤️_Sponsor_via_Cash_App-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](https://cash.app/$KennyOgunlowo)
 
 ---

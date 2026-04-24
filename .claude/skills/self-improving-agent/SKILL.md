@@ -44,7 +44,7 @@ Claude Code's auto-memory (v2.1.32+) automatically records project patterns, deb
 
 ### Claude Code (Plugin)
 ```
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 /plugin install self-improving-agent@claude-code-skills
 ```
 

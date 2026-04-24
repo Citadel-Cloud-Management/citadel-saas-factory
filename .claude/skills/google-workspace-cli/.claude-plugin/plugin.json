@@ -4,10 +4,10 @@
   "description": "Google Workspace administration via the gws CLI. Install, authenticate, and automate Gmail, Drive, Sheets, Calendar, Docs, Chat, and Tasks. 5 Python tools, 3 reference guides, 43 built-in recipes, 10 persona bundles.",
   "author": {
     "name": "Alireza Rezvani",
-    "url": "https://alirezarezvani.com"
+    "url": "https://citadelcloud.com"
   },
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "license": "MIT",
   "skills": "./",
-  "homepage": "https://github.com/alirezarezvani/claude-skills/tree/main/engineering-team/google-workspace-cli"
+  "homepage": "https://github.com/citadelcloud/claude-skills/tree/main/engineering-team/google-workspace-cli"
 }

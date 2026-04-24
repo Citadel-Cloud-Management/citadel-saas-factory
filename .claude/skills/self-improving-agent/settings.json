@@ -8,7 +8,7 @@
   "platforms": ["claude-code", "openclaw", "codex"],
   "category": "development",
   "tags": ["memory", "auto-memory", "self-improvement", "learning", "rules", "skills"],
-  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "repository": "https://github.com/citadelcloud/claude-skills",
   "commands": {
     "review": "/si:review",
     "promote": "/si:promote",

@@ -16,7 +16,7 @@ Citadel SaaS Factory is an infrastructure-agnostic SaaS framework driven by **26
 
 ## How the wiki fits in
 
-This wiki is the **persistent brain memory** of the Citadel agent fleet. Following Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f), it compounds knowledge across sessions instead of re-deriving everything from scratch on every question.
+This wiki is the **persistent brain memory** of the Citadel agent fleet. Following the LLM Wiki pattern, it compounds knowledge across sessions instead of re-deriving everything from scratch on every question.
 
 The wiki has three layers:
 

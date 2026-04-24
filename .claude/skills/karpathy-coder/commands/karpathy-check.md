@@ -1,11 +1,11 @@
 ---
 name: karpathy-check
-description: Run Karpathy's 4-principle review on staged changes or the last commit. Checks complexity, diff noise, hidden assumptions, and goal verification. Usage /karpathy-check [--last-commit]
+description: Run Citadel's 4-principle code quality review on staged changes or the last commit. Checks complexity, diff noise, hidden assumptions, and goal verification. Usage /karpathy-check [--last-commit]
 ---
 
 # /karpathy-check
 
-Review your staged changes (or last commit) against Karpathy's 4 coding principles.
+Review your staged changes (or last commit) against Citadel's 4 coding quality principles.
 
 ## Usage
 

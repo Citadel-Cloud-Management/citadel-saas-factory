@@ -26,10 +26,6 @@ check "Claude Code installed" \
   "claude --version" \
   "npm install -g @anthropic-ai/claude-code"
 
-check "Ruflo installed" \
-  "npx ruflo@latest --version" \
-  "curl -fsSL https://cdn.jsdelivr.net/gh/ruvnet/ruflo@main/scripts/install.sh | bash"
-
 check "Graphify installed" \
   "graphify --version" \
   "pip install graphifyy && graphify install"

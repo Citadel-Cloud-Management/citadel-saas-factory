@@ -19,5 +19,5 @@ See the [Quick Start](quickstart.md) guide to get up and running in minutes.
 
 ## Links
 
-- [GitHub Repository](https://github.com/kogunlowo123/citadel-saas-factory)
+- [GitHub Repository](https://github.com/Citadel-Cloud-Management/citadel-saas-factory)
 - [Citadel Cloud Management](https://citadelcloudmanagement.com)

@@ -27,7 +27,7 @@ Complete installation guide for all 205+ production-ready skills across multiple
 
 ```bash
 # In Claude Code, run:
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 /plugin install marketing-skills@claude-code-skills
 ```
 
@@ -37,10 +37,10 @@ Native integration with automatic updates and version management.
 
 ```bash
 # Option 1: Universal installer
-npx agent-skills-cli add alirezarezvani/claude-skills --agent codex
+npx agent-skills-cli add citadelcloud/claude-skills --agent codex
 
 # Option 2: Direct installation script
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 ./scripts/codex-install.sh
 ```
@@ -49,7 +49,7 @@ cd claude-skills
 
 ```bash
 # Setup script for Gemini CLI
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 ./scripts/gemini-install.sh
 ```
@@ -62,10 +62,10 @@ Skills install to `~/.codex/skills/`. See [OpenAI Codex Installation](#openai-co
 
 ```bash
 # Install from ClawHub
-clawhub install alirezarezvani/claude-skills
+clawhub install citadelcloud/claude-skills
 
 # Or manual installation
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cp -r claude-skills/engineering-team ~/.openclaw/skills/
 ```
 
@@ -74,7 +74,7 @@ Skills load via YAML frontmatter triggers. See [OpenClaw Installation](#openclaw
 ### For All Other Agents (Cursor, VS Code, Goose, etc.)
 
 ```bash
-npx agent-skills-cli add alirezarezvani/claude-skills
+npx agent-skills-cli add citadelcloud/claude-skills
 ```
 
 This single command installs all skills to all supported agents automatically.
@@ -96,7 +96,7 @@ Learn more: https://www.agentskills.in
 
 ```bash
 # In Claude Code, run:
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 ```
 
 This adds the skills library to your available marketplaces.
@@ -165,13 +165,13 @@ This adds the skills library to your available marketplaces.
 
 ## Universal Installer
 
-The universal installer uses the [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli) package to install skills across multiple agents simultaneously.
+The universal installer uses the [Agent Skills CLI](https://github.com/citadelcloud/agent-skills-cli) package to install skills across multiple agents simultaneously.
 
 ### Install All Skills
 
 ```bash
 # Install to all supported agents
-npx agent-skills-cli add alirezarezvani/claude-skills
+npx agent-skills-cli add citadelcloud/claude-skills
 ```
 
 **This installs to:**
@@ -188,26 +188,26 @@ npx agent-skills-cli add alirezarezvani/claude-skills
 
 ```bash
 # Claude Code only
-npx agent-skills-cli add alirezarezvani/claude-skills --agent claude
+npx agent-skills-cli add citadelcloud/claude-skills --agent claude
 
 # Cursor only
-npx agent-skills-cli add alirezarezvani/claude-skills --agent cursor
+npx agent-skills-cli add citadelcloud/claude-skills --agent cursor
 
 # VS Code/Copilot only
-npx agent-skills-cli add alirezarezvani/claude-skills --agent vscode
+npx agent-skills-cli add citadelcloud/claude-skills --agent vscode
 
 # Goose only
-npx agent-skills-cli add alirezarezvani/claude-skills --agent goose
+npx agent-skills-cli add citadelcloud/claude-skills --agent goose
 
 # Project-specific installation (portable)
-npx agent-skills-cli add alirezarezvani/claude-skills --agent project
+npx agent-skills-cli add citadelcloud/claude-skills --agent project
 ```
 
 ### Preview Before Installing
 
 ```bash
 # Dry run to see what will be installed
-npx agent-skills-cli add alirezarezvani/claude-skills --dry-run
+npx agent-skills-cli add citadelcloud/claude-skills --dry-run
 ```
 
 ---
@@ -220,126 +220,126 @@ Install individual skills instead of the entire library:
 
 ```bash
 # Content Creator
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/content-creator
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/content-creator
 
 # Demand Generation & Acquisition
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/marketing-demand-acquisition
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/marketing-demand-acquisition
 
 # Product Marketing Strategy
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/marketing-strategy-pmm
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/marketing-strategy-pmm
 
 # App Store Optimization
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/app-store-optimization
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/app-store-optimization
 
 # Social Media Analyzer
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/social-media-analyzer
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/social-media-analyzer
 ```
 
 ### C-Level Advisory Skills
 
 ```bash
 # CEO Advisor
-npx agent-skills-cli add alirezarezvani/claude-skills/c-level-advisor/ceo-advisor
+npx agent-skills-cli add citadelcloud/claude-skills/c-level-advisor/ceo-advisor
 
 # CTO Advisor
-npx agent-skills-cli add alirezarezvani/claude-skills/c-level-advisor/cto-advisor
+npx agent-skills-cli add citadelcloud/claude-skills/c-level-advisor/cto-advisor
 ```
 
 ### Product Team Skills
 
 ```bash
 # Product Manager Toolkit
-npx agent-skills-cli add alirezarezvani/claude-skills/product-team/product-manager-toolkit
+npx agent-skills-cli add citadelcloud/claude-skills/product-team/product-manager-toolkit
 
 # Agile Product Owner
-npx agent-skills-cli add alirezarezvani/claude-skills/product-team/agile-product-owner
+npx agent-skills-cli add citadelcloud/claude-skills/product-team/agile-product-owner
 
 # Product Strategist
-npx agent-skills-cli add alirezarezvani/claude-skills/product-team/product-strategist
+npx agent-skills-cli add citadelcloud/claude-skills/product-team/product-strategist
 
 # UX Researcher Designer
-npx agent-skills-cli add alirezarezvani/claude-skills/product-team/ux-researcher-designer
+npx agent-skills-cli add citadelcloud/claude-skills/product-team/ux-researcher-designer
 
 # UI Design System
-npx agent-skills-cli add alirezarezvani/claude-skills/product-team/ui-design-system
+npx agent-skills-cli add citadelcloud/claude-skills/product-team/ui-design-system
 ```
 
 ### Project Management Skills
 
 ```bash
 # Senior PM Expert
-npx agent-skills-cli add alirezarezvani/claude-skills/project-management/senior-pm
+npx agent-skills-cli add citadelcloud/claude-skills/project-management/senior-pm
 
 # Scrum Master Expert
-npx agent-skills-cli add alirezarezvani/claude-skills/project-management/scrum-master
+npx agent-skills-cli add citadelcloud/claude-skills/project-management/scrum-master
 
 # Atlassian Jira Expert
-npx agent-skills-cli add alirezarezvani/claude-skills/project-management/jira-expert
+npx agent-skills-cli add citadelcloud/claude-skills/project-management/jira-expert
 
 # Atlassian Confluence Expert
-npx agent-skills-cli add alirezarezvani/claude-skills/project-management/confluence-expert
+npx agent-skills-cli add citadelcloud/claude-skills/project-management/confluence-expert
 
 # Atlassian Administrator
-npx agent-skills-cli add alirezarezvani/claude-skills/project-management/atlassian-admin
+npx agent-skills-cli add citadelcloud/claude-skills/project-management/atlassian-admin
 
 # Atlassian Template Creator
-npx agent-skills-cli add alirezarezvani/claude-skills/project-management/atlassian-templates
+npx agent-skills-cli add citadelcloud/claude-skills/project-management/atlassian-templates
 ```
 
 ### Engineering Team Skills
 
 ```bash
 # Core Engineering
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-architect
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-frontend
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-backend
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-fullstack
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-qa
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-devops
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-secops
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/code-reviewer
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-security
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-architect
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-frontend
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-backend
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-fullstack
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-qa
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-devops
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-secops
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/code-reviewer
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-security
 
 # Cloud & Enterprise
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/aws-solution-architect
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/ms365-tenant-manager
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/aws-solution-architect
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/ms365-tenant-manager
 
 # Development Tools
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/tdd-guide
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/tech-stack-evaluator
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/tdd-guide
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/tech-stack-evaluator
 
 # AI/ML/Data
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-data-scientist
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-data-engineer
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-ml-engineer
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-prompt-engineer
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-computer-vision
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-data-scientist
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-data-engineer
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-ml-engineer
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-prompt-engineer
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-computer-vision
 ```
 
 ### Regulatory Affairs & Quality Management Skills
 
 ```bash
 # Regulatory & Quality Leadership
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/regulatory-affairs-head
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/quality-manager-qmr
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/quality-manager-qms-iso13485
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/regulatory-affairs-head
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/quality-manager-qmr
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/quality-manager-qms-iso13485
 
 # Quality Processes
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/capa-officer
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/quality-documentation-manager
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/risk-management-specialist
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/capa-officer
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/quality-documentation-manager
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/risk-management-specialist
 
 # Security & Privacy
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/information-security-manager-iso27001
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/gdpr-dsgvo-expert
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/information-security-manager-iso27001
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/gdpr-dsgvo-expert
 
 # Regional Compliance
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/mdr-745-specialist
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/fda-consultant-specialist
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/mdr-745-specialist
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/fda-consultant-specialist
 
 # Audit & Assessment
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/qms-audit-expert
-npx agent-skills-cli add alirezarezvani/claude-skills/ra-qm-team/isms-audit-expert
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/qms-audit-expert
+npx agent-skills-cli add citadelcloud/claude-skills/ra-qm-team/isms-audit-expert
 ```
 
 ---
@@ -352,23 +352,23 @@ Install the same skills across different agents for team consistency:
 
 ```bash
 # Install marketing skills to Claude Code (for content strategist)
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/content-creator --agent claude
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/content-creator --agent claude
 
 # Install same skills to Cursor (for developer working on content)
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/content-creator --agent cursor
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/content-creator --agent cursor
 
 # Install to VS Code (for SEO specialist)
-npx agent-skills-cli add alirezarezvani/claude-skills/marketing-skill/content-creator --agent vscode
+npx agent-skills-cli add citadelcloud/claude-skills/marketing-skill/content-creator --agent vscode
 ```
 
 ### Example: Engineering Team Setup
 
 ```bash
 # Full engineering suite to Claude Code
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team --agent claude
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team --agent claude
 
 # Same suite to Cursor
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team --agent cursor
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team --agent cursor
 ```
 
 ---
@@ -386,7 +386,7 @@ For development, customization, or offline use:
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 ```
 
@@ -529,10 +529,10 @@ sudo apt-get install nodejs npm
 
 ```bash
 # Install entire domain bundle
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team
 
 # Or install individual skills
-npx agent-skills-cli add alirezarezvani/claude-skills/engineering-team/senior-frontend
+npx agent-skills-cli add citadelcloud/claude-skills/engineering-team/senior-frontend
 ```
 
 Note: The older `ai-agent-skills` package may not support bundle installation. Use `agent-skills-cli` instead.
@@ -543,7 +543,7 @@ Note: The older `ai-agent-skills` package may not support bundle installation. U
 
 ```bash
 # Check network
-curl https://github.com/alirezarezvani/claude-skills
+curl https://github.com/citadelcloud/claude-skills
 
 # Check write permissions
 ls -la ~/.claude/
@@ -607,7 +607,7 @@ rm -rf ~/.claude/skills/
 mkdir -p ~/.claude/skills/
 
 # Reinstall
-npx agent-skills-cli add alirezarezvani/claude-skills --agent claude
+npx agent-skills-cli add citadelcloud/claude-skills --agent claude
 ```
 
 #### Cursor
@@ -636,16 +636,16 @@ ls .github/skills/
 
 ```bash
 # Remove from Claude Code
-rm -rf ~/.claude/skills/alirezarezvani/claude-skills/
+rm -rf ~/.claude/skills/citadelcloud/claude-skills/
 
 # Remove from Cursor
-rm -rf .cursor/skills/alirezarezvani/claude-skills/
+rm -rf .cursor/skills/citadelcloud/claude-skills/
 
 # Remove from VS Code
-rm -rf .github/skills/alirezarezvani/claude-skills/
+rm -rf .github/skills/citadelcloud/claude-skills/
 
 # Remove from Goose
-rm -rf ~/.config/goose/skills/alirezarezvani/claude-skills/
+rm -rf ~/.config/goose/skills/citadelcloud/claude-skills/
 ```
 
 ### Manual Installation
@@ -680,7 +680,7 @@ Gemini CLI users can install skills using the setup script below. This repositor
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/alirezarezvani/claude-skills.git
+    git clone https://github.com/citadelcloud/claude-skills.git
     cd claude-skills
     ```
 
@@ -733,17 +733,17 @@ OpenClaw loads skills via YAML frontmatter in `SKILL.md` files. Every skill in t
 
 ```bash
 # Install from ClawHub registry
-clawhub install alirezarezvani/claude-skills
+clawhub install citadelcloud/claude-skills
 
 # Install specific skill
-clawhub install alirezarezvani/claude-skills/engineering-team/senior-frontend
+clawhub install citadelcloud/claude-skills/engineering-team/senior-frontend
 ```
 
 ### Method 2: Manual Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 
 # Copy a skill to your OpenClaw skills directory
@@ -813,10 +813,10 @@ OpenAI Codex users can install skills using the methods below. This repository p
 
 ```bash
 # Install all skills to Codex
-npx agent-skills-cli add alirezarezvani/claude-skills --agent codex
+npx agent-skills-cli add citadelcloud/claude-skills --agent codex
 
 # Preview before installing
-npx agent-skills-cli add alirezarezvani/claude-skills --agent codex --dry-run
+npx agent-skills-cli add citadelcloud/claude-skills --agent codex --dry-run
 ```
 
 ### Method 2: Direct Installation Script
@@ -826,7 +826,7 @@ For manual installation using the provided scripts:
 **macOS/Linux:**
 ```bash
 # Clone repository
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 
 # Generate symlinks (if not already present)
@@ -849,7 +849,7 @@ python3 scripts/sync-codex-skills.py
 **Windows:**
 ```cmd
 REM Clone repository
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 
 REM Generate structure (if not already present)
@@ -869,7 +869,7 @@ scripts\codex-install.bat --list
 
 ```bash
 # Clone repository
-git clone https://github.com/alirezarezvani/claude-skills.git
+git clone https://github.com/citadelcloud/claude-skills.git
 cd claude-skills
 
 # Copy skills (following symlinks) to Codex directory
@@ -931,18 +931,17 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 
 **Installation Issues?**
 - Check [Troubleshooting](#troubleshooting) section above
-- Review [Agent Skills CLI documentation](https://github.com/Karanjot786/agent-skills-cli)
-- Open issue: https://github.com/alirezarezvani/claude-skills/issues
+- Review [Agent Skills CLI documentation](https://github.com/citadelcloud/agent-skills-cli)
+- Open issue: https://github.com/citadelcloud/claude-skills/issues
 
 **Feature Requests:**
 - Submit via GitHub Issues with `enhancement` label
 
 **General Questions:**
-- Visit: https://alirezarezvani.com
-- Blog: https://medium.com/@alirezarezvani
+- Visit: https://citadelcloudmanagement.com
 
 ---
 
 **Last Updated:** March 2026
 **Skills Version:** 2.1.2 (205+ production skills across 9 domains)
-**Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)
+**Universal Installer:** [Agent Skills CLI](https://github.com/citadelcloud/agent-skills-cli)

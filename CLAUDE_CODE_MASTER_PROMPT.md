@@ -4,7 +4,7 @@
 >
 > Synthesizes the complete architecture — **Runtime → Memory → Skills → MCP → Commands → Orchestration → Workflows** — plus the full Agent Development Kit (ADK), LLM API internals, canonical project scaffolding, RAG selection logic, security posture, observability, and the operational playbooks to run it all in production.
 >
-> Author: Kehinde "Kenny" Ogunlowo · Principal AI Platform Architect · [github.com/kogunlowo123](https://github.com/kogunlowo123)
+> Author: Kehinde "Kenny" Ogunlowo · Principal AI Platform Architect · [Citadel Cloud Management](https://github.com/Citadel-Cloud-Management)
 >
 > **How to use this file:** Drop it in as `./CLAUDE.md` (project constitution) or `~/.claude/CLAUDE.md` (personal defaults). Clone, fork, and trim sections you don't need. Everything below is load-bearing — nothing is decorative.
 
@@ -794,7 +794,7 @@ plugins/my-plugin/
   "name": "my-plugin",
   "version": "1.0.0",
   "description": "Adds X capability to Claude Code",
-  "author": "kogunlowo123",
+  "author": "Citadel Cloud Management",
   "requires": {
     "claude-code": ">=1.0.0"
   },

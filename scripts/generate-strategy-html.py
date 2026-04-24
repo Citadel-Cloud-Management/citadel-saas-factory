@@ -246,9 +246,9 @@ def render() -> str:
 &#x2514;&#x2500; <span class="dir">hooks/</span>                   &#x2014; vault-autolink, graphify pre-tool-use
 </div>
 
-<h2>Ruflo &#x00B7; Swarm Orchestration</h2>
-<p>Ruflo provides mesh-topology multi-agent coordination across 314 MCP tools. 8 worker types (coder, reviewer, tester, architect, researcher, analyst, optimizer, documenter) with byzantine consensus, auto-remediation, and AgentDB vector memory. Configured in <code>ruflo.config.yaml</code>.</p>
-<div class="note">CYCLE_INTERVAL=0 means agents execute in parallel, not on a timer. Ruflo consensus kicks in when two or more agents disagree on a change &#x2014; byzantine voting resolves the conflict before any write lands in the working tree.</div>
+<h2>Citadel Mesh &#x00B7; Swarm Orchestration</h2>
+<p>Citadel Mesh provides mesh-topology multi-agent coordination across 314 MCP tools. 8 worker types (coder, reviewer, tester, architect, researcher, analyst, optimizer, documenter) with byzantine consensus, auto-remediation, and AgentDB vector memory.</p>
+<div class="note">CYCLE_INTERVAL=0 means agents execute in parallel, not on a timer. Byzantine consensus kicks in when two or more agents disagree on a change &#x2014; voting resolves the conflict before any write lands in the working tree.</div>
 
 <h2>Graphify &#x00B7; Codebase Knowledge Graph</h2>
 <p>Graphify parses the codebase with Tree-sitter (20 languages), builds a knowledge graph of entities and relationships, and exposes it to Claude via a PreToolUse hook that intercepts every <code>Glob</code>/<code>Grep</code> call. The result: 71&#x00D7; fewer tokens spent on repo exploration. Output lands at <code>graphify-out/GRAPH_REPORT.md</code> and in the Obsidian vault at <code>docs/vault/knowledge-graph/</code>.</p>

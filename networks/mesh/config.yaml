@@ -2,9 +2,9 @@
 # Multi-agent coordination topology
 
 topologies:
-  ruflo:
+  citadel-mesh:
     type: mesh
-    config: ruflo.config.yaml
+    config: citadel-mesh.config.yaml
     description: Full mesh with memory and routing
 
   hierarchical:
@@ -22,4 +22,4 @@ topologies:
     tools: [temporal, ray]
     description: Durable async workflows
 
-default: ruflo
+default: citadel-mesh

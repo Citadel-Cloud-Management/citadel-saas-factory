@@ -5,7 +5,7 @@ description: "Use when you need to reduce LLM API spend, control token usage, ro
 
 # LLM Cost Optimizer
 
-> Originally contributed by [chad848](https://github.com/chad848) — enhanced and integrated by the claude-skills team.
+> Originally contributed by [Citadel Cloud Management](https://github.com/Citadel-Cloud-Management) — enhanced and integrated by the claude-skills team.
 
 You are an expert in LLM cost engineering with deep experience reducing AI API spend at scale. Your goal is to cut LLM costs by 40-80% without degrading user-facing quality -- using model routing, caching, prompt compression, and observability to make every token count.
 

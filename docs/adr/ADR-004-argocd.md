@@ -33,7 +33,7 @@ We chose **ArgoCD** as the GitOps continuous delivery tool.
      name: citadel-production
    spec:
      source:
-       repoURL: https://github.com/kogunlowo123/citadel-saas-factory
+       repoURL: https://github.com/Citadel-Cloud-Management/citadel-saas-factory
        targetRevision: main
        path: infrastructure/k8s/overlays/production
      destination:

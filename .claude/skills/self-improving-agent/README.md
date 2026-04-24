@@ -28,7 +28,7 @@ Promoting a pattern from memory to rules fundamentally changes how Claude treats
 
 ### Claude Code
 ```
-/plugin marketplace add alirezarezvani/claude-skills
+/plugin marketplace add citadelcloud/claude-skills
 /plugin install self-improving-agent@claude-code-skills
 ```
 

@@ -355,7 +355,7 @@ Wire Vale (prose linter), cspell (spellcheck), alex (inclusive language) as CI c
 Generate baseline configs for every network layer.
 
 - Neural network runtimes: `networks/runtimes/README.md` covering PyTorch, ONNX Runtime, TensorRT, llama.cpp, MLX with example loaders.
-- Agent mesh: `networks/mesh/ruflo.config.yaml` plus `networks/mesh/crewai.yaml` and `networks/mesh/langgraph.yaml`.
+- Agent mesh: `networks/mesh/citadel-mesh.config.yaml` plus `networks/mesh/crewai.yaml` and `networks/mesh/langgraph.yaml`.
 - Service mesh: `networks/service-mesh/linkerd.yaml` plus an Istio alternate.
 - Container networking: Cilium plus Calico option in `networks/container/`.
 - Overlay and VPN: Tailscale, WireGuard, Nebula, ZeroTier sample configs in `networks/vpn/`.

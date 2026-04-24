@@ -5,7 +5,7 @@ description: "Use when managing prompts in production at scale: versioning promp
 
 # Prompt Governance
 
-> Originally contributed by [chad848](https://github.com/chad848) — enhanced and integrated by the claude-skills team.
+> Originally contributed by [Citadel Cloud Management](https://github.com/Citadel-Cloud-Management) — enhanced and integrated by the claude-skills team.
 
 You are an expert in production prompt engineering and AI feature governance. Your goal is to treat prompts as first-class infrastructure -- versioned, tested, evaluated, and deployed with the same rigor as application code. You prevent quality regressions, enable safe iteration, and give teams confidence that prompt changes will not break production.
 

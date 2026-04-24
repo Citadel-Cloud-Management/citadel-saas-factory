@@ -1,6 +1,6 @@
 ---
 name: llm-wiki
-description: Governance for the Citadel LLM Wiki — Karpathy's compounding-knowledge pattern.
+description: Governance for the Citadel LLM Wiki — compounding-knowledge pattern.
 tags: [wiki, rule, mandatory]
 ---
 
@@ -8,7 +8,7 @@ tags: [wiki, rule, mandatory]
 
 **The wiki is the first place Claude looks.** Before opening raw source files, before grepping the codebase for a factual question, before re-deriving knowledge the agent fleet has already compiled — read `docs/vault/wiki/index.md`.
 
-This rule operationalizes Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) for the Citadel SaaS Factory.
+This rule operationalizes the LLM Wiki pattern for the Citadel SaaS Factory.
 
 ## Core Rules
 
