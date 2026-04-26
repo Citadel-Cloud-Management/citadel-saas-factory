@@ -356,42 +356,40 @@ cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md                 # personal g
 
 ---
 
-## 🗂️ Complete Project Structure
-
-<details>
-<summary><b>📁 Full directory tree (click to expand)</b></summary>
+## 🗂️ Project Structure
 
 ```
 citadel-saas-factory/
 │
-├── 📄 CLAUDE.md                          # Project constitution (Claude Code reads this)
-├── 📄 AGENTS.md                          # OpenAI Codex / multi-agent instructions
-├── 📄 GEMINI.md                          # Google Jules / Gemini CLI instructions
-├── 📄 AGENT.md                           # Cursor agent config
-├── 📄 CLAUDE_CODE_MASTER_PROMPT.md       # Deep-dive operating manual
-├── 📄 docker-compose.yml                 # Local dev stack (12 services)
-├── 📄 Makefile / Justfile                # All CLI commands
-├── 📄 .env.example                       # Environment variable contract
-├── 📄 .mcp.json                          # MCP server configuration
+├── CLAUDE.md                             # Project constitution (Claude Code reads this)
+├── AGENTS.md                             # OpenAI Codex / multi-agent instructions
+├── GEMINI.md                             # Google Jules / Gemini CLI instructions
+├── AGENT.md                              # Cursor agent config
+├── CLAUDE_CODE_MASTER_PROMPT.md          # Deep-dive operating manual
+├── docker-compose.yml                    # Local dev stack (12 services)
+├── Makefile / Justfile                   # All CLI commands
+├── .env.example                          # Environment variable contract
+├── .mcp.json                             # MCP server configuration
 │
-├── 🧠 .claude/                           # AI INTELLIGENCE LAYER
+├── .claude/                              # ── AI INTELLIGENCE LAYER ──
+│   │
 │   ├── agents/                           # 500+ agent definitions
 │   │   ├── _registry.yaml                #   Master registry (id, domain, model, entrypoint)
-│   │   ├── executive/                    #   18 agents (CEO, CTO, CFO, OKR, Board, M&A...)
-│   │   ├── marketing/                    #   28 agents (SEO, Content, Social, Email, PPC...)
-│   │   ├── sales/                        #   24 agents (Lead Qualifier, CRM, Deal Desk...)
-│   │   ├── customer-success/             #   20 agents (Onboarding, Churn, NPS, QBR...)
-│   │   ├── product-design/               #   26 agents (UI, Wireframes, A11y, Research...)
-│   │   ├── engineering/                  #   35 agents (API, Auth, Cache, CQRS, SDK...)
-│   │   ├── frontend/                     #   24 agents (Components, Forms, PWA, SSR...)
-│   │   ├── devops/                       #   34 agents (CI/CD, K8s, Terraform, FinOps...)
-│   │   ├── security/                     #   28 agents (SAST, DAST, Falco, Zero Trust...)
-│   │   ├── data-analytics/               #   24 agents (ETL, Dashboards, Vector, dbt...)
-│   │   ├── qa-testing/                   #   28 agents (Unit, E2E, Load, Chaos, Mutation...)
-│   │   ├── hr-people/                    #   16 agents (Jobs, Onboarding, DEI, Culture...)
-│   │   ├── finance/                      #   20 agents (Stripe, Tax, Revenue, FP&A...)
-│   │   ├── legal/                        #   14 agents (GDPR, SOC2, AI Ethics, IP...)
-│   │   └── content/                      #   16 agents (Tech Writing, Case Studies...)
+│   │   ├── executive/                    #   18 agents: CEO, CTO, CFO, OKR, Board, M&A
+│   │   ├── marketing/                    #   28 agents: SEO, Content, Social, Email, PPC
+│   │   ├── sales/                        #   24 agents: Lead Qualifier, CRM, Deal Desk
+│   │   ├── customer-success/             #   20 agents: Onboarding, Churn, NPS, QBR
+│   │   ├── product-design/               #   26 agents: UI, Wireframes, A11y, Research
+│   │   ├── engineering/                  #   35 agents: API, Auth, Cache, CQRS, SDK
+│   │   ├── frontend/                     #   24 agents: Components, Forms, PWA, SSR
+│   │   ├── devops/                       #   34 agents: CI/CD, K8s, Terraform, FinOps
+│   │   ├── security/                     #   28 agents: SAST, DAST, Falco, Zero Trust
+│   │   ├── data-analytics/               #   24 agents: ETL, Dashboards, Vector, dbt
+│   │   ├── qa-testing/                   #   28 agents: Unit, E2E, Load, Chaos, Mutation
+│   │   ├── hr-people/                    #   16 agents: Jobs, Onboarding, DEI, Culture
+│   │   ├── finance/                      #   20 agents: Stripe, Tax, Revenue, FP&A
+│   │   ├── legal/                        #   14 agents: GDPR, SOC2, AI Ethics, IP
+│   │   └── content/                      #   16 agents: Tech Writing, Case Studies
 │   │
 │   ├── rules/                            # 23 coding standards
 │   │   ├── code-quality.md               #   Immutability, small files, no dead code
@@ -477,8 +475,9 @@ citadel-saas-factory/
 │   │
 │   └── settings.json                     # Model routing + hook config
 │
-├── ⚙️ backbone/                          # AGENT ORCHESTRATOR
-│   ├── memory/                           # 8-LAYER AI MEMORY SYSTEM
+├── backbone/                             # ── AGENT ORCHESTRATOR ──
+│   │
+│   ├── memory/                           # 8-Layer AI Memory System
 │   │   ├── __init__.py                   #   Package exports
 │   │   ├── schemas.py                    #   Frozen dataclass models (all 8 layers)
 │   │   ├── config.py                     #   Environment-based configuration
@@ -502,7 +501,7 @@ citadel-saas-factory/
 │   ├── observability/                    #   Logging, metrics, tracing
 │   └── runtime/                          #   Agent execution runtime
 │
-├── 🖥️ backend/                           # FastAPI (Python 3.12)
+├── backend/                              # ── FastAPI (Python 3.12) ──
 │   ├── app/
 │   │   ├── api/                          #   REST endpoints
 │   │   ├── core/                         #   Config, security, dependencies
@@ -514,7 +513,7 @@ citadel-saas-factory/
 │   ├── alembic/                          #   Database migrations
 │   └── tests/                            #   pytest test suite
 │
-├── 🌐 frontend/                          # Next.js 14 (TypeScript)
+├── frontend/                             # ── Next.js 14 (TypeScript) ──
 │   ├── src/
 │   │   ├── app/                          #   App router pages
 │   │   ├── components/                   #   React components
@@ -523,7 +522,7 @@ citadel-saas-factory/
 │   │   └── stores/                       #   Zustand state management
 │   └── tests/                            #   Vitest + Playwright
 │
-├── 🔒 security/                          # SECURITY POLICIES
+├── security/                             # ── SECURITY POLICIES ──
 │   ├── falco/                            #   Runtime threat detection rules
 │   ├── guardrails/                       #   LLM output validators
 │   ├── kyverno/                          #   Kubernetes policy enforcement
@@ -531,18 +530,18 @@ citadel-saas-factory/
 │   ├── sigma/                            #   SIEM detection rules
 │   └── trivy/                            #   Container vulnerability scanning
 │
-├── 🏗️ infrastructure/                    # INFRASTRUCTURE AS CODE
+├── infrastructure/                       # ── INFRASTRUCTURE AS CODE ──
 │   ├── terraform/                        #   Cloud provisioning
 │   ├── helm/                             #   Kubernetes Helm charts
 │   └── ansible/                          #   Configuration management
 │
-├── 📊 monitoring/                        # OBSERVABILITY
+├── monitoring/                           # ── OBSERVABILITY ──
 │   ├── prometheus/                       #   Metric collection rules
 │   ├── grafana/                          #   Dashboard definitions
 │   ├── loki/                             #   Log aggregation config
 │   └── alertmanager/                     #   Alert routing rules
 │
-├── 📚 docs/                              # DOCUMENTATION
+├── docs/                                 # ── DOCUMENTATION ──
 │   ├── ai-memory-architecture.md         #   8-Layer Memory System design
 │   ├── architecture.md                   #   Clean architecture overview
 │   ├── agents.md                         #   Agent system documentation
@@ -559,76 +558,27 @@ citadel-saas-factory/
 │       │   └── contradictions/           #       Flagged conflicts
 │       └── SCHEMA.md                     #     Governance rules
 │
-├── 🤖 agents/                            # Agent providers + router
-├── 🔗 models/                            # Model catalog + routing
+├── agents/                               # Agent providers + router
+├── models/                               # Model catalog + routing
 │   ├── catalog.yaml                      #   40+ models across 12 providers
 │   ├── routing.yaml                      #   Tier-based model selection
 │   └── embeddings.yaml                   #   Embedding model configs
-├── 🔌 mcp/                               # MCP gateway + registry
-├── ⚡ engines/                            # LLM engine configs
-├── 🧪 evals/                             # DeepEval + PromptFoo evaluation
-├── 📜 compliance/                        # Regulatory frameworks
-├── 🌐 networks/                          # Service mesh, agent protocols
-├── 🛠️ tools/                              # Tool catalog
-├── 📦 scripts/                           # Bootstrap, deploy, verify
-├── 🚀 gitops/                            # ArgoCD + Kustomize overlays
-└── 🏁 starter-kit/                       # Standalone starter for new projects
+├── mcp/                                  # MCP gateway + registry
+├── engines/                              # LLM engine configs (paid, free, local)
+├── evals/                                # DeepEval + PromptFoo evaluation
+├── compliance/                           # Regulatory frameworks
+├── networks/                             # Service mesh, agent protocols
+├── tools/                                # Tool catalog
+├── scripts/                              # Bootstrap, deploy, verify
+├── gitops/                               # ArgoCD + Kustomize overlays
+└── starter-kit/                          # Standalone starter for new projects
 ```
-
-</details>
 
 ---
 
 ## 🧠 8-Layer AI Memory Architecture
 
 > Production-grade memory system that makes the AI feel persistent, context-aware, and stateful across sessions, users, and workflows. Full docs: [`docs/ai-memory-architecture.md`](docs/ai-memory-architecture.md)
-
-```mermaid
-graph TB
-    subgraph "Client Layer"
-        USER[User / API Consumer]
-    end
-
-    subgraph "Memory Orchestrator"
-        ORCH[backbone/memory/orchestrator.py]
-        PRE[PRE-INFERENCE<br/>Assemble context from all 8 layers]
-        POST[POST-INFERENCE<br/>Write back learnings]
-    end
-
-    subgraph "8 Memory Layers"
-        L1[L1: Working Memory<br/>Context window tokens<br/><i>In-process</i>]
-        L2[L2: Short-Term Memory<br/>Conversation buffer<br/><i>Redis</i>]
-        L3[L3: Long-Term Memory<br/>Persistent user data<br/><i>PostgreSQL + RLS</i>]
-        L4[L4: Episodic Memory<br/>Timestamped events<br/><i>PostgreSQL partitioned</i>]
-        L5[L5: Semantic Memory<br/>Vector RAG retrieval<br/><i>pgvector + HNSW</i>]
-        L6[L6: Procedural Memory<br/>Workflows & skills<br/><i>PostgreSQL</i>]
-        L7[L7: Entity Memory<br/>User/org/product profiles<br/><i>PostgreSQL + Neo4j</i>]
-        L8[L8: Shared Memory<br/>Multi-agent coordination<br/><i>Redis pub/sub</i>]
-    end
-
-    subgraph "LLM Layer"
-        LLM[Claude / GPT / Gemini / Local]
-        GUARD[Guardrails Validation]
-    end
-
-    USER -->|query| ORCH
-    ORCH --> PRE
-    PRE --> L1 & L2 & L3 & L4 & L5 & L6 & L7 & L8
-    PRE -->|assembled context| LLM
-    LLM --> GUARD
-    GUARD -->|validated response| POST
-    POST --> L2 & L3 & L4 & L7 & L8
-    POST -->|response| USER
-
-    style L1 fill:#e3f2fd
-    style L2 fill:#fff3e0
-    style L3 fill:#e8f5e9
-    style L4 fill:#fce4ec
-    style L5 fill:#f3e5f5
-    style L6 fill:#fff8e1
-    style L7 fill:#e0f2f1
-    style L8 fill:#fbe9e7
-```
 
 ### Memory Layer Summary
 
@@ -643,87 +593,120 @@ graph TB
 | 7 | **Entity** | PostgreSQL + Neo4j | 5-50ms | Structured profiles: users, orgs, products, agents |
 | 8 | **Shared** | Redis (pub/sub) | 1-5ms | Multi-agent state, distributed locks, broadcasts |
 
-### Memory Data Flow
+### System Architecture
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant O as Orchestrator
-    participant WM as Working Memory
-    participant STM as Short-Term (Redis)
-    participant LTM as Long-Term (Postgres)
-    participant EM as Entity (Postgres)
-    participant SM as Semantic (pgvector)
-    participant LLM as LLM Provider
-
-    U->>O: Send query
-    Note over O: PRE-INFERENCE
-    O->>WM: Load system prompt
-    O->>EM: Load user profile
-    O->>LTM: Query preferences & facts
-    O->>SM: RAG retrieval (embed → search → rerank)
-    O->>STM: Load recent conversation turns
-    O->>WM: Truncate to fit context window
-    O->>LLM: Send assembled context
-    LLM-->>O: Response
-    Note over O: POST-INFERENCE
-    O->>STM: Append user msg + response
-    O->>LTM: Store new facts learned
-    O->>EM: Update interaction count
-    O-->>U: Return validated response
+```
+                    ┌─────────────────────────────┐
+                    │     USER / API CONSUMER      │
+                    └─────────────┬───────────────┘
+                                  │
+                    ┌─────────────▼───────────────┐
+                    │     MEMORY ORCHESTRATOR      │
+                    │  backbone/memory/            │
+                    │  orchestrator.py             │
+                    └──┬──┬──┬──┬──┬──┬──┬──┬─────┘
+                       │  │  │  │  │  │  │  │
+       ┌───────────────┘  │  │  │  │  │  │  └───────────────┐
+       │           ┌──────┘  │  │  │  │  └──────┐           │
+       ▼           ▼         ▼  ▼  ▼  ▼         ▼           ▼
+  ┌─────────┐ ┌─────────┐ ┌────┐┌────┐┌────┐ ┌─────────┐ ┌──────��──┐
+  │L1 WORK- │ │L2 SHORT │ │ L3 ││ L4 ││ L5 │ │L6 PROCE-│ │L7 ENTITY│
+  │ING      │ │TERM     │ │LONG││EPIS││SEMA│ │DURAL    │ │         │
+  │         │ │         │ │TERM││ODIC││NTIC│ │         │ │         │
+  │In-proc  │ │Redis    │ │PG  ││PG  ││pgv │ │PG      │ │PG+Neo4j │
+  └─────────┘ └─────────┘ └────┘└────┘└────┘ └─────────┘ └─────────┘
+                                                           ┌─────────┐
+                                                           │L8 SHARED│
+                                                           │Redis    │
+                                                           │pub/sub  │
+                                                           └─────────┘
 ```
 
-### Retrieval Strategy Decision Tree
+### Data Flow — Per Request
 
-```mermaid
-flowchart TD
-    Q[Incoming Query] --> TYPE{Query Type?}
-    TYPE -->|Factual about user| STRUCT[Structured Query<br/>Long-Term + Entity Memory]
-    TYPE -->|Open knowledge question| VEC[Vector Search<br/>Semantic Memory]
-    TYPE -->|Mixed specific + general| HYB[Hybrid Retrieval<br/>70% Vector + 30% Keyword]
-    TYPE -->|Past interaction recall| TIME[Time-Range Query<br/>Episodic Memory]
-    TYPE -->|How to do something| PROC[Trigger Match<br/>Procedural Memory]
-    TYPE -->|Multi-agent context| SHARED[Namespace Scan<br/>Shared Memory]
-
-    STRUCT --> RESULT[Return Results]
-    VEC --> RERANK[Rerank Top 20]
-    HYB --> RERANK
-    TIME --> RESULT
-    PROC --> RESULT
-    SHARED --> RESULT
-    RERANK --> RESULT
 ```
+  PRE-INFERENCE (assemble context)
+  ─────────────────────────────────────────────────────────────────
+  Step 1  Working Memory    Load system prompt, allocate token budget
+  Step 2  Entity Memory     Load user profile, inject as system context
+  Step 3  Long-Term Memory  Query preferences, facts, corrections
+  Step 4  Semantic Memory   RAG retrieval: embed query → search → rerank
+  Step 5  Procedural Memory Find applicable workflows for this context
+  Step 6  Episodic Memory   Load relevant past interactions
+  Step 7  Shared Memory     Load multi-agent coordination state
+  Step 8  Short-Term Memory Load recent conversation turns
+  Step 9  Working Memory    Truncate all injections to fit context window
+
+  INFERENCE
+  ─────────────────────────────────────────────────────────────────
+  Send assembled context → LLM → Receive response
+  Guardrails validation (hallucination, PII, toxicity)
+
+  POST-INFERENCE (write back)
+  ─────────────────────────────────────────────────────────────────
+  Step 1  Short-Term Memory Append user message + assistant response
+  Step 2  Episodic Memory   Record conversation episode with timestamp
+  Step 3  Long-Term Memory  Extract and store any new facts learned
+  Step 4  Entity Memory     Update interaction count, last_seen, attributes
+  Step 5  Procedural Memory If workflow completed, update success stats
+  Step 6  Shared Memory     If multi-agent, broadcast state update
+```
+
+### Retrieval Strategy
+
+| Query Type | Strategy | Memory Layer | Method |
+|------------|----------|-------------|--------|
+| Factual question about user | Structured query | Long-Term + Entity | Exact key lookup |
+| Open-ended knowledge question | Vector search | Semantic | Embed → HNSW → Rerank |
+| Mixed specific + general | Hybrid | Semantic | 70% vector + 30% keyword |
+| Recall past interaction | Time-range query | Episodic | Temporal filter on event log |
+| How to do something | Trigger match | Procedural | Pattern match on conditions |
+| Multi-agent coordination | Namespace scan | Shared | Direct key-value in Redis |
 
 ### Multi-Agent Shared Memory
 
-```mermaid
-graph LR
-    subgraph "Agent Fleet"
-        A[Agent A<br/>Planner]
-        B[Agent B<br/>Coder]
-        C[Agent C<br/>Tester]
-        D[Agent D<br/>Reviewer]
-    end
-
-    subgraph "Shared Memory (Redis)"
-        SM[(Shared State<br/>namespace:task-1)]
-        LOCK[Distributed Locks]
-        PS[Pub/Sub Broadcast]
-    end
-
-    A -->|write task| SM
-    SM -->|broadcast| PS
-    PS -->|notify| B & C & D
-    B -->|write result| SM
-    C -->|write result| SM
-    D -->|write result| SM
-    B -.->|acquire| LOCK
-    LOCK -.->|release| B
-
-    style SM fill:#fff3e0
-    style LOCK fill:#ffcdd2
-    style PS fill:#e8f5e9
 ```
+  Agent A (planner)
+       │
+       │  write task to shared namespace
+       ▼
+  ┌──────────────────────────────┐
+  │  SHARED MEMORY (Redis)       │
+  │  namespace: task-1           │
+  │                              │
+  │  Distributed Locks           │
+  │  Optimistic Versioning       │
+  │  Pub/Sub Broadcast           │
+  └──────┬───────┬───────┬───────┘
+         │       │       │
+    notify  notify  notify
+         │       │       │
+         ▼       ▼       ▼
+   Agent B  Agent C  Agent D
+   (coder)  (tester) (reviewer)
+       │       │       │
+       └───────┼───────┘
+               │
+         write results back
+               │
+               ▼
+  Shared Memory (conflict resolution)
+  ─ last-writer-wins (non-critical)
+  ─ merge (additive state)
+  ─ reject (critical / locked)
+  ─ version check (optimistic concurrency)
+```
+
+### Cost Model (~$95/mo baseline)
+
+| Component | Purpose | Estimate |
+|-----------|---------|----------|
+| PostgreSQL (RDS t3.small) | L3 + L4 + L5 + L6 + L7 | ~$25/mo |
+| Redis (ElastiCache t3.small) | L2 + L8 | ~$25/mo |
+| Embeddings (text-embedding-3-small) | L5 ingestion | ~$0.10/mo |
+| Reranking (Cohere Rerank v3) | L5 search quality | ~$20/mo |
+| Storage (gp3 EBS) | All layers | ~$4/mo |
+| **Total** | | **~$74/mo** |
 
 ---
 
