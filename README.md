@@ -356,6 +356,377 @@ cp CLAUDE_CODE_MASTER_PROMPT.md ~/.claude/CLAUDE.md                 # personal g
 
 ---
 
+## 🗂️ Complete Project Structure
+
+<details>
+<summary><b>📁 Full directory tree (click to expand)</b></summary>
+
+```
+citadel-saas-factory/
+│
+├── 📄 CLAUDE.md                          # Project constitution (Claude Code reads this)
+├── 📄 AGENTS.md                          # OpenAI Codex / multi-agent instructions
+├── 📄 GEMINI.md                          # Google Jules / Gemini CLI instructions
+├── 📄 AGENT.md                           # Cursor agent config
+├── 📄 CLAUDE_CODE_MASTER_PROMPT.md       # Deep-dive operating manual
+├── 📄 docker-compose.yml                 # Local dev stack (12 services)
+├── 📄 Makefile / Justfile                # All CLI commands
+├── 📄 .env.example                       # Environment variable contract
+├── 📄 .mcp.json                          # MCP server configuration
+│
+├── 🧠 .claude/                           # AI INTELLIGENCE LAYER
+│   ├── agents/                           # 500+ agent definitions
+│   │   ├── _registry.yaml                #   Master registry (id, domain, model, entrypoint)
+│   │   ├── executive/                    #   18 agents (CEO, CTO, CFO, OKR, Board, M&A...)
+│   │   ├── marketing/                    #   28 agents (SEO, Content, Social, Email, PPC...)
+│   │   ├── sales/                        #   24 agents (Lead Qualifier, CRM, Deal Desk...)
+│   │   ├── customer-success/             #   20 agents (Onboarding, Churn, NPS, QBR...)
+│   │   ├── product-design/               #   26 agents (UI, Wireframes, A11y, Research...)
+│   │   ├── engineering/                  #   35 agents (API, Auth, Cache, CQRS, SDK...)
+│   │   ├── frontend/                     #   24 agents (Components, Forms, PWA, SSR...)
+│   │   ├── devops/                       #   34 agents (CI/CD, K8s, Terraform, FinOps...)
+│   │   ├── security/                     #   28 agents (SAST, DAST, Falco, Zero Trust...)
+│   │   ├── data-analytics/               #   24 agents (ETL, Dashboards, Vector, dbt...)
+│   │   ├── qa-testing/                   #   28 agents (Unit, E2E, Load, Chaos, Mutation...)
+│   │   ├── hr-people/                    #   16 agents (Jobs, Onboarding, DEI, Culture...)
+│   │   ├── finance/                      #   20 agents (Stripe, Tax, Revenue, FP&A...)
+│   │   ├── legal/                        #   14 agents (GDPR, SOC2, AI Ethics, IP...)
+│   │   └── content/                      #   16 agents (Tech Writing, Case Studies...)
+│   │
+│   ├── rules/                            # 23 coding standards
+│   │   ├── code-quality.md               #   Immutability, small files, no dead code
+│   │   ├── architecture.md               #   Clean architecture, DDD, bounded contexts
+│   │   ├── api-design.md                 #   REST conventions, response envelope
+│   │   ├── security.md                   #   No hardcoded secrets, input validation
+│   │   ├── testing.md                    #   TDD mandatory, 80% coverage
+│   │   ├── database.md                   #   Migrations, RLS, indexes
+│   │   ├── guardrails.md                 #   Mandatory LLM validation pipeline
+│   │   ├── llm-wiki.md                   #   Wiki-first lookup, ingest protocol
+│   │   ├── obsidian-backlinks.md         #   Bidirectional linking, vault integration
+│   │   ├── frontend.md                   #   Components, a11y, responsive-first
+│   │   ├── devops.md                     #   GitOps, immutable infra, health probes
+│   │   ├── monitoring.md                 #   Structured logging, RED metrics
+│   │   ├── performance.md               #   Caching, pagination, connection pools
+│   │   ├── error-handling.md             #   Structured errors, retry strategies
+│   │   ├── naming.md                     #   snake_case, PascalCase, kebab-case
+│   │   ├── secrets.md                    #   Vault, rotation, scanning
+│   │   ├── git.md                        #   Conventional commits, squash merge
+│   │   ├── review.md                     #   PR required, CI must pass
+│   │   ├── dependencies.md               #   Lock files, license check
+│   │   ├── documentation.md              #   ADRs, OpenAPI, changelogs
+│   │   └── accessibility.md              #   WCAG 2.1 AA, ARIA, keyboard nav
+│   │
+│   ├── skills/                           # 262 specialist capabilities
+│   │   ├── code-review/SKILL.md          #   Automated code review patterns
+│   │   ├── testing/SKILL.md              #   Test framework patterns
+│   │   ├── guardrails/SKILL.md           #   LLM output validation
+│   │   ├── llm-wiki/SKILL.md             #   Knowledge base management
+│   │   ├── obsidian-linker/SKILL.md      #   Vault cross-linking
+│   │   ├── graphify/SKILL.md             #   Codebase knowledge graph
+│   │   ├── deploy/SKILL.md               #   Deployment automation
+│   │   ├── onboard/SKILL.md              #   Developer onboarding
+│   │   ├── security-audit/SKILL.md       #   Security scanning
+│   │   └── (250+ more...)               #   AWS, Azure, Django, React, etc.
+│   │
+│   ├── hooks/                            # 11 lifecycle scripts
+│   │   ├── pre-commit.sh                 #   Secret scan + lint + test
+│   │   ├── pre-push.sh                   #   Full validation before push
+│   │   ├── pre-agent.sh                  #   Before agent spawn
+│   │   ├── post-agent.sh                 #   After agent complete
+│   │   ├── pre-deploy.sh                 #   Pre-deployment checks
+│   │   ├── post-deploy.sh                #   Post-deployment verification
+│   │   ├── on-error.sh                   #   Error handling
+│   │   ├── on-test-fail.sh               #   Test failure handling
+│   │   ├── on-deploy-fail.sh             #   Deployment failure handling
+│   │   ├── on-security-alert.sh          #   Security incident response
+│   │   └── vault-autolink.sh             #   Auto-backlink vault writes
+│   │
+│   ├── memory/                           # Persistent project memory
+│   │   ├── project-context.md            #   Current project state
+│   │   ├── architecture-decisions.md     #   Architectural choices
+│   │   ├── agent-learnings.md            #   Agent knowledge base
+│   │   ├── error-patterns.md             #   Common error patterns
+│   │   ├── deployment-history.md         #   Deployment records
+│   │   └── team-preferences.md           #   Team conventions
+│   │
+│   ├── commands/                         # 34 slash commands
+│   │   ├── deploy.md                     #   /deploy staging|production
+│   │   ├── review.md                     #   /review (code review)
+│   │   ├── test.md                       #   /test (run test suite)
+│   │   ├── wiki-ingest.md                #   /wiki-ingest (add to wiki)
+│   │   ├── wiki-query.md                 #   /wiki-query (search wiki)
+│   │   ├── wiki-lint.md                  #   /wiki-lint (health check)
+│   │   └── (28 more...)                  #   audit, backup, build, cert...
+│   │
+│   ├── templates/                        # 20 code generation templates
+│   │   ├── api-endpoint.py.tmpl          #   FastAPI endpoint scaffold
+│   │   ├── component.tsx.tmpl            #   React component scaffold
+│   │   ├── test-unit.py.tmpl             #   pytest test scaffold
+│   │   ├── terraform-module.tf.tmpl      #   Terraform module scaffold
+│   │   └── (16 more...)                  #   model, service, migration...
+│   │
+│   ├── mcp/                              # 8 MCP server configs
+│   │   ├── github.json                   #   GitHub repos, PRs, issues
+│   │   ├── postgres.json                 #   Database queries
+│   │   ├── docker.json                   #   Container management
+│   │   ├── kubernetes.json               #   Cluster operations
+│   │   ├── filesystem.json               #   File access
+│   │   ├── redis.json                    #   Cache operations
+│   │   ├── vault.json                    #   Secret management
+│   │   └── prometheus.json               #   Metrics queries
+│   │
+│   └── settings.json                     # Model routing + hook config
+│
+├── ⚙️ backbone/                          # AGENT ORCHESTRATOR
+│   ├── memory/                           # 8-LAYER AI MEMORY SYSTEM
+│   │   ├── __init__.py                   #   Package exports
+│   │   ├── schemas.py                    #   Frozen dataclass models (all 8 layers)
+│   │   ├── config.py                     #   Environment-based configuration
+│   │   ├── orchestrator.py               #   Main coordinator (assemble + post-inference)
+│   │   ├── working_memory.py             #   L1: Context window management
+│   │   ├── short_term_memory.py          #   L2: Redis conversation buffer
+│   │   ├── long_term_memory.py           #   L3: PostgreSQL persistent user data
+│   │   ├── episodic_memory.py            #   L4: PostgreSQL event timeline
+│   │   ├── semantic_memory.py            #   L5: pgvector RAG retrieval
+│   │   ├── procedural_memory.py          #   L6: PostgreSQL workflow patterns
+│   │   ├── entity_memory.py              #   L7: PostgreSQL + Neo4j entity profiles
+│   │   ├── shared_memory.py              #   L8: Redis multi-agent coordination
+│   │   ├── manager.py                    #   Legacy 4-tier manager (backward compat)
+│   │   └── api/
+│   │       └── routes.py                 #   FastAPI endpoints for all layers
+│   ├── orchestrator/                     #   Agent lifecycle management
+│   ├── governance/                       #   Policy enforcement
+│   ├── workflows/                        #   Workflow definitions
+│   ├── tools/                            #   Tool catalog
+│   ├── validation/                       #   Input/output validation
+│   ├── observability/                    #   Logging, metrics, tracing
+│   └── runtime/                          #   Agent execution runtime
+│
+├── 🖥️ backend/                           # FastAPI (Python 3.12)
+│   ├── app/
+│   │   ├── api/                          #   REST endpoints
+│   │   ├── core/                         #   Config, security, dependencies
+│   │   ├── domain/                       #   Business entities, value objects
+│   │   ├── middleware/
+│   │   │   └── guardrails.py             #   LLM validation pipeline
+│   │   ├── services/                     #   Business logic layer
+│   │   └── repositories/                 #   Data access layer
+│   ├── alembic/                          #   Database migrations
+│   └── tests/                            #   pytest test suite
+│
+├── 🌐 frontend/                          # Next.js 14 (TypeScript)
+│   ├── src/
+│   │   ├── app/                          #   App router pages
+│   │   ├── components/                   #   React components
+│   │   ├── hooks/                        #   Custom React hooks
+│   │   ├── lib/                          #   Utilities, API client
+│   │   └── stores/                       #   Zustand state management
+│   └── tests/                            #   Vitest + Playwright
+│
+├── 🔒 security/                          # SECURITY POLICIES
+│   ├── falco/                            #   Runtime threat detection rules
+│   ├── guardrails/                       #   LLM output validators
+│   ├── kyverno/                          #   Kubernetes policy enforcement
+│   ├── opa/                              #   Open Policy Agent rules
+│   ├── sigma/                            #   SIEM detection rules
+│   └── trivy/                            #   Container vulnerability scanning
+│
+├── 🏗️ infrastructure/                    # INFRASTRUCTURE AS CODE
+│   ├── terraform/                        #   Cloud provisioning
+│   ├── helm/                             #   Kubernetes Helm charts
+│   └── ansible/                          #   Configuration management
+│
+├── 📊 monitoring/                        # OBSERVABILITY
+│   ├── prometheus/                       #   Metric collection rules
+│   ├── grafana/                          #   Dashboard definitions
+│   ├── loki/                             #   Log aggregation config
+│   └── alertmanager/                     #   Alert routing rules
+│
+├── 📚 docs/                              # DOCUMENTATION
+│   ├── ai-memory-architecture.md         #   8-Layer Memory System design
+│   ├── architecture.md                   #   Clean architecture overview
+│   ├── agents.md                         #   Agent system documentation
+│   ├── deployment.md                     #   Deployment guide
+│   ├── adr/                              #   Architecture Decision Records
+│   ├── runbooks/                         #   Operational procedures
+│   └── vault/                            #   Obsidian knowledge vault
+│       ├── raw/                          #     Immutable source documents
+│       ├── wiki/                         #     LLM-maintained compiled knowledge
+│       │   ├── index.md                  #       Content catalog (first lookup)
+│       │   ├── entities/                 #       One page per agent/service/tool
+│       │   ├── concepts/                 #       Cross-cutting topics
+│       │   ├── sources/                  #       Ingested source summaries
+│       │   └── contradictions/           #       Flagged conflicts
+│       └── SCHEMA.md                     #     Governance rules
+│
+├── 🤖 agents/                            # Agent providers + router
+├── 🔗 models/                            # Model catalog + routing
+│   ├── catalog.yaml                      #   40+ models across 12 providers
+│   ├── routing.yaml                      #   Tier-based model selection
+│   └── embeddings.yaml                   #   Embedding model configs
+├── 🔌 mcp/                               # MCP gateway + registry
+├── ⚡ engines/                            # LLM engine configs
+├── 🧪 evals/                             # DeepEval + PromptFoo evaluation
+├── 📜 compliance/                        # Regulatory frameworks
+├── 🌐 networks/                          # Service mesh, agent protocols
+├── 🛠️ tools/                              # Tool catalog
+├── 📦 scripts/                           # Bootstrap, deploy, verify
+├── 🚀 gitops/                            # ArgoCD + Kustomize overlays
+└── 🏁 starter-kit/                       # Standalone starter for new projects
+```
+
+</details>
+
+---
+
+## 🧠 8-Layer AI Memory Architecture
+
+> Production-grade memory system that makes the AI feel persistent, context-aware, and stateful across sessions, users, and workflows. Full docs: [`docs/ai-memory-architecture.md`](docs/ai-memory-architecture.md)
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        USER[User / API Consumer]
+    end
+
+    subgraph "Memory Orchestrator"
+        ORCH[backbone/memory/orchestrator.py]
+        PRE[PRE-INFERENCE<br/>Assemble context from all 8 layers]
+        POST[POST-INFERENCE<br/>Write back learnings]
+    end
+
+    subgraph "8 Memory Layers"
+        L1[L1: Working Memory<br/>Context window tokens<br/><i>In-process</i>]
+        L2[L2: Short-Term Memory<br/>Conversation buffer<br/><i>Redis</i>]
+        L3[L3: Long-Term Memory<br/>Persistent user data<br/><i>PostgreSQL + RLS</i>]
+        L4[L4: Episodic Memory<br/>Timestamped events<br/><i>PostgreSQL partitioned</i>]
+        L5[L5: Semantic Memory<br/>Vector RAG retrieval<br/><i>pgvector + HNSW</i>]
+        L6[L6: Procedural Memory<br/>Workflows & skills<br/><i>PostgreSQL</i>]
+        L7[L7: Entity Memory<br/>User/org/product profiles<br/><i>PostgreSQL + Neo4j</i>]
+        L8[L8: Shared Memory<br/>Multi-agent coordination<br/><i>Redis pub/sub</i>]
+    end
+
+    subgraph "LLM Layer"
+        LLM[Claude / GPT / Gemini / Local]
+        GUARD[Guardrails Validation]
+    end
+
+    USER -->|query| ORCH
+    ORCH --> PRE
+    PRE --> L1 & L2 & L3 & L4 & L5 & L6 & L7 & L8
+    PRE -->|assembled context| LLM
+    LLM --> GUARD
+    GUARD -->|validated response| POST
+    POST --> L2 & L3 & L4 & L7 & L8
+    POST -->|response| USER
+
+    style L1 fill:#e3f2fd
+    style L2 fill:#fff3e0
+    style L3 fill:#e8f5e9
+    style L4 fill:#fce4ec
+    style L5 fill:#f3e5f5
+    style L6 fill:#fff8e1
+    style L7 fill:#e0f2f1
+    style L8 fill:#fbe9e7
+```
+
+### Memory Layer Summary
+
+| # | Layer | Storage | Latency | What It Stores |
+|---|-------|---------|---------|----------------|
+| 1 | **Working** | In-process | <1ms | Current context window tokens, system prompt |
+| 2 | **Short-Term** | Redis | 1-5ms | Recent conversation turns within a session |
+| 3 | **Long-Term** | PostgreSQL (RLS) | 5-20ms | User preferences, facts, corrections across sessions |
+| 4 | **Episodic** | PostgreSQL (partitioned) | 5-20ms | Timestamped interaction events, error logs, decisions |
+| 5 | **Semantic** | pgvector (HNSW) | 10-50ms | Embedded knowledge chunks for RAG retrieval |
+| 6 | **Procedural** | PostgreSQL | 5-20ms | Learned workflows, tool-call sequences, success rates |
+| 7 | **Entity** | PostgreSQL + Neo4j | 5-50ms | Structured profiles: users, orgs, products, agents |
+| 8 | **Shared** | Redis (pub/sub) | 1-5ms | Multi-agent state, distributed locks, broadcasts |
+
+### Memory Data Flow
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant O as Orchestrator
+    participant WM as Working Memory
+    participant STM as Short-Term (Redis)
+    participant LTM as Long-Term (Postgres)
+    participant EM as Entity (Postgres)
+    participant SM as Semantic (pgvector)
+    participant LLM as LLM Provider
+
+    U->>O: Send query
+    Note over O: PRE-INFERENCE
+    O->>WM: Load system prompt
+    O->>EM: Load user profile
+    O->>LTM: Query preferences & facts
+    O->>SM: RAG retrieval (embed → search → rerank)
+    O->>STM: Load recent conversation turns
+    O->>WM: Truncate to fit context window
+    O->>LLM: Send assembled context
+    LLM-->>O: Response
+    Note over O: POST-INFERENCE
+    O->>STM: Append user msg + response
+    O->>LTM: Store new facts learned
+    O->>EM: Update interaction count
+    O-->>U: Return validated response
+```
+
+### Retrieval Strategy Decision Tree
+
+```mermaid
+flowchart TD
+    Q[Incoming Query] --> TYPE{Query Type?}
+    TYPE -->|Factual about user| STRUCT[Structured Query<br/>Long-Term + Entity Memory]
+    TYPE -->|Open knowledge question| VEC[Vector Search<br/>Semantic Memory]
+    TYPE -->|Mixed specific + general| HYB[Hybrid Retrieval<br/>70% Vector + 30% Keyword]
+    TYPE -->|Past interaction recall| TIME[Time-Range Query<br/>Episodic Memory]
+    TYPE -->|How to do something| PROC[Trigger Match<br/>Procedural Memory]
+    TYPE -->|Multi-agent context| SHARED[Namespace Scan<br/>Shared Memory]
+
+    STRUCT --> RESULT[Return Results]
+    VEC --> RERANK[Rerank Top 20]
+    HYB --> RERANK
+    TIME --> RESULT
+    PROC --> RESULT
+    SHARED --> RESULT
+    RERANK --> RESULT
+```
+
+### Multi-Agent Shared Memory
+
+```mermaid
+graph LR
+    subgraph "Agent Fleet"
+        A[Agent A<br/>Planner]
+        B[Agent B<br/>Coder]
+        C[Agent C<br/>Tester]
+        D[Agent D<br/>Reviewer]
+    end
+
+    subgraph "Shared Memory (Redis)"
+        SM[(Shared State<br/>namespace:task-1)]
+        LOCK[Distributed Locks]
+        PS[Pub/Sub Broadcast]
+    end
+
+    A -->|write task| SM
+    SM -->|broadcast| PS
+    PS -->|notify| B & C & D
+    B -->|write result| SM
+    C -->|write result| SM
+    D -->|write result| SM
+    B -.->|acquire| LOCK
+    LOCK -.->|release| B
+
+    style SM fill:#fff3e0
+    style LOCK fill:#ffcdd2
+    style PS fill:#e8f5e9
+```
+
+---
+
 ## 🏗️ Architecture
 
 ```
