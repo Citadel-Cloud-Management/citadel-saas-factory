@@ -1,0 +1,73 @@
+[
+  {
+    "id": "council-arch-001",
+    "description": "Council Architecture session produces all 9 agent sections for a SaaS product brief",
+    "input": {
+      "task": "council-architecture",
+      "product_name": "Meridian",
+      "core_problem": "Engineering teams lack visibility into workforce capacity and allocation",
+      "primary_persona": "VP Engineering at mid-market SaaS company, frustrated by spreadsheet-based capacity planning",
+      "business_model": "per-seat SaaS",
+      "target_segment": "Mid-Market",
+      "compliance_exposure": "SOC2",
+      "cloud_provider": "AWS",
+      "team_size": "2 BE, 1 FE, 1 DevOps",
+      "timeline_to_mvp": "10 weeks"
+    },
+    "expected_output": {
+      "must_contain_sections": [
+        "RESEARCHER",
+        "STRATEGIST",
+        "CREATIVE",
+        "CRITIC",
+        "DEVIL'S ADVOCATE",
+        "ETHICIST",
+        "IMPLEMENTER",
+        "FACT-CHECKER",
+        "ORCHESTRATOR"
+      ],
+      "must_contain_concepts": [
+        "ADR",
+        "RISK",
+        "PHASE"
+      ]
+    },
+    "tags": ["council", "architecture", "integration"],
+    "pass_criteria": {
+      "accuracy": "All 9 agent sections present with substantive content",
+      "format": "Structured output with clear section headers",
+      "hallucination": "No fabricated library names or non-existent AWS services",
+      "latency_budget_ms": 120000
+    }
+  },
+  {
+    "id": "council-val-001",
+    "description": "Council Validation session produces findings table and ship verdict",
+    "input": {
+      "task": "council-validation",
+      "system_under_review": "Tenant Provisioning Service",
+      "review_trigger": "pre-launch",
+      "compliance_requirements": "SOC2",
+      "highest_risk_area": "tenant isolation"
+    },
+    "expected_output": {
+      "must_contain_sections": [
+        "RESEARCHER",
+        "CRITIC",
+        "ORCHESTRATOR"
+      ],
+      "must_contain_concepts": [
+        "VERDICT",
+        "FINDING",
+        "SEVERITY"
+      ]
+    },
+    "tags": ["council", "validation", "security"],
+    "pass_criteria": {
+      "accuracy": "Findings table with severity ratings and file locations",
+      "format": "Structured findings with ID, Severity, Category, Location columns",
+      "hallucination": "No fabricated CVE numbers or non-existent compliance clauses",
+      "latency_budget_ms": 120000
+    }
+  }
+]

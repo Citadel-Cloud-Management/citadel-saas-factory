@@ -1,0 +1,39 @@
+# Summarization Skill
+# Reusable skill definition for document summarization tasks.
+
+name: summarization
+description: Extract key points from documents with confidence ratings and source citations.
+version: "1.0.0"
+
+prompt_ref: ai/prompts/tasks/example_task.md
+
+input_schema:
+  document_text:
+    type: string
+    required: true
+    description: The full text of the document to summarize.
+  max_points:
+    type: integer
+    required: false
+    default: 5
+    description: Maximum number of key points to extract.
+  output_format:
+    type: string
+    required: false
+    default: json
+    enum: [json, markdown, plain]
+    description: Desired output format.
+
+output_schema:
+  summary:
+    type: array
+    items:
+      point: string
+      source_ref: string
+      confidence: string
+  total_points: integer
+  document_length_chars: integer
+
+guardrails:
+  - hallucination_free
+  - provenance_llm

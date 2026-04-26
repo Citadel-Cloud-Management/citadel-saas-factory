@@ -1,0 +1,67 @@
+[
+  {
+    "id": "sum-001",
+    "description": "Summarize a short technical document into 3 key points",
+    "input": {
+      "document_text": "Kubernetes 1.30 introduces sidecar containers as a first-class concept. Previously, sidecar containers were implemented as regular containers with workarounds for lifecycle management. The new native sidecar support ensures proper startup and shutdown ordering, reducing race conditions in service mesh and logging setups. Additionally, the release includes improvements to pod scheduling with the new SchedulingGates feature, allowing external controllers to influence when pods become schedulable.",
+      "max_points": 3,
+      "output_format": "json"
+    },
+    "expected_output": {
+      "summary_length": 3,
+      "must_contain_concepts": [
+        "sidecar containers",
+        "lifecycle management",
+        "SchedulingGates"
+      ],
+      "confidence_levels": ["HIGH", "MEDIUM", "LOW"]
+    },
+    "tags": ["summarization", "technical", "kubernetes"],
+    "pass_criteria": {
+      "accuracy": "All 3 must_contain_concepts appear in output",
+      "format": "Valid JSON matching output schema",
+      "hallucination": "No claims not supported by input text",
+      "latency_budget_ms": 5000
+    }
+  },
+  {
+    "id": "sum-002",
+    "description": "Handle empty document gracefully",
+    "input": {
+      "document_text": "",
+      "max_points": 5,
+      "output_format": "json"
+    },
+    "expected_output": {
+      "summary_length": 0,
+      "error_or_empty": true
+    },
+    "tags": ["summarization", "edge-case", "empty-input"],
+    "pass_criteria": {
+      "accuracy": "Returns empty summary array or descriptive error",
+      "format": "Valid JSON",
+      "hallucination": "No fabricated content",
+      "latency_budget_ms": 2000
+    }
+  },
+  {
+    "id": "tool-001",
+    "description": "Web search tool returns relevant results for a factual query",
+    "input": {
+      "query": "Claude 4.6 release date features",
+      "num_results": 3,
+      "type": "auto"
+    },
+    "expected_output": {
+      "min_results": 1,
+      "results_contain_query_terms": true
+    },
+    "tags": ["tool-use", "search", "exa"],
+    "pass_criteria": {
+      "accuracy": "At least 1 result is relevant to the query",
+      "format": "Results array with title, url, and snippet fields",
+      "tool_use": "Tool was invoked with correct parameters",
+      "latency_budget_ms": 8000
+    }
+  }
+]

@@ -1,0 +1,43 @@
+# AI Layer Configuration — Citadel SaaS Factory
+# This file is the entry point for the ai/ directory structure.
+# It defines mount point, model defaults, and directory layout.
+
+mount_point: ai/
+default_model: claude-sonnet-4-6
+
+prompt_dir: ai/prompts/
+eval_dir: ai/evals/
+agent_dir: ai/agents/
+data_dir: ai/data/
+
+eval_threshold: 0.85
+
+model_routing:
+  default: claude-sonnet-4-6
+  cheap: claude-haiku-4-5
+  premium: claude-opus-4-7
+
+guardrails:
+  enabled: true
+  hallucination_threshold: 0.85
+  validators:
+    - hallucination_free
+    - provenance_llm
+    - toxic_language
+    - detect_pii
+
+directories:
+  prompts:
+    system: ai/prompts/system/
+    tasks: ai/prompts/tasks/
+    tools: ai/prompts/tools/
+  data:
+    raw: ai/data/raw/
+    processed: ai/data/processed/
+  agents:
+    skills: ai/agents/skills/
+    tools: ai/agents/tools/
+  evals:
+    tests: ai/evals/tests/
+    traces: ai/evals/traces/
+    scorecards: ai/evals/scorecards/

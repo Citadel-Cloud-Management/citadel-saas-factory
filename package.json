@@ -50,6 +50,7 @@
     "mcp/",
     "subagents/",
     "tools/",
+    "ai/",
     "evals/",
     "networks/",
     "indexing/",
@@ -67,6 +68,16 @@
   "funding": {
     "type": "custom",
     "url": "https://cash.app/$KennyOgunlowo"
+  },
+  "scripts": {
+    "ai:setup": "bash ai/setup.sh",
+    "ai:eval": "node ai/evals/run.js",
+    "ai:eval:mock": "node ai/evals/run.js --mock",
+    "ai:eval:dry": "node ai/evals/run.js --dry-run",
+    "ai:prompts:lint": "node ai/prompts/lint.js",
+    "ai:agent": "python3 ai/agents/run.py",
+    "ai:agent:mock": "python3 ai/agents/run.py --mock",
+    "ai:validate": "python3 ai/agents/run.py --validate"
   },
   "engines": {
     "node": ">=18.0.0"

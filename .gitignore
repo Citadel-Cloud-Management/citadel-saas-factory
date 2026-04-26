@@ -76,3 +76,11 @@ vendor/
 # ─── Build Artifacts ───
 *.tar.gz
 *.zip
+
+# ─── AI Layer ───
+ai/data/raw/*
+!ai/data/raw/.gitkeep
+ai/evals/traces/*
+!ai/evals/traces/.gitkeep
+**/.env
+**/secrets*

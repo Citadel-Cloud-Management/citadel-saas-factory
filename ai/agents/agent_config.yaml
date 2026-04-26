@@ -1,0 +1,50 @@
+# Citadel AI Agent Configuration
+# This config defines agent defaults for the ai/ layer.
+# Domain-specific agents live in .claude/agents/ — this file covers
+# agents that operate within the ai/ prompt/eval pipeline.
+
+name: citadel-ai-agent
+model: claude-sonnet-4-6
+system_prompt_ref: ai/prompts/system/base.md
+
+tools:
+  - exa_search
+  - knowledge_vault_read
+  - guardrails_validate
+  - structured_output
+
+skills:
+  - summarization
+  - code_review
+  - data_extraction
+  - question_answering
+
+eval_threshold: 0.85
+
+# Model routing overrides (matches models/routing.yaml tiers)
+model_routing:
+  default: claude-sonnet-4-6
+  cheap: claude-haiku-4-5
+  premium: claude-opus-4-7
+
+# Guardrails — every LLM call must pass these validators
+guardrails:
+  hallucination_free:
+    threshold: 0.85
+  provenance_llm: true
+  toxic_language: true
+  detect_pii: true
+  max_retries: 3
+  fail_mode: reject
+
+# Prompt directories
+prompt_dirs:
+  system: ai/prompts/system/
+  tasks: ai/prompts/tasks/
+  tools: ai/prompts/tools/
+
+# Eval directories
+eval_dirs:
+  tests: ai/evals/tests/
+  traces: ai/evals/traces/
+  scorecards: ai/evals/scorecards/

@@ -1,0 +1,34 @@
+# Exa Search Tool Configuration
+# Wrapper config for the Exa web search tool.
+
+name: exa_search
+description: Web search via Exa API for retrieving current information.
+version: "1.0.0"
+
+provider: exa
+api_key_env: EXA_API_KEY
+
+prompt_ref: ai/prompts/tools/example_tool.md
+
+parameters:
+  query:
+    type: string
+    required: true
+  num_results:
+    type: integer
+    default: 5
+    min: 1
+    max: 10
+  type:
+    type: string
+    default: auto
+    enum: [keyword, neural, auto]
+
+rate_limit:
+  requests_per_minute: 30
+  burst: 5
+
+retry:
+  max_attempts: 3
+  backoff: exponential
+  base_delay_ms: 500

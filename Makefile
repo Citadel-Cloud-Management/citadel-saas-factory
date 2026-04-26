@@ -1,4 +1,4 @@
-.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks setup-claude setup-claude-target render-agents eval status
+.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks setup-claude setup-claude-target render-agents eval ai-setup ai-eval ai-eval-mock ai-eval-dry ai-prompt-lint ai-agent ai-agent-mock ai-validate ai-list-tasks ai-list-tools status
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -127,6 +127,36 @@ convert-skills: ## Convert skills to all agent formats (Cursor, Aider, Windsurf,
 install-skills: ## Install converted skills into target project
 	@echo "Usage: make install-skills TOOL=cursor TARGET=."
 	./scripts/install.sh --tool $${TOOL:-cursor} --target $${TARGET:-.}
+
+ai-setup: ## Bootstrap the AI layer (verify runtimes, structure, permissions)
+	bash ai/setup.sh
+
+ai-eval: ## Run AI layer eval suite (set ANTHROPIC_API_KEY or use ai-eval-mock)
+	node ai/evals/run.js
+
+ai-eval-mock: ## Run AI layer eval suite in mock mode (no API key needed)
+	node ai/evals/run.js --mock
+
+ai-eval-dry: ## Dry-run: validate test cases without calling the API
+	node ai/evals/run.js --dry-run
+
+ai-prompt-lint: ## Lint all AI prompt files for frontmatter and structure
+	node ai/prompts/lint.js
+
+ai-agent: ## Run an AI agent task (usage: make ai-agent TASK=summarize-document INPUT='{"document_text":"..."}')
+	python3 ai/agents/run.py --task $${TASK} --input '$${INPUT}'
+
+ai-agent-mock: ## Run an AI agent task in mock mode (usage: make ai-agent-mock TASK=summarize-document)
+	python3 ai/agents/run.py --task $${TASK} --mock
+
+ai-validate: ## Validate the entire ai/ layer integrity
+	python3 ai/agents/run.py --validate
+
+ai-list-tasks: ## List all available AI tasks
+	python3 ai/agents/run.py --list-tasks
+
+ai-list-tools: ## List all available AI tools
+	python3 ai/agents/run.py --list-tools
 
 status: ## System status (agents, models, rules, skills, providers)
 	@echo "=== Citadel SaaS Factory Status ==="
