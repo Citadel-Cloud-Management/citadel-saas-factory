@@ -355,9 +355,22 @@ def main() -> None:
     # ── Parse input ──
     variables: dict[str, Any] = {}
     if args.input:
-        variables = json.loads(args.input)
+        try:
+            variables = json.loads(args.input)
+        except json.JSONDecodeError as e:
+            print(f"Invalid JSON in --input: {e}", file=sys.stderr)
+            print(f"  Received: {args.input[:200]}", file=sys.stderr)
+            sys.exit(1)
     elif args.input_file:
-        variables = json.loads(Path(args.input_file).read_text())
+        input_path = Path(args.input_file)
+        if not input_path.exists():
+            print(f"Input file not found: {args.input_file}", file=sys.stderr)
+            sys.exit(1)
+        try:
+            variables = json.loads(input_path.read_text())
+        except json.JSONDecodeError as e:
+            print(f"Invalid JSON in {args.input_file}: {e}", file=sys.stderr)
+            sys.exit(1)
 
     # ── Load system prompt ──
     config = load_yaml_simple(AGENTS_DIR / "agent_config.yaml")
