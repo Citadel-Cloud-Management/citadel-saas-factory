@@ -414,7 +414,35 @@ citadel-saas-factory/
 │   │   ├── documentation.md              #   ADRs, OpenAPI, changelogs
 │   │   └── accessibility.md              #   WCAG 2.1 AA, ARIA, keyboard nav
 │   │
-│   ├── skills/                           # 262 specialist capabilities
+│   ├── skills/                           # 262+ specialist capabilities
+│   │   ├── master-system/                #   🔥 26-plugin autonomous engineering system
+│   │   │   ├── SKILL.md                  #     Orchestrator + plugin registry
+│   │   │   ├── 01-no-gatekeeping.md      #     Complete implementation guidance
+│   │   │   ├── 02-real-world-execution.md#     Production-oriented outputs
+│   │   │   ├── 03-multi-domain-validation#     Cross-domain validation
+│   │   │   ├── 04-tool-first-execution.md#     MCP tools > assumptions
+│   │   │   ├── 05-execution-ready-output #     Standardized response format
+│   │   │   ├── 06-security-first.md      #     Zero trust, OWASP, threat modeling
+│   │   │   ├── 07-autonomous-agents.md   #     13 agent archetypes
+│   │   │   ├── 08-mcp-ecosystem.md       #     40+ MCP server integrations
+│   │   │   ├── 09-saas-factory.md        #     End-to-end SaaS generation
+│   │   │   ├── 10-engineering-standards  #     Backend/frontend/infra/DB
+│   │   │   ├── 11-observability.md       #     OTel + Prometheus + Grafana
+│   │   │   ├── 12-agent-safety.md        #     Safety controls + circuit breakers
+│   │   │   ├── 13-context-engineering.md #     Memory, ADRs, decision logs
+│   │   │   ├── 14-response-quality.md    #     Pre-response validation
+│   │   │   ├── 15-folder-structure.md    #     Default project layout
+│   │   │   ├── 16-new-project-outputs.md #     13 required artifacts
+│   │   │   ├── 17-cicd-standards.md      #     Pipeline stages + tooling
+│   │   │   ├── 18-cloud-security.md      #     AWS/Azure/GCP security
+│   │   │   ├── 19-execution-priority.md  #     Security > stability > velocity
+│   │   │   ├── 20-failure-handling.md    #     Retry, circuit breakers, DLQ
+│   │   │   ├── 21-business-awareness.md  #     ROI, cost, vendor lock-in
+│   │   │   ├── 22-self-check.md          #     Final validation checklist
+│   │   │   ├── 23-plugin-execution.md    #     Claude Code safety protocol
+│   │   │   ├── 24-saas-business.md       #     Billing, CRM, analytics
+│   │   │   ├── 25-enterprise-docs.md     #     Auto-generated documentation
+│   │   │   └── 26-never-blind.md         #     Verified state > assumptions
 │   │   ├── code-review/SKILL.md          #   Automated code review patterns
 │   │   ├── testing/SKILL.md              #   Test framework patterns
 │   │   ├── guardrails/SKILL.md           #   LLM output validation
@@ -1017,6 +1045,76 @@ docs/vault/
 | 🔄 **Sync** | `make wiki-sync` | Refresh Graphify output + run lint pass |
 
 **Key principle:** LLMs don't get bored. They don't forget to update cross-references. They can touch 15 files in one pass. The tedious bookkeeping that makes humans abandon wikis is exactly what LLMs excel at.
+
+---
+
+## 🔧 Master System — 26 Autonomous Engineering Plugins
+
+> Production-grade plugin system that transforms Claude Code into a full-stack autonomous engineering, DevSecOps, and SaaS factory operator. Located at `.claude/skills/master-system/`.
+
+### Plugin Registry
+
+| # | Plugin | Skill ID | Purpose |
+|---|--------|----------|---------|
+| 1 | No Gatekeeping | `ms-no-gatekeeping` | Complete implementation guidance — no vague summaries |
+| 2 | Real-World Execution | `ms-real-world-execution` | Production-oriented, operationally realistic outputs |
+| 3 | Multi-Domain Validation | `ms-multi-domain-validation` | Cross-domain validation (arch, security, DevOps, SRE, cost) |
+| 4 | Tool-First Execution | `ms-tool-first-execution` | Prioritize MCP tools and runtime context over assumptions |
+| 5 | Execution-Ready Output | `ms-execution-ready-output` | Standardized response format with all artifacts |
+| 6 | Security-First | `ms-security-first` | Zero trust, least privilege, OWASP Top 10, threat modeling |
+| 7 | Autonomous Agents | `ms-autonomous-agents` | 13 agent archetypes with scoped permissions |
+| 8 | MCP Ecosystem | `ms-mcp-ecosystem` | Orchestrate 40+ MCP servers across domains |
+| 9 | SaaS Factory | `ms-saas-factory` | End-to-end SaaS business generation |
+| 10 | Engineering Standards | `ms-engineering-standards` | Backend, frontend, infrastructure, database standards |
+| 11 | Observability | `ms-observability` | OpenTelemetry + Prometheus + Grafana + Loki + Tempo |
+| 12 | Agent Safety | `ms-agent-safety` | Safety controls, circuit breakers, approval gates |
+| 13 | Context Engineering | `ms-context-engineering` | Long-term memory, ADRs, decision logs, changelogs |
+| 14 | Response Quality | `ms-response-quality` | Pre-response validation checklist |
+| 15 | Folder Structure | `ms-folder-structure` | Default project organization template |
+| 16 | New Project Outputs | `ms-new-project-outputs` | 13 required artifacts for new systems |
+| 17 | CI/CD Standards | `ms-cicd-standards` | Pipeline stages, tooling, approval gates |
+| 18 | Cloud Security | `ms-cloud-security` | AWS/Azure/GCP security baseline |
+| 19 | Execution Priority | `ms-execution-priority` | Security > stability > reliability > ... > velocity |
+| 20 | Failure Handling | `ms-failure-handling` | Retry, circuit breakers, DLQ, rollback |
+| 21 | Business Awareness | `ms-business-awareness` | ROI, cost, vendor lock-in, monetization |
+| 22 | Self-Check | `ms-self-check` | Final validation before every response |
+| 23 | Plugin Execution | `ms-plugin-execution` | Claude Code plugin safety protocol |
+| 24 | SaaS Business Mode | `ms-saas-business` | Billing, CRM, analytics, onboarding, support |
+| 25 | Enterprise Docs | `ms-enterprise-docs` | Auto-generated ADRs, runbooks, SOPs, compliance |
+| 26 | Never Operate Blindly | `ms-never-blind` | Verified state over assumptions |
+
+### Usage
+
+```bash
+# Activate the full system
+/master-system
+
+# Use individual plugins
+/ms-security-first
+/ms-saas-factory
+/ms-cicd-standards
+
+# Composite workflows
+# New Project:  ms-folder-structure -> ms-new-project-outputs -> ms-cicd-standards -> ms-security-first
+# Security Audit: ms-security-first -> ms-cloud-security -> ms-self-check
+# SaaS Launch:  ms-saas-factory -> ms-saas-business -> ms-observability -> ms-enterprise-docs
+```
+
+### Execution Priority Order
+
+Every autonomous decision follows this strict priority:
+
+```
+1. SECURITY           (non-negotiable)
+2. STABILITY
+3. RELIABILITY
+4. OBSERVABILITY
+5. MAINTAINABILITY
+6. SCALABILITY
+7. PERFORMANCE
+8. COST OPTIMIZATION
+9. FEATURE VELOCITY
+```
 
 ---
 
