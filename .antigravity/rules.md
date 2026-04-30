@@ -1,12 +1,16 @@
 # Antigravity Rules
 
-## Project: Citadel SaaS Factory
-265-agent SaaS framework. FastAPI + Next.js + PostgreSQL + K3s.
+> **Canonical context**: [`context.md`](../context.md) — all architecture, standards, conventions, and agent system details.
 
-## Conventions
+## Project
+
+Citadel SaaS Factory — 500+ agent SaaS framework. FastAPI + Next.js + PostgreSQL + K3s.
+
+## Key Rules
+
 - Immutability by default — create new objects, never mutate
-- Small files: 200-400 lines typical, 800 max
-- TDD: tests first, 80% minimum coverage
+- Small files (200-400 lines, 800 max)
+- TDD mandatory (80% coverage)
 - Conventional commits: feat, fix, refactor, docs, test, chore
 - Clean architecture: domain > use cases > interfaces > infrastructure
 - No hardcoded secrets — use env vars or Vault
@@ -15,14 +19,18 @@
 - WCAG 2.1 AA accessibility
 
 ## Multi-Model
+
 See `models/routing.yaml` for tier-based model selection.
 See `models/catalog.yaml` for full provider catalog.
 
 ## Agents
-265 agents defined at `.claude/agents/_registry.yaml`.
+
+500+ agents defined at `.claude/agents/_registry.yaml`.
 Antigravity workflows at `.antigravity/workflows/`.
 
 ## Key Files
+
+- Full context: [`context.md`](../context.md)
 - Agent registry: `.claude/agents/_registry.yaml`
 - Model catalog: `models/catalog.yaml`
 - Model routing: `models/routing.yaml`

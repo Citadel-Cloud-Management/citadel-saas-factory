@@ -1,4 +1,4 @@
-.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks setup-claude setup-claude-target render-agents eval ai-setup ai-eval ai-eval-mock ai-eval-dry ai-prompt-lint ai-agent ai-agent-mock ai-validate ai-list-tasks ai-list-tools status
+.PHONY: help dev stop backend frontend test lint security deploy clean vault-sync vault-audit vault-generate wiki-ingest wiki-lint wiki-sync run-paid run-free run-local engine-status strategy-html bootstrap-parallel bootstrap-dry detect-business install-models install-mcp install-hooks setup-claude setup-claude-target render-agents eval ai-setup ai-eval ai-eval-mock ai-eval-dry ai-prompt-lint ai-agent ai-agent-mock ai-validate ai-list-tasks ai-list-tools status sync-adapters
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -168,3 +168,6 @@ status: ## System status (agents, models, rules, skills, providers)
 	@echo "Personas:  $$(ls .claude/agents/personas/*.md 2>/dev/null | wc -l || echo 0)"
 	@echo "Providers: $$(ls agents/providers/*.yaml 2>/dev/null | wc -l || echo 0)"
 	@echo "Scripts:   $$(ls scripts/*.sh 2>/dev/null | wc -l || echo 0)"
+
+sync-adapters: ## Verify all AI instruction files reference context.md
+	./scripts/sync-adapters.sh

@@ -7,6 +7,7 @@
 name = "citadel-saas-factory"
 description = "265-agent SaaS framework — FastAPI + Next.js + PostgreSQL + K3s"
 instructions = "AGENTS.md"
+# Canonical context: context.md — AGENTS.md is the Codex-compatible adapter
 
 [agent]
 model = "codex-1"

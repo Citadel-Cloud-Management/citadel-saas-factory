@@ -1,7 +1,8 @@
 # Citadel SaaS Factory — .claude/ Intelligence Layer
 
+> **Canonical context**: [`context.md`](../context.md) — all architecture, standards, conventions, and agent system details.
 > This file extends the root [CLAUDE.md](../CLAUDE.md) with .claude/-specific context.
-> The root CLAUDE.md is the project constitution. This file covers the intelligence layer only.
+> This file covers the intelligence layer only.
 
 ## Intelligence Layer Structure
 

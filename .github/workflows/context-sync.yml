@@ -1,0 +1,79 @@
+name: Context Sync Validation
+
+on:
+  push:
+    paths:
+      - "context.md"
+      - "CLAUDE.md"
+      - "AGENTS.md"
+      - "AGENT.md"
+      - "GEMINI.md"
+      - ".github/copilot-instructions.md"
+      - ".antigravity/rules.md"
+      - ".cursor/rules/project-context.mdc"
+  pull_request:
+    paths:
+      - "context.md"
+      - "CLAUDE.md"
+      - "AGENTS.md"
+      - "AGENT.md"
+      - "GEMINI.md"
+      - ".github/copilot-instructions.md"
+      - ".antigravity/rules.md"
+      - ".cursor/rules/project-context.mdc"
+
+jobs:
+  validate-context-sync:
+    name: Validate context.md references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate context.md exists and is non-empty
+        run: |
+          if [ ! -f context.md ]; then
+            echo "::error::context.md does not exist"
+            exit 1
+          fi
+          if [ ! -s context.md ]; then
+            echo "::error::context.md is empty"
+            exit 1
+          fi
+          echo "context.md exists and is non-empty ($(wc -l < context.md) lines)"
+
+      - name: Validate adapter files reference context.md
+        run: |
+          ADAPTERS=(
+            "CLAUDE.md"
+            "AGENTS.md"
+            "AGENT.md"
+            "GEMINI.md"
+            ".github/copilot-instructions.md"
+            ".antigravity/rules.md"
+            ".cursor/rules/project-context.mdc"
+          )
+
+          FAILED=0
+
+          for file in "${ADAPTERS[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::warning::$file does not exist — skipping"
+              continue
+            fi
+
+            if grep -q "context\.md" "$file"; then
+              echo "OK: $file references context.md"
+            else
+              echo "::error::$file does NOT reference context.md"
+              FAILED=1
+            fi
+          done
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo ""
+            echo "::error::One or more adapter files are missing a reference to context.md"
+            exit 1
+          fi
+
+          echo ""
+          echo "All adapter files reference context.md"

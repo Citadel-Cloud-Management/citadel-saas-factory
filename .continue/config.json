@@ -30,6 +30,7 @@
     "model": "claude-haiku-4-5"
   },
   "docs": [
-    {"title": "Project Docs", "startUrl": "file://docs/index.md"}
+    {"title": "Project Docs", "startUrl": "file://docs/index.md"},
+    {"title": "Project Context", "startUrl": "file://context.md"}
   ]
 }

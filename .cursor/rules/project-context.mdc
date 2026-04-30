@@ -6,19 +6,12 @@ alwaysApply: true
 
 # Citadel SaaS Factory — Cursor Rules
 
-## Stack
-- Backend: FastAPI (Python 3.12)
-- Frontend: Next.js 14 (TypeScript)
-- Database: PostgreSQL 16 + Redis 7
-- Auth: Keycloak 24
-- Orchestration: K3s + ArgoCD
+> **Canonical context**: `context.md` at repository root — all architecture, standards, conventions, and agent system details.
 
-## Multi-Model Support
-Model routing defined in `models/routing.yaml`. Tiers: reasoning_deep, reasoning_fast, cheap_fast, long_context, code_specialist, vision, local_only.
+## Key Rules
 
-## Conventions
 - Immutability by default — create new objects, never mutate
-- Small files (200-400 lines, 800 max)
+- Small files (200-400 lines, 800 max), small functions (<50 lines)
 - TDD mandatory (80% coverage)
 - Conventional commits: feat, fix, refactor, docs, test, chore, perf, ci
 - Clean architecture: domain > use cases > interfaces > infrastructure
@@ -26,8 +19,15 @@ Model routing defined in `models/routing.yaml`. Tiers: reasoning_deep, reasoning
 - Parameterized queries only
 - Rate limiting on all endpoints
 - WCAG 2.1 AA accessibility
+- All LLM output passes through guardrails validation
+
+## Multi-Model
+
+Model routing defined in `models/routing.yaml`. Tiers: reasoning_deep, reasoning_fast, cheap_fast, long_context, code_specialist, vision, local_only, ultra_context, reasoning_chain.
 
 ## Key References
+
+- Full context: `context.md`
 - Agent registry: `.claude/agents/_registry.yaml`
 - Model catalog: `models/catalog.yaml`
 - MCP servers: `.cursor/mcp.json`
