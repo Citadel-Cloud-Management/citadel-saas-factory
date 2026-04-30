@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 
 from fastapi import FastAPI
 
+from app.api.v1 import v1_router
 from app.middleware.audit import AuditMiddleware
 from app.middleware.auth import AuthMiddleware
 from app.middleware.cors import setup_cors
@@ -41,6 +42,9 @@ app.add_middleware(AuthMiddleware)           # auth runs before rate limit
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(RequestIDMiddleware)      # outermost custom middleware
 setup_cors(app)                             # outermost: handles preflight
+
+# ── API Routes ──────────────────────────────────────────────────────────
+app.include_router(v1_router, prefix="/api/v1")
 
 
 @app.get("/health")

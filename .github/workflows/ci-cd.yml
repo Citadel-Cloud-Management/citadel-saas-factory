@@ -48,7 +48,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: cd frontend && npm ci && npm test -- --watchAll=false
+      - run: cd frontend && npm ci && npx vitest --run
 
   sast:
     runs-on: ubuntu-latest
@@ -122,7 +122,11 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
-      - run: echo "Deploy to staging via ArgoCD sync or kubectl apply -k gitops/overlays/staging"
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to staging..."
+          kubectl apply -k gitops/overlays/staging/ --dry-run=client
+          echo "Staging deployment validated (dry-run). Manual approval required for actual deploy."
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -130,4 +134,8 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      - run: echo "Deploy to production via ArgoCD sync or kubectl apply -k gitops/overlays/production"
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production..."
+          kubectl apply -k gitops/overlays/production/ --dry-run=client
+          echo "Production deployment validated (dry-run). Manual approval required for actual deploy."

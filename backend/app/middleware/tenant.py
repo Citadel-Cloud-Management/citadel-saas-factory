@@ -40,6 +40,12 @@ class TenantMiddleware(BaseHTTPMiddleware):
 
         request.state.tenant_id = tenant_id
 
+        # NOTE: RLS enforcement happens at the database session level.
+        # When a route handler obtains a session via get_db(), it should call
+        # set_tenant_context(session, tenant_id) from app.db.session to execute
+        # SET LOCAL app.current_tenant = tenant_id, scoping all queries to
+        # this tenant's rows via PostgreSQL RLS policies.
+
         if tenant_id:
             logger.debug("tenant_context_set", tenant_id=tenant_id, path=request.url.path)
 

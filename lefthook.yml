@@ -6,12 +6,12 @@ pre-commit:
   commands:
     lint-python:
       glob: "*.py"
-      run: ruff check {staged_files} 2>/dev/null || true
+      run: ruff check {staged_files}
     lint-typescript:
       glob: "*.{ts,tsx}"
-      run: npx eslint {staged_files} 2>/dev/null || true
+      run: npx eslint {staged_files}
     secret-scan:
-      run: gitleaks protect --staged 2>/dev/null || echo "Install gitleaks for secret scanning"
+      run: gitleaks protect --staged
 
 commit-msg:
   commands:
@@ -28,4 +28,4 @@ pre-push:
   parallel: true
   commands:
     security-scan:
-      run: semgrep scan --config auto . 2>/dev/null || echo "Semgrep not installed"
+      run: semgrep scan --config auto .
