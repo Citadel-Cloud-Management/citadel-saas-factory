@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Analytics from "../components/analytics";
+import CookieConsent from "../components/cookie-consent";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -19,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen bg-[var(--background)] font-sans antialiased">
+        <Analytics />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

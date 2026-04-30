@@ -1,0 +1,77 @@
+# DeepEval Faithfulness Test Cases
+# Metric: faithfulness | Threshold: 0.8
+# Tests whether agent outputs are grounded in the provided retrieval context
+
+test_cases:
+  - id: faithfulness-001
+    description: "Agent answer grounded in provided context (should pass)"
+    input: "What authentication system does the project use?"
+    actual_output: |
+      The project uses Keycloak 24 for authentication. It supports OAuth2
+      for authorization flows, RBAC for role-based access control, and MFA
+      for multi-factor authentication. Keycloak is deployed via the
+      docker-compose.yml configuration.
+    retrieval_context:
+      - |
+        Auth layer: Keycloak 24 (OAuth2, RBAC, MFA) configured in docker-compose.yml.
+        Keycloak provides SSO, social login, and fine-grained authorization policies.
+        All API endpoints require a valid JWT issued by Keycloak.
+    metric: faithfulness
+    threshold: 0.8
+    expected_verdict: pass
+
+  - id: faithfulness-002
+    description: "Agent answer contradicts provided context (should fail)"
+    input: "What database does the project use?"
+    actual_output: |
+      The project uses MongoDB 7 as its primary database with Mongoose ODM
+      for schema modeling. Documents are stored in collections organized
+      by domain, and the database supports horizontal scaling through sharding.
+    retrieval_context:
+      - |
+        Database: PostgreSQL 16 with pgvector extension for vector similarity
+        search and Row-Level Security (RLS) for multi-tenant data isolation.
+        Schema changes are managed through Alembic migrations. SQLAlchemy 2.0+
+        is used as the ORM. No raw SQL in application code.
+    metric: faithfulness
+    threshold: 0.8
+    expected_verdict: fail
+
+  - id: faithfulness-003
+    description: "Agent correctly says 'I don't know' when context is insufficient (should pass)"
+    input: "What is the expected uptime SLA for the platform?"
+    actual_output: |
+      I don't have enough information to answer that question. The provided
+      context covers the monitoring stack (Prometheus, Grafana, Loki, Tempo)
+      and alerting thresholds, but it does not specify an uptime SLA target.
+      I'd recommend checking the SRE runbooks or the service-level objectives
+      documentation for that detail.
+    retrieval_context:
+      - |
+        Monitoring stack: Prometheus for metrics collection, Grafana for
+        dashboards, Loki for log aggregation, Tempo for distributed tracing.
+        Alerting thresholds: >1% error rate triggers a warning, >500ms p95
+        latency triggers an alert. AlertManager handles notification routing
+        to on-call via PagerDuty integration.
+    metric: faithfulness
+    threshold: 0.8
+    expected_verdict: pass
+
+  - id: faithfulness-004
+    description: "Agent makes up facts beyond the context (should fail)"
+    input: "How are background jobs processed?"
+    actual_output: |
+      Background jobs are processed using Celery with Redis as the message
+      broker. Workers are configured with auto-scaling based on queue depth,
+      supporting up to 50 concurrent workers per node. Job results are stored
+      in PostgreSQL with a 30-day retention policy. Failed jobs are automatically
+      retried 5 times with exponential backoff before being moved to a dead
+      letter queue for manual review.
+    retrieval_context:
+      - |
+        Messaging: RabbitMQ is used for asynchronous message passing between
+        services. It is configured in docker-compose.yml. The backend publishes
+        events to topic exchanges, and consumers process them asynchronously.
+    metric: faithfulness
+    threshold: 0.8
+    expected_verdict: fail

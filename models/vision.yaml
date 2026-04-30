@@ -5,10 +5,10 @@ vision:
   - id: claude-opus-4-6
     provider: anthropic
     role: Design-to-code, screenshot analysis
-  - id: gemini-3-pro
+  - id: gemini-2.5-pro
     provider: google
     role: Long-context vision, UI reasoning
-  - id: gpt-5
+  - id: gpt-4.1
     provider: openai
     role: Alternative vision
   - id: llama-3.2-vision

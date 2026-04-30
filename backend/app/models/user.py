@@ -31,6 +31,13 @@ class User(TenantMixin, Base):
     full_name: Mapped[str] = mapped_column(String(255), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, server_default="false")
+    role: Mapped[str] = mapped_column(
+        String(32),
+        default="member",
+        server_default="member",
+        nullable=False,
+        comment="RBAC role: viewer, member, admin, owner, superuser",
+    )
     tenant_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         ForeignKey("tenants.id", ondelete="CASCADE"),

@@ -6,7 +6,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_current_user, get_db_session, require_superuser
+from app.api.deps import get_db_session
+from app.auth import Permission, require_permission
 from app.services.user_service import UserService
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -25,7 +26,7 @@ async def list_users(
     request: Request,
     page: int = Query(1, ge=1, description="Page number"),
     limit: int = Query(20, ge=1, le=100, description="Items per page"),
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.USERS_READ)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
     """List users in the current tenant (paginated)."""
@@ -48,7 +49,7 @@ async def list_users(
 @router.get("/{user_id}", status_code=status.HTTP_200_OK)
 async def get_user(
     user_id: UUID,
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.USERS_READ)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
     """Retrieve a single user by ID."""
@@ -70,15 +71,16 @@ async def get_user(
 async def update_user(
     user_id: UUID,
     request: Request,
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.USERS_WRITE)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Update a user.  Only the user themselves or a superuser may update."""
+    """Update a user.  Only the user themselves or a privileged role may update."""
     caller_id = current_user.get("sub")
     is_self = caller_id == str(user_id)
-    is_super = _is_superuser(current_user)
+    role: str = current_user.get("role", "member")
+    is_privileged = role in {"admin", "owner", "superuser"}
 
-    if not is_self and not is_super:
+    if not is_self and not is_privileged:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You can only update your own profile",
@@ -102,11 +104,10 @@ async def update_user(
 @router.delete("/{user_id}", status_code=status.HTTP_200_OK)
 async def delete_user(
     user_id: UUID,
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.USERS_DELETE)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Soft-delete a user (superuser only)."""
-    require_superuser(current_user)
+    """Soft-delete a user (admin+ role required)."""
 
     service = UserService(db)
     deleted = await service.delete_user(user_id=str(user_id))
@@ -116,11 +117,3 @@ async def delete_user(
             detail="User not found",
         )
     return _envelope({"deleted": True, "user_id": str(user_id)})
-
-
-def _is_superuser(user: dict[str, Any]) -> bool:
-    """Check superuser without raising — returns bool."""
-    if user.get("is_superuser", False):
-        return True
-    roles: list[str] = user.get("roles", [])
-    return "superuser" in roles or "admin" in roles

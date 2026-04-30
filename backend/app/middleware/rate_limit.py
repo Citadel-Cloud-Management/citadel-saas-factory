@@ -13,7 +13,7 @@ logger = structlog.get_logger("rate_limit")
 
 RATE_LIMIT = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-RATE_LIMIT_FAIL_OPEN = os.getenv("RATE_LIMIT_FAIL_OPEN", "true").lower() == "true"
+RATE_LIMIT_FAIL_OPEN = os.getenv("RATE_LIMIT_FAIL_OPEN", "false").lower() == "true"
 
 _redis_pool: aioredis.Redis | None = None
 

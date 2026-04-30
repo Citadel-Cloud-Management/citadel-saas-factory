@@ -22,26 +22,22 @@ providers:
   openai:
     env_var: OPENAI_API_KEY
     models:
-      - id: gpt-5
-        name: GPT-5
-        context: 256000
-        role: Complex reasoning alternative
-      - id: gpt-5.4
-        name: GPT-5.4
-        context: 256000
-        role: Latest frontier reasoning (March 2026)
-      - id: gpt-5-mini
-        name: GPT-5 Mini
-        context: 128000
-        role: Fast agent fallback
-      - id: gpt-5-nano
-        name: GPT-5 Nano
-        context: 32000
-        role: Autocomplete speed tier
       - id: gpt-4.1
         name: GPT-4.1
         context: 1000000
-        role: Long-context fallback
+        role: Complex reasoning, long-context fallback
+      - id: gpt-4.1-mini
+        name: GPT-4.1 Mini
+        context: 1000000
+        role: Fast agent fallback
+      - id: gpt-4.1-nano
+        name: GPT-4.1 Nano
+        context: 1000000
+        role: Autocomplete speed tier
+      - id: gpt-4o
+        name: GPT-4o
+        context: 128000
+        role: Multimodal reasoning alternative
       - id: o4
         name: o4 Reasoning
         context: 200000
@@ -50,44 +46,36 @@ providers:
   google:
     env_var: GOOGLE_API_KEY
     models:
-      - id: gemini-3-pro
-        name: Gemini 3 Pro
-        context: 2000000
-        role: Long-context codebase reasoning
-      - id: gemini-3.1-pro
-        name: Gemini 3.1 Pro
-        context: 2000000
-        role: Primary agent, 2M-token context
-      - id: gemini-3-flash
-        name: Gemini 3 Flash
-        context: 1000000
-        role: Fast autocomplete and boilerplate
       - id: gemini-2.5-pro
         name: Gemini 2.5 Pro
         context: 1000000
-        role: Cost-optimized long context
+        role: Long-context codebase reasoning, primary agent
+      - id: gemini-2.5-flash
+        name: Gemini 2.5 Flash
+        context: 1000000
+        role: Fast autocomplete and boilerplate
+      - id: gemini-2.0-flash
+        name: Gemini 2.0 Flash
+        context: 1000000
+        role: Cost-optimized fast inference
 
   xai:
     env_var: XAI_API_KEY
     models:
-      - id: grok-4
-        name: Grok 4
-        context: 2000000
-        role: Real-time X data access, large-context reasoning
-      - id: grok-4.20-beta
-        name: Grok 4.20 Beta 2
-        context: 2000000
-        role: Latest frontier reasoning (March 2026)
-      - id: grok-code-fast
-        name: Grok Code Fast
-        context: 128000
-        role: Code-tuned speed tier
+      - id: grok-3
+        name: Grok 3
+        context: 131072
+        role: Real-time X data access, reasoning
+      - id: grok-3-mini
+        name: Grok 3 Mini
+        context: 131072
+        role: Fast reasoning, cost-optimized
 
   deepseek:
     env_var: DEEPSEEK_API_KEY
     models:
-      - id: deepseek-v3.1
-        name: DeepSeek V3.1
+      - id: deepseek-v3
+        name: DeepSeek V3
         context: 128000
         role: Open-weights reasoning, cost-optimal (90% cheaper than GPT)
       - id: deepseek-r1
@@ -106,12 +94,12 @@ providers:
         name: Mistral Large 2
         context: 128000
         role: EU-hosted option
-      - id: mistral-small-4
-        name: Mistral Small 4
+      - id: mistral-small-latest
+        name: Mistral Small
         context: 128000
-        role: Fast EU-hosted (March 2026)
-      - id: codestral-25
-        name: Codestral 25
+        role: Fast EU-hosted
+      - id: codestral-latest
+        name: Codestral
         context: 256000
         role: Code-tuned Mistral, best multilingual code
 
@@ -130,14 +118,10 @@ providers:
   meta:
     self_hosted: true
     models:
-      - id: llama-4-scout
-        name: Llama 4 Scout
-        context: 10000000
-        role: 10M context, 17B active params, MoE 16 experts, fits single H100
-      - id: llama-4-maverick
-        name: Llama 4 Maverick
-        context: 1000000
-        role: 400B total params, 128 experts, beats GPT-4o on coding
+      - id: llama-3.1-405b
+        name: Llama 3.1 405B
+        context: 128000
+        role: Largest open-weights dense model, strong reasoning
       - id: llama-3.3-70b
         name: Llama 3.3 70B
         context: 128000
@@ -150,12 +134,8 @@ providers:
   alibaba:
     self_hosted: true
     models:
-      - id: qwen-3.5-397b
-        name: Qwen 3.5 397B-A17B
-        context: 256000
-        role: Flagship MoE, multimodal reasoning, agentic workloads
-      - id: qwen-3-235b
-        name: Qwen 3 235B
+      - id: qwen-2.5-72b
+        name: Qwen 2.5 72B
         context: 131000
         role: Dense general-purpose, strong multilingual
       - id: qwen-2.5-coder-32b
@@ -166,18 +146,18 @@ providers:
   zhipu:
     self_hosted: true
     models:
-      - id: glm-5
-        name: GLM-5 744B-A40B
+      - id: glm-4-plus
+        name: GLM-4 Plus
         context: 128000
-        role: 77.8% SWE-bench, top Chatbot Arena Elo 1451
+        role: Zhipu flagship, strong Chinese and English
 
   minimax:
     env_var: MINIMAX_API_KEY
     models:
-      - id: minimax-m2.5
-        name: MiniMax M2.5
-        context: 256000
-        role: 80.2% SWE-bench, matches closed frontier models
+      - id: minimax-01
+        name: MiniMax-01
+        context: 1000000
+        role: Long-context open model, competitive with frontier
 
 gateways:
   openrouter:

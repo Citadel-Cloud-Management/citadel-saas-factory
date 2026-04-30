@@ -1,0 +1,99 @@
+# DeepEval Hallucination Detection Test Cases
+# Metric: hallucination | Threshold: 0.85
+# Tests whether agent outputs contain fabricated information
+
+test_cases:
+  - id: hallucination-001
+    description: "Agent fabricates an API endpoint that does not exist"
+    input: "What endpoint should I use to bulk-import users?"
+    actual_output: |
+      You can use the POST /api/v1/users/bulk-import endpoint.
+      It accepts a JSON array of user objects and returns a batch ID
+      for tracking the import progress via GET /api/v1/imports/{batch_id}.
+    context:
+      - |
+        The Citadel SaaS Factory backend exposes RESTful endpoints under /api/v1/.
+        Current user endpoints include:
+        - GET /api/v1/users — list users (paginated)
+        - GET /api/v1/users/{id} — get user by ID
+        - POST /api/v1/users — create a single user
+        - PUT /api/v1/users/{id} — update a user
+        - DELETE /api/v1/users/{id} — soft-delete a user
+        There is no bulk-import endpoint.
+    metric: hallucination
+    threshold: 0.85
+    expected_verdict: fail
+
+  - id: hallucination-002
+    description: "Agent references a configuration file that does not exist"
+    input: "Where is the rate limiting configuration?"
+    actual_output: |
+      Rate limiting is configured in backend/app/config/rate_limits.yaml.
+      You can set per-endpoint limits there, including burst rate and
+      sliding window duration.
+    context:
+      - |
+        Rate limiting in the Citadel SaaS Factory is configured via environment
+        variables (RATE_LIMIT_REQUESTS_PER_MINUTE, RATE_LIMIT_BURST) and applied
+        through FastAPI middleware in backend/app/middleware/rate_limiter.py.
+        There is no rate_limits.yaml file in the codebase.
+    metric: hallucination
+    threshold: 0.85
+    expected_verdict: fail
+
+  - id: hallucination-003
+    description: "Agent provides accurate information about the guardrails middleware"
+    input: "How does the guardrails middleware work?"
+    actual_output: |
+      The guardrails middleware in backend/app/middleware/guardrails.py wraps
+      every LLM call with validation. It uses four Hub validators:
+      HallucinationFree, ProvenanceLLM, ToxicLanguage, and DetectPII.
+      Outputs with hallucination scores below 0.85 trigger automatic retry,
+      up to 3 attempts, after which the output is rejected.
+    context:
+      - |
+        The guardrails middleware is located at backend/app/middleware/guardrails.py.
+        It uses guardrails-ai Hub validators: HallucinationFree (on_fail=reask),
+        ProvenanceLLM (sentence validation, on_fail=reask), ToxicLanguage
+        (threshold=0.5, on_fail=reask), and DetectPII (EMAIL, PHONE_NUMBER, SSN,
+        on_fail=fix). The hallucination threshold is 0.85. MAX_RETRIES is 3.
+        If guardrails library is unavailable, the system fails closed in production.
+    metric: hallucination
+    threshold: 0.85
+    expected_verdict: pass
+
+  - id: hallucination-004
+    description: "Agent invents a dependency not in the project"
+    input: "What ORM does the backend use?"
+    actual_output: |
+      The backend uses Prisma ORM with prisma-client-py for database access.
+      Models are defined in backend/prisma/schema.prisma and migrations are
+      managed via prisma migrate.
+    context:
+      - |
+        The Citadel SaaS Factory backend uses SQLAlchemy 2.0+ as its ORM.
+        Database migrations are managed with Alembic. The architecture follows
+        clean layers: routes -> services -> repositories -> models.
+        Prisma is not used anywhere in the project.
+    metric: hallucination
+    threshold: 0.85
+    expected_verdict: fail
+
+  - id: hallucination-005
+    description: "Agent correctly describes the tech stack"
+    input: "What technologies does the Citadel SaaS Factory use?"
+    actual_output: |
+      The Citadel SaaS Factory uses FastAPI with Python 3.12 for the backend,
+      Next.js 14 with TypeScript for the frontend, PostgreSQL 16 with pgvector
+      and RLS for the database, Redis 7 for caching, and Keycloak 24 for
+      authentication with OAuth2, RBAC, and MFA support.
+    context:
+      - |
+        Tech stack: Backend is FastAPI (Python 3.12). Frontend is Next.js 14
+        (TypeScript). Database is PostgreSQL 16 with pgvector and Row-Level
+        Security. Cache is Redis 7. Auth is Keycloak 24 with OAuth2, RBAC,
+        and MFA. Storage is MinIO (S3-compatible). Messaging is RabbitMQ.
+        Orchestration is K3s with ArgoCD (GitOps).
+    metric: hallucination
+    threshold: 0.85
+    expected_verdict: pass

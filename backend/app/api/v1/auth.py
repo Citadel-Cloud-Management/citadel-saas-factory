@@ -19,13 +19,19 @@ ACCESS_TOKEN_EXPIRE_HOURS = 24
 REFRESH_TOKEN_EXPIRE_HOURS = 168  # 7 days
 
 
-def _create_access_token(user_id: str, email: str, tenant_id: str) -> str:
+def _create_access_token(
+    user_id: str,
+    email: str,
+    tenant_id: str,
+    role: str = "member",
+) -> str:
     """Create a signed JWT access token with standard claims."""
     now = datetime.now(timezone.utc)
     payload = {
         "sub": user_id,
         "email": email,
         "tenant_id": tenant_id,
+        "role": role,
         "iat": now,
         "exp": now + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS),
         "type": "access",
@@ -76,10 +82,12 @@ async def login(
             detail="Invalid email or password",
         )
 
+    user_role: str = getattr(user, "role", "member") or "member"
     access_token = _create_access_token(
         user_id=str(user.id),
         email=user.email,
         tenant_id=str(user.tenant_id),
+        role=user_role,
     )
     refresh_token = _create_refresh_token(user_id=str(user.id))
 
@@ -121,7 +129,7 @@ async def me(
         "user_id": current_user.get("sub"),
         "email": current_user.get("email"),
         "tenant_id": current_user.get("tenant_id"),
-        "roles": current_user.get("roles", []),
+        "role": current_user.get("role", "member"),
     })
 
 

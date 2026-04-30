@@ -6,7 +6,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_current_user, get_db_session, require_superuser
+from app.api.deps import get_db_session
+from app.auth import Permission, require_permission
 from app.services.tenant_service import TenantService
 
 router = APIRouter(prefix="/tenants", tags=["tenants"])
@@ -33,11 +34,10 @@ def _tenant_dict(tenant: Any) -> dict[str, Any]:
 async def list_tenants(
     page: int = Query(1, ge=1, description="Page number"),
     limit: int = Query(20, ge=1, le=100, description="Items per page"),
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.TENANTS_READ)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """List all tenants (superuser only)."""
-    require_superuser(current_user)
+    """List all tenants (admin+ role required)."""
 
     service = TenantService(db)
     tenants, total = await service.list_tenants(page=page, limit=limit)
@@ -50,11 +50,10 @@ async def list_tenants(
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_tenant(
     request: Request,
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.TENANTS_WRITE)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Create a new tenant (superuser only)."""
-    require_superuser(current_user)
+    """Create a new tenant (admin+ role required)."""
 
     body = await request.json()
     service = TenantService(db)
@@ -71,15 +70,16 @@ async def create_tenant(
 @router.get("/{tenant_id}", status_code=status.HTTP_200_OK)
 async def get_tenant(
     tenant_id: UUID,
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.TENANTS_READ)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Get a tenant by ID (own tenant or superuser)."""
+    """Get a tenant by ID (admin+ role required)."""
     caller_tenant = current_user.get("tenant_id")
     is_own = caller_tenant == str(tenant_id)
-    is_super = _is_superuser(current_user)
+    role: str = current_user.get("role", "member")
+    is_privileged = role in {"admin", "owner", "superuser"}
 
-    if not is_own and not is_super:
+    if not is_own and not is_privileged:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access restricted to own tenant",
@@ -99,11 +99,10 @@ async def get_tenant(
 async def update_tenant(
     tenant_id: UUID,
     request: Request,
-    current_user: dict[str, Any] = Depends(get_current_user),
+    current_user: dict[str, Any] = Depends(require_permission(Permission.TENANTS_WRITE)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Update a tenant (superuser only)."""
-    require_superuser(current_user)
+    """Update a tenant (admin+ role required)."""
 
     body = await request.json()
     service = TenantService(db)
@@ -114,11 +113,3 @@ async def update_tenant(
             detail="Tenant not found",
         )
     return _envelope(_tenant_dict(updated))
-
-
-def _is_superuser(user: dict[str, Any]) -> bool:
-    """Check superuser without raising."""
-    if user.get("is_superuser", False):
-        return True
-    roles: list[str] = user.get("roles", [])
-    return "superuser" in roles or "admin" in roles

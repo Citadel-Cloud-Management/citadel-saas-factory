@@ -99,8 +99,24 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-[var(--card-border)] px-6 py-6 text-center text-sm text-[var(--muted)]">
-        &copy; {new Date().getFullYear()} Citadel Cloud Management. All rights
-        reserved.
+        <p>
+          &copy; {new Date().getFullYear()} Citadel Cloud Management. All rights
+          reserved.
+        </p>
+        <div className="mt-2 flex justify-center gap-4">
+          <Link
+            href="/privacy"
+            className="transition hover:text-white"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms"
+            className="transition hover:text-white"
+          >
+            Terms of Service
+          </Link>
+        </div>
       </footer>
     </div>
   );

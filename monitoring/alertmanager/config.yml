@@ -10,7 +10,18 @@ route:
 
 receivers:
   - name: default
-    # Configure your SMTP or webhook receiver
-    webhook_configs:
-      - url: "http://localhost:9093/webhook"
+    # Configure email alerts by setting these environment variables:
+    #   SMTP_HOST       — SMTP server hostname (e.g., smtp.gmail.com)
+    #   SMTP_PORT       — SMTP server port (e.g., 587)
+    #   SMTP_AUTH_USER  — SMTP username / email address
+    #   SMTP_AUTH_PASS  — SMTP password or app-specific password
+    #   ALERTMANAGER_EMAIL_FROM — sender address for alert emails
+    #   ALERTMANAGER_EMAIL_TO   — recipient address for alert emails
+    email_configs:
+      - to: "$ALERTMANAGER_EMAIL_TO"
+        from: "$ALERTMANAGER_EMAIL_FROM"
+        smarthost: "$SMTP_HOST:$SMTP_PORT"
+        auth_username: "$SMTP_AUTH_USER"
+        auth_password: "$SMTP_AUTH_PASS"
         send_resolved: true
+        require_tls: true

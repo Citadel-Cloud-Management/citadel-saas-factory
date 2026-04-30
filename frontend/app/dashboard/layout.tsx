@@ -4,6 +4,7 @@ const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: "📊" },
   { label: "Agents", href: "/dashboard/agents", icon: "🤖" },
   { label: "Models", href: "/dashboard/models", icon: "🧠" },
+  { label: "Profile", href: "/dashboard/profile", icon: "👤" },
   { label: "Settings", href: "/dashboard/settings", icon: "⚙️" },
 ];
 

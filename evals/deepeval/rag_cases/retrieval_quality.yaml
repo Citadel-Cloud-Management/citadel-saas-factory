@@ -1,0 +1,90 @@
+# DeepEval RAG Retrieval Quality Test Cases
+# Tests whether the RAG pipeline retrieves relevant documents for queries
+
+test_cases:
+  - id: rag-retrieval-001
+    description: "Query about project architecture retrieves architecture docs"
+    input: "Explain the clean architecture layers used in the Citadel SaaS Factory."
+    expected_output: |
+      The Citadel SaaS Factory follows clean architecture with four layers:
+      domain (core business logic), use cases (application-specific rules),
+      interfaces (controllers, routes, presenters), and infrastructure
+      (database, external services). Dependency direction flows inward:
+      outer layers depend on inner layers, never the reverse. The backend
+      follows routes -> services -> repositories -> models layering.
+    retrieval_context:
+      - |
+        Source: .claude/rules/architecture.md
+        Clean architecture: domain > use cases > interfaces > infrastructure.
+        Dependency direction: outer layers depend on inner layers, never reverse.
+        Domain-driven design: ubiquitous language, bounded contexts.
+        Repository pattern for data access. Service layer for business logic.
+        No business logic in controllers or routes.
+      - |
+        Source: backend/CLAUDE.md
+        Architecture: Clean layers — routes -> services -> repositories -> models.
+        All endpoints under /api/v1/. Pydantic schemas for request/response
+        validation. Async-first: use async def for all endpoints.
+    expected_retrieval_sources:
+      - ".claude/rules/architecture.md"
+      - "backend/CLAUDE.md"
+    metric: retrieval_relevance
+    threshold: 0.7
+
+  - id: rag-retrieval-002
+    description: "Query about security rules retrieves security documentation"
+    input: "What security measures are required for the Citadel SaaS Factory?"
+    expected_output: |
+      Security requirements include: no hardcoded secrets (use env vars or Vault),
+      validate all user input at system boundaries, parameterized queries only,
+      rate limiting on all API endpoints, CORS/CSRF/XSS protection on all routes,
+      container image scanning with Trivy before deployment, secret scanning in
+      pre-commit hooks with gitleaks, and TLS everywhere in production.
+    retrieval_context:
+      - |
+        Source: .claude/rules/security.md
+        No hardcoded secrets — use environment variables or Vault. Validate all
+        user input at system boundaries. Parameterized queries only — no SQL
+        string concatenation. Rate limiting on all API endpoints. CORS, CSRF,
+        XSS protection on all routes. Container image scanning before deployment.
+        Secret scanning in pre-commit hooks. TLS everywhere in production.
+      - |
+        Source: .claude/rules/secrets.md
+        Production: HashiCorp Vault only. Development: environment variables via
+        .env (never committed). Rotation policy: every 90 days. Pre-commit
+        scanning with TruffleHog. No secrets in CI/CD logs — mask all sensitive
+        values. GitHub Secrets for Actions workflows.
+    expected_retrieval_sources:
+      - ".claude/rules/security.md"
+      - ".claude/rules/secrets.md"
+    metric: retrieval_relevance
+    threshold: 0.7
+
+  - id: rag-retrieval-003
+    description: "Query about deployment retrieves DevOps and deployment docs"
+    input: "How is deployment handled in the Citadel SaaS Factory?"
+    expected_output: |
+      Deployment follows GitOps principles using ArgoCD with Kustomize overlays.
+      All infrastructure is defined as code. The system uses K3s for orchestration
+      with immutable infrastructure (never patch in place, rebuild). Rolling
+      deployments with automatic rollback on failure are enforced. All containers
+      have health probes (liveness, readiness, startup) and resource limits.
+    retrieval_context:
+      - |
+        Source: .claude/rules/devops.md
+        GitOps: all infrastructure as code, all changes via git. Immutable
+        infrastructure: never patch in place, rebuild. Health probes: liveness,
+        readiness, startup on all services. Resource limits on all containers
+        (CPU + memory). Rolling deployments with automatic rollback on failure.
+        Infrastructure-agnostic: no cloud vendor lock-in.
+      - |
+        Source: CLAUDE.md (root)
+        Orchestration: K3s + ArgoCD (GitOps) in gitops/ and infrastructure/
+        directories. Reverse Proxy: Traefik. Service Mesh: Linkerd (mTLS).
+        Deploy command: make deploy. Emergency rollback: ./scripts/rollback.sh.
+    expected_retrieval_sources:
+      - ".claude/rules/devops.md"
+      - "CLAUDE.md"
+      - "gitops/"
+    metric: retrieval_relevance
+    threshold: 0.7

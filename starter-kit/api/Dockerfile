@@ -9,4 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app ./app
 
+RUN adduser --disabled-password --no-create-home appuser
+USER appuser
+
 EXPOSE 8000

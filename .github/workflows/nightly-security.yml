@@ -32,7 +32,7 @@ jobs:
       - name: Python dependency audit
         run: |
           pip install pip-audit
-          cd backend && pip-audit 2>/dev/null || true
+          cd backend && pip-audit
 
       - name: Node dependency audit
-        run: cd frontend && npm audit --audit-level=high 2>/dev/null || true
+        run: cd frontend && npm audit --audit-level=high
