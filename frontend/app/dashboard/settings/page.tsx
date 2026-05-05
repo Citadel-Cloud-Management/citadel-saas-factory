@@ -1,198 +1,124 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { api } from "@/lib/api";
-
-interface NotificationPrefs {
-  readonly securityAlerts: boolean;
-  readonly billing: boolean;
-  readonly weeklyReports: boolean;
-}
-
-function Toggle({
-  label,
-  checked,
-  onChange,
-}: {
-  readonly label: string;
-  readonly checked: boolean;
-  readonly onChange: (value: boolean) => void;
-}) {
-  return (
-    <label className="flex items-center justify-between py-3">
-      <span className="text-sm text-[var(--foreground)]">{label}</span>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        onClick={() => onChange(!checked)}
-        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors ${
-          checked ? "bg-[var(--accent)]" : "bg-[var(--card-border)]"
-        }`}
-      >
-        <span
-          className={`pointer-events-none inline-block h-5 w-5 translate-y-0.5 rounded-full bg-white shadow transition-transform ${
-            checked ? "translate-x-[22px]" : "translate-x-0.5"
-          }`}
-        />
-      </button>
-    </label>
-  );
-}
+import { StatusBadge } from "@/components/ui/status-badge";
+import { billingApi } from "@/lib/fintech-api";
+import { useAuth } from "@/lib/providers";
 
 export default function SettingsPage() {
-  const [tenantName, setTenantName] = useState("My Organization");
-  const [saving, setSaving] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [notifications, setNotifications] = useState<NotificationPrefs>({
-    securityAlerts: true,
-    billing: true,
-    weeklyReports: false,
+  const { user, logout } = useAuth();
+
+  const { data: subRes } = useQuery({
+    queryKey: ["subscription"],
+    queryFn: () => billingApi.subscription(),
   });
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await api.put("/api/v1/tenants/current", {
-        name: tenantName,
-        notifications,
-      });
-    } catch {
-      // error handled by api layer
-    } finally {
-      setSaving(false);
-    }
-  };
+  const subscription = subRes?.data;
 
-  const handleNotificationChange = (
-    key: keyof NotificationPrefs,
-    value: boolean,
-  ) => {
-    setNotifications((prev) => ({ ...prev, [key]: value }));
-  };
+  async function handleUpgrade(plan: string) {
+    try {
+      const res = await billingApi.checkout(plan);
+      if (res.data?.checkout_url) {
+        window.location.href = res.data.checkout_url;
+      }
+    } catch (err) {
+      console.error("Checkout failed:", err);
+    }
+  }
 
   return (
     <div className="p-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">Settings</h1>
-        <p className="mt-1 text-[var(--muted)]">
-          Manage your organization and preferences.
-        </p>
+        <p className="mt-1 text-zinc-400">Manage your account, billing, and API keys.</p>
       </div>
 
-      <div className="max-w-2xl space-y-6">
-        {/* General */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Account Info */}
         <Card>
-          <CardHeader>
-            <h2 className="text-lg font-semibold text-white">General</h2>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <Input
-                label="Organization Name"
-                value={tenantName}
-                onChange={(e) => setTenantName(e.target.value)}
-              />
-              <Input
-                label="Slug"
-                value="my-organization"
-                disabled
-                readOnly
-              />
-              <div className="space-y-1.5">
-                <span className="block text-sm font-medium text-[var(--foreground)]">
-                  Plan
-                </span>
-                <span className="inline-flex items-center rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-medium text-white">
-                  Pro
-                </span>
+          <div className="p-6">
+            <h3 className="text-lg font-semibold text-white">Account</h3>
+            <div className="mt-4 space-y-3">
+              <div className="flex justify-between">
+                <span className="text-sm text-zinc-400">Email</span>
+                <span className="text-sm text-white">{user?.email ?? "—"}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-zinc-400">Name</span>
+                <span className="text-sm text-white">{user?.full_name ?? "—"}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-zinc-400">Role</span>
+                <StatusBadge label={user?.role ?? "member"} variant="info" />
               </div>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Notifications */}
-        <Card>
-          <CardHeader>
-            <h2 className="text-lg font-semibold text-white">
-              Notification Preferences
-            </h2>
-          </CardHeader>
-          <CardContent>
-            <div className="divide-y divide-[var(--card-border)]">
-              <Toggle
-                label="Security Alerts"
-                checked={notifications.securityAlerts}
-                onChange={(v) => handleNotificationChange("securityAlerts", v)}
-              />
-              <Toggle
-                label="Billing Notifications"
-                checked={notifications.billing}
-                onChange={(v) => handleNotificationChange("billing", v)}
-              />
-              <Toggle
-                label="Weekly Reports"
-                checked={notifications.weeklyReports}
-                onChange={(v) => handleNotificationChange("weeklyReports", v)}
-              />
+            <div className="mt-6 flex gap-3">
+              <Button variant="outline" className="flex-1">Edit Profile</Button>
+              <Button variant="outline" className="flex-1">Change Password</Button>
             </div>
-          </CardContent>
+          </div>
         </Card>
 
-        {/* Save */}
-        <div className="flex justify-end">
-          <Button onClick={handleSave} disabled={saving}>
-            {saving ? "Saving..." : "Save Changes"}
-          </Button>
-        </div>
+        {/* Billing */}
+        <Card>
+          <div className="p-6">
+            <h3 className="text-lg font-semibold text-white">Billing & Plan</h3>
+            <div className="mt-4 space-y-3">
+              <div className="flex justify-between">
+                <span className="text-sm text-zinc-400">Current Plan</span>
+                <StatusBadge label={subscription?.plan ?? "FREE"} variant="info" />
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-zinc-400">Status</span>
+                <StatusBadge label={subscription?.status ?? "active"} variant="success" />
+              </div>
+            </div>
+            <div className="mt-6 space-y-2">
+              <Button className="w-full" onClick={() => handleUpgrade("pro")}>
+                Upgrade to Pro — $199/mo
+              </Button>
+              <Button variant="outline" className="w-full">
+                Manage Billing
+              </Button>
+            </div>
+          </div>
+        </Card>
+
+        {/* API Keys */}
+        <Card>
+          <div className="p-6">
+            <h3 className="text-lg font-semibold text-white">API Keys</h3>
+            <p className="mt-2 text-sm text-zinc-400">
+              Integrate Citadel into your applications.
+            </p>
+            <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-900 p-3">
+              <code className="text-xs text-zinc-400">sk_live_••••••••••••••••</code>
+            </div>
+            <div className="mt-4 flex gap-3">
+              <Button variant="outline" className="flex-1">Generate Key</Button>
+              <Button variant="outline" className="flex-1">API Docs</Button>
+            </div>
+          </div>
+        </Card>
 
         {/* Danger Zone */}
-        <Card className="border-[var(--danger)]">
-          <CardHeader>
-            <h2 className="text-lg font-semibold text-[var(--danger)]">
-              Danger Zone
-            </h2>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-[var(--muted)]">
-              Permanently delete your account and all associated data. This
-              action cannot be undone.
-            </p>
-            <div className="mt-4">
-              {showDeleteConfirm ? (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-[var(--danger)]">
-                    Are you sure?
-                  </span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-[var(--danger)] text-[var(--danger)]"
-                  >
-                    Yes, delete my account
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowDeleteConfirm(false)}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  variant="outline"
-                  className="border-[var(--danger)] text-[var(--danger)]"
-                  onClick={() => setShowDeleteConfirm(true)}
-                >
-                  Delete Account
-                </Button>
-              )}
+        <Card>
+          <div className="p-6">
+            <h3 className="text-lg font-semibold text-white">Account Actions</h3>
+            <div className="mt-4 space-y-3">
+              <button
+                onClick={logout}
+                className="w-full rounded-lg border border-zinc-700 px-4 py-2 text-sm text-zinc-300 transition hover:border-zinc-500"
+              >
+                Sign Out
+              </button>
+              <button className="w-full rounded-lg border border-red-800/50 px-4 py-2 text-sm text-red-400 transition hover:border-red-600">
+                Delete Account
+              </button>
             </div>
-          </CardContent>
+          </div>
         </Card>
       </div>
     </div>

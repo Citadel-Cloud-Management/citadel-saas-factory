@@ -1,0 +1,89 @@
+groups:
+  - name: fintech_transactions
+    rules:
+      - alert: HighTransactionFailureRate
+        expr: rate(transactions_failed_total[5m]) / rate(transactions_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          team: fintech
+        annotations:
+          summary: "Transaction failure rate > 5%"
+          description: "{{ $value | humanizePercentage }} of transactions failing in last 5m"
+
+      - alert: TransactionProcessingLatency
+        expr: histogram_quantile(0.95, rate(transaction_processing_seconds_bucket[5m])) > 5
+        for: 3m
+        labels:
+          severity: high
+          team: fintech
+        annotations:
+          summary: "p95 transaction processing > 5s"
+
+      - alert: SuspiciousActivitySpike
+        expr: rate(compliance_alerts_total{risk_level="critical"}[15m]) > 3
+        for: 1m
+        labels:
+          severity: critical
+          team: compliance
+        annotations:
+          summary: "Critical compliance alerts spiking"
+
+      - alert: KYCVerificationBacklog
+        expr: kyc_pending_verifications > 100
+        for: 10m
+        labels:
+          severity: high
+          team: compliance
+        annotations:
+          summary: "KYC verification backlog > 100 pending"
+
+  - name: fintech_accounts
+    rules:
+      - alert: LedgerImbalance
+        expr: abs(sum(ledger_debit_total) - sum(ledger_credit_total)) > 0.01
+        for: 1m
+        labels:
+          severity: critical
+          team: fintech
+        annotations:
+          summary: "CRITICAL: Double-entry ledger imbalance detected"
+          description: "Debit/credit mismatch of {{ $value }}. Immediate investigation required."
+
+      - alert: HighValueTransactionVolume
+        expr: sum(rate(transactions_amount_total{amount_bucket=">10000"}[1h])) > 50
+        for: 5m
+        labels:
+          severity: high
+          team: compliance
+        annotations:
+          summary: "High volume of large transactions (>$10k)"
+
+  - name: fintech_infrastructure
+    rules:
+      - alert: DatabaseConnectionPoolExhaustion
+        expr: pg_stat_activity_count / pg_settings_max_connections > 0.8
+        for: 2m
+        labels:
+          severity: high
+          team: platform
+        annotations:
+          summary: "Database connection pool > 80% utilized"
+
+      - alert: RedisMemoryPressure
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.85
+        for: 5m
+        labels:
+          severity: high
+          team: platform
+        annotations:
+          summary: "Redis memory > 85% — evictions may begin"
+
+      - alert: EKSNodeNotReady
+        expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+        for: 5m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "EKS node {{ $labels.node }} not ready"

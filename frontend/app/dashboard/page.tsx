@@ -1,53 +1,64 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
-
-const stats = [
-  { label: "Total Agents", value: "500+", change: "+12 this week" },
-  { label: "Active Models", value: "12", change: "3 providers" },
-  { label: "Security Score", value: "A+", change: "All checks passing" },
-  { label: "Uptime", value: "99.9%", change: "Last 30 days" },
-];
-
-const recentActivity = [
-  {
-    id: 1,
-    action: "Agent deployed",
-    detail: "marketing/seo-analyst updated to v2.3",
-    time: "2 minutes ago",
-  },
-  {
-    id: 2,
-    action: "Security scan passed",
-    detail: "Trivy container scan — 0 vulnerabilities",
-    time: "15 minutes ago",
-  },
-  {
-    id: 3,
-    action: "Model route changed",
-    detail: "Switched data-analytics to Claude Haiku 4.5",
-    time: "1 hour ago",
-  },
-  {
-    id: 4,
-    action: "Pipeline completed",
-    detail: "CI/CD pipeline #1247 — all stages green",
-    time: "3 hours ago",
-  },
-  {
-    id: 5,
-    action: "Wiki updated",
-    detail: "LLM Wiki ingested 3 new source documents",
-    time: "5 hours ago",
-  },
-];
+import { accountsApi, transactionsApi, kycApi } from "@/lib/fintech-api";
 
 export default function DashboardPage() {
+  const { data: accountsRes } = useQuery({
+    queryKey: ["accounts"],
+    queryFn: () => accountsApi.list(),
+  });
+
+  const { data: txnRes } = useQuery({
+    queryKey: ["transactions"],
+    queryFn: () => transactionsApi.list(1, 5),
+  });
+
+  const { data: kycRes } = useQuery({
+    queryKey: ["kyc-status"],
+    queryFn: () => kycApi.status(),
+  });
+
+  const accounts = accountsRes?.data ?? [];
+  const transactions = txnRes?.data ?? [];
+  const kycStatus = kycRes?.data;
+
+  const totalBalance = accounts.reduce(
+    (sum, a) => sum + parseFloat(a.balance || "0"),
+    0,
+  );
+
+  const stats = [
+    {
+      label: "Total Balance",
+      value: `$${totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
+      change: `${accounts.length} account${accounts.length !== 1 ? "s" : ""}`,
+    },
+    {
+      label: "KYC Status",
+      value: kycStatus?.verification_level?.toUpperCase() ?? "NONE",
+      change: kycStatus?.status ?? "pending",
+    },
+    {
+      label: "Transactions",
+      value: String(transactions.length),
+      change: "Last 5 shown",
+    },
+    {
+      label: "Risk Score",
+      value: kycStatus?.risk_score != null ? `${kycStatus.risk_score}/100` : "N/A",
+      change: (kycStatus?.risk_score ?? 0) < 30 ? "Low risk" : "Review needed",
+    },
+  ];
+
   return (
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <p className="mt-1 text-[var(--muted)]">
-          Welcome back. Here&apos;s your system overview.
+          Your financial overview at a glance.
         </p>
       </div>
 
@@ -64,23 +75,76 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Recent Activity */}
+      {/* Accounts */}
+      <div className="mb-8">
+        <Card>
+          <div className="border-b border-[var(--card-border)] px-6 py-4">
+            <h2 className="text-lg font-semibold text-white">Accounts</h2>
+          </div>
+          <div className="divide-y divide-[var(--card-border)]">
+            {accounts.length === 0 ? (
+              <div className="px-6 py-8 text-center text-[var(--muted)]">
+                No accounts yet. Create your first account to get started.
+              </div>
+            ) : (
+              accounts.map((account) => (
+                <div key={account.id} className="flex items-center justify-between px-6 py-4">
+                  <div>
+                    <p className="text-sm font-medium text-white">
+                      {account.account_type.toUpperCase()} — {account.currency}
+                    </p>
+                    <p className="text-xs text-[var(--muted)]">{account.account_number}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-bold text-white">
+                      ${parseFloat(account.balance).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                    </p>
+                    <span className={`text-xs ${account.status === "active" ? "text-green-400" : "text-yellow-400"}`}>
+                      {account.status}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </Card>
+      </div>
+
+      {/* Recent Transactions */}
       <Card>
         <div className="border-b border-[var(--card-border)] px-6 py-4">
-          <h2 className="text-lg font-semibold text-white">Recent Activity</h2>
+          <h2 className="text-lg font-semibold text-white">Recent Transactions</h2>
         </div>
         <div className="divide-y divide-[var(--card-border)]">
-          {recentActivity.map((item) => (
-            <div key={item.id} className="flex items-center justify-between px-6 py-4">
-              <div>
-                <p className="text-sm font-medium text-white">{item.action}</p>
-                <p className="text-sm text-[var(--muted)]">{item.detail}</p>
-              </div>
-              <span className="shrink-0 text-xs text-[var(--muted)]">
-                {item.time}
-              </span>
+          {transactions.length === 0 ? (
+            <div className="px-6 py-8 text-center text-[var(--muted)]">
+              No transactions yet.
             </div>
-          ))}
+          ) : (
+            transactions.map((txn) => (
+              <div key={txn.id} className="flex items-center justify-between px-6 py-4">
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    {txn.transaction_type.toUpperCase()}
+                  </p>
+                  <p className="text-xs text-[var(--muted)]">
+                    {txn.description ?? txn.reference_id}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-white">
+                    ${parseFloat(txn.amount).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                  </p>
+                  <span className={`text-xs ${
+                    txn.status === "completed" ? "text-green-400" :
+                    txn.status === "failed" ? "text-red-400" : "text-yellow-400"
+                  }`}>
+                    {txn.status}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </Card>
     </div>

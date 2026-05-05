@@ -10,7 +10,10 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from app.db.base import Base
 
 # Import all models so Alembic sees their metadata
-from app.models import AuditLog, Tenant, User  # noqa: F401
+from app.models import (  # noqa: F401
+    Account, AuditLog, ComplianceRecord, KYCRecord, LedgerEntry,
+    PaymentMethod, Subscription, Tenant, Transaction, User,
+)
 
 config = context.config
 if config.config_file_name is not None:

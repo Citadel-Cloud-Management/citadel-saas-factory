@@ -2,48 +2,142 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: citadel-backend
+  namespace: citadel
   labels:
     app: citadel-backend
-    version: "3.0.0"
+    tier: backend
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: citadel-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: citadel-backend
-        version: "3.0.0"
+        tier: backend
     spec:
+      serviceAccountName: citadel-backend
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
         fsGroup: 1000
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: citadel-backend
       containers:
         - name: backend
-          image: ghcr.io/Citadel-Cloud-Management/citadel-saas-factory/backend:latest
+          image: backend
           ports:
             - containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: citadel-secrets
+          env:
+            - name: APP_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
           livenessProbe:
             httpGet:
               path: /health
               port: 8000
             initialDelaySeconds: 10
-            periodSeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /ready
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: citadel-frontend
+  namespace: citadel
+  labels:
+    app: citadel-frontend
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: citadel-frontend
+  template:
+    metadata:
+      labels:
+        app: citadel-frontend
+        tier: frontend
+    spec:
+      serviceAccountName: citadel-frontend
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: citadel-frontend
+      containers:
+        - name: frontend
+          image: frontend
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "https://api.citadelcloudmanagement.com"
           resources:
             requests:
               cpu: 100m
-              memory: 128Mi
+              memory: 256Mi
             limits:
               cpu: 500m
               memory: 512Mi
-          envFrom:
-            - secretRef:
-                name: citadel-secrets
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10

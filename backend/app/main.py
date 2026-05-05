@@ -25,10 +25,29 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Citadel SaaS Factory",
-    description="Universal Full-Stack SaaS Production Framework",
-    version="3.0.0",
+    title="Citadel Fintech Platform",
+    description=(
+        "AI-Native Fintech Infrastructure — Autonomous compliance intelligence, "
+        "real-time transaction monitoring, double-entry ledger, KYC/AML verification, "
+        "and 500+ AI agents for financial services."
+    ),
+    version="3.1.0",
     lifespan=lifespan,
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_tags=[
+        {"name": "auth", "description": "Authentication — login, register, token management"},
+        {"name": "users", "description": "User management — CRUD, roles, permissions"},
+        {"name": "tenants", "description": "Tenant management — multi-tenant isolation"},
+        {"name": "accounts", "description": "Financial accounts — create, freeze, manage balances"},
+        {"name": "transactions", "description": "Transfers — double-entry ledger with idempotency"},
+        {"name": "kyc", "description": "KYC/AML — identity verification and compliance checks"},
+        {"name": "billing", "description": "Subscription billing — Stripe checkout, plans, webhooks"},
+        {"name": "agents", "description": "AI agents — 500+ autonomous business agents"},
+        {"name": "websocket", "description": "Real-time — WebSocket for live transaction/balance updates"},
+    ],
+    contact={"name": "Citadel Cloud Management", "url": "https://citadelcloudmanagement.com"},
+    license_info={"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
 )
 
 # Middleware stack — add_middleware wraps bottom-to-top, so the LAST added

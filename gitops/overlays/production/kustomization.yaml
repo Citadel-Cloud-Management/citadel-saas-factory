@@ -1,8 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: production
+namespace: citadel
 resources:
   - ../../base
+images:
+  - name: backend
+    newName: ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/citadel/backend
+    newTag: latest
+  - name: frontend
+    newName: ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/citadel/frontend
+    newTag: latest
 patches:
   - patch: |-
       apiVersion: apps/v1
@@ -17,8 +24,26 @@ patches:
               - name: backend
                 resources:
                   requests:
-                    cpu: 200m
-                    memory: 256Mi
+                    cpu: 500m
+                    memory: 1Gi
                   limits:
-                    cpu: 1000m
+                    cpu: "2"
+                    memory: 2Gi
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: citadel-frontend
+      spec:
+        replicas: 3
+        template:
+          spec:
+            containers:
+              - name: frontend
+                resources:
+                  requests:
+                    cpu: 200m
+                    memory: 512Mi
+                  limits:
+                    cpu: "1"
                     memory: 1Gi

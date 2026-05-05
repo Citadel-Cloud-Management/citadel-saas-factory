@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline — AWS
 
 on:
   push:
@@ -7,8 +7,15 @@ on:
     branches: [main]
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_PREFIX: ghcr.io/${{ github.repository }}
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
+  EKS_CLUSTER_STAGING: citadel-staging-eks
+  EKS_CLUSTER_PRODUCTION: citadel-production-eks
+
+permissions:
+  id-token: write
+  contents: read
+  packages: write
 
 jobs:
   lint:
@@ -37,6 +44,10 @@ jobs:
           POSTGRES_DB: citadel_test
         ports: ["5432:5432"]
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -45,6 +56,7 @@ jobs:
       - run: cd backend && pip install -e ".[dev]" && pytest --cov=app --cov-report=xml
         env:
           DATABASE_URL: postgresql://citadel:citadel@localhost:5432/citadel_test
+          REDIS_URL: redis://localhost:6379/0
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -81,38 +93,65 @@ jobs:
         with:
           extra_args: --only-verified
 
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
     needs: [test, sast, sca, secret-scan]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
-      - uses: docker/login-action@v3
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action@v5
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v5
         with:
           context: backend
           push: true
-          tags: ${{ env.IMAGE_PREFIX }}/backend:${{ github.sha }},${{ env.IMAGE_PREFIX }}/backend:latest
-      - uses: docker/build-push-action@v5
+          tags: |
+            ${{ env.ECR_REGISTRY }}/citadel/backend:${{ github.sha }}
+            ${{ env.ECR_REGISTRY }}/citadel/backend:latest
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v5
         with:
           context: frontend
           push: true
-          tags: ${{ env.IMAGE_PREFIX }}/frontend:${{ github.sha }},${{ env.IMAGE_PREFIX }}/frontend:latest
+          tags: |
+            ${{ env.ECR_REGISTRY }}/citadel/frontend:${{ github.sha }}
+            ${{ env.ECR_REGISTRY }}/citadel/frontend:latest
 
   container-scan:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-and-push
     steps:
-      - uses: aquasecurity/trivy-action@master
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          image-ref: ${{ env.IMAGE_PREFIX }}/backend:${{ github.sha }}
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Scan backend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.ECR_REGISTRY }}/citadel/backend:${{ github.sha }}
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+      - name: Scan frontend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.ECR_REGISTRY }}/citadel/frontend:${{ github.sha }}
           severity: HIGH,CRITICAL
           exit-code: 1
 
@@ -122,11 +161,29 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy to staging
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_STAGING }} --region ${{ env.AWS_REGION }}
+
+      - name: Set image tag in kustomization
         run: |
-          echo "Deploying to staging..."
-          kubectl apply -k gitops/overlays/staging/ --dry-run=client
-          echo "Staging deployment validated (dry-run). Manual approval required for actual deploy."
+          cd gitops/overlays/staging
+          kustomize edit set image backend=${{ env.ECR_REGISTRY }}/citadel/backend:${{ github.sha }}
+          kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/citadel/frontend:${{ github.sha }}
+
+      - name: Deploy to staging
+        run: kubectl apply -k gitops/overlays/staging/
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/citadel-backend -n citadel --timeout=300s
+          kubectl rollout status deployment/citadel-frontend -n citadel --timeout=300s
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -134,8 +191,35 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy to production
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_PRODUCTION }} --region ${{ env.AWS_REGION }}
+
+      - name: Set image tag in kustomization
         run: |
-          echo "Deploying to production..."
-          kubectl apply -k gitops/overlays/production/ --dry-run=client
-          echo "Production deployment validated (dry-run). Manual approval required for actual deploy."
+          cd gitops/overlays/production
+          kustomize edit set image backend=${{ env.ECR_REGISTRY }}/citadel/backend:${{ github.sha }}
+          kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/citadel/frontend:${{ github.sha }}
+
+      - name: Deploy to production
+        run: kubectl apply -k gitops/overlays/production/
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/citadel-backend -n citadel --timeout=300s
+          kubectl rollout status deployment/citadel-frontend -n citadel --timeout=300s
+
+      - name: Notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {"text": "🚨 Production deploy FAILED for ${{ github.sha }}"}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
