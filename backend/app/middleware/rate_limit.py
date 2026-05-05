@@ -27,13 +27,15 @@ async def get_redis() -> aioredis.Redis:
 
 
 def _get_client_ip(request: Request) -> str:
-    """Extract real client IP, accounting for reverse proxy headers."""
-    forwarded = request.headers.get("X-Real-IP")
-    if forwarded:
-        return forwarded.strip()
-    forwarded_for = request.headers.get("X-Forwarded-For")
-    if forwarded_for:
-        return forwarded_for.split(",")[0].strip()
+    """Extract real client IP from the connection, not from client-supplied headers.
+
+    SECURITY: X-Real-IP and X-Forwarded-For are trivially spoofable by any
+    client. This function intentionally reads only the TCP-level peer address
+    (set by the ASGI server / trusted reverse proxy at the socket layer).
+    If your deployment uses a trusted proxy (ALB/nginx) that rewrites the
+    peer address, configure the proxy to set the real IP at the TCP level
+    or use a trusted-proxy allowlist pattern.
+    """
     return request.client.host if request.client else "unknown"
 
 

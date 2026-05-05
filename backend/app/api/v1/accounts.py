@@ -92,8 +92,9 @@ async def create_account(request: Request, body: CreateAccountRequest) -> Accoun
 
 @router.post("/{account_id}/freeze", response_model=AccountResponse)
 async def freeze_account(account_id: str, request: Request) -> AccountResponse:
-    """Freeze an account (compliance or fraud hold)."""
+    """Freeze an account (compliance or fraud hold). Requires admin/compliance role."""
     tenant_id = _require_tenant(request)
+    _require_role(request, "admin", "compliance_officer", "owner")
     db: AsyncSession = request.state.db
 
     account = await _get_account_or_404(db, account_id, tenant_id)
@@ -110,8 +111,9 @@ async def freeze_account(account_id: str, request: Request) -> AccountResponse:
 
 @router.post("/{account_id}/unfreeze", response_model=AccountResponse)
 async def unfreeze_account(account_id: str, request: Request) -> AccountResponse:
-    """Unfreeze a frozen account."""
+    """Unfreeze a frozen account. Requires admin/compliance role."""
     tenant_id = _require_tenant(request)
+    _require_role(request, "admin", "compliance_officer", "owner")
     db: AsyncSession = request.state.db
 
     account = await _get_account_or_404(db, account_id, tenant_id)
@@ -141,6 +143,13 @@ def _require_user(request: Request) -> uuid.UUID:
     if user_id is None:
         raise HTTPException(status_code=401, detail="Authentication required")
     return user_id
+
+
+def _require_role(request: Request, *allowed_roles: str) -> None:
+    """Verify the authenticated user has one of the allowed roles."""
+    user_role = getattr(request.state, "user_role", None)
+    if user_role not in allowed_roles:
+        raise HTTPException(status_code=403, detail="Insufficient permissions")
 
 
 async def _get_account_or_404(db: AsyncSession, account_id: str, tenant_id: uuid.UUID) -> Account:

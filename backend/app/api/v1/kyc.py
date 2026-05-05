@@ -97,17 +97,39 @@ async def start_verification(request: Request, body: InitiateKYCRequest) -> KYCS
 
 
 @router.post("/webhook", status_code=status.HTTP_200_OK)
-async def kyc_webhook(request: Request, body: KYCWebhookPayload) -> dict:
-    """Handle KYC provider webhook callbacks (Sumsub, Onfido)."""
+async def kyc_webhook(request: Request) -> dict:
+    """Handle KYC provider webhook callbacks (Sumsub, Onfido).
+
+    Verifies HMAC signature before processing. Rejects unsigned requests.
+    """
+    import hashlib
+    import hmac
+    import os
+
+    raw_body = await request.body()
+    signature = request.headers.get("x-payload-digest", "")
+    webhook_secret = os.environ.get("SUMSUB_WEBHOOK_SECRET", "")
+
+    if not webhook_secret:
+        raise HTTPException(status_code=503, detail="Webhook secret not configured")
+
+    expected = hmac.new(
+        webhook_secret.encode(), raw_body, hashlib.sha256
+    ).hexdigest()
+
+    if not hmac.compare_digest(expected, signature):
+        raise HTTPException(status_code=403, detail="Invalid webhook signature")
+
+    import json
+    payload = json.loads(raw_body)
     db: AsyncSession = request.state.db
 
+    allowed_providers = {"sumsub", "onfido"}
     provider = request.headers.get("x-provider", "sumsub")
+    if provider not in allowed_providers:
+        raise HTTPException(status_code=400, detail="Unknown provider")
 
-    await process_webhook(
-        db,
-        provider=provider,
-        payload=body.model_dump(),
-    )
+    await process_webhook(db, provider=provider, payload=payload)
 
     return {"status": "ok"}
 

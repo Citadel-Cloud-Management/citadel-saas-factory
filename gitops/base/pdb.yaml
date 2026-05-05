@@ -7,3 +7,13 @@ spec:
   selector:
     matchLabels:
       app: citadel-backend
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: citadel-frontend
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: citadel-frontend

@@ -18,6 +18,8 @@ const variantStyles: Record<BadgeVariant, string> = {
 export function StatusBadge({ label, variant = "neutral" }: StatusBadgeProps) {
   return (
     <span
+      role="status"
+      aria-label={`Status: ${label}`}
       className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${variantStyles[variant]}`}
     >
       {label}
@@ -45,3 +47,5 @@ export function autoVariant(status: string): BadgeVariant {
   };
   return map[status.toLowerCase()] ?? "neutral";
 }
+
+export type { BadgeVariant, StatusBadgeProps };

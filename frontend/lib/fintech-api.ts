@@ -62,26 +62,26 @@ export interface TransferRequest {
 
 export const accountsApi = {
   list: () => api.get<Account[]>("/api/v1/accounts"),
-  get: (id: string) => api.get<Account>(`/api/v1/accounts/${id}`),
-  create: (data: { account_type: string; currency: string }) =>
+  get: (id: string) => api.get<Account>(`/api/v1/accounts/${encodeURIComponent(id)}`),
+  create: (data: { account_type: Account["account_type"]; currency: string }) =>
     api.post<Account>("/api/v1/accounts", data),
-};
+} as const;
 
 export const transactionsApi = {
   list: (page = 1, limit = 20) =>
     api.get<Transaction[]>("/api/v1/transactions", {
       params: { page: String(page), limit: String(limit) },
     }),
-  get: (id: string) => api.get<Transaction>(`/api/v1/transactions/${id}`),
+  get: (id: string) => api.get<Transaction>(`/api/v1/transactions/${encodeURIComponent(id)}`),
   transfer: (data: TransferRequest) =>
     api.post<Transaction>("/api/v1/transactions/transfer", data),
-};
+} as const;
 
 export const kycApi = {
   status: () => api.get<KYCVerification>("/api/v1/kyc/status"),
-  initiate: (data: { level: string; document_type: string }) =>
+  initiate: (data: { level: KYCVerification["verification_level"]; document_type: string }) =>
     api.post<KYCVerification>("/api/v1/kyc/verify", data),
-};
+} as const;
 
 export const billingApi = {
   plans: () => api.get<Plan[]>("/api/v1/billing/plans"),
@@ -92,4 +92,4 @@ export const billingApi = {
       success_url: `${typeof window !== "undefined" ? window.location.origin : ""}/dashboard?checkout=success`,
       cancel_url: `${typeof window !== "undefined" ? window.location.origin : ""}/dashboard/settings`,
     }),
-};
+} as const;

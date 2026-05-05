@@ -24,6 +24,17 @@ class ApiError extends Error {
   }
 }
 
+function getStoredToken(): string | null {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem("access_token");
+}
+
+function clearStoredToken(): void {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem("access_token");
+  document.cookie = "access_token=; path=/; max-age=0";
+}
+
 async function request<T>(
   path: string,
   options: RequestOptions = {},
@@ -44,11 +55,26 @@ async function request<T>(
     ),
   };
 
+  // Inject authorization token if available
+  const token = getStoredToken();
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const response = await fetch(url.toString(), {
     ...rest,
     headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
   });
+
+  // Handle 401 — clear stale token
+  if (response.status === 401) {
+    clearStoredToken();
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+    throw new ApiError("Unauthorized", 401, null);
+  }
 
   const responseBody = await response.json().catch(() => null);
 

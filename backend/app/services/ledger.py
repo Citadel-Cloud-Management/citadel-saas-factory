@@ -64,16 +64,27 @@ async def execute_transfer(
 
     All within a single database transaction for ACID guarantees.
     """
-    # 1. Idempotency check
+    # 1. Idempotency check (tenant-scoped to prevent cross-tenant collisions)
     existing = await db.execute(
-        select(Transaction).where(Transaction.idempotency_key == idempotency_key)
+        select(Transaction)
+        .where(Transaction.idempotency_key == idempotency_key)
+        .where(Transaction.tenant_id == tenant_id)
     )
     if found := existing.scalar_one_or_none():
         raise DuplicateTransactionError(found)
 
-    # 2. Load and validate accounts (SELECT FOR UPDATE for row-level locking)
-    debit_account = await db.get(Account, debit_account_id, with_for_update=True)
-    credit_account = await db.get(Account, credit_account_id, with_for_update=True)
+    # 2. Load and validate accounts (SELECT FOR UPDATE with consistent lock ordering)
+    # Lock in sorted UUID order to prevent deadlocks on A→B / B→A concurrent transfers
+    ordered_ids = sorted([debit_account_id, credit_account_id])
+    result = await db.execute(
+        select(Account)
+        .where(Account.id.in_(ordered_ids))
+        .order_by(Account.id)
+        .with_for_update()
+    )
+    locked_accounts = {a.id: a for a in result.scalars().all()}
+    debit_account = locked_accounts.get(debit_account_id)
+    credit_account = locked_accounts.get(credit_account_id)
 
     if not debit_account or debit_account.status != AccountStatus.ACTIVE:
         raise AccountNotActiveError(f"Debit account {debit_account_id} is not active")
@@ -100,7 +111,7 @@ async def execute_transfer(
         transaction_type=transaction_type,
         status=TransactionStatus.COMPLETED,
         description=description,
-        metadata=metadata,
+        extra_data=metadata,
         initiated_by=initiated_by,
         completed_at=datetime.now(timezone.utc),
     )

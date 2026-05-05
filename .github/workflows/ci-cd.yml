@@ -57,10 +57,20 @@ jobs:
         env:
           DATABASE_URL: postgresql://citadel:citadel@localhost:5432/citadel_test
           REDIS_URL: redis://localhost:6379/0
+      - name: Upload backend coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: backend/coverage.xml
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: cd frontend && npm ci && npx vitest --run
+      - run: cd frontend && npm ci && npx vitest --run --coverage
+      - name: Upload frontend coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: frontend/coverage/
 
   sast:
     runs-on: ubuntu-latest
@@ -110,11 +120,16 @@ jobs:
         id: ecr-login
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build and push backend
         uses: docker/build-push-action@v5
         with:
           context: backend
           push: true
+          cache-from: type=gha,scope=backend
+          cache-to: type=gha,mode=max,scope=backend
           tags: |
             ${{ env.ECR_REGISTRY }}/citadel/backend:${{ github.sha }}
             ${{ env.ECR_REGISTRY }}/citadel/backend:latest
@@ -124,6 +139,8 @@ jobs:
         with:
           context: frontend
           push: true
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,mode=max,scope=frontend
           tags: |
             ${{ env.ECR_REGISTRY }}/citadel/frontend:${{ github.sha }}
             ${{ env.ECR_REGISTRY }}/citadel/frontend:latest
@@ -185,6 +202,11 @@ jobs:
           kubectl rollout status deployment/citadel-backend -n citadel --timeout=300s
           kubectl rollout status deployment/citadel-frontend -n citadel --timeout=300s
 
+      - name: Smoke test staging
+        run: |
+          BACKEND_URL=$(kubectl get ingress citadel-ingress -n citadel -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          curl -sf "http://${BACKEND_URL}/health" || (echo "Smoke test failed — rolling back" && kubectl rollout undo deployment/citadel-backend -n citadel && kubectl rollout undo deployment/citadel-frontend -n citadel && exit 1)
+
   deploy-production:
     runs-on: ubuntu-latest
     needs: deploy-staging
@@ -211,15 +233,34 @@ jobs:
         run: kubectl apply -k gitops/overlays/production/
 
       - name: Wait for rollout
+        id: rollout
         run: |
           kubectl rollout status deployment/citadel-backend -n citadel --timeout=300s
           kubectl rollout status deployment/citadel-frontend -n citadel --timeout=300s
+
+      - name: Rollback on failure
+        if: failure() && steps.rollout.outcome == 'failure'
+        run: |
+          echo "Rolling back production deployments..."
+          kubectl rollout undo deployment/citadel-backend -n citadel
+          kubectl rollout undo deployment/citadel-frontend -n citadel
+          kubectl rollout status deployment/citadel-backend -n citadel --timeout=120s
+          kubectl rollout status deployment/citadel-frontend -n citadel --timeout=120s
 
       - name: Notify on failure
         if: failure()
         uses: slackapi/slack-github-action@v1
         with:
           payload: |
-            {"text": "🚨 Production deploy FAILED for ${{ github.sha }}"}
+            {"text": "Production deploy FAILED for ${{ github.sha }} — automatic rollback initiated"}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify on success
+        if: success()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {"text": "Production deploy SUCCESS for ${{ github.sha }}"}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

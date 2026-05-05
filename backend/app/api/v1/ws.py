@@ -63,18 +63,34 @@ manager = ConnectionManager()
 async def websocket_endpoint(websocket: WebSocket, user_id: str) -> None:
     """WebSocket connection for real-time events.
 
+    Requires a valid JWT token passed as ?token= query parameter.
     Events pushed to client:
     - transaction.completed — when a transfer completes
     - transaction.failed — when a transfer fails
     - balance.updated — when account balance changes
     - compliance.alert — when a compliance issue is detected
     - kyc.status_changed — when KYC verification status updates
-    - notification — general notification
     """
+    # Authenticate before accepting connection
+    token = websocket.query_params.get("token")
+    if not token:
+        await websocket.close(code=1008, reason="Authentication required")
+        return
+
+    # Validate token claims match the requested user_id
+    try:
+        from app.middleware.auth import decode_token
+        claims = decode_token(token)
+        if claims.get("sub") != user_id:
+            await websocket.close(code=1008, reason="Token does not match user_id")
+            return
+    except Exception:
+        await websocket.close(code=1008, reason="Invalid token")
+        return
+
     await manager.connect(websocket, user_id)
     try:
         while True:
-            # Keep connection alive, handle client pings
             data = await websocket.receive_text()
             if data == "ping":
                 await websocket.send_text(json.dumps({"event": "pong"}))

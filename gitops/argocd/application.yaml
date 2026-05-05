@@ -31,6 +31,9 @@ kind: Application
 metadata:
   name: citadel-production
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: citadel-deploys
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: citadel-deploys
 spec:
   project: default
   source:
@@ -41,12 +44,13 @@ spec:
     server: https://kubernetes.default.svc
     namespace: citadel
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # Production requires manual sync approval for fintech compliance
+    automated: null
     syncOptions:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
+      - Validate=true
+      - PruneLast=true
     retry:
       limit: 5
       backoff:

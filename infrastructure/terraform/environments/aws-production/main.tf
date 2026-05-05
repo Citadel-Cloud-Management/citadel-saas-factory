@@ -72,13 +72,14 @@ module "eks" {
   vpc_id              = module.vpc.vpc_id
   private_subnet_ids  = module.vpc.private_subnet_ids
   public_subnet_ids   = module.vpc.public_subnet_ids
-  kms_key_arn         = module.secrets.kms_key_arn
-  node_instance_types = ["t3.large"]
-  capacity_type       = "ON_DEMAND"
-  node_desired_size   = 3
-  node_min_size       = 3
-  node_max_size       = 15
-  tags                = local.tags
+  kms_key_arn            = module.secrets.kms_key_arn
+  endpoint_public_access = false  # CIS EKS 2.1.1: no public API endpoint
+  node_instance_types    = ["t3.large"]
+  capacity_type          = "ON_DEMAND"
+  node_desired_size      = 3
+  node_min_size          = 3
+  node_max_size          = 15
+  tags                   = local.tags
 }
 
 # --- RDS Aurora PostgreSQL ---

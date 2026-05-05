@@ -13,9 +13,15 @@ from app.services.user_service import UserService
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-SECRET_KEY = os.getenv("SECRET_KEY", "change-me-in-production")
+_raw_secret = os.getenv("SECRET_KEY", "")
+if not _raw_secret:
+    raise RuntimeError(
+        "SECRET_KEY environment variable is not set. "
+        "Set a cryptographically random value before starting the server."
+    )
+SECRET_KEY: str = _raw_secret
 JWT_ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_HOURS = 24
+ACCESS_TOKEN_EXPIRE_HOURS = 1   # Reduced from 24h — refresh tokens handle session longevity
 REFRESH_TOKEN_EXPIRE_HOURS = 168  # 7 days
 
 
@@ -159,14 +165,24 @@ async def refresh(request: Request) -> dict[str, Any]:
         )
 
     user_id = payload["sub"]
-    # Note: email/tenant_id would be looked up from DB in production;
-    # for now we reuse claims from the refresh payload if available.
+    # Look up the user from the database to get current email/tenant_id/role.
+    # This ensures revoked users or role changes are reflected immediately.
+    db: AsyncSession = Depends(get_db_session)  # type: ignore[assignment]
+    service = UserService(db)
+    user = await service.get_user(user_id=user_id)
+    if user is None or not getattr(user, "is_active", True):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found or deactivated",
+        )
+    user_role: str = getattr(user, "role", "member") or "member"
     access_token = _create_access_token(
-        user_id=user_id,
-        email=payload.get("email", ""),
-        tenant_id=payload.get("tenant_id", ""),
+        user_id=str(user.id),
+        email=user.email,
+        tenant_id=str(user.tenant_id),
+        role=user_role,
     )
-    new_refresh = _create_refresh_token(user_id=user_id)
+    new_refresh = _create_refresh_token(user_id=str(user.id))
 
     return _envelope({
         "access_token": access_token,

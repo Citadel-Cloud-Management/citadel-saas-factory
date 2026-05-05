@@ -8,7 +8,75 @@ spec:
       app: citadel-backend
   policyTypes:
     - Ingress
+    - Egress
   ingress:
-    - ports:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: citadel-frontend
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
         - port: 8000
           protocol: TCP
+  egress:
+    # DNS
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # PostgreSQL (RDS)
+    - ports:
+        - port: 5432
+          protocol: TCP
+    # Redis (ElastiCache)
+    - ports:
+        - port: 6379
+          protocol: TCP
+    # HTTPS to Stripe, Keycloak, Sumsub, AWS APIs
+    - ports:
+        - port: 443
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: citadel-frontend
+spec:
+  podSelector:
+    matchLabels:
+      app: citadel-frontend
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - port: 3000
+          protocol: TCP
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: citadel-backend
+      ports:
+        - port: 8000
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-default
+  namespace: citadel
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: []
+  egress: []

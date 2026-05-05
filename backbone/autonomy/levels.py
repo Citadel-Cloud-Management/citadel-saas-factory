@@ -104,7 +104,7 @@ def get_current_level() -> AgenticLevel:
         "L4": AgenticLevel.SYSTEM_ORCH,
         "L5": AgenticLevel.FULL_AUTONOMY,
     }
-    return level_map.get(level_str, AgenticLevel.ORCHESTRATION)
+    return level_map.get(level_str, AgenticLevel.INTERACTIVE)  # fail-safe: default to L1
 
 
 def get_policy() -> AutonomyPolicy:

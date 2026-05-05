@@ -31,12 +31,8 @@ resource "aws_security_group" "rds" {
     description     = "PostgreSQL from EKS nodes"
   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # No egress — database should not initiate outbound connections
+  # VPC endpoints handle CloudWatch/Secrets Manager connectivity
 
   tags = merge(var.tags, {
     Name = "${var.project}-${var.environment}-rds-sg"

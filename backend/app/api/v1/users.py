@@ -52,9 +52,10 @@ async def get_user(
     current_user: dict[str, Any] = Depends(require_permission(Permission.USERS_READ)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Retrieve a single user by ID."""
+    """Retrieve a single user by ID, scoped to the caller's tenant."""
+    tenant_id = current_user.get("tenant_id")
     service = UserService(db)
-    user = await service.get_user(user_id=str(user_id))
+    user = await service.get_user(user_id=user_id, tenant_id=tenant_id)
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -107,9 +108,16 @@ async def delete_user(
     current_user: dict[str, Any] = Depends(require_permission(Permission.USERS_DELETE)),
     db: AsyncSession = Depends(get_db_session),
 ) -> dict[str, Any]:
-    """Soft-delete a user (admin+ role required)."""
-
+    """Soft-delete a user (admin+ role required), scoped to the caller's tenant."""
+    tenant_id = current_user.get("tenant_id")
     service = UserService(db)
+    # Verify the user exists within this tenant before deleting (prevents cross-tenant deletion)
+    existing = await service.get_user(user_id=user_id, tenant_id=tenant_id)
+    if existing is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
     deleted = await service.delete_user(user_id=str(user_id))
     if not deleted:
         raise HTTPException(

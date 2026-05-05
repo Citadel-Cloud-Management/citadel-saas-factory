@@ -6,19 +6,19 @@ import { StatusBadge, autoVariant } from "@/components/ui/status-badge";
 import { accountsApi, type Account } from "@/lib/fintech-api";
 
 export default function AccountsPage() {
-  const { data: accountsRes, isLoading } = useQuery({
+  const { data: accountsRes, isLoading, isError } = useQuery({
     queryKey: ["accounts"],
     queryFn: () => accountsApi.list(),
   });
 
-  const accounts = (accountsRes?.data ?? []) as Account[];
+  const accounts: ReadonlyArray<Account> = accountsRes?.data ?? [];
 
   const totalBalance = accounts.reduce((sum, a) => sum + parseFloat(a.balance || "0"), 0);
   const totalAvailable = accounts.reduce((sum, a) => sum + parseFloat(a.available_balance || "0"), 0);
   const activeCount = accounts.filter((a) => a.status === "active").length;
 
   return (
-    <div className="p-8">
+    <main className="p-8" aria-label="Accounts management">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-white">Accounts</h1>
@@ -26,13 +26,27 @@ export default function AccountsPage() {
             Manage your financial accounts and balances.
           </p>
         </div>
-        <button className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500">
+        <button
+          type="button"
+          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
+          aria-label="Create new account"
+        >
           + New Account
         </button>
       </div>
 
+      {/* Error state */}
+      {isError && (
+        <div
+          role="alert"
+          className="mb-6 rounded-lg border border-red-800/30 bg-red-900/10 p-4 text-sm text-red-400"
+        >
+          Failed to load accounts. Please try again later.
+        </div>
+      )}
+
       {/* KPIs */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section aria-label="Account metrics" className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KPICard
           title="Total Balance"
           value={`$${totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}`}
@@ -55,11 +69,11 @@ export default function AccountsPage() {
           value={String(new Set(accounts.map((a) => a.currency)).size)}
           subtitle="Multi-currency enabled"
         />
-      </div>
+      </section>
 
       {/* Account Cards */}
       {isLoading ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true" aria-label="Loading accounts">
           {[1, 2, 3].map((i) => (
             <div key={i} className="h-48 animate-pulse rounded-xl border border-zinc-800 bg-zinc-900/50" />
           ))}
@@ -68,16 +82,22 @@ export default function AccountsPage() {
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-zinc-900/30 py-16">
           <p className="text-lg font-medium text-zinc-300">No accounts yet</p>
           <p className="mt-2 text-sm text-zinc-500">Create your first account to start transacting.</p>
-          <button className="mt-6 rounded-lg bg-indigo-600 px-6 py-2 text-sm font-medium text-white transition hover:bg-indigo-500">
+          <button
+            type="button"
+            className="mt-6 rounded-lg bg-indigo-600 px-6 py-2 text-sm font-medium text-white transition hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
+            aria-label="Create your first account"
+          >
             Create Account
           </button>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="Account list">
           {accounts.map((account) => (
-            <div
+            <article
               key={account.id}
+              role="listitem"
               className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition hover:border-zinc-700"
+              aria-label={`${account.account_type} account in ${account.currency}`}
             >
               <div className="flex items-start justify-between">
                 <div>
@@ -101,20 +121,32 @@ export default function AccountsPage() {
               </div>
 
               <div className="mt-6 flex gap-2">
-                <button className="flex-1 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500">
+                <button
+                  type="button"
+                  className="flex-1 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  aria-label={`Send from ${account.account_type} account`}
+                >
                   Send
                 </button>
-                <button className="flex-1 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500">
+                <button
+                  type="button"
+                  className="flex-1 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  aria-label={`Receive to ${account.account_type} account`}
+                >
                   Receive
                 </button>
-                <button className="flex-1 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500">
+                <button
+                  type="button"
+                  className="flex-1 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  aria-label={`View details for ${account.account_type} account`}
+                >
                   Details
                 </button>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       )}
-    </div>
+    </main>
   );
 }
