@@ -4,20 +4,20 @@
 
 ### Universal Full-Stack SaaS Production Framework
 
-**385+ Autonomous Business Agents | 12 Model Providers | 22 Domains | Cross-IDE**
+**265+ Autonomous AI Agents | 12 Model Providers | 15 Domains | Cross-IDE**
 
 [![npm](https://img.shields.io/npm/v/@citadelcloud/saas-factory?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/@citadelcloud/saas-factory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Agents](https://img.shields.io/badge/Agents-385+-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
+[![Agents](https://img.shields.io/badge/Agents-265+-FF6B35?style=for-the-badge&logo=probot&logoColor=white)](.claude/agents/_registry.yaml)
 [![Models](https://img.shields.io/badge/Models-12_Providers-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](models/catalog.yaml)
-[![Domains](https://img.shields.io/badge/Domains-22-E91E63?style=for-the-badge&logo=target&logoColor=white)](#-all-385-agents--22-domains)
+[![Domains](https://img.shields.io/badge/Domains-15-E91E63?style=for-the-badge&logo=target&logoColor=white)](#-all-265-agents--15-domains)
 [![IDEs](https://img.shields.io/badge/IDEs-12_Supported-0078D4?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#-cross-ide-support)
 [![Cost](https://img.shields.io/badge/Cost-$0/month-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](#-free-toolchain)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Ready-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
 
 <br/>
 
-[🌐 Architecture Diagram](https://kogunlowo123.github.io/kehinde-architecture-diagram/) &nbsp;|&nbsp; [📦 npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) &nbsp;|&nbsp; [**❤️ Sponsor**](https://cash.app/$KennyOgunlowo) &nbsp;|&nbsp; [🏢 citadelcloudmanagement.com](https://citadelcloudmanagement.com)
+[📦 npm Package](https://www.npmjs.com/package/@citadelcloud/saas-factory) &nbsp;|&nbsp; [🏢 citadelcloudmanagement.com](https://citadelcloudmanagement.com)
 
 <br/>
 
@@ -150,7 +150,7 @@ claude                                # Or open in Cursor, Antigravity, Copilot,
 
 <div align="center">
 
-**12 providers** &nbsp;·&nbsp; **8 gateways** &nbsp;·&nbsp; **5 local runtimes** &nbsp;·&nbsp; **40+ models**
+**12 providers** &nbsp;·&nbsp; **8 gateways** &nbsp;·&nbsp; **5 local runtimes** &nbsp;·&nbsp; **33+ models**
 
 <img src="https://img.shields.io/badge/Anthropic-D97757?style=flat-square&logo=anthropic&logoColor=white" />
 <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" />
@@ -204,39 +204,32 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 
 ---
 
-## 🤖 All 385+ Agents — 22 Domains
+## 🤖 All 265+ Agents — 15 Domains
 
 <div align="center">
 
-| Domain | Agents | Highlights |
-|--------|--------|------------|
-| 👔 **Executive & Strategy** | 15 | CEO Strategist, CTO Technology, OKR Tracker, Board Reporter, M&A Analyst |
-| 📈 **Marketing & Growth** | 26 | SEO, Content, Social, Email, PPC, PR, PLG, ABM, Podcast, Influencer |
-| 💰 **Sales & Revenue** | 22 | Lead Qualifier, Proposals, CRM, Forecast, Revenue Ops, Deal Desk |
-| 🎯 **Customer Success** | 18 | Onboarding, Tickets, Churn Predictor, NPS, QBR, Health Score |
-| 🎨 **Product & UI/UX** | 24 | UI Designer, Wireframes, Design System, A11y, Micro-interactions, User Research |
-| ⚙️ **Engineering** | 30 | API, Models, Auth, Cache, Search, WebSocket, GraphQL, gRPC, Event Sourcing |
-| 🖥️ **Frontend** | 22 | Components, Pages, Forms, Charts, State, PWA, i18n, Micro-frontends |
-| 🚀 **DevOps** | 32 | CI/CD, GitOps, K8s, Helm, Terraform, Canary, FinOps, Platform Eng |
-| 🔒 **Security** | 26 | SAST, DAST, Secrets, Falco, Kyverno, Pentest, Zero Trust, SBOM |
-| 📊 **Data & Analytics** | 22 | Schema, ETL, Dashboards, Forecasting, Vector, Lakehouse, dbt |
-| 🧪 **QA & Testing** | 26 | Unit, E2E, Load, Chaos, Mutation, Visual, Contract, Property-based |
-| 👥 **HR & People** | 15 | Jobs, Interviews, Onboarding, Performance, DEI, L&D, Culture |
-| 💳 **Finance & Billing** | 18 | Stripe, Subscriptions, Tax, Revenue, Runway, FP&A, Treasury |
-| ⚖️ **Legal & Governance** | 12 | ToS, DPA, GDPR, SOC2, SLA, AI Ethics, IP, Export Control |
-| ✍️ **Content & Comms** | 14 | Tech Writing, Docs, Changelogs, Case Studies, Video Scripts, Podcasts |
-| 📦 **Supply Chain & Procurement** | 12 | Vendor Scoring, RFP Generator, Inventory Optimizer, Demand Forecast, Logistics |
-| 🏗️ **Platform Engineering** | 10 | IDP Builder, Service Catalog, Golden Paths, Developer Portal, Backstage |
-| 🌐 **Internationalization** | 8 | i18n Manager, Locale Sync, RTL Adapter, Currency Converter, Translation QA |
-| 🤖 **AI/ML Operations** | 14 | Model Registry, Feature Store, Experiment Tracker, Prompt Optimizer, Eval Runner |
-| 📡 **IoT & Edge** | 8 | Device Manager, Telemetry Collector, Edge Deployer, OTA Updater, Fleet Monitor |
-| 🎓 **Education & Training** | 6 | Course Builder, Quiz Generator, Skill Assessor, Learning Path, Cert Tracker |
-| 🏥 **Compliance & Risk** | 10 | Risk Scorer, Audit Trail, Policy Enforcer, Incident Reporter, Vendor Risk |
+| # | Domain | Agents | Highlights |
+|---|--------|--------|------------|
+| 1 | 👔 **Executive & Strategy** | 12 | CEO Strategist, CTO Technology, OKR Tracker, Board Reporter, Competitive Intel |
+| 2 | 📈 **Marketing & Growth** | 22 | SEO, Content, Social, Email, PPC, PR, PLG, Growth Hacker, Podcast, Influencer |
+| 3 | 💰 **Sales & Revenue** | 18 | Lead Qualifier, Proposals, CRM, Forecast, Revenue Ops, Deal Desk |
+| 4 | 🎯 **Customer Success** | 15 | Onboarding, Tickets, Churn Predictor, NPS, QBR, Health Score |
+| 5 | 🎨 **Product & UI/UX** | 20 | UI Designer, Wireframes, Design System, A11y, Micro-interactions, User Research |
+| 6 | ⚙️ **Engineering** | 25 | API, Models, Auth, Cache, Search, WebSocket, GraphQL, gRPC, Event Sourcing |
+| 7 | 🖥️ **Frontend** | 18 | Components, Pages, Forms, Charts, State, PWA, i18n, Micro-frontends |
+| 8 | 🚀 **DevOps & Infrastructure** | 28 | CI/CD, GitOps, K8s, Helm, Terraform, Canary, FinOps, Platform Eng |
+| 9 | 🔒 **Security & Compliance** | 22 | SAST, DAST, Secrets, Falco, Kyverno, Pentest, Zero Trust, SBOM |
+| 10 | 📊 **Data & Analytics** | 18 | Schema, ETL, Dashboards, Forecasting, Vector, Lakehouse, dbt |
+| 11 | 🧪 **QA & Testing** | 22 | Unit, E2E, Load, Chaos, Mutation, Visual, Contract, Property-based |
+| 12 | 👥 **HR & People** | 12 | Jobs, Interviews, Onboarding, Performance, DEI, L&D, Culture |
+| 13 | 💳 **Finance & Billing** | 15 | Stripe, Subscriptions, Tax, Revenue, Runway, FP&A, Treasury |
+| 14 | ⚖️ **Legal & Governance** | 8 | ToS, DPA, GDPR, SOC2, SLA, AI Ethics, IP |
+| 15 | ✍️ **Content & Comms** | 10 | Tech Writing, Docs, Changelogs, Case Studies, Video Scripts, Podcasts |
 
 </div>
 
 <details>
-<summary><b>📋 View all 265 agents with IDs and descriptions</b></summary>
+<summary><b>📋 View all 265+ agents with IDs and descriptions</b></summary>
 
 ### 👔 Domain 1: Executive & Strategy (12 Agents)
 
@@ -305,7 +298,7 @@ See [`models/catalog.yaml`](models/catalog.yaml) · [`models/routing.yaml`](mode
 | 17 | `sales-pipeline-cleaner` | Pipeline Cleaner | Stale deal ID, missing data alerts, stage-appropriate actions |
 | 18 | `sales-commission` | Commission Calculator | Commission calculation, plan modeling, quota attainment |
 
-### 🎯 Domain 4–15: See [`.claude/agents/_registry.yaml`](.claude/agents/_registry.yaml) for the complete registry
+### 🎯 Domains 4–15: See [`.claude/agents/_registry.yaml`](.claude/agents/_registry.yaml) for the complete registry
 
 </details>
 
@@ -366,7 +359,7 @@ pip install graphifyy && graphify install && graphify index .
 
 ## 📖 LLM Wiki — Brain Memory (Karpathy Pattern)
 
-> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Knowledge **compounds** across all 385+ agents — every ingest adds, every query answer is filed back.
+> Citadel's agent fleet uses Andrej Karpathy's [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as persistent brain memory. Knowledge **compounds** across all 265+ agents — every ingest adds, every query answer is filed back.
 
 > [!NOTE]
 > **Why not RAG?** Karpathy's insight: treat knowledge like code compilation. The LLM reads sources, extracts key info, and integrates it into the wiki — updating entities, revising summaries, noting contradictions. Unlike RAG, knowledge compounds instead of being re-retrieved from scratch every session.
@@ -621,16 +614,6 @@ citadel-factory init my-saas
 ---
 
 <div align="center">
-
-## 👤 Author
-
-**Kehinde Ogunlowo**
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kehinde-ogunlowo/)
-[![Architecture](https://img.shields.io/badge/Architecture_Diagram-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://kogunlowo123.github.io/kehinde-architecture-diagram/)
-[![Sponsor](https://img.shields.io/badge/❤️_Sponsor_via_Cash_App-00C853?style=for-the-badge&logo=cashapp&logoColor=white)](https://cash.app/$KennyOgunlowo)
-
----
 
 ## 📄 License
 
