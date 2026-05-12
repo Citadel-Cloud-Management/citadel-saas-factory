@@ -251,3 +251,17 @@ tasks/
 ArgoCD, K3s, Traefik, Linkerd, Keycloak, Vault, Prometheus, Grafana, Loki, Falco, Kyverno, Semgrep, Trivy, ZAP, Flagsmith, Grafana OnCall, Velero, MinIO, Ansible, n8n, Ollama, vLLM, LiteLLM, Playwright, Certbot.
 
 Total monthly software cost: **$0**
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on `Citadel-Cloud-Management/citadel-saas-factory` via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout. `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
