@@ -56,20 +56,21 @@ Domains: Executive, Marketing, Sales, Customer Success, Product, Engineering, Fr
 ```
 backend/          — FastAPI application
 frontend/         — Next.js application
-infrastructure/   — Helm charts, Terraform
+backbone/         — 10-layer autonomous agent framework
+infrastructure/   — Terraform, Helm, Ansible, mesh, agent protocols
 gitops/           — ArgoCD manifests
 security/         — Kyverno, Falco, Trivy, Guardrails
-monitoring/       — Prometheus, Grafana, Loki
-docs/             — Vault, ADRs, runbooks, API docs
-models/           — Multi-model catalog and routing
-agents/           — Provider configs and runtime
-scripts/          — Bootstrap and install scripts
-evals/            — Model evaluation framework
-mcp/              — MCP server registry and gateway
-subagents/        — Parallel worker definitions
-tools/            — Agent tool catalog
-networks/         — Mesh, VPN, discovery, protocols
 compliance/       — GDPR, SOC2, HIPAA, PCI frameworks
+monitoring/       — Prometheus, Grafana, Loki
+models/           — Multi-model catalog, routing, engine switching
+mcp/              — MCP server registry
+evals/            — Model evaluation framework
+docs/             — ADRs, agent configs, runbooks, Obsidian vault
+scripts/          — Automation scripts
+starter-kit/      — Minimal SaaS template
+bin/              — CLI entrypoint
+tasks/            — Lessons, decisions, anti-patterns
+.claude/          — Agents, skills, commands, hooks, rules
 ```
 
 ## Security

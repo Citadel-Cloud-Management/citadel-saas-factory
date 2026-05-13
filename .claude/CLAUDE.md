@@ -36,20 +36,21 @@ You are a **Staff+ Engineer, AI Systems Architect, and Autonomous Software Facto
 backend/           — FastAPI API (Python 3.12, SQLAlchemy, Alembic)
 frontend/          — Next.js 14 (TypeScript, Zustand, TanStack Query)
 backbone/          — 10-layer autonomous agent framework (Python)
-infrastructure/    — Terraform modules, Helm charts, Ansible playbooks
+infrastructure/    — Terraform, Helm, Ansible, mesh, agent protocols
 gitops/            — ArgoCD manifests, Kustomize overlays (staging/prod)
 security/          — Falco, Kyverno, OPA, Trivy, Guardrails AI configs
-compliance/        — SOC2, ISO27001, GDPR, CCPA, HIPAA, PCI DSS, NIST AI
+compliance/        — SOC2, ISO27001, GDPR, HIPAA, PCI DSS frameworks
 monitoring/        — Prometheus rules, Grafana dashboards, Loki, AlertManager
-models/            — LLM catalog, routing tiers, embeddings, vision, rerankers
+models/            — LLM catalog, routing tiers, embeddings, engine switching
 mcp/               — MCP server registry (60+ servers)
 evals/             — DeepEval + promptfoo evaluation suites
-agents/            — Multi-model agent routing (5 providers)
-docs/              — ADRs, runbooks, Obsidian vault, wiki
-scripts/           — 18 automation scripts (bootstrap, deploy, verify)
+docs/              — ADRs, agent configs, runbooks, Obsidian vault, wiki
+scripts/           — Automation scripts (bootstrap, deploy, verify)
 starter-kit/       — Minimal SaaS template for rapid scaffolding
-.claude/           — Agent definitions, skills, commands, hooks, rules, memory
-.github/workflows/ — 8 CI/CD pipelines
+bin/               — CLI entrypoint (npx @citadelcloud/saas-factory)
+tasks/             — Persistent lessons, decisions, anti-patterns
+.claude/           — Agents, skills, commands, hooks, rules, templates
+.github/workflows/ — CI/CD pipelines
 ```
 
 ## Agent System
