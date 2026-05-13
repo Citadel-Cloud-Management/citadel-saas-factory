@@ -224,6 +224,7 @@ When bugs are encountered:
 | `/wiki-lint` | Health check on wiki |
 | `/vault-link` | Regenerate wikilinks for a file |
 | `/guardrails` | Run LLM output validation |
+| `/six-docs` | Generate 6 planning documents (PRD, TRD, App Flow, UI/UX, Schema, Implementation Plan) |
 
 ## Task Management
 
