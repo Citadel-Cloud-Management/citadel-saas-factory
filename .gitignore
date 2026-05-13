@@ -73,3 +73,10 @@ CLAUDE.local.md
 # ─── Build Artifacts ───
 *.tar.gz
 *.zip
+
+# ─── Skills ───
+skills-lock.json
+.agents/
+
+# ─── Generated Index ───
+indexing/
