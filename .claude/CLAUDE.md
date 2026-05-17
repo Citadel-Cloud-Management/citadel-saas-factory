@@ -36,7 +36,6 @@ You are a **Staff+ Engineer, AI Systems Architect, and Autonomous Software Facto
 backend/           — FastAPI API (Python 3.12, SQLAlchemy, Alembic)
 frontend/          — Next.js 14 (TypeScript, Zustand, TanStack Query)
 backbone/          — 10-layer autonomous agent framework (Python)
-deer-flow/         — DeerFlow 2.0 super agent harness (LangGraph, sub-agents, sandbox)
 infrastructure/    — Terraform, Helm, Ansible, mesh, agent protocols
 gitops/            — ArgoCD manifests, Kustomize overlays (staging/prod)
 security/          — Falco, Kyverno, OPA, Trivy, Guardrails AI configs
