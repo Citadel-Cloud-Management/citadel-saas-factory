@@ -79,17 +79,6 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "if": "Bash(rm -rf *)",
-            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Destructive rm -rf commands are blocked by project policy\"}}'",
-            "timeout": 2
-          }
-        ]
-      },
-      {
         "matcher": "Grep|Glob",
         "hooks": [
           {
