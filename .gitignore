@@ -74,6 +74,13 @@ CLAUDE.local.md
 *.tar.gz
 *.zip
 
+# ─── DeerFlow ───
+deer-flow/nginx/
+deer-flow/.deer-flow/
+deer-flow/.env
+deer-flow/frontend/.env
+deer-flow/config.yaml
+
 # ─── Skills ───
 skills-lock.json
 .agents/

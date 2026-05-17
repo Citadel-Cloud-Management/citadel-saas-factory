@@ -65,6 +65,16 @@ def load_registry(
                 router.register(agent)
                 agent_count += 1
 
+    # Register built-in thinking panel agents
+    from backbone.agents.thinking import ThinkingPanel
+
+    panel = ThinkingPanel()
+    for agent in panel.agents:
+        router.register(agent)
+        agent_count += 1
+    router.register(panel.orchestrator)
+    agent_count += 1
+
     logger.info("registry_loaded", agent_count=agent_count, path=str(path))
     return router
 
