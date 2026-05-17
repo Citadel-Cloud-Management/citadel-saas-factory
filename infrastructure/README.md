@@ -1,17 +1,31 @@
-# Networks
+# Infrastructure
 
-Network configurations for the Citadel SaaS Factory multi-agent system.
+Infrastructure-as-code for deploying the Citadel SaaS Factory. Runs on any Linux server with SSH and Docker.
 
-## Layers
+## Components
 
-| Layer | Directory | Purpose |
-|-------|-----------|---------|
-| Agent Mesh | `mesh/` | Multi-agent coordination (Ruflo, CrewAI, LangGraph) |
-| Service Mesh | `service-mesh/` | mTLS, traffic management (Linkerd, Istio) |
-| Container | `container/` | CNI and network policies (Cilium, Calico) |
-| VPN/Overlay | `vpn/` | Zero-trust access (Tailscale, WireGuard) |
-| Discovery | `discovery/` | Service discovery (Consul, CoreDNS) |
-| Agent Protocols | `agent-protocols/` | Inter-agent communication (MCP, A2A, ACP) |
+| Directory | Tool | Purpose |
+|-----------|------|---------|
+| `terraform/` | Terraform | Server provisioning, networking, K8s bootstrap |
+| `helm/` | Helm | Kubernetes application charts |
+| `ansible/` | Ansible | Configuration management playbooks |
+| `mesh/` | Linkerd | Service mesh (mTLS, traffic policies) |
+| `agent-protocols/` | Custom | Inter-agent communication (MCP, A2A, ACP) |
+
+## Terraform Modules
+
+```
+terraform/
+├── modules/
+│   ├── compute/        Server provisioning
+│   ├── network/        VPC, subnets, security groups
+│   ├── k8s-bootstrap/  K3s cluster initialization
+│   ├── server/         Base server configuration
+│   └── platform-stack/ Full platform deployment
+└── environments/
+    ├── staging/
+    └── production/
+```
 
 ## Agent Communication Protocols
 
@@ -20,9 +34,10 @@ Network configurations for the Citadel SaaS Factory multi-agent system.
 | MCP | Anthropic | Tool invocation for LLM agents |
 | A2A | Google | Agent-to-Agent communication |
 | ACP | IBM | Agent Communication Protocol |
-| AGNTCY | Open | Open agent network standard |
-| AutoGen | Microsoft | Multi-agent orchestration |
 
-## Configuration
+## Deploy
 
-Each directory contains YAML configs with sensible defaults. Override via environment variables or by editing the configs directly.
+```bash
+cd infrastructure/terraform/environments/staging
+terraform init && terraform plan && terraform apply
+```
