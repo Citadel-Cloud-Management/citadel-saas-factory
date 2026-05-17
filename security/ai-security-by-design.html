@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Security by Design · Comprehensive Framework 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#fff; --offwhite:#f8faff; --text:#0f172a; --muted:#64748b; --light:#e2e8f0;
+  --blue:#2563eb; --blue-bg:#eff6ff; --blue-b:#bfdbfe; --blue-d:#1e40af;
+  --indigo:#4f46e5; --indigo-bg:#eef2ff; --indigo-b:#c7d2fe; --indigo-d:#3730a3;
+  --violet:#7c3aed; --violet-bg:#f5f3ff; --violet-b:#ddd6fe; --violet-d:#5b21b6;
+  --pink:#db2777; --pink-bg:#fdf2f8; --pink-b:#fbcfe8; --pink-d:#9d174d;
+  --rose:#e11d48; --rose-bg:#fff1f2; --rose-b:#fecdd3; --rose-d:#9f1239;
+  --orange:#ea580c; --orange-bg:#fff7ed; --orange-b:#fed7aa; --orange-d:#7c2d12;
+  --amber:#d97706; --amber-bg:#fffbeb; --amber-b:#fde68a; --amber-d:#92400e;
+  --green:#16a34a; --green-bg:#f0fdf4; --green-b:#bbf7d0; --green-d:#14532d;
+  --teal:#0d9488; --teal-bg:#f0fdfa; --teal-b:#99f6e4; --teal-d:#134e4a;
+  --cyan:#0891b2; --cyan-bg:#ecfeff; --cyan-b:#a5f3fc; --cyan-d:#164e63;
+}
+*{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:#fff;color:var(--text);line-height:1.6}
+
+/* NAV */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--light)}
+.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;padding:0 32px}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-brand{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text);margin-right:20px;white-space:nowrap;flex-shrink:0;padding:14px 0}
+.nav-link{flex-shrink:0;font-size:11.5px;font-weight:600;padding:14px 14px;color:var(--muted);text-decoration:none;letter-spacing:.4px;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
+.nav-link:hover{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 45%,#0c2340 100%);color:white;padding:80px 40px 90px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 55%,rgba(99,102,241,.28) 0%,transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(14,165,233,.22) 0%,transparent 50%),radial-gradient(ellipse at 55% 85%,rgba(168,85,247,.18) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(56,189,248,.06) 0%,transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:6px 20px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#93c5fd;margin-bottom:26px}
+.hero-eyebrow .dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-size:clamp(42px,7.5vw,88px);font-weight:900;line-height:1.0;letter-spacing:-3px;margin-bottom:22px}
+.grad{background:linear-gradient(95deg,#60a5fa 0%,#a78bfa 50%,#f472b6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{color:#94a3b8;font-size:17px;max-width:660px;margin:0 auto 40px;font-weight:400;line-height:1.7}
+.stat-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:28px}
+.stat-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:10px 22px;display:flex;align-items:center;gap:10px}
+.stat-pill strong{font-size:22px;font-weight:800;color:white}
+.stat-pill span{font-size:11px;color:#94a3b8;letter-spacing:.4px}
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
+.htag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:5px;padding:5px 13px;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#94a3b8;letter-spacing:1px}
+
+/* PAGE */
+.page{max-width:1320px;margin:0 auto;padding:0 32px}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:flex-start;gap:16px;margin:72px 0 36px;scroll-margin-top:58px}
+.sec-num{background:var(--text);color:white;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:4px;flex-shrink:0;margin-top:4px}
+.sec-text .sec-title{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.sec-text .sec-desc{font-size:13.5px;color:var(--muted);margin-top:4px}
+.sec-line{flex:1;height:1px;background:var(--light);margin-top:16px}
+
+/* THREAT INTEL BANNER */
+.intel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:64px}
+.intel-card{border-radius:12px;padding:18px 20px;border:1.5px solid;position:relative;overflow:hidden}
+.intel-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;display:block;line-height:1.1}
+.intel-label{font-size:11.5px;font-weight:600;margin-top:4px;display:block}
+.intel-src{font-size:9.5px;font-family:'JetBrains Mono',monospace;opacity:.5;margin-top:8px;display:block}
+
+/* DOMAIN CARDS */
+.domains-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:22px;margin-bottom:20px}
+.domain-card{border-radius:18px;border:1.5px solid transparent;overflow:hidden;transition:transform .22s,box-shadow .22s;animation:fadeUp .5s ease both}
+.domain-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.11)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.c-blue{background:var(--blue-bg);border-color:var(--blue-b);--A:var(--blue);--AD:var(--blue-d)}
+.c-indigo{background:var(--indigo-bg);border-color:var(--indigo-b);--A:var(--indigo);--AD:var(--indigo-d)}
+.c-violet{background:var(--violet-bg);border-color:var(--violet-b);--A:var(--violet);--AD:var(--violet-d)}
+.c-pink{background:var(--pink-bg);border-color:var(--pink-b);--A:var(--pink);--AD:var(--pink-d)}
+.c-rose{background:var(--rose-bg);border-color:var(--rose-b);--A:var(--rose);--AD:var(--rose-d)}
+.c-orange{background:var(--orange-bg);border-color:var(--orange-b);--A:var(--orange);--AD:var(--orange-d)}
+.c-amber{background:var(--amber-bg);border-color:var(--amber-b);--A:var(--amber);--AD:var(--amber-d)}
+.c-green{background:var(--green-bg);border-color:var(--green-b);--A:var(--green);--AD:var(--green-d)}
+.c-teal{background:var(--teal-bg);border-color:var(--teal-b);--A:var(--teal);--AD:var(--teal-d)}
+.c-cyan{background:var(--cyan-bg);border-color:var(--cyan-b);--A:var(--cyan);--AD:var(--cyan-d)}
+
+.card-top{padding:26px 26px 18px;position:relative}
+.card-num{position:absolute;top:14px;right:18px;font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:800;color:var(--A);opacity:.07;line-height:1;pointer-events:none}
+.card-icon{font-size:28px;margin-bottom:10px;display:block}
+.card-title{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--A);margin-bottom:4px}
+.card-subtitle{font-size:12px;color:var(--muted);margin-bottom:14px;font-weight:400}
+
+/* stat call-out */
+.card-stat{background:white;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:9px 12px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.cs-num{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;color:var(--A);flex-shrink:0}
+.cs-text{font-size:11px;color:#475569;line-height:1.4}
+
+.controls-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.controls-list li{font-size:12.5px;color:#334155;padding-left:16px;position:relative;line-height:1.5}
+.controls-list li::before{content:'›';position:absolute;left:0;color:var(--A);font-weight:700;font-size:15px;line-height:1.35}
+.controls-list li strong{color:#0f172a;font-weight:600}
+
+.card-mid{padding:0 26px 16px}
+.sub-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--A);margin:12px 0 8px;display:flex;align-items:center;gap:8px}
+.sub-label::after{content:'';flex:1;height:1px;background:var(--A);opacity:.18}
+
+/* hands-on items */
+.hol-item{background:white;border:1px solid rgba(0,0,0,.08);border-radius:8px;padding:10px 12px;margin-bottom:7px}
+.hol-name{font-size:12px;font-weight:700;color:var(--AD)}
+.hol-desc{font-size:11px;color:#475569;line-height:1.45;margin-top:2px}
+.code-block{background:#1e293b;border-radius:7px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#e2e8f0;line-height:1.7;overflow-x:auto;margin-top:6px}
+.code-block .cm{color:#64748b}.code-block .ck{color:#7dd3fc}.code-block .cv{color:#86efac}.code-block .cs{color:#fbbf24}.code-block .co{color:#f472b6}
+
+/* real-world scenario */
+.scenario-box{background:white;border-left:3px solid var(--A);border-radius:0 8px 8px 0;padding:10px 14px;margin:8px 0;font-size:11.5px;color:#334155;line-height:1.5}
+.scenario-box strong{color:var(--AD);font-weight:600}
+
+.card-foot{padding:14px 26px 22px;border-top:1px solid rgba(0,0,0,.06)}
+.res-tags{display:flex;flex-wrap:wrap;gap:5px}
+.res-tag{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-family:'JetBrains Mono',monospace;font-weight:600;padding:4px 10px;border-radius:100px;text-decoration:none;background:white;border:1px solid rgba(0,0,0,.1);color:var(--A);transition:all .15s;letter-spacing:.2px}
+.res-tag:hover{background:var(--A);color:white;border-color:var(--A)}
+.res-tag::before{content:'↗';font-size:8px}
+
+/* stagger */
+.domain-card:nth-child(1){animation-delay:.04s}.domain-card:nth-child(2){animation-delay:.08s}
+.domain-card:nth-child(3){animation-delay:.12s}.domain-card:nth-child(4){animation-delay:.16s}
+.domain-card:nth-child(5){animation-delay:.20s}.domain-card:nth-child(6){animation-delay:.24s}
+.domain-card:nth-child(7){animation-delay:.28s}.domain-card:nth-child(8){animation-delay:.32s}
+.domain-card:nth-child(9){animation-delay:.36s}.domain-card:nth-child(10){animation-delay:.40s}
+.domain-card:nth-child(11){animation-delay:.44s}
+
+/* THREAT TABLE */
+.table-wrap{border-radius:16px;overflow:hidden;border:1.5px solid var(--light);margin-bottom:64px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:#0f172a}
+th{padding:13px 16px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#94a3b8;font-weight:500}
+td{padding:13px 16px;border-bottom:1px solid #f1f5f9;color:#475569;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#f8faff}
+tr:hover td{background:#eff6ff!important}
+td:first-child{font-weight:700;font-family:'JetBrains Mono',monospace;color:#1e40af;font-size:11px}
+td:nth-child(2){font-weight:600;color:#0f172a}
+.badge{display:inline-block;padding:3px 9px;border-radius:100px;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.b-crit{background:#fee2e2;color:#b91c1c}.b-high{background:#ffedd5;color:#c2410c}.b-med{background:#fef9c3;color:#92400e}
+.atags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.atag{font-size:9px;font-family:'JetBrains Mono',monospace;background:#f1f5f9;color:#475569;padding:2px 6px;border-radius:3px}
+.tlink{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:600;color:#2563eb;text-decoration:none}
+.tlink::before{content:'↗'}.tlink:hover{text-decoration:underline}
+
+/* TOOLS GRID */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin-bottom:24px}
+.tool-card{border-radius:14px;padding:22px;border:1.5px solid;transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:9px;position:relative}
+.tool-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.09)}
+.tool-card::after{content:'↗';position:absolute;top:15px;right:16px;font-size:15px;opacity:.28;transition:opacity .2s}
+.tool-card:hover::after{opacity:.8}
+.tc-type{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.6}
+.tc-name{font-size:14.5px;font-weight:800}
+.tc-desc{font-size:12px;color:#475569;line-height:1.55}
+.tc-code{background:#1e293b;border-radius:6px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#86efac;line-height:1.65;overflow-x:auto}
+.tc-url{font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:.42;word-break:break-all;margin-top:1px}
+
+/* CERT CARDS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:64px}
+.cert-card{border-radius:14px;padding:22px;border:1.5px solid;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
+.cert-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.09)}
+.cert-org{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.6}
+.cert-name{font-size:14px;font-weight:800}
+.cert-scope{font-size:12px;color:#475569;line-height:1.55}
+.cert-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.cmeta{font-size:9.5px;padding:3px 9px;border-radius:100px;font-weight:600;font-family:'JetBrains Mono',monospace}
+
+/* RESOURCE NODES */
+.nodes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px;margin-bottom:64px}
+.node-card{border-radius:13px;padding:20px;border:1.5px solid;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.node-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.node-card::after{content:'↗';position:absolute;top:13px;right:15px;font-size:17px;opacity:.28;transition:opacity .2s}
+.node-card:hover::after{opacity:.85}
+.n-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.65}
+.n-name{font-size:14.5px;font-weight:800}
+.n-desc{font-size:11.5px;color:#475569;line-height:1.5}
+.n-url{font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:.42;word-break:break-all}
+
+/* FW CARDS */
+.fw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:64px}
+.fw-card{border-radius:13px;padding:20px;border:1.5px solid;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
+.fw-card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,.08)}
+.fw-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.8px;padding:3px 10px;border-radius:100px;width:fit-content}
+.fw-name{font-size:14px;font-weight:800}
+.fw-scope{font-size:11.5px;color:#475569;line-height:1.5}
+.fw-map{font-size:11px;color:#64748b;margin-top:2px;font-style:italic}
+.fw-url{font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:.4;margin-top:3px}
+
+/* FOOTER */
+footer{background:#0f172a;color:#94a3b8;padding:48px 40px;text-align:center}
+footer strong{color:white;font-weight:700}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:14px}
+.footer-links a{color:#60a5fa;font-family:'JetBrains Mono',monospace;font-size:11px;text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+
+@media(max-width:768px){
+  .hero{padding:48px 20px 60px}.page{padding:0 16px}
+  .domains-grid,.tools-grid,.cert-grid,.nodes-grid,.fw-grid,.intel-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <span class="nav-brand">AI·SEC·DESIGN·2026</span>
+    <a href="#intel" class="nav-link">Threat Intel</a>
+    <a href="#domains" class="nav-link">11 Domains</a>
+    <a href="#threats" class="nav-link">OWASP Top 10</a>
+    <a href="#tools" class="nav-link">Tools &amp; Labs</a>
+    <a href="#certs" class="nav-link">Certifications</a>
+    <a href="#nodes" class="nav-link">Resources</a>
+    <a href="#frameworks" class="nav-link">Frameworks</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow"><span class="dot"></span> Comprehensive Security Framework · April 2026 Edition</div>
+  <h1>AI <span class="grad">Security</span><br>by Design</h1>
+  <p class="hero-desc">The definitive reference for securing AI systems end-to-end — from architecture to supply chain, model training to agentic deployment — grounded in 2025–2026 threat intelligence from IBM X-Force, NIST, OWASP, MITRE, and the International AI Safety Report.</p>
+  <div class="stat-pills">
+    <div class="stat-pill"><strong>11</strong><span>Domains</span></div>
+    <div class="stat-pill"><strong>80+</strong><span>Controls</span></div>
+    <div class="stat-pill"><strong>10</strong><span>LLM Threats</span></div>
+    <div class="stat-pill"><strong>15+</strong><span>Tools &amp; Labs</span></div>
+    <div class="stat-pill"><strong>8</strong><span>Certifications</span></div>
+    <div class="stat-pill"><strong>30+</strong><span>Resource Nodes</span></div>
+  </div>
+  <div class="hero-tags">
+    <span class="htag">NIST AI RMF</span><span class="htag">OWASP LLM TOP 10</span><span class="htag">MITRE ATLAS</span>
+    <span class="htag">EU AI ACT</span><span class="htag">ISO/IEC 42001</span><span class="htag">ZERO TRUST</span>
+    <span class="htag">PYRIT</span><span class="htag">GARAK</span><span class="htag">PROMPTFOO</span>
+    <span class="htag">DEVSECOPS</span><span class="htag">SUPPLY CHAIN</span><span class="htag">AGENTIC AI</span>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════════════════════════
+     SECTION 00 — THREAT INTELLIGENCE
+     ══════════════════════════════════ -->
+<div id="intel" class="section-header">
+  <span class="sec-num">00</span>
+  <div class="sec-text">
+    <div class="sec-title">2025–2026 Threat Intelligence Dashboard</div>
+    <div class="sec-desc">Live data from IBM X-Force 2026, Verizon DBIR 2025, ENISA, Stanford AI Index, Palo Alto Networks, and the International AI Safety Report (Feb 2026).</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="intel-grid">
+  <div class="intel-card" style="background:var(--rose-bg);border-color:var(--rose-b)">
+    <span class="intel-num" style="color:var(--rose)">$5.72M</span>
+    <span class="intel-label" style="color:var(--rose-d)">Avg AI-Powered Breach Cost</span>
+    <span class="intel-src">Verizon DBIR 2025 · +13% YoY</span>
+  </div>
+  <div class="intel-card" style="background:var(--orange-bg);border-color:var(--orange-b)">
+    <span class="intel-num" style="color:var(--orange)">56%</span>
+    <span class="intel-label" style="color:var(--orange-d)">Rise in AI-Related Security Incidents YoY</span>
+    <span class="intel-src">Stanford AI Index Report 2025</span>
+  </div>
+  <div class="intel-card" style="background:var(--amber-bg);border-color:var(--amber-b)">
+    <span class="intel-num" style="color:var(--amber)">44%</span>
+    <span class="intel-label" style="color:var(--amber-d)">Increase in Public-Facing App Attacks</span>
+    <span class="intel-src">IBM X-Force Threat Index 2026</span>
+  </div>
+  <div class="intel-card" style="background:var(--violet-bg);border-color:var(--violet-b)">
+    <span class="intel-num" style="color:var(--violet)">80%</span>
+    <span class="intel-label" style="color:var(--violet-d)">Social Engineering Attacks Using AI</span>
+    <span class="intel-src">ENISA 2025 Threat Landscape</span>
+  </div>
+  <div class="intel-card" style="background:var(--blue-bg);border-color:var(--blue-b)">
+    <span class="intel-num" style="color:var(--blue)">97%</span>
+    <span class="intel-label" style="color:var(--blue-d)">AI Breach Victims Lacked AI Access Controls</span>
+    <span class="intel-src">IBM Cost of Data Breach 2025</span>
+  </div>
+  <div class="intel-card" style="background:var(--pink-bg);border-color:var(--pink-b)">
+    <span class="intel-num" style="color:var(--pink)">82:1</span>
+    <span class="intel-label" style="color:var(--pink-d)">AI Agents Outnumber Human Users</span>
+    <span class="intel-src">Palo Alto Networks 2026 Predictions</span>
+  </div>
+  <div class="intel-card" style="background:var(--green-bg);border-color:var(--green-b)">
+    <span class="intel-num" style="color:var(--green)">2,000%</span>
+    <span class="intel-label" style="color:var(--green-d)">Increase in AI-Specific CVEs Since 2022</span>
+    <span class="intel-src">NIST NVD / OWASP LLM Top 10 2025</span>
+  </div>
+  <div class="intel-card" style="background:var(--teal-bg);border-color:var(--teal-b)">
+    <span class="intel-num" style="color:var(--teal)">$670K</span>
+    <span class="intel-label" style="color:var(--teal-d)">Extra Cost of Shadow AI Breaches</span>
+    <span class="intel-src">IBM Cost of Data Breach Report 2025</span>
+  </div>
+  <div class="intel-card" style="background:var(--indigo-bg);border-color:var(--indigo-b)">
+    <span class="intel-num" style="color:var(--indigo)">32%</span>
+    <span class="intel-label" style="color:var(--indigo-d)">Organizations Hit by AI Prompt Attacks in 2025</span>
+    <span class="intel-src">Security Boulevard Research 2025</span>
+  </div>
+  <div class="intel-card" style="background:var(--cyan-bg);border-color:var(--cyan-b)">
+    <span class="intel-num" style="color:var(--cyan)">4×</span>
+    <span class="intel-label" style="color:var(--cyan-d)">Rise in Supply Chain Compromises Since 2020</span>
+    <span class="intel-src">IBM X-Force Threat Index 2026</span>
+  </div>
+  <div class="intel-card" style="background:var(--rose-bg);border-color:var(--rose-b)">
+    <span class="intel-num" style="color:var(--rose)">11 min</span>
+    <span class="intel-label" style="color:var(--rose-d)">Avg Detection Time for AI-Assisted Breaches</span>
+    <span class="intel-src">Network Installers AI Threat Report 2025</span>
+  </div>
+  <div class="intel-card" style="background:var(--orange-bg);border-color:var(--orange-b)">
+    <span class="intel-num" style="color:var(--orange)">24%</span>
+    <span class="intel-label" style="color:var(--orange-d)">Enterprises With Dedicated AI Security Team</span>
+    <span class="intel-src">Practical DevSecOps AI Security Stats 2026</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SECTION 01 — SECURITY DOMAINS
+     ══════════════════════════════════ -->
+<div id="domains" class="section-header">
+  <span class="sec-num">01</span>
+  <div class="sec-text">
+    <div class="sec-title">11 Security Domains</div>
+    <div class="sec-desc">Comprehensive controls, hands-on tools, real-world scenarios, and verified resource links across every layer of the AI system lifecycle.</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="domains-grid">
+
+<!-- ▸ D01 ARCHITECTURE -->
+<div class="domain-card c-blue">
+  <div class="card-top">
+    <span class="card-num">01</span>
+    <span class="card-icon">🏗️</span>
+    <div class="card-title">Secure Architecture Principles</div>
+    <div class="card-subtitle">Foundation-layer controls that every AI system must implement before anything else is built on top.</div>
+    <div class="card-stat"><span class="cs-num">72%</span><span class="cs-text">of security leaders report record-high AI risk levels in 2025, driven by insecure AI architectures deployed without ZTA principles (SANS AI Guidelines 2025)</span></div>
+    <ul class="controls-list">
+      <li><strong>Zero Trust Architecture (ZTA)</strong> — Never trust, always verify; apply to every AI pipeline hop including inference endpoints, training environments, vector stores, and model registries</li>
+      <li><strong>Least Privilege Access</strong> — Models, agents, pipelines, and APIs access only what they strictly need; implement time-bound, task-scoped JIT permissions</li>
+      <li><strong>Defense in Depth</strong> — Layer WAF, API gateway, prompt guardrails, model-level output filters, post-output validators, and behavioral monitoring</li>
+      <li><strong>Immutable Infrastructure</strong> — AI workloads run in hardened, reproducible, signed container images; no SSH to production training nodes; use GitOps for all changes</li>
+      <li><strong>Microsegmentation</strong> — Network-isolate training, fine-tuning, inference, embedding generation, and vector database services into discrete security zones</li>
+      <li><strong>Secure-by-Default Configurations</strong> — All AI APIs and model endpoints ship with all capabilities disabled; enable explicitly with documented justification</li>
+      <li><strong>Blast Radius Minimization</strong> — Design system boundaries so a compromised model, agent, or pipeline cannot pivot to unrelated systems or data stores</li>
+      <li><strong>AI System Inventory</strong> — Maintain a continuously updated inventory of all AI models, agents, datasets, prompts, plugins, and third-party API dependencies</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">CISA Zero Trust Maturity Model v2 — AI Application</div>
+      <div class="hol-desc">Apply the 5-pillar ZTA model (Identity, Devices, Networks, Apps, Data) to AI workloads. Map each model serving endpoint, training cluster, and vector DB to a specific maturity tier before production deployment.</div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">Open Policy Agent (OPA) — AI Infrastructure Policy Gates</div>
+      <div class="hol-desc">Enforce least-privilege policies across AI infrastructure at deploy time. Block over-permissioned IAM roles, open storage buckets containing model weights, and unencrypted embedding stores.</div>
+      <div class="code-block"><span class="cm"># Deny wildcard IAM for AI roles (OPA Rego)</span><br><span class="ck">deny</span>[msg] {<br>  <span class="cv">input</span>.resource.aws_iam_role_policy.effect == <span class="cs">"Allow"</span><br>  <span class="cv">input</span>.resource.actions[_] == <span class="cs">"*"</span><br>  msg := <span class="cs">"Wildcard IAM forbidden for AI model roles"</span><br>}</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident (2025):</strong> Trend Micro scans revealed 3,000+ AI components and 200+ unprotected Chroma vector DB servers publicly exposed online, enabling direct data theft and model poisoning attacks. Root cause: no network segmentation, no authentication on AI infrastructure. Fix: ZTA microsegmentation + mandatory auth on all AI endpoints.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://www.nist.gov/publications/zero-trust-architecture" target="_blank" class="res-tag">NIST SP 800-207 ZTA</a>
+      <a href="https://www.cisa.gov/zero-trust-maturity-model" target="_blank" class="res-tag">CISA ZT Maturity v2</a>
+      <a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" target="_blank" class="res-tag">NIST 800-53 Rev5</a>
+      <a href="https://www.openpolicyagent.org/" target="_blank" class="res-tag">Open Policy Agent</a>
+      <a href="https://www.sans.org/blog/securing-ai-in-2025-a-risk-based-approach-to-ai-controls-and-governance" target="_blank" class="res-tag">SANS AI Guidelines</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D02 DATA SECURITY -->
+<div class="domain-card c-green">
+  <div class="card-top">
+    <span class="card-num">02</span>
+    <span class="card-icon">🔐</span>
+    <div class="card-title">Data Security &amp; Privacy</div>
+    <div class="card-subtitle">AI data is both the fuel and the primary liability — protect it across the entire training-to-inference lifecycle.</div>
+    <div class="card-stat"><span class="cs-num">11%</span><span class="cs-text">of data employees paste into GenAI tools is confidential — Samsung banned ChatGPT after engineers leaked proprietary source code (Cyberhaven Research 2024)</span></div>
+    <ul class="controls-list">
+      <li><strong>Data Classification &amp; Tagging</strong> — Label all training and inference data by sensitivity (PII, PHI, CUI, FOUO, IP) before any ML pipeline ingestion; enforce classification in metadata</li>
+      <li><strong>Data Minimization</strong> — Collect, retain, and process only what is strictly necessary for the AI task; enforce TTL policies on all training datasets</li>
+      <li><strong>Differential Privacy (DP)</strong> — Apply calibrated Laplace or Gaussian noise to training data and statistical query results to prevent membership inference and re-identification attacks</li>
+      <li><strong>Federated Learning</strong> — Train models on distributed data without centralizing raw sensitive datasets; use secure aggregation protocols to protect gradient updates</li>
+      <li><strong>Encryption at Rest &amp; In Transit</strong> — AES-256-GCM for stored datasets, model weights, and embedding vectors; mutual TLS 1.3 for all data flows between AI pipeline components</li>
+      <li><strong>Secure Data Pipelines</strong> — Validate, sanitize, hash-verify, and audit all data entering AI training; reject malformed, out-of-distribution, or poisoned inputs at ingestion gates</li>
+      <li><strong>Machine Unlearning / Right to Erasure</strong> — Implement selective unlearning capability to comply with GDPR Article 17; test that erased data cannot be reconstructed from model outputs</li>
+      <li><strong>Data Lineage &amp; Provenance Tracking</strong> — Log the full origin, transformation, and usage chain of every dataset used in model training; cryptographically sign each step</li>
+      <li><strong>GenAI Output DLP</strong> — Deploy Data Loss Prevention controls integrated with GenAI platforms to intercept confidential data before it is submitted to external AI APIs</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">Microsoft Presidio — PII Detection Pipeline</div>
+      <div class="hol-desc">Production-grade PII detection and anonymization. Integrate as a mandatory pre-ingestion gate for all training data and a post-generation filter for all LLM outputs. Detects 40+ entity types across 15+ languages.</div>
+      <div class="code-block"><span class="cm"># pip install presidio-analyzer presidio-anonymizer</span><br><span class="ck">from</span> presidio_analyzer <span class="ck">import</span> AnalyzerEngine<br><span class="ck">from</span> presidio_anonymizer <span class="ck">import</span> AnonymizerEngine<br>results = AnalyzerEngine().analyze(text=llm_output, language=<span class="cs">'en'</span>)<br>anonymized = AnonymizerEngine().anonymize(text=llm_output, analyzer_results=results)</div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">OpenDP — Differential Privacy for Training Data</div>
+      <div class="hol-desc">Formally verified DP library. Apply Laplace mechanism to statistics before training, or use DP-SGD (TensorFlow Privacy) during model training to bound worst-case information leakage about any individual in the training set.</div>
+      <div class="code-block"><span class="cm"># pip install opendp tensorflow-privacy</span><br><span class="ck">from</span> tensorflow_privacy.privacy.optimizers <span class="ck">import</span> dp_optimizer_keras<br>optimizer = dp_optimizer_keras.DPKerasSGDOptimizer(<br>  l2_norm_clip=<span class="cv">1.0</span>, noise_multiplier=<span class="cv">1.1</span>, num_microbatches=<span class="cv">256</span>)</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident (2025):</strong> Shadow AI breaches cost organizations an average of $670,000 more than traditional incidents and took 247 days to detect. 65% of shadow AI breach victims had customer PII exfiltrated through employees submitting data to unsanctioned AI tools. Fix: GenAI DLP + organizational AI usage policies + output monitoring.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://github.com/microsoft/presidio" target="_blank" class="res-tag">Presidio PII Scanner</a>
+      <a href="https://opendp.org/" target="_blank" class="res-tag">OpenDP Library</a>
+      <a href="https://www.tensorflow.org/responsible_ai/privacy/guide" target="_blank" class="res-tag">TF Privacy DP-SGD</a>
+      <a href="https://gdpr-info.eu/" target="_blank" class="res-tag">GDPR</a>
+      <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" class="res-tag">CCPA</a>
+      <a href="https://www.nist.gov/privacy-framework" target="_blank" class="res-tag">NIST Privacy Framework</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D03 MODEL SECURITY -->
+<div class="domain-card c-violet">
+  <div class="card-top">
+    <span class="card-num">03</span>
+    <span class="card-icon">🤖</span>
+    <div class="card-title">Model Security</div>
+    <div class="card-subtitle">Harden the model artifact itself — from training through registry to serving — against tampering, theft, and adversarial manipulation.</div>
+    <div class="card-stat"><span class="cs-num">13%</span><span class="cs-text">of organizations suffered breaches directly tied to their AI models or applications in 2025, with model evasion accounting for 21% of AI attack vectors (IBM CODB 2025)</span></div>
+    <ul class="controls-list">
+      <li><strong>Model Signing &amp; Integrity Verification</strong> — Cryptographically sign all model artifacts with Sigstore/cosign; verify signatures before every deployment, fine-tuning run, and inference startup</li>
+      <li><strong>Adversarial Robustness Testing</strong> — Test models against evasion (FGSM, PGD), poisoning, model inversion, and membership inference attacks using ART, Foolbox, or CleverHans before every production release</li>
+      <li><strong>Backdoor Detection</strong> — Scan all models (especially downloaded from HuggingFace) for neural backdoors using Neural Cleanse, STRIP, or ActivationClustering before use in production</li>
+      <li><strong>Model Watermarking</strong> — Embed traceable cryptographic or statistical identifiers in model weights to detect theft, unauthorized redistribution, or derivative use</li>
+      <li><strong>Secure Model Registry</strong> — Version-controlled, RBAC-enforced model store (MLflow, DVC, HuggingFace private) with full audit history, rollback capability, and deployment approval gates</li>
+      <li><strong>Continuous Red Teaming</strong> — Continuously probe models with PyRIT, Garak, and Promptfoo as mandatory CI/CD gates; block any model update that introduces new critical vulnerabilities</li>
+      <li><strong>Explainability for Security Forensics (XAI)</strong> — Generate SHAP/LIME explanations for model decisions; detect anomalous decision boundaries that may indicate successful poisoning attacks</li>
+      <li><strong>Anti-Extraction Controls</strong> — Implement output perturbation, query rate limits, and extraction-pattern detection to prevent model stealing via systematic API queries</li>
+      <li><strong>Secure Fine-tuning Pipelines</strong> — Verify dataset provenance and integrity before every fine-tuning run; monitor output distribution shift as an indicator of data poisoning</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">ProtectAI ModelScan — Model Weight Security</div>
+      <div class="hol-desc">Detect malicious code hidden in pickle files, safetensors, ONNX models, and Keras artifacts. Blocks arbitrary code execution payloads, unsafe deserialization, and backdoor patterns. Critical before using any HuggingFace model in production.</div>
+      <div class="code-block"><span class="cm"># pip install modelscan</span><br>modelscan scan -p <span class="cs">./models/llama-3.1-8b/</span><br>modelscan scan --hf <span class="cs">meta-llama/Meta-Llama-3-8B</span><br><span class="cm"># Returns: SAFE | UNSAFE + vulnerability details</span></div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">Garak — LLM Vulnerability Scanner</div>
+      <div class="hol-desc">Automated LLM probe suite testing 100+ vulnerability classes including jailbreaks, DAN exploits, encoding bypasses, PII extraction, and hallucination amplification. Supports local and API-hosted models.</div>
+      <div class="code-block"><span class="cm"># pip install garak</span><br>python -m garak --model_type openai --model_name gpt-4o \<br>  --probes <span class="cs">dan,encoding,knownbadsignatures,atkgen</span> \<br>  --report_prefix <span class="cs">./security-reports/model-scan</span></div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident Pattern (2025):</strong> Researchers documented multiple HuggingFace model repositories containing malicious pickle payloads that executed arbitrary code on download. Over 200 malicious models were identified. Fix: ProtectAI ModelScan + model signing verification before any model download or deployment.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://atlas.mitre.org/" target="_blank" class="res-tag">MITRE ATLAS</a>
+      <a href="https://github.com/leondz/garak" target="_blank" class="res-tag">Garak Scanner</a>
+      <a href="https://github.com/protectai/modelscan" target="_blank" class="res-tag">ProtectAI ModelScan</a>
+      <a href="https://github.com/microsoft/PyRIT" target="_blank" class="res-tag">PyRIT Red Team</a>
+      <a href="https://www.sigstore.dev/" target="_blank" class="res-tag">Sigstore Signing</a>
+      <a href="https://mlflow.org/docs/latest/model-registry.html" target="_blank" class="res-tag">MLflow Registry</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D04 LLM SECURITY -->
+<div class="domain-card c-rose">
+  <div class="card-top">
+    <span class="card-num">04</span>
+    <span class="card-icon">🛡️</span>
+    <div class="card-title">LLM-Specific Security · OWASP Top 10</div>
+    <div class="card-subtitle">Mitigations for the 10 vulnerability classes specific to Large Language Model applications — the #1 AI security priority in 2026.</div>
+    <div class="card-stat"><span class="cs-num">#1</span><span class="cs-text">Prompt injection has been the top LLM vulnerability for two consecutive years per OWASP; NIST reports a 2,000%+ increase in AI-specific CVEs since 2022</span></div>
+    <ul class="controls-list">
+      <li><strong>Prompt Injection Defense (LLM01)</strong> — Sanitize all inputs; enforce instruction hierarchy (system &gt; developer &gt; user); use structured output schemas; deploy spotlighting defenses; never trust indirect content as instructions</li>
+      <li><strong>Sensitive Info Disclosure Prevention (LLM02)</strong> — PII detection on all outputs; deny-by-default on training data retrieval; output redaction pipelines; zero-trust to sensitive data stores from inference layer</li>
+      <li><strong>Supply Chain Hardening (LLM03)</strong> — SBOM for all model and library dependencies; cryptographic verification of base models; ModelScan all downloads; signed attestations for fine-tuning pipelines</li>
+      <li><strong>Data &amp; Model Poisoning Detection (LLM04)</strong> — Statistical anomaly detection on training batches; label distribution drift monitoring; hash-verify all dataset versions; isolate fine-tuning from user-supplied data</li>
+      <li><strong>Improper Output Handling (LLM05)</strong> — Treat LLM output as untrusted input; apply HTML/SQL encoding before rendering; never execute raw LLM code without sandbox; validate JSON schema of structured outputs</li>
+      <li><strong>Excessive Agency Controls (LLM06)</strong> — Define explicit tool allowlists per agent role; require HITL approval for irreversible actions; scope permissions per task; implement maximum action budgets</li>
+      <li><strong>System Prompt Leakage Prevention (LLM07)</strong> — Never store secrets in system prompts; test prompt confidentiality with adversarial extraction probes; use separate secure secret management</li>
+      <li><strong>Vector &amp; Embedding Security (LLM08)</strong> — RBAC on vector databases; validate retrieved chunks before RAG injection; monitor cosine similarity distributions for poisoning signals; audit embedding access logs</li>
+      <li><strong>Misinformation Mitigation (LLM09)</strong> — Factual grounding via authoritative RAG sources; confidence scoring; citation verification; mandatory disclaimers for low-certainty outputs; domain expert review gates</li>
+      <li><strong>Unbounded Consumption Controls (LLM10)</strong> — Hard token and compute budgets per user/session; adaptive rate limiting; detect context-stuffing attacks; cost anomaly alerting; circuit breakers on API runaway</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">Microsoft PyRIT — Automated Multi-Turn Red Teaming</div>
+      <div class="hol-desc">Battle-tested by Microsoft's AI Red Team since 2022. Automates Crescendo multi-turn attacks, jailbreak generation, scoring engines, and memory-based adversarial conversations. Runs against Azure OpenAI, HuggingFace, and local endpoints.</div>
+      <div class="code-block"><span class="cm"># pip install pyrit</span><br><span class="ck">from</span> pyrit.orchestrator <span class="ck">import</span> CrescendoOrchestrator<br><span class="ck">from</span> pyrit.prompt_target <span class="ck">import</span> AzureOpenAIChatTarget<br>orchestrator = CrescendoOrchestrator(<br>  adversarial_chat=AzureOpenAIChatTarget(),<br>  objective_target=AzureOpenAIChatTarget())<br><span class="co">await</span> orchestrator.apply_crescendo_attack_async(attack_strategy=<span class="cs">"prompt_injection"</span>)</div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">Promptfoo — OWASP LLM Compliance Testing</div>
+      <div class="hol-desc">Run automated tests mapped directly to OWASP LLM Top 10 categories. Generates compliance reports, flags regressions, and integrates into CI/CD as a mandatory pre-deployment gate.</div>
+      <div class="code-block"><span class="cm"># npx promptfoo@latest redteam init</span><br><span class="ck">providers</span>: [openai:gpt-4o]<br><span class="ck">redteam</span>:<br>  <span class="ck">plugins</span>: [owasp:llm:01, owasp:llm:02, owasp:llm:06, owasp:llm:08]<br>  <span class="ck">strategies</span>: [prompt-injection, jailbreak, crescendo, multi-turn]<br>  <span class="ck">numTests</span>: <span class="cv">100</span></div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident (2025):</strong> A Claude AI model was documented by Anthropic to have been used in a campaign that automated 80–90% of tactical cyber operations via prompt injection and MCP server manipulation. Nation-state actors from Iran, China, and North Korea leveraged LLMs as force multipliers for reconnaissance, exploitation, and lateral movement. Fix: LLM01 + LLM06 controls with strict tool whitelisting and HITL gates.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://genai.owasp.org/llm-top-10/" target="_blank" class="res-tag">OWASP LLM Top 10</a>
+      <a href="https://github.com/microsoft/PyRIT" target="_blank" class="res-tag">PyRIT GitHub</a>
+      <a href="https://github.com/microsoft/AI-Red-Teaming-Playground-Labs" target="_blank" class="res-tag">MSFT RT Labs</a>
+      <a href="https://www.promptfoo.dev/" target="_blank" class="res-tag">Promptfoo</a>
+      <a href="https://learn.microsoft.com/en-us/security/ai-red-team/training" target="_blank" class="res-tag">MSFT AI RT 101</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D05 IAM -->
+<div class="domain-card c-amber">
+  <div class="card-top">
+    <span class="card-num">05</span>
+    <span class="card-icon">🔑</span>
+    <div class="card-title">Identity &amp; Access Management</div>
+    <div class="card-subtitle">In 2026, identity is the #1 attack target — with AI agents outnumbering human users 82:1, non-human identity management is now critical.</div>
+    <div class="card-stat"><span class="cs-num">300K+</span><span class="cs-text">ChatGPT credential sets were advertised on the dark web in 2025 via infostealer malware — AI service credentials are now high-value targets (IBM X-Force 2026)</span></div>
+    <ul class="controls-list">
+      <li><strong>AI Workload Identity (SPIFFE/SPIRE)</strong> — Issue cryptographic SVID identities to every model, agent, pipeline stage, and serving endpoint; eliminate long-lived secrets in all container environments</li>
+      <li><strong>Phishing-Resistant MFA</strong> — Enforce FIDO2/Passkey authentication for all human access to AI platforms, model registries, and training environments; ban SMS-based MFA for AI system access</li>
+      <li><strong>Fine-Grained RBAC/ABAC for AI</strong> — Control access to specific models, datasets, embedding stores, and inference APIs based on roles AND attributes; separate permissions for dev/staging/prod environments</li>
+      <li><strong>API Key Vault Integration</strong> — Store all AI service credentials (OpenAI, Anthropic, HuggingFace, Cohere) in HashiCorp Vault or AWS Secrets Manager; automated 30-day rotation; never hardcode in notebooks</li>
+      <li><strong>Service Mesh mTLS Authentication</strong> — Enforce bidirectional certificate-based authentication via Istio or Linkerd between all AI microservices; no plaintext inter-service AI communication</li>
+      <li><strong>Non-Human Identity (NHI) Lifecycle</strong> — Apply full IAM lifecycle controls (onboard, rotate, offboard) to every AI agent credential; monitor for anomalous agent behavior as early compromise indicator</li>
+      <li><strong>Just-in-Time (JIT) Access</strong> — Grant temporary, task-scoped access for model training, fine-tuning, and data access jobs; automatically revoke upon completion via privileged access workstations</li>
+      <li><strong>Credential Exposure Monitoring</strong> — Continuously scan dark web and public repositories for leaked AI service API keys; use Trufflehog or GitGuardian in pre-commit hooks</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">HashiCorp Vault — AI Secret Management at Scale</div>
+      <div class="hol-desc">Centralize, rotate, and audit all AI API keys, database credentials, and model signing certificates. Use dynamic secrets for ephemeral training job access. Integrate with Kubernetes service accounts for AI agent credential binding.</div>
+      <div class="code-block"><span class="cm"># Dynamic OpenAI key rotation via Vault</span><br>vault secrets enable -path=<span class="cs">ai-keys</span> kv-v2<br>vault kv put ai-keys/openai api_key=<span class="cs">"sk-..."</span> ttl=<span class="cv">24h</span> max_ttl=<span class="cv">168h</span><br>vault policy write ai-inference-ro ./policies/ai-readonly.hcl<br><span class="cm"># Agent auto-renews token; never sees long-lived key</span></div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">TruffleHog — AI Credential Leak Detection</div>
+      <div class="hol-desc">Detect leaked AI API keys, HuggingFace tokens, and model signing keys in Git history, CI/CD logs, container images, and S3 buckets. Run as pre-commit hook and in CI pipelines.</div>
+      <div class="code-block">trufflehog git <span class="cs">https://github.com/your-ai-repo</span> --only-verified<br>trufflehog docker --image <span class="cs">ai-trainer:latest</span> --only-verified</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident (2025):</strong> Threat actor UNC6395 used stolen OAuth tokens from a SaaS integration to access 700+ enterprise customer environments without any exploit — the activity looked legitimate because it came from a trusted connection. Shadow AI agent credentials were never monitored. Fix: NHI lifecycle management + continuous credential behavior anomaly detection.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://developer.hashicorp.com/vault" target="_blank" class="res-tag">HashiCorp Vault</a>
+      <a href="https://spiffe.io/" target="_blank" class="res-tag">SPIFFE/SPIRE</a>
+      <a href="https://github.com/trufflesecurity/trufflehog" target="_blank" class="res-tag">TruffleHog</a>
+      <a href="https://csrc.nist.gov/publications/detail/sp/800-63/3/final" target="_blank" class="res-tag">NIST SP 800-63</a>
+      <a href="https://www.cisa.gov/sites/default/files/2023-03/zero_trust_maturity_model_v2_508.pdf" target="_blank" class="res-tag">CISA ZT Maturity v2</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D06 MONITORING -->
+<div class="domain-card c-cyan">
+  <div class="card-top">
+    <span class="card-num">06</span>
+    <span class="card-icon">🔍</span>
+    <div class="card-title">Monitoring, Observability &amp; Threat Detection</div>
+    <div class="card-subtitle">Continuous visibility across every inference request, agent action, and model behavior — the only way to detect AI-specific threats in production.</div>
+    <div class="card-stat"><span class="cs-num">108 days</span><span class="cs-text">sooner — organizations with extensive AI security features discovered and contained breaches 108 days faster, saving $1.8M on average (IBM CODB 2025)</span></div>
+    <ul class="controls-list">
+      <li><strong>AI-Specific SIEM Integration</strong> — Forward all inference request/response pairs to Splunk/Sentinel with full context: user identity, model version, token count, latency, output hash, and tool calls</li>
+      <li><strong>Behavioral Baselines &amp; Drift Detection</strong> — Establish normal query volume, token distributions, response patterns per model; alert on 3-sigma deviations indicating adversarial activity or model compromise</li>
+      <li><strong>Runtime LLM Guardrails</strong> — Deploy Guardrails AI, LlamaGuard, or Nemo Guardrails to detect prompt injection, jailbreaks, toxic outputs, and PII exfiltration in real time before responses reach users</li>
+      <li><strong>Immutable Audit Logging</strong> — Write-once logs of every model interaction: requester identity, full prompt hash, response hash, tool calls, retrieved documents, and decision rationale with cryptographic chaining</li>
+      <li><strong>Query Pattern Anomaly Detection</strong> — ML-based detection of model extraction probes (systematic boundary-testing queries), PII fishing attempts, and coordinated injection campaigns</li>
+      <li><strong>Model Performance Drift Alerting</strong> — Monitor accuracy, calibration, confidence, and output distribution for production models; trigger forensic investigation on sudden unexplained degradation</li>
+      <li><strong>Agent Action Monitoring</strong> — Log every tool call, file write, API request, database query, and external communication made by AI agents in real time; alert on anomalous sequences</li>
+      <li><strong>Continuous Prompt Toxicity Monitoring</strong> — Score all outputs against content safety classifiers; log, quarantine, and escalate harmful outputs for human review and incident response</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">Guardrails AI — Production LLM Runtime Safety</div>
+      <div class="hol-desc">50+ built-in validators for PII detection, toxic language, hallucination detection, and structural output validation. Integrates with OpenAI, Anthropic, and local models. Deploy as middleware in any LLM application.</div>
+      <div class="code-block"><span class="ck">from</span> guardrails <span class="ck">import</span> Guard<br><span class="ck">from</span> guardrails.hub <span class="ck">import</span> ToxicLanguage, DetectPII, ValidLength<br>guard = Guard().use_many(DetectPII(on=<span class="cs">"output"</span>), ToxicLanguage(), ValidLength(min=<span class="cv">1</span>, max=<span class="cv">2000</span>))<br>validated = guard(llm_api=openai.chat.completions.create, prompt=user_input)</div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">Evidently AI — ML Model &amp; Data Drift Monitoring</div>
+      <div class="hol-desc">Statistical monitoring for production AI models. Detect data distribution shifts, model performance degradation, and prediction drift that may indicate training data poisoning or adversarial distribution shift attacks.</div>
+      <div class="code-block"><span class="ck">from</span> evidently <span class="ck">import</span> Report<br><span class="ck">from</span> evidently.metric_preset <span class="ck">import</span> DataDriftPreset, ModelPerformancePreset<br>report = Report(metrics=[DataDriftPreset(), ModelPerformancePreset()])<br>report.run(reference_data=baseline_df, current_data=production_df)<br>report.save_html(<span class="cs">"drift-report.html"</span>)</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Pattern (2025–2026):</strong> The 2026 International AI Safety Report documented that current AI systems exhibit unpredictable failures with no combination of methods eliminating failures entirely. Layered monitoring with behavioral baselines is the primary mechanism for detecting when production models deviate from expected behavior — whether from adversarial attacks, distributional shift, or model degradation.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://github.com/guardrails-ai/guardrails" target="_blank" class="res-tag">Guardrails AI</a>
+      <a href="https://www.evidentlyai.com/" target="_blank" class="res-tag">Evidently AI</a>
+      <a href="https://smith.langchain.com/" target="_blank" class="res-tag">LangSmith Tracing</a>
+      <a href="https://atlas.mitre.org/techniques" target="_blank" class="res-tag">MITRE ATLAS Techniques</a>
+      <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" class="res-tag">NIST AI RMF Measure</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D07 DEVSECOPS -->
+<div class="domain-card c-teal">
+  <div class="card-top">
+    <span class="card-num">07</span>
+    <span class="card-icon">🏭</span>
+    <div class="card-title">MLOps / DevSecOps for AI</div>
+    <div class="card-subtitle">Security embedded into the AI development lifecycle — from code commit to model serving — with no human-in-loop friction.</div>
+    <div class="card-stat"><span class="cs-num">49%</span><span class="cs-text">surge in active ransomware groups in 2025; supply chain and third-party compromises nearly quadrupled since 2020 — CI/CD pipelines are now primary attack vectors (IBM X-Force 2026)</span></div>
+    <ul class="controls-list">
+      <li><strong>Secure CI/CD for ML Pipelines</strong> — Integrate secrets scanning (TruffleHog, GitGuardian), SAST, SCA (Snyk, Dependabot), and adversarial test gates as mandatory checks in every ML pipeline commit</li>
+      <li><strong>AI-Specific SBOM Generation</strong> — Generate CycloneDX/SPDX SBOMs for all model dependencies, base models, training datasets, and Python libraries using Syft; continuously re-scan against NVD for new CVEs</li>
+      <li><strong>Container Image Hardening</strong> — Use distroless or minimal base images for AI training/serving containers; scan with Trivy or Grype before push; enforce no-root container execution policies</li>
+      <li><strong>IaC Security Policy Gates</strong> — Scan all Terraform, CloudFormation, Kubernetes, and Helm AI infrastructure definitions with Checkov, KICS, or Terrascan; block deployment on policy violations</li>
+      <li><strong>Pre-Deployment Adversarial Test Gate</strong> — Run Garak/PyRIT/Promptfoo test suite as a mandatory CI gate; block any model version that introduces new critical or high LLM vulnerabilities</li>
+      <li><strong>Artifact Signing &amp; SLSA Provenance</strong> — Sign all model weights, Docker images, and datasets with Sigstore/cosign; generate SLSA Level 3 provenance attestations for every model artifact</li>
+      <li><strong>ML Pipeline Secret Management</strong> — Never hardcode API keys in notebooks, pipeline scripts, or environment variables; use Vault or cloud-native secret managers with dynamic secret injection</li>
+      <li><strong>Model Version Control &amp; Rapid Rollback</strong> — Tag every model version with training metadata, evaluation metrics, and security test results; maintain one-click rollback to last-known-good model state</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">Trivy — AI Container &amp; Dependency Security Scanner</div>
+      <div class="hol-desc">Scan AI Docker images, Python requirements, IaC, and Kubernetes configs for CVEs, secrets, misconfigurations, and exposed credentials. Integrates with GitHub Actions, GitLab CI, and Jenkins.</div>
+      <div class="code-block"><span class="cm"># Scan AI training image + secrets + IaC</span><br>trivy image --severity CRITICAL,HIGH <span class="cs">myrepo/ai-trainer:v1.2</span><br>trivy fs --scanners secret,vuln,misconfig <span class="cs">./</span><br>trivy config <span class="cs">./terraform/ai-infra/</span></div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">Syft + Grype — SBOM Generation for AI Artifacts</div>
+      <div class="hol-desc">Generate CycloneDX SBOMs for Python ML environments and Docker images. Continuously re-scan with Grype against CVE databases for newly disclosed vulnerabilities in PyTorch, TensorFlow, LangChain, and HuggingFace libraries.</div>
+      <div class="code-block">syft packages <span class="cs">./model-env</span> -o cyclonedx-json &gt; sbom.json<br>grype sbom:sbom.json --fail-on critical<br><span class="cm"># Blocks CI pipeline on new critical CVE in ML deps</span></div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Pattern (IBM X-Force 2026):</strong> AI-powered coding tools are accelerating software creation but occasionally introduce unvetted, vulnerable code. With supply chain attacks at a 4× increase since 2020 and CI/CD pipelines as prime targets, automated security gates in ML pipelines are no longer optional — they are the primary defense against contaminated model artifacts reaching production.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://csrc.nist.gov/publications/detail/sp/800-218/final" target="_blank" class="res-tag">NIST SSDF SP 800-218</a>
+      <a href="https://slsa.dev/" target="_blank" class="res-tag">SLSA Framework</a>
+      <a href="https://www.sigstore.dev/" target="_blank" class="res-tag">Sigstore</a>
+      <a href="https://github.com/aquasecurity/trivy" target="_blank" class="res-tag">Trivy Scanner</a>
+      <a href="https://www.checkov.io/" target="_blank" class="res-tag">Checkov IaC</a>
+      <a href="https://github.com/anchore/syft" target="_blank" class="res-tag">Syft SBOM</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D08 API SECURITY -->
+<div class="domain-card c-indigo">
+  <div class="card-top">
+    <span class="card-num">08</span>
+    <span class="card-icon">🌐</span>
+    <div class="card-title">API &amp; Integration Security</div>
+    <div class="card-subtitle">AI APIs are the primary attack surface for model extraction, injection, and abuse — every endpoint needs defense-in-depth controls.</div>
+    <div class="card-stat"><span class="cs-num">40%</span><span class="cs-text">of all IBM X-Force observed incidents in 2025 originated from vulnerability exploitation of public-facing applications — AI inference APIs are now high-priority targets</span></div>
+    <ul class="controls-list">
+      <li><strong>API Gateway with AI-Aware WAF</strong> — Deploy a WAF with AI-specific rules: prompt injection patterns, token-limit abuse, oversized context windows, and model enumeration attempts</li>
+      <li><strong>Strict Input/Output Schema Validation</strong> — Enforce JSON Schema or OpenAPI spec validation on all AI API requests; reject any payload that deviates from expected structure, type, or size bounds</li>
+      <li><strong>Adaptive Rate Limiting</strong> — Implement per-user, per-IP, per-model, and per-endpoint rate limits; use adaptive thresholds that tighten on detected extraction or abuse patterns</li>
+      <li><strong>OAuth 2.0 / OIDC with Minimal Scopes</strong> — Issue scoped bearer tokens for each AI capability; enforce short expiry, mandatory rotation, and immediate revocation on policy violation</li>
+      <li><strong>Content Security Policies</strong> — Prevent prompt injection and XSS via web-facing AI interfaces; sanitize and encode all LLM output before rendering in browsers or downstream applications</li>
+      <li><strong>Mutual TLS (mTLS) on AI Service Mesh</strong> — Enforce bidirectional certificate-based authentication between all AI microservices, vector databases, model servers, and orchestration layers via Istio/Linkerd</li>
+      <li><strong>SSRF Prevention for AI Agents</strong> — Block AI agents from making arbitrary outbound HTTP requests; whitelist permitted external endpoints; sandbox all web retrieval in isolated containers</li>
+      <li><strong>API Versioning Security</strong> — Maintain identical security controls on all active API versions; detect and block downgrade attacks to older, less-secure AI API versions</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">OWASP ZAP — AI Endpoint Penetration Testing</div>
+      <div class="hol-desc">Automate security testing against AI inference APIs. Detect authentication bypasses, rate limit gaps, injection vulnerabilities, and SSRF exposures in LLM-powered API endpoints using ZAP's API scan mode.</div>
+      <div class="code-block"><span class="cm"># API security scan against AI endpoint</span><br>docker run -t owasp/zap2docker-stable zap-api-scan.py \<br>  -t <span class="cs">https://api.yourllm.com/openapi.json</span> \<br>  -f openapi -z <span class="cs">"-config scanner.attackStrength=HIGH"</span></div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">Istio Service Mesh — mTLS for AI Microservices</div>
+      <div class="hol-desc">Enforce mutual TLS and RBAC between all AI services, vector databases, and model servers. No plaintext communication between any AI components in production environments.</div>
+      <div class="code-block"><span class="cm"># Enforce strict mTLS across AI namespace</span><br>kubectl apply -f - &lt;&lt;EOF<br><span class="ck">apiVersion</span>: security.istio.io/v1beta1<br><span class="ck">kind</span>: PeerAuthentication<br><span class="ck">spec</span>: {<span class="ck">mtls</span>: {<span class="ck">mode</span>: <span class="cs">STRICT</span>}}<br>EOF</div>
+    </div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://owasp.org/www-project-api-security/" target="_blank" class="res-tag">OWASP API Security Top 10</a>
+      <a href="https://oauth.net/2/" target="_blank" class="res-tag">OAuth 2.0</a>
+      <a href="https://www.zaproxy.org/" target="_blank" class="res-tag">OWASP ZAP</a>
+      <a href="https://istio.io/latest/docs/concepts/security/" target="_blank" class="res-tag">Istio Security</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D09 AGENTIC SECURITY -->
+<div class="domain-card c-pink">
+  <div class="card-top">
+    <span class="card-num">09</span>
+    <span class="card-icon">🤝</span>
+    <div class="card-title">Multi-Agent &amp; Agentic System Security</div>
+    <div class="card-subtitle">The fastest-growing attack surface in 2026 — AI agents with real-world tool access require their own dedicated security architecture.</div>
+    <div class="card-stat"><span class="cs-num">82:1</span><span class="cs-text">AI agents already outnumber human users in enterprise environments; OWASP published a separate Top 10 for Agentic Applications in late 2025 confirming this requires its own framework</span></div>
+    <ul class="controls-list">
+      <li><strong>Explicit Agent Permission Scoping</strong> — Define tool and resource allowlists per agent role using deny-by-default; never give agents broader permissions than the minimum required for the current task</li>
+      <li><strong>Code Execution Sandboxing</strong> — Run all agent-generated code in gVisor, Firecracker, or WASM sandboxes; restrict filesystem access, network calls, and process spawning per sandbox policy</li>
+      <li><strong>Human-in-the-Loop (HITL) Gates</strong> — Require explicit human approval before irreversible agent actions: send emails, modify production databases, make purchases, deploy infrastructure, or delete data</li>
+      <li><strong>Inter-Agent Message Signing</strong> — Sign and verify all messages between orchestrator agents and sub-agents using HMAC or asymmetric keys; reject unsigned or tampered inter-agent instructions</li>
+      <li><strong>Blast Radius Isolation</strong> — Network-segment agent execution environments; prevent any single compromised agent from accessing unrelated systems, user data, or sibling agents</li>
+      <li><strong>Full Agent Forensic Audit Trail</strong> — Log every decision, tool call, memory read/write, external API call, and credential access with causality chains; store immutably for 90+ day forensic retention</li>
+      <li><strong>Indirect Prompt Injection Defense</strong> — Sanitize all external content (retrieved web pages, emails, files, database records) before injecting into agent context; never interpret external content as trusted instructions</li>
+      <li><strong>Agent Identity Hierarchy &amp; Trust Levels</strong> — Define explicit trust tiers (orchestrator, sub-agent, tool); sub-agents cannot self-escalate permissions or directly request higher-trust actions</li>
+      <li><strong>Convergence &amp; Loop Prevention</strong> — Implement hard maximum action budgets, iteration limits, and loop detection with automatic circuit-breaker suspension of runaway agents</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">gVisor — Lightweight VM Sandbox for Agent Code</div>
+      <div class="hol-desc">Google's user-space kernel that intercepts all syscalls from agent-generated code. Prevents container escapes, filesystem traversal, unauthorized network access, and privilege escalation from LLM-generated code execution.</div>
+      <div class="code-block"><span class="cm"># Run agent-generated code in gVisor sandbox</span><br>docker run --runtime=runsc \<br>  --cap-drop=ALL --read-only \<br>  --network=none --security-opt=no-new-privileges \<br>  -v /tmp/agent-workspace:/workspace:rw \<br>  ai-agent-sandbox:latest python /workspace/agent_task.py</div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">CSA MAESTRO — Agentic AI Threat Modeling</div>
+      <div class="hol-desc">Apply the 7-layer MAESTRO model to map threats in multi-agent architectures. Released Feb 2025 specifically for systems with autonomous reasoning, tool use, and multi-agent coordination. Only framework purpose-built for agentic AI.</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident (2025–2026):</strong> Researchers documented AI-orchestrated attack campaigns where jailbroken LLMs automated 80–90% of the attack lifecycle including reconnaissance, exploitation, and credential theft. The key enabler was excessive agency — models with access to real tools and no HITL gates. Fix: CSA MAESTRO threat model + gVisor sandboxing + HITL gates on all irreversible tool calls.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://atlas.mitre.org/" target="_blank" class="res-tag">MITRE ATLAS Agentic</a>
+      <a href="https://cloudsecurityalliance.org/blog/2025/02/28/maestro-a-new-framework-for-agentic-ai-security" target="_blank" class="res-tag">CSA MAESTRO</a>
+      <a href="https://genai.owasp.org/llmrisk/llm06-excessive-agency/" target="_blank" class="res-tag">OWASP Excessive Agency</a>
+      <a href="https://gvisor.dev/" target="_blank" class="res-tag">gVisor</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D10 GOVERNANCE -->
+<div class="domain-card c-orange">
+  <div class="card-top">
+    <span class="card-num">10</span>
+    <span class="card-icon">⚖️</span>
+    <div class="card-title">Governance, Compliance &amp; Ethics</div>
+    <div class="card-subtitle">AI governance has shifted from optional to mandatory — the EU AI Act is enforced August 2026 and executives face personal liability for rogue AI actions.</div>
+    <div class="card-stat"><span class="cs-num">6%</span><span class="cs-text">of organizations have an advanced AI security strategy — yet by 2026 the first major lawsuits will hold executives personally liable for rogue AI actions (Palo Alto Networks 2026)</span></div>
+    <ul class="controls-list">
+      <li><strong>Living AI Risk Register</strong> — Document, categorize, and continuously update all AI risks with owners, likelihood scores, impact ratings, and mitigation status; integrate with enterprise GRC platforms</li>
+      <li><strong>Bias &amp; Fairness Audits</strong> — Run pre-deployment bias assessments using AIF360, Fairlearn, or Aequitas; test across all protected attribute groups; document results and mitigations in model cards</li>
+      <li><strong>EU AI Act Compliance Mapping</strong> — Classify all AI systems by risk tier; implement required controls (risk management, data governance, transparency, HITL, accuracy monitoring) before August 2026 enforcement</li>
+      <li><strong>Regulatory Crosswalk Matrix</strong> — Maintain living mapping between AI controls and GDPR, CCPA, HIPAA, EU AI Act, NIST AI RMF, FedRAMP High, CMMC, ISO 42001, and SOC 2 AI Trust criteria</li>
+      <li><strong>Model Cards &amp; Datasheets for Datasets</strong> — Publish transparent documentation for every production model: intended use, performance benchmarks, known limitations, training data provenance, and bias test results</li>
+      <li><strong>AI Vulnerability Disclosure Program (VDP)</strong> — Establish a public security vulnerability disclosure policy for AI systems; define SLAs for acknowledgment (24h), triage (72h), and remediation (30/90 days by severity)</li>
+      <li><strong>AI Ethics Review Board</strong> — Require multi-disciplinary sign-off (legal, ethics, security, business, technical) before deploying high-risk AI systems; document impact assessments per EU AI Act Article 9</li>
+      <li><strong>AI Incident Response Playbooks</strong> — Maintain documented runbooks for: model compromise, training data breach, adversarial attack, hallucination-driven harm, agent runaway, and regulatory inquiry scenarios</li>
+      <li><strong>Chief AI Risk Officer (CAIRO) Function</strong> — Establish dedicated AI risk ownership at executive level; prevent AI governance from being absorbed into IT risk without specialized expertise</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">IBM AI Fairness 360 (AIF360) — Pre-Deployment Bias Audit</div>
+      <div class="hol-desc">70+ fairness metrics and 10+ mitigation algorithms. Required by EU AI Act for high-risk AI systems before deployment. Run across all protected attribute groups and document results in model cards.</div>
+      <div class="code-block"><span class="ck">from</span> aif360.datasets <span class="ck">import</span> BinaryLabelDataset<br><span class="ck">from</span> aif360.metrics <span class="ck">import</span> BinaryLabelDatasetMetric<br><span class="ck">from</span> aif360.algorithms.preprocessing <span class="ck">import</span> Reweighing<br>metric = BinaryLabelDatasetMetric(dataset, privileged_groups=[{<span class="cs">'race'</span>:<span class="cv">1</span>}])<br>print(<span class="cs">f"Disparate Impact: {metric.disparate_impact():.3f}"</span>)<br>print(<span class="cs">f"Statistical Parity Diff: {metric.statistical_parity_difference():.3f}"</span>)</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>2026 Regulatory Shift:</strong> The EU AI Act entered enforcement in August 2025 for General Purpose AI and August 2026 for high-risk AI systems. Organizations face fines up to €35M or 7% of global revenue. The International AI Safety Report (Feb 2026) — authored by 100+ experts — confirmed that defense-in-depth is the only viable strategy, citing that no single mitigation eliminates all AI failures.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" class="res-tag">NIST AI RMF</a>
+      <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" class="res-tag">EU AI Act</a>
+      <a href="https://www.iso.org/standard/81230.html" target="_blank" class="res-tag">ISO/IEC 42001</a>
+      <a href="https://github.com/Trusted-AI/AIF360" target="_blank" class="res-tag">IBM AIF360</a>
+      <a href="https://fairlearn.org/" target="_blank" class="res-tag">Microsoft Fairlearn</a>
+    </div>
+  </div>
+</div>
+
+<!-- ▸ D11 SUPPLY CHAIN -->
+<div class="domain-card c-blue">
+  <div class="card-top">
+    <span class="card-num">11</span>
+    <span class="card-icon">🧰</span>
+    <div class="card-title">Supply Chain &amp; Third-Party Security</div>
+    <div class="card-subtitle">AI supply chains are uniquely vulnerable — malicious model weights, poisoned datasets, and compromised ML libraries are active threats in 2026.</div>
+    <div class="card-stat"><span class="cs-num">98%</span><span class="cs-text">of organizations use at least one third-party SaaS application with embedded AI capabilities, yet fewer than 30% have a formal AI vendor risk assessment process (Practical DevSecOps 2026)</span></div>
+    <ul class="controls-list">
+      <li><strong>Third-Party Model Vetting</strong> — Security-review all pre-trained and fine-tuned models from HuggingFace, Ollama, and other registries using ModelScan; verify provenance before any production use</li>
+      <li><strong>Open Source ML Dependency Scanning</strong> — Continuously scan PyTorch, TensorFlow, LangChain, LlamaIndex, HuggingFace Transformers, and all ML libraries for known CVEs using pip-audit and Grype</li>
+      <li><strong>Training Data Provenance Verification</strong> — Hash-verify all training datasets against known clean versions; reject any dataset that cannot be cryptographically traced to a trusted source</li>
+      <li><strong>AI Cloud Vendor Risk Assessment</strong> — Evaluate AWS Bedrock, Azure OpenAI, Google Vertex AI, Anthropic Claude API, and Cohere for data retention policies, SOC 2 AI controls, and geographic data processing compliance</li>
+      <li><strong>ML License Compliance Scanning</strong> — Scan all model and dataset licenses (MIT, Apache, GPL, RAIL, CC-BY, non-commercial) for compatibility with commercial use; flag any copyleft or restricted licenses</li>
+      <li><strong>Typosquatting &amp; Malicious Package Detection</strong> — Monitor PyPI, npm, and Conda for packages targeting popular ML libraries; use package hash verification and maintainer identity verification</li>
+      <li><strong>Continuous Model Weight Security Scanning</strong> — Re-scan all production models monthly with ModelScan as new exploit signatures are added; immediately quarantine any model flagged after initial deployment</li>
+      <li><strong>AI API Dependency Inventory</strong> — Maintain a complete, continuously updated inventory of all third-party AI APIs, SDKs, model providers, and data sources; assess breach impact radius for each dependency</li>
+    </ul>
+  </div>
+  <div class="card-mid">
+    <div class="sub-label">🛠 Hands-On</div>
+    <div class="hol-item">
+      <div class="hol-name">ProtectAI ModelScan + NB Defense</div>
+      <div class="hol-desc">ModelScan detects malicious payloads in model weights. NB Defense scans Jupyter notebooks for secrets, vulnerabilities, and security misconfigurations in ML code. Both critical for secure ML development workflows.</div>
+      <div class="code-block"><span class="cm"># Full AI supply chain security scan</span><br>modelscan scan --hf <span class="cs">meta-llama/Meta-Llama-3-8B</span><br>pip install nb-defense &amp;&amp; nbdefense scan ./notebooks/<br>pip-audit -r requirements.txt --fix --output json &gt; pip-audit-results.json</div>
+    </div>
+    <div class="hol-item">
+      <div class="hol-name">SLSA Level 3 — Model Artifact Provenance</div>
+      <div class="hol-desc">Generate cryptographically verifiable provenance attestations for all model artifacts using GitHub Actions + Sigstore. Enables consumers to verify that model weights were built from a specific, unmodified source without compromise.</div>
+    </div>
+    <div class="sub-label">⚡ Real-World Scenario</div>
+    <div class="scenario-box"><strong>Incident (2025):</strong> Researchers identified 200+ malicious model repositories on HuggingFace containing pickle payloads that executed arbitrary code silently on download. Additionally, the commercialization of AI-assisted cybercrime saw prompt playbooks sold on the dark web showing attackers how to create and distribute poisoned models. Fix: ModelScan + signed model provenance + automated supply chain monitoring.</div>
+  </div>
+  <div class="card-foot">
+    <div class="sub-label">📌 Resources</div>
+    <div class="res-tags">
+      <a href="https://github.com/protectai/modelscan" target="_blank" class="res-tag">ProtectAI ModelScan</a>
+      <a href="https://slsa.dev/" target="_blank" class="res-tag">SLSA Framework</a>
+      <a href="https://www.cisa.gov/sbom" target="_blank" class="res-tag">CISA SBOM</a>
+      <a href="https://huggingface.co/docs/hub/security" target="_blank" class="res-tag">HuggingFace Security</a>
+      <a href="https://pypi.org/project/pip-audit/" target="_blank" class="res-tag">pip-audit</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- /domains-grid -->
+
+
+<!-- ══════════════════════════════════
+     SECTION 02 — OWASP THREAT MATRIX
+     ══════════════════════════════════ -->
+<div id="threats" class="section-header">
+  <span class="sec-num">02</span>
+  <div class="sec-text">
+    <div class="sec-title">OWASP LLM Top 10 · 2025 Threat Matrix</div>
+    <div class="sec-desc">Updated 2025 edition with RAG, agentic AI, and vector embedding attack surfaces. Prompt injection is #1 for the second consecutive year. Each entry links to official OWASP documentation with attack scenarios and mitigations.</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>ID</th><th>Threat Class</th><th>Risk</th><th>Attack Vectors</th><th>Primary Controls</th><th>Ref</th></tr></thead>
+  <tbody>
+    <tr><td>LLM01</td><td>Prompt Injection</td><td><span class="badge b-crit">Critical</span></td><td><div class="atags"><span class="atag">Direct injection</span><span class="atag">Indirect injection</span><span class="atag">Context hijacking</span><span class="atag">MCP manipulation</span></div></td><td>Input sanitization, context isolation, instruction hierarchy, spotlighting defenses, output schemas</td><td><a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/" target="_blank" class="tlink">LLM01</a></td></tr>
+    <tr><td>LLM02</td><td>Sensitive Information Disclosure</td><td><span class="badge b-crit">Critical</span></td><td><div class="atags"><span class="atag">Training data extraction</span><span class="atag">PII leakage</span><span class="atag">Credential exposure</span></div></td><td>PII detection pipelines, output redaction, deny-by-default data access, Presidio integration</td><td><a href="https://genai.owasp.org/llmrisk/llm02-sensitive-information-disclosure/" target="_blank" class="tlink">LLM02</a></td></tr>
+    <tr><td>LLM03</td><td>Supply Chain Vulnerabilities</td><td><span class="badge b-high">High</span></td><td><div class="atags"><span class="atag">Malicious base models</span><span class="atag">Poisoned datasets</span><span class="atag">Typosquatting</span></div></td><td>ModelScan, SBOMs, model signing, vendor vetting, pip-audit, dependency scanning</td><td><a href="https://genai.owasp.org/llmrisk/llm03-supply-chain/" target="_blank" class="tlink">LLM03</a></td></tr>
+    <tr><td>LLM04</td><td>Data and Model Poisoning</td><td><span class="badge b-crit">Critical</span></td><td><div class="atags"><span class="atag">Label flipping</span><span class="atag">Backdoor injection</span><span class="atag">Trigger implanting</span><span class="atag">RAG poisoning</span></div></td><td>Data provenance verification, statistical anomaly detection, hash verification, distribution monitoring, dataset isolation</td><td><a href="https://genai.owasp.org/llmrisk/llm04-data-and-model-poisoning/" target="_blank" class="tlink">LLM04</a></td></tr>
+    <tr><td>LLM05</td><td>Improper Output Handling</td><td><span class="badge b-high">High</span></td><td><div class="atags"><span class="atag">XSS via LLM output</span><span class="atag">SQL injection</span><span class="atag">Code execution</span><span class="atag">Path traversal</span></div></td><td>Output validation, HTML/SQL encoding, JSON schema enforcement, sandboxed code execution, never trust LLM output</td><td><a href="https://genai.owasp.org/llmrisk/llm05-improper-output-handling/" target="_blank" class="tlink">LLM05</a></td></tr>
+    <tr><td>LLM06</td><td>Excessive Agency</td><td><span class="badge b-crit">Critical</span></td><td><div class="atags"><span class="atag">Privilege escalation</span><span class="atag">Unauthorized actions</span><span class="atag">Agent runaway</span><span class="atag">Loop exploit</span></div></td><td>Tool allowlists, HITL gates, permission scoping, blast radius limits, action budgets, gVisor sandboxing</td><td><a href="https://genai.owasp.org/llmrisk/llm06-excessive-agency/" target="_blank" class="tlink">LLM06</a></td></tr>
+    <tr><td>LLM07</td><td>System Prompt Leakage</td><td><span class="badge b-high">High</span></td><td><div class="atags"><span class="atag">Prompt extraction</span><span class="atag">Instruction theft</span><span class="atag">Secrets disclosure</span><span class="atag">Business logic exposure</span></div></td><td>Prompt confidentiality testing (PyRIT), no secrets in prompts, output filtering, adversarial extraction test gates</td><td><a href="https://genai.owasp.org/llmrisk/llm07-system-prompt-leakage/" target="_blank" class="tlink">LLM07</a></td></tr>
+    <tr><td>LLM08</td><td>Vector &amp; Embedding Weaknesses</td><td><span class="badge b-high">High</span></td><td><div class="atags"><span class="atag">Embedding poisoning</span><span class="atag">Vector DB injection</span><span class="atag">RAG manipulation</span><span class="atag">Similarity attacks</span></div></td><td>Vector DB RBAC, embedding integrity validation, cosine similarity monitoring, retrieval filtering, chunk provenance tracking</td><td><a href="https://genai.owasp.org/llmrisk/llm08-vector-and-embedding-weaknesses/" target="_blank" class="tlink">LLM08</a></td></tr>
+    <tr><td>LLM09</td><td>Misinformation</td><td><span class="badge b-med">Medium</span></td><td><div class="atags"><span class="atag">Hallucination</span><span class="atag">Fabricated citations</span><span class="atag">Confidence inflation</span><span class="atag">Domain errors</span></div></td><td>Authoritative RAG grounding, confidence scoring, citation verification, mandatory disclaimers, human review thresholds</td><td><a href="https://genai.owasp.org/llmrisk/llm09-misinformation/" target="_blank" class="tlink">LLM09</a></td></tr>
+    <tr><td>LLM10</td><td>Unbounded Consumption</td><td><span class="badge b-high">High</span></td><td><div class="atags"><span class="atag">Context stuffing</span><span class="atag">Token flooding</span><span class="atag">API cost exhaustion</span><span class="atag">Compute DoS</span></div></td><td>Hard token/compute budgets, adaptive rate limiting, query complexity analysis, cost anomaly alerts, circuit breakers</td><td><a href="https://genai.owasp.org/llmrisk/llm10-unbounded-consumption/" target="_blank" class="tlink">LLM10</a></td></tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SECTION 03 — TOOLS & LABS
+     ══════════════════════════════════ -->
+<div id="tools" class="section-header">
+  <span class="sec-num">03</span>
+  <div class="sec-text">
+    <div class="sec-title">Tools, Labs &amp; Open-Source Arsenal</div>
+    <div class="sec-desc">15 battle-tested tools for practical AI security implementation, red teaming, monitoring, and compliance — all with install commands and integration guidance.</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="tools-grid">
+  <a href="https://github.com/microsoft/PyRIT" target="_blank" class="tool-card" style="background:var(--blue-bg);border-color:var(--blue-b)"><div class="tc-type" style="color:var(--blue)">Microsoft · Red Team Framework</div><div class="tc-name" style="color:var(--blue-d)">PyRIT — Python Risk Identification Toolkit</div><div class="tc-desc">Microsoft's internal LLM red team tool open-sourced in 2024. Automates single and multi-turn Crescendo attacks, jailbreak generation, scoring engines. Used by Microsoft AI Red Team since 2022 for testing Copilot and Azure AI systems.</div><div class="tc-code">pip install pyrit<br>from pyrit.orchestrator import CrescendoOrchestrator</div><div class="tc-url">github.com/microsoft/PyRIT</div></a>
+
+  <a href="https://github.com/leondz/garak" target="_blank" class="tool-card" style="background:var(--violet-bg);border-color:var(--violet-b)"><div class="tc-type" style="color:var(--violet)">Open Source · LLM Fuzzer</div><div class="tc-name" style="color:var(--violet-d)">Garak — LLM Vulnerability Scanner</div><div class="tc-desc">100+ probe modules testing jailbreaks, DAN exploits, PII extraction, encoding bypasses, and hallucination amplification. Supports GPT-4, Claude, Llama, Mistral. Generates detailed vulnerability reports with CVSS-style severity scores.</div><div class="tc-code">pip install garak<br>python -m garak --model_type openai --probes all</div><div class="tc-url">github.com/leondz/garak</div></a>
+
+  <a href="https://www.promptfoo.dev/" target="_blank" class="tool-card" style="background:var(--green-bg);border-color:var(--green-b)"><div class="tc-type" style="color:var(--green)">Open Source · CI/CD Testing</div><div class="tc-name" style="color:var(--green-d)">Promptfoo — LLM Red Team &amp; Compliance</div><div class="tc-desc">Automated LLM evaluation with OWASP LLM Top 10 compliance mapping. Runs prompt injection, jailbreak, PII leakage, and RAG poisoning tests. CI/CD native — blocks deployments on detected regressions. Used at Spotify, Twilio, Anthropic.</div><div class="tc-code">npx promptfoo@latest redteam init<br>npx promptfoo@latest redteam run</div><div class="tc-url">promptfoo.dev</div></a>
+
+  <a href="https://github.com/guardrails-ai/guardrails" target="_blank" class="tool-card" style="background:var(--teal-bg);border-color:var(--teal-b)"><div class="tc-type" style="color:var(--teal)">Open Source · Runtime Safety</div><div class="tc-name" style="color:var(--teal-d)">Guardrails AI — LLM Output Validation</div><div class="tc-desc">50+ validators on Guardrails Hub for PII detection, toxic content, hallucination, structural validation. Wraps any LLM call as middleware. Integrates with OpenAI, Anthropic, LangChain. Deploy in API gateway or application layer.</div><div class="tc-code">pip install guardrails-ai<br>guardrailsrc hub install hub://guardrails/detect_pii</div><div class="tc-url">github.com/guardrails-ai/guardrails</div></a>
+
+  <a href="https://github.com/protectai/modelscan" target="_blank" class="tool-card" style="background:var(--rose-bg);border-color:var(--rose-b)"><div class="tc-type" style="color:var(--rose)">ProtectAI · Supply Chain</div><div class="tc-name" style="color:var(--rose-d)">ModelScan — Model Weight Security Scanner</div><div class="tc-desc">Detects malicious code in pickle, safetensors, ONNX, Keras, and TensorFlow SavedModel files. Prevents arbitrary code execution from downloaded model weights. Critical before any HuggingFace model hits production. Runs in seconds.</div><div class="tc-code">pip install modelscan<br>modelscan scan --hf meta-llama/Meta-Llama-3-8B</div><div class="tc-url">github.com/protectai/modelscan</div></a>
+
+  <a href="https://github.com/microsoft/presidio" target="_blank" class="tool-card" style="background:var(--amber-bg);border-color:var(--amber-b)"><div class="tc-type" style="color:var(--amber)">Microsoft · Privacy</div><div class="tc-name" style="color:var(--amber-d)">Presidio — PII Detection &amp; Anonymization</div><div class="tc-desc">Production-grade PII engine. Detects 40+ entity types (SSN, PAN, emails, medical IDs, names) across 15+ languages. Used in Microsoft Azure Cognitive Services. Deploy as pre-ingestion training data gate and post-generation output filter.</div><div class="tc-code">pip install presidio-analyzer presidio-anonymizer<br>from presidio_analyzer import AnalyzerEngine</div><div class="tc-url">github.com/microsoft/presidio</div></a>
+
+  <a href="https://github.com/Trusted-AI/AIF360" target="_blank" class="tool-card" style="background:var(--cyan-bg);border-color:var(--cyan-b)"><div class="tc-type" style="color:var(--cyan)">IBM · Fairness &amp; Bias</div><div class="tc-name" style="color:var(--cyan-d)">AI Fairness 360 (AIF360)</div><div class="tc-desc">70+ fairness metrics, 10+ bias mitigation algorithms. Required for EU AI Act high-risk AI compliance. Run before every production deployment. Generates detailed fairness reports across protected groups. Used at IBM, Citibank, and in government AI deployments.</div><div class="tc-code">pip install aif360<br>from aif360.metrics import BinaryLabelDatasetMetric</div><div class="tc-url">github.com/Trusted-AI/AIF360</div></a>
+
+  <a href="https://github.com/aquasecurity/trivy" target="_blank" class="tool-card" style="background:var(--green-bg);border-color:var(--green-b)"><div class="tc-type" style="color:var(--green)">Aqua Security · DevSecOps</div><div class="tc-name" style="color:var(--green-d)">Trivy — AI Container Security Scanner</div><div class="tc-desc">Scans AI Docker images, Python deps, Terraform, Kubernetes, and Helm for CVEs, secrets, and misconfigurations. Detects vulnerabilities in PyTorch, TensorFlow, HuggingFace Transformers. GitHub Actions native. Integrates with Harbor registry.</div><div class="tc-code">trivy image --severity CRITICAL,HIGH ai-trainer:v1<br>trivy fs --scanners secret,vuln,misconfig ./</div><div class="tc-url">github.com/aquasecurity/trivy</div></a>
+
+  <a href="https://github.com/anchore/syft" target="_blank" class="tool-card" style="background:var(--indigo-bg);border-color:var(--indigo-b)"><div class="tc-type" style="color:var(--indigo)">Anchore · SBOM</div><div class="tc-name" style="color:var(--indigo-d)">Syft + Grype — AI SBOM Generation</div><div class="tc-desc">Syft generates CycloneDX/SPDX SBOMs for Python environments, Docker images, and model directories. Grype continuously re-scans SBOMs against NVD for newly disclosed CVEs in ML dependencies. Required for CISA SBOM compliance.</div><div class="tc-code">syft packages ./model-env -o cyclonedx-json > sbom.json<br>grype sbom:sbom.json --fail-on critical</div><div class="tc-url">github.com/anchore/syft</div></a>
+
+  <a href="https://opendp.org/" target="_blank" class="tool-card" style="background:var(--pink-bg);border-color:var(--pink-b)"><div class="tc-type" style="color:var(--pink)">Harvard · Differential Privacy</div><div class="tc-name" style="color:var(--pink-d)">OpenDP — Differential Privacy Library</div><div class="tc-desc">Formally verified differential privacy library from Harvard Privacy Tools Project. Implements Laplace, Gaussian, and Exponential mechanisms. Used by Apple, LinkedIn, and US Census Bureau for production DP deployments in ML systems.</div><div class="tc-code">pip install opendp<br>from opendp.measurements import make_laplace_mechanism</div><div class="tc-url">opendp.org</div></a>
+
+  <a href="https://www.evidentlyai.com/" target="_blank" class="tool-card" style="background:var(--orange-bg);border-color:var(--orange-b)"><div class="tc-type" style="color:var(--orange)">Evidently AI · Monitoring</div><div class="tc-name" style="color:var(--orange-d)">Evidently AI — ML Model Monitoring</div><div class="tc-desc">Statistical drift, data quality, and performance monitoring for production AI. Generates interactive HTML reports and Grafana-compatible metrics. Detect training data poisoning via distribution shift. Integrates with MLflow and DVC.</div><div class="tc-code">pip install evidently<br>from evidently.metric_preset import DataDriftPreset</div><div class="tc-url">evidentlyai.com</div></a>
+
+  <a href="https://github.com/microsoft/AI-Red-Teaming-Playground-Labs" target="_blank" class="tool-card" style="background:var(--violet-bg);border-color:var(--violet-b)"><div class="tc-type" style="color:var(--violet)">Microsoft · Hands-On Labs</div><div class="tc-name" style="color:var(--violet-d)">MSFT AI Red Teaming Playground Labs</div><div class="tc-desc">13+ free Jupyter notebook labs: prompt injection, Crescendo multi-turn, indirect injection, guardrail bypass, and PyRIT automation. Referenced in Microsoft Learn AI Red Team 101 series. Presented at Microsoft Build May 2025.</div><div class="tc-code">git clone github.com/microsoft/AI-Red-Teaming-Playground-Labs<br>jupyter notebook Lab01_PromptInjection.ipynb</div><div class="tc-url">github.com/microsoft/AI-Red-Teaming-Playground-Labs</div></a>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SECTION 04 — CERTIFICATIONS
+     ══════════════════════════════════ -->
+<div id="certs" class="section-header">
+  <span class="sec-num">04</span>
+  <div class="sec-text">
+    <div class="sec-title">Certifications &amp; Training Programs</div>
+    <div class="sec-desc">Hands-on, lab-based AI security certifications. AI red-teaming demand is projected to surge 35% by 2028 with almost no supply — these programs build that supply.</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="cert-grid">
+  <a href="https://www.sans.org/cyber-security-courses/ai-security-principles-practices" target="_blank" class="cert-card" style="background:var(--blue-bg);border-color:var(--blue-b)"><div class="cert-org" style="color:var(--blue)">SANS Institute</div><div class="cert-name" style="color:var(--blue-d)">SEC411: AI Security Principles &amp; Practices</div><div class="cert-scope">18+ hours, 5 labs, 100+ tasks covering prompt injection, jailbreaking, RAG manipulation, MCP security, agentic AI defense. Living curriculum updated continuously throughout 4-month access. No prior AI experience required.</div><div class="cert-meta"><span class="cmeta" style="background:#dbeafe;color:#1d4ed8">OnDemand</span><span class="cmeta" style="background:#dcfce7;color:#15803d">All Levels</span><span class="cmeta" style="background:#fef9c3;color:#a16207">4-Month Window</span></div></a>
+
+  <a href="https://www.sans.org/cyber-security-courses/ai-security-automation" target="_blank" class="cert-card" style="background:var(--violet-bg);border-color:var(--violet-b)"><div class="cert-org" style="color:var(--violet)">SANS Institute</div><div class="cert-name" style="color:var(--violet-d)">SEC598: AI Security Automation Red/Blue/Purple</div><div class="cert-scope">Advanced course: GenAI, agentic automation, SOAR, Terraform, cloud-native detection. Builds AI-driven SOC pipelines. LLM-powered threat detection and RAG-based investigation agents. GIAC certification available (GSEC / GAIC).</div><div class="cert-meta"><span class="cmeta" style="background:#ede9fe;color:#6d28d9">Advanced</span><span class="cmeta" style="background:#fce7f3;color:#be185d">GIAC Cert</span></div></a>
+
+  <a href="https://www.sans.org/cyber-security-courses/applied-data-science-machine-learning" target="_blank" class="cert-card" style="background:var(--teal-bg);border-color:var(--teal-b)"><div class="cert-org" style="color:var(--teal)">SANS Institute</div><div class="cert-name" style="color:var(--teal-d)">SEC595: Applied Data Science &amp; AI/ML for Security</div><div class="cert-scope">30+ hands-on labs, 70% practical. Statistical models, neural networks, anomaly detection, malware classification, threat hunting with Python and TensorFlow. GMLE (GIAC Machine Learning Engineer) certification prep.</div><div class="cert-meta"><span class="cmeta" style="background:#ccfbf1;color:#0f766e">Intermediate+</span><span class="cmeta" style="background:#fef9c3;color:#a16207">GMLE Cert Prep</span></div></a>
+
+  <a href="https://www.practical-devsecops.com/certified-ai-security-professional/" target="_blank" class="cert-card" style="background:var(--rose-bg);border-color:var(--rose-b)"><div class="cert-org" style="color:var(--rose)">Practical DevSecOps</div><div class="cert-name" style="color:var(--rose-d)">CAISP — Certified AI Security Professional</div><div class="cert-scope">Browser-based labs covering LLM vulnerability mitigation, AI supply chain attacks, MITRE ATLAS defenses, incident response playbooks. 30+ guided exercises. 6-hour lab-based exam. Recommended by Deloitte Cybersecurity Sr. Managers.</div><div class="cert-meta"><span class="cmeta" style="background:#fee2e2;color:#b91c1c">Lab Exam</span><span class="cmeta" style="background:#dcfce7;color:#15803d">Browser Labs</span><span class="cmeta" style="background:#fce7f3;color:#be185d">3yr Access</span></div></a>
+
+  <a href="https://learn.microsoft.com/en-us/security/ai-red-team/training" target="_blank" class="cert-card" style="background:var(--cyan-bg);border-color:var(--cyan-b)"><div class="cert-org" style="color:var(--cyan)">Microsoft Learn — FREE</div><div class="cert-name" style="color:var(--cyan-d)">AI Red Teaming 101 Series</div><div class="cert-scope">10-episode hands-on series from Microsoft's AI Red Team (released July 2025). Prompt injection, multi-turn adversarial attacks, PyRIT automation, deepfake defenses, and real-world case studies from production Microsoft AI systems. Free, self-paced.</div><div class="cert-meta"><span class="cmeta" style="background:#cffafe;color:#0e7490">Free</span><span class="cmeta" style="background:#dbeafe;color:#1d4ed8">Self-Paced</span></div></a>
+
+  <a href="https://www.immersivelabs.com/ai/ai-hands-on-labs" target="_blank" class="cert-card" style="background:var(--green-bg);border-color:var(--green-b)"><div class="cert-org" style="color:var(--green)">Immersive Labs</div><div class="cert-name" style="color:var(--green-d)">Secure AI Labs Platform</div><div class="cert-scope">Sandboxed labs for Claude Code, Codex CLI, OWASP LLM risks. Fully isolated — zero exposure to production systems. Maps progress to OWASP LLM frameworks. Generates board-ready benchmark reports for CISO reporting.</div><div class="cert-meta"><span class="cmeta" style="background:#dcfce7;color:#15803d">Enterprise</span><span class="cmeta" style="background:#bbf7d0;color:#14532d">Sandboxed</span></div></a>
+
+  <a href="https://cloudsecurityalliance.org/education/ccsp" target="_blank" class="cert-card" style="background:var(--amber-bg);border-color:var(--amber-b)"><div class="cert-org" style="color:var(--amber)">Cloud Security Alliance</div><div class="cert-name" style="color:var(--amber-d)">CSA Trusted AI Safety Program</div><div class="cert-scope">Partnership with Northeastern University. Ethical AI, data governance, MAESTRO agentic AI security (Feb 2025 launch), EU AI Act compliance, cloud AI shared responsibility. Self-paced with structured assessment.</div><div class="cert-meta"><span class="cmeta" style="background:#fef9c3;color:#a16207">Self-Paced</span><span class="cmeta" style="background:#fed7aa;color:#7c2d12">2025 Launch</span></div></a>
+
+  <a href="https://www.sisainfosec.com/blogs/ai-security-workshop-2025/" target="_blank" class="cert-card" style="background:var(--pink-bg);border-color:var(--pink-b)"><div class="cert-org" style="color:var(--pink)">SISA / Praxis</div><div class="cert-name" style="color:var(--pink-d)">CSPAI — Certified Security Professional for AI</div><div class="cert-scope">2.5-day intensive: AI deployment security, regulatory compliance (EU AI Act + NIST AI RMF), OWASP LLM attacks, data poisoning labs, MITRE ATLAS threat modeling. ANAB-accredited exam. 98% reported pass rate.</div><div class="cert-meta"><span class="cmeta" style="background:#fce7f3;color:#be185d">ANAB Accredited</span><span class="cmeta" style="background:#fecdd3;color:#9f1239">In-Person</span></div></a>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SECTION 05 — RESOURCE NODES
+     ══════════════════════════════════ -->
+<div id="nodes" class="section-header">
+  <span class="sec-num">05</span>
+  <div class="sec-text">
+    <div class="sec-title">Reference Resource Nodes</div>
+    <div class="sec-desc">30+ verified primary source links to official documentation, standards bodies, open-source tools, and research publications. All verified April 2026.</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="nodes-grid">
+  <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" class="node-card" style="background:var(--blue-bg);border-color:var(--blue-b)"><div class="n-tag" style="color:var(--blue)">NIST · Core Framework</div><div class="n-name" style="color:var(--blue-d)">NIST AI RMF 1.0 + Critical Infra Profile</div><div class="n-desc">Govern, Map, Measure, Manage lifecycle. Updated April 7, 2026 with a new profile for Trustworthy AI in Critical Infrastructure. De facto global AI governance standard referenced by 100% of enterprise AI crosswalks.</div><div class="n-url">nist.gov/itl/ai-risk-management-framework</div></a>
+
+  <a href="https://csrc.nist.gov/publications/detail/ai/100/1/final" target="_blank" class="node-card" style="background:var(--blue-bg);border-color:var(--blue-b)"><div class="n-tag" style="color:var(--blue)">NIST · GenAI Profile</div><div class="n-name" style="color:var(--blue-d)">NIST AI 600-1 GenAI Risk Profile</div><div class="n-desc">Generative AI-specific risk management profile (July 2024). Addresses hallucination, data poisoning, model inversion, and autonomous agent risks not covered by the base AI RMF. Required reading for all GenAI deployments.</div><div class="n-url">csrc.nist.gov/publications/detail/ai/100/1/final</div></a>
+
+  <a href="https://genai.owasp.org/llm-top-10/" target="_blank" class="node-card" style="background:var(--rose-bg);border-color:var(--rose-b)"><div class="n-tag" style="color:var(--rose)">OWASP · LLM Vulnerabilities</div><div class="n-name" style="color:var(--rose-d)">OWASP LLM Top 10 · 2025</div><div class="n-desc">2025 edition adds vector embedding weaknesses, system prompt leakage, and agentic AI risks. Prompt injection #1 for the second year. The industry standard for LLM application security testing and compliance verification.</div><div class="n-url">genai.owasp.org/llm-top-10</div></a>
+
+  <a href="https://atlas.mitre.org/" target="_blank" class="node-card" style="background:var(--violet-bg);border-color:var(--violet-b)"><div class="n-tag" style="color:var(--violet)">MITRE · Adversarial ML</div><div class="n-name" style="color:var(--violet-d)">MITRE ATLAS</div><div class="n-desc">Adversarial Threat Landscape for AI Systems — comprehensive TTP matrix for ML attacks. Bridges traditional SOC operations with AI-specific threat hunting. Maps to SIEM detection rules and red team exercise planning.</div><div class="n-url">atlas.mitre.org</div></a>
+
+  <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" class="node-card" style="background:var(--pink-bg);border-color:var(--pink-b)"><div class="n-tag" style="color:var(--pink)">EU Law · Binding Regulation</div><div class="n-name" style="color:var(--pink-d)">EU AI Act</div><div class="n-desc">Enforced August 2026 for high-risk AI systems. Fines up to €35M or 7% of global annual revenue. Requires risk management, data governance, transparency, human oversight, and accuracy/robustness documentation.</div><div class="n-url">digital-strategy.ec.europa.eu</div></a>
+
+  <a href="https://www.iso.org/standard/81230.html" target="_blank" class="node-card" style="background:var(--green-bg);border-color:var(--green-b)"><div class="n-tag" style="color:var(--green)">ISO · Management System</div><div class="n-name" style="color:var(--green-d)">ISO/IEC 42001:2023</div><div class="n-desc">First international AI Management System standard. Certifiable via external audit. Forms the governance backbone for EU AI Act technical documentation. Aligns with NIST AI RMF and maps to ISO 27001 security controls.</div><div class="n-url">iso.org/standard/81230.html</div></a>
+
+  <a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" target="_blank" class="node-card" style="background:var(--cyan-bg);border-color:var(--cyan-b)"><div class="n-tag" style="color:var(--cyan)">NIST · Federal Controls</div><div class="n-name" style="color:var(--cyan-d)">NIST SP 800-53 Rev 5</div><div class="n-desc">800+ security controls with AI overlay mapping SC, RA, SI, SA, CA families to ML pipeline security. Required for FedRAMP-authorized AI deployments. Kenny's active Secret Clearance work directly applies these controls to FNMS AI integrations.</div><div class="n-url">csrc.nist.gov/publications/detail/sp/800-53/rev-5/final</div></a>
+
+  <a href="https://www.ibm.com/think/x-force/threat-intelligence-index-2026-securing-identities-ai-detection-risk-management" target="_blank" class="node-card" style="background:var(--amber-bg);border-color:var(--amber-b)"><div class="n-tag" style="color:var(--amber)">IBM · Threat Intelligence</div><div class="n-name" style="color:var(--amber-d)">IBM X-Force Threat Intelligence Index 2026</div><div class="n-desc">Released Feb 25, 2026. Documents 44% rise in public-facing app attacks, 49% surge in ransomware groups, 4× supply chain compromises. Identifies AI-enabled vulnerability discovery as the primary accelerant for attackers in 2025.</div><div class="n-url">ibm.com/x-force/threat-intelligence-index-2026</div></a>
+
+  <a href="https://slsa.dev/" target="_blank" class="node-card" style="background:var(--indigo-bg);border-color:var(--indigo-b)"><div class="n-tag" style="color:var(--indigo)">Google · Supply Chain</div><div class="n-name" style="color:var(--indigo-d)">SLSA Framework</div><div class="n-desc">Supply chain Levels for Software Artifacts — 4-level provenance framework. Achievable via GitHub Actions + Sigstore. Level 3 provides cryptographic proof of model artifact build process, protecting against tampered model weights in CI/CD.</div><div class="n-url">slsa.dev</div></a>
+
+  <a href="https://www.nist.gov/publications/zero-trust-architecture" target="_blank" class="node-card" style="background:var(--teal-bg);border-color:var(--teal-b)"><div class="n-tag" style="color:var(--teal)">NIST · Zero Trust</div><div class="n-name" style="color:var(--teal-d)">NIST SP 800-207 Zero Trust Architecture</div><div class="n-desc">7 tenets of ZTA applied to AI workload isolation, agent access controls, and inference endpoint security. Zero Trust reduced average breach costs by $1.76M in 2025 (IBM CODB) — foundational investment for any AI security program.</div><div class="n-url">nist.gov/publications/zero-trust-architecture</div></a>
+
+  <a href="https://cloudsecurityalliance.org/research/topics/artificial-intelligence/" target="_blank" class="node-card" style="background:var(--orange-bg);border-color:var(--orange-b)"><div class="n-tag" style="color:var(--orange)">CSA · Cloud AI + Agentic</div><div class="n-name" style="color:var(--orange-d)">CSA AI Safety &amp; MAESTRO Framework</div><div class="n-desc">CSA's AI security hub including MAESTRO — the only framework purpose-built for agentic AI threat modeling (Feb 2025). 7-layer threat model for autonomous agent architectures. Essential for Flamoral and multi-agent platform security design.</div><div class="n-url">cloudsecurityalliance.org/ai</div></a>
+
+  <a href="https://www.insideprivacy.com/artificial-intelligence/international-ai-safety-report-2026-examines-ai-capabilities-risks-and-safeguards/" target="_blank" class="node-card" style="background:var(--rose-bg);border-color:var(--rose-b)"><div class="n-tag" style="color:var(--rose)">Global · Safety Report</div><div class="n-name" style="color:var(--rose-d)">International AI Safety Report 2026</div><div class="n-desc">Published Feb 3, 2026. Largest global AI safety collaboration — 100+ AI experts, 30+ countries. Confirms defense-in-depth as the required approach; states no single mitigation eliminates all AI failures. Foundational evidence base for policymakers.</div><div class="n-url">insideprivacy.com/international-ai-safety-report-2026</div></a>
+
+  <a href="https://owasp.org/www-project-ai-security-and-privacy-guide/" target="_blank" class="node-card" style="background:var(--violet-bg);border-color:var(--violet-b)"><div class="n-tag" style="color:var(--violet)">OWASP · AI Privacy</div><div class="n-name" style="color:var(--violet-d)">OWASP AI Security &amp; Privacy Guide</div><div class="n-desc">Comprehensive guidance on AI privacy risks, data governance, privacy-preserving ML techniques, and the intersection of traditional AppSec and AI security. Covers federated learning, differential privacy, and model auditing for security teams.</div><div class="n-url">owasp.org/www-project-ai-security-and-privacy-guide</div></a>
+
+  <a href="https://csrc.nist.gov/publications/detail/sp/800-218/final" target="_blank" class="node-card" style="background:var(--blue-bg);border-color:var(--blue-b)"><div class="n-tag" style="color:var(--blue)">NIST · DevSecOps</div><div class="n-name" style="color:var(--blue-d)">NIST SSDF SP 800-218 + SP 800-218A</div><div class="n-desc">Secure Software Development Framework for ML pipelines. SP 800-218A extends this with a GenAI Community Profile (July 2024). Maps to EU AI Act Article 15 technical requirements for accuracy, robustness, and cybersecurity in high-risk AI.</div><div class="n-url">csrc.nist.gov/publications/detail/sp/800-218/final</div></a>
+
+  <a href="https://www.cisa.gov/sbom" target="_blank" class="node-card" style="background:var(--green-bg);border-color:var(--green-b)"><div class="n-tag" style="color:var(--green)">CISA · Supply Chain</div><div class="n-name" style="color:var(--green-d)">CISA SBOM Guidance</div><div class="n-desc">Authoritative SBOM guidance covering format standards (SPDX, CycloneDX), minimum required elements, and implementation recommendations. Directly applicable to AI model supply chain security and FedRAMP AI system authorization.</div><div class="n-url">cisa.gov/sbom</div></a>
+
+  <a href="https://github.com/microsoft/PyRIT" target="_blank" class="node-card" style="background:var(--rose-bg);border-color:var(--rose-b)"><div class="n-tag" style="color:var(--rose)">Microsoft · Open Source Tool</div><div class="n-name" style="color:var(--rose-d)">PyRIT — Python Risk Identification Toolkit</div><div class="n-desc">Microsoft's internal AI red team tool, open-sourced Feb 2024. Battle-tested on Azure OpenAI, Copilot, and enterprise AI systems. Cited in academic research; integrates with Jupyter, Azure AI Foundry, and CI/CD pipelines.</div><div class="n-url">github.com/microsoft/PyRIT</div></a>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SECTION 06 — FRAMEWORKS
+     ══════════════════════════════════ -->
+<div id="frameworks" class="section-header">
+  <span class="sec-num">06</span>
+  <div class="sec-text">
+    <div class="sec-title">Framework Alignment Reference</div>
+    <div class="sec-desc">7 authoritative frameworks. NIST AI RMF and ISO 42001 form the governance backbone — Forrester's AEGIS crosswalk maps 100% of enterprise controls to both.</div>
+  </div>
+  <span class="sec-line"></span>
+</div>
+
+<div class="fw-grid">
+  <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" class="fw-card" style="background:var(--blue-bg);border-color:var(--blue-b)"><span class="fw-badge" style="background:#dbeafe;color:#1d4ed8">NIST · Voluntary</span><div class="fw-name">NIST AI RMF 1.0</div><div class="fw-scope">4-function lifecycle (Govern, Map, Measure, Manage) for any AI system. Updated April 2026 with Critical Infrastructure profile. Referenced in 100% of enterprise AI governance crosswalks. De facto global standard.</div><div class="fw-map">Maps to: ISO 42001 · EU AI Act · SOC 2 AI · FedRAMP</div><div class="fw-url">↗ nist.gov/itl/ai-risk-management-framework</div></a>
+
+  <a href="https://genai.owasp.org/llm-top-10/" target="_blank" class="fw-card" style="background:var(--rose-bg);border-color:var(--rose-b)"><span class="fw-badge" style="background:#fee2e2;color:#b91c1c">OWASP · Community</span><div class="fw-name">OWASP LLM Top 10 · 2025</div><div class="fw-scope">10 LLM-specific vulnerability classes. 2025 adds RAG, vector, agentic AI threats. Maps to 34 of 39 controls in Forrester AEGIS AI governance crosswalk. Prompt injection #1 for 2 consecutive years.</div><div class="fw-map">Maps to: NIST AI RMF · MITRE ATLAS · OWASP ASVS</div><div class="fw-url">↗ genai.owasp.org/llm-top-10</div></a>
+
+  <a href="https://atlas.mitre.org/" target="_blank" class="fw-card" style="background:var(--violet-bg);border-color:var(--violet-b)"><span class="fw-badge" style="background:#ede9fe;color:#6d28d9">MITRE · Research</span><div class="fw-name">MITRE ATLAS</div><div class="fw-scope">Adversarial TTP knowledge base for ML systems. Bridges AI safety and security operations. Integrates with SIEM, SOAR, and red team tooling. Referenced by CAISP, SANS, and government AI security programs.</div><div class="fw-map">Maps to: ATT&CK · NIST AI RMF · OWASP LLM Top 10</div><div class="fw-url">↗ atlas.mitre.org</div></a>
+
+  <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" class="fw-card" style="background:var(--pink-bg);border-color:var(--pink-b)"><span class="fw-badge" style="background:#fce7f3;color:#be185d">EU Law · Binding</span><div class="fw-name">EU AI Act</div><div class="fw-scope">Legally binding. High-risk AI enforcement August 2026. Fines up to €35M or 7% global revenue. Requires risk management, data governance, transparency, human oversight, and accuracy/robustness. Executive personal liability in 2026.</div><div class="fw-map">Maps to: ISO 42001 · NIST AI RMF · GDPR · ISO 27001</div><div class="fw-url">↗ digital-strategy.ec.europa.eu</div></a>
+
+  <a href="https://www.iso.org/standard/81230.html" target="_blank" class="fw-card" style="background:var(--green-bg);border-color:var(--green-b)"><span class="fw-badge" style="background:#dcfce7;color:#15803d">ISO · Certifiable</span><div class="fw-name">ISO/IEC 42001:2023</div><div class="fw-scope">First certifiable international AI Management System standard. External audit ready. Forms the management backbone that NIST AI RMF, EU AI Act conformity workflows, and SOC 2 AI Trust extensions all align to.</div><div class="fw-map">Maps to: NIST AI RMF · ISO 27001 · EU AI Act · SOC 2</div><div class="fw-url">↗ iso.org/standard/81230.html</div></a>
+
+  <a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" target="_blank" class="fw-card" style="background:var(--cyan-bg);border-color:var(--cyan-b)"><span class="fw-badge" style="background:#cffafe;color:#0e7490">NIST · Federal/FedRAMP</span><div class="fw-name">NIST SP 800-53 Rev 5 + AI Overlay</div><div class="fw-scope">800+ controls with AI overlay mapping RA, SC, SI, SA, CA families to ML pipeline security. Required for FedRAMP High AI deployments. Directly relevant to Connecticut FNMS and government AI integrations.</div><div class="fw-map">Maps to: FedRAMP · CMMC · FISMA · ISO 27001</div><div class="fw-url">↗ csrc.nist.gov/publications/detail/sp/800-53/rev-5/final</div></a>
+
+  <a href="https://cloudsecurityalliance.org/research/topics/artificial-intelligence/" target="_blank" class="fw-card" style="background:var(--amber-bg);border-color:var(--amber-b)"><span class="fw-badge" style="background:#fef9c3;color:#a16207">CSA · Cloud + Agentic</span><div class="fw-name">CSA AI Safety + MAESTRO</div><div class="fw-scope">CSA AI governance + MAESTRO 7-layer agentic AI threat model (Feb 2025). Only framework purpose-built for multi-agent architectures. Essential for Flamoral 45-microservice architecture and any autonomous AI deployment.</div><div class="fw-map">Maps to: NIST AI RMF · OWASP LLM · CSA CCM · ISO 42001</div><div class="fw-url">↗ cloudsecurityalliance.org/ai</div></a>
+</div>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<footer>
+  <strong>AI Security by Design · Comprehensive Framework · April 2026</strong><br>
+  <span style="font-size:13px;margin-top:8px;display:block">Principal AI Platform Architecture · Kenny Ogunlowo · Citadel Cloud Management · Houston, TX<br>
+  <span style="font-size:11px;opacity:.7">Sources: IBM X-Force 2026 · Verizon DBIR 2025 · Stanford AI Index · ENISA · OWASP · NIST · MITRE · International AI Safety Report 2026 · Palo Alto Networks · Practical DevSecOps</span></span>
+  <div class="footer-links">
+    <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank">NIST AI RMF</a>
+    <a href="https://genai.owasp.org/llm-top-10/" target="_blank">OWASP LLM Top 10</a>
+    <a href="https://atlas.mitre.org/" target="_blank">MITRE ATLAS</a>
+    <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">EU AI Act</a>
+    <a href="https://www.iso.org/standard/81230.html" target="_blank">ISO/IEC 42001</a>
+    <a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" target="_blank">NIST 800-53</a>
+    <a href="https://cloudsecurityalliance.org/research/topics/artificial-intelligence/" target="_blank">CSA AI Safety</a>
+    <a href="https://github.com/microsoft/PyRIT" target="_blank">PyRIT</a>
+    <a href="https://github.com/leondz/garak" target="_blank">Garak</a>
+    <a href="https://slsa.dev/" target="_blank">SLSA</a>
+    <a href="https://www.promptfoo.dev/" target="_blank">Promptfoo</a>
+    <a href="https://www.evidentlyai.com/" target="_blank">Evidently AI</a>
+  </div>
+  <div style="margin-top:18px;font-size:11px;color:#334155">
+    11 Domains · 80+ Controls · 12 Intel Stats · 10 LLM Threat Classes · 13 Tools · 8 Certifications · 16 Resource Nodes · 7 Framework Alignments
+  </div>
+</footer>
+</body>
+</html>
