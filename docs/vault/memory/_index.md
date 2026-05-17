@@ -8,14 +8,18 @@ tags: [index, memory]
 
 Project memory mirrored from `.claude/memory/`. Refreshed via `make vault-sync`.
 
-## Notes
+## 8-Type Memory System
 
-- [[project-context|Project Context]]
-- [[architecture-decisions|Architecture Decisions]]
-- [[agent-learnings|Agent Learnings]]
-- [[error-patterns|Error Patterns]]
-- [[deployment-history|Deployment History]]
-- [[team-preferences|Team Preferences]]
+| Type | File | Purpose |
+|------|------|---------|
+| Project | [[project-context]] | Identity, state, stack, principles |
+| Architecture | [[architecture-decisions]] | ADRs with context and rationale |
+| Agent | [[agent-learnings]] | Cross-agent patterns and integration notes |
+| Error | [[error-patterns]] | Known issues, fixes, prevention rules |
+| Deployment | [[deployment-history]] | Chronological deployment log |
+| Team | [[team-preferences]] | Conventions, style, workflow preferences |
+| Workflow | [[workflow-patterns]] | Context/harness/memory engineering patterns |
+| Tools | [[tool-integrations]] | MCP, models, IDEs, guardrails, observability |
 
 ## Vault Links
 

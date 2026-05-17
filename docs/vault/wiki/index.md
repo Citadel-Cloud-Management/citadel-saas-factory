@@ -3,8 +3,8 @@ name: Wiki Index
 description: Content-oriented catalog of every wiki page. The LLM's first lookup when answering questions.
 tags: [wiki, index, catalog]
 layer: wiki
-page_count: 0
-last_updated: 2026-04-12
+page_count: 7
+last_updated: 2026-05-17
 ---
 
 # Wiki Index
@@ -56,11 +56,16 @@ _No entity pages yet. Run `/project:wiki-ingest` on raw sources to start populat
 > Cross-cutting topics that span multiple entities. When the same idea shows up in three or more sources, it earns its own concept page.
 
 <!-- wiki-index:concepts:start -->
-- _multi-tenancy_ — pending
-- _canary-deploys_ — pending
-- _hallucination-prevention_ — pending
-- _knowledge-graphs_ — pending
-- _swarm-orchestration_ — pending
+- _context-engineering_ — CLAUDE.md, rules, skills, hooks layered loading system
+- _harness-engineering_ — 98.4% infrastructure / 1.6% AI logic (VILA-Lab research)
+- _memory-engineering_ — 8-type memory system, auto-memory, vault wiki compounding
+- _multi-tenancy_ — PostgreSQL RLS, Keycloak realm isolation
+- _canary-deploys_ — ArgoCD progressive rollout with Linkerd traffic splitting
+- _hallucination-prevention_ — Triple-layer guardrails (Guardrails AI + NeMo + DeepEval)
+- _knowledge-graphs_ — Graphify Tree-sitter AST, Obsidian vault visualization
+- _swarm-orchestration_ — Ruflo 314 MCP tools, mesh topology, backbone 10-layer framework
+- _deny-first-permissions_ — Strictest rule wins across 7 independent safety layers
+- _graduated-compaction_ — 5-layer pipeline (Budget → Snip → Microcompact → Collapse → Auto)
 <!-- wiki-index:concepts:end -->
 
 ---
@@ -79,6 +84,12 @@ _No entity pages yet. Run `/project:wiki-ingest` on raw sources to start populat
 > System-level design pages. Fed by Graphify's AST output and human-authored ADRs.
 
 <!-- wiki-index:architecture:start -->
+- [[../architecture/tech-stack|Tech Stack]] — 12-layer architecture overview
+- [[../architecture/adr-001-fastapi|ADR-001 FastAPI]] — Backend framework choice
+- [[../architecture/adr-002-postgresql|ADR-002 PostgreSQL]] — Database choice
+- [[../architecture/adr-003-k3s|ADR-003 K3s]] — Orchestration choice
+- [[../architecture/adr-004-argocd|ADR-004 ArgoCD]] — GitOps delivery
+- [[../architecture/adr-005-linkerd|ADR-005 Linkerd]] — Service mesh choice
 <!-- wiki-index:architecture:end -->
 
 ---
@@ -88,6 +99,8 @@ _No entity pages yet. Run `/project:wiki-ingest` on raw sources to start populat
 > Runbooks, incident playbooks, deployment procedures — as distilled by the wiki curator, not the raw runbook text.
 
 <!-- wiki-index:operations:start -->
+- [[../runbooks/deployment-rollback|Deployment & Rollback]] — ArgoCD deployment procedures
+- [[../runbooks/incident-response|Incident Response]] — Escalation and resolution playbook
 <!-- wiki-index:operations:end -->
 
 ---
@@ -106,6 +119,13 @@ _No entity pages yet. Run `/project:wiki-ingest` on raw sources to start populat
 > Reusable design patterns distilled from multiple sources — the Citadel playbook as it accumulates.
 
 <!-- wiki-index:patterns:start -->
+- _harness-first_ — Infrastructure differentiates, not model capability
+- _deny-first-permissions_ — Strictest rule always wins
+- _summary-only-subagents_ — Child verbosity doesn't explode parent context
+- _file-based-inspectable-memory_ — Markdown, hierarchical, searchable without embeddings
+- _wiki-first-lookup_ — Compiled knowledge before raw source grepping
+- _skill-over-command_ — Skills support files, frontmatter, subagent execution
+- _hook-over-instruction_ — Deterministic enforcement over probabilistic guidance
 <!-- wiki-index:patterns:end -->
 
 ---

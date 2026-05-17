@@ -1,16 +1,16 @@
 # Default owner
-* @kogunlowo123
+* @Citadel-Cloud-Management
 
 # Backend
-/backend/ @kogunlowo123
+/backend/ @Citadel-Cloud-Management
 
 # Frontend
-/frontend/ @kogunlowo123
+/frontend/ @Citadel-Cloud-Management
 
 # Security
-/security/ @kogunlowo123
-/.github/workflows/ @kogunlowo123
+/security/ @Citadel-Cloud-Management
+/.github/workflows/ @Citadel-Cloud-Management
 
 # Infrastructure
-/infrastructure/ @kogunlowo123
-/gitops/ @kogunlowo123
+/infrastructure/ @Citadel-Cloud-Management
+/gitops/ @Citadel-Cloud-Management
