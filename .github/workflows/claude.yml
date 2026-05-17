@@ -1,42 +1,78 @@
-# Claude Code — AI-Powered PR Review and Issue Resolution
+# Claude Code — AI-Powered PR Review, Issue Resolution, and Agent Automation
+# Uses official anthropics/claude-code-action@v1
+# Setup: Add ANTHROPIC_API_KEY to repository secrets
+# Install: Run /install-github-app in Claude Code CLI, or install https://github.com/apps/claude
 name: Claude Code
 
 on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
   pull_request:
     types: [opened, synchronize]
   issues:
-    types: [opened, labeled]
-  issue_comment:
-    types: [created]
+    types: [opened, assigned, labeled]
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
   issues: write
+  id-token: write
 
 jobs:
-  review:
+  # Respond to @claude mentions in issues and PRs
+  claude-interact:
+    name: Claude Agent
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          trigger_phrase: "@claude"
+          claude_args: "--model claude-sonnet-4-6 --max-turns 15"
+
+  # Auto-review new and updated PRs
+  claude-pr-review:
     name: Claude PR Review
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Review with Claude
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          echo "Claude Code PR review"
-          echo "Set ANTHROPIC_API_KEY in repo secrets to enable"
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Review this pull request for:
+            1. Code quality and adherence to project conventions in CLAUDE.md
+            2. Security vulnerabilities (hardcoded secrets, SQL injection, XSS)
+            3. Test coverage — flag untested code paths
+            4. Performance issues (N+1 queries, missing indexes, unbounded selects)
 
-  resolve:
+            Post a review comment summarizing findings. Be specific with file:line references.
+          claude_args: "--model claude-sonnet-4-6 --max-turns 10"
+
+  # Auto-resolve issues labeled 'claude' or 'ready-for-agent'
+  claude-issue-resolve:
     name: Claude Issue Resolution
-    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'claude')
+    if: |
+      github.event_name == 'issues' && (
+        contains(github.event.issue.labels.*.name, 'claude') ||
+        contains(github.event.issue.labels.*.name, 'ready-for-agent')
+      )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Resolve with Claude
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          echo "Claude Code issue resolution"
-          echo "Label issues with 'claude' for AI resolution"
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Read the issue description and implement a fix.
+            Follow the project conventions in CLAUDE.md.
+            Write tests for any new code.
+            Create a pull request with a descriptive title and summary.
+          claude_args: "--model claude-sonnet-4-6 --max-turns 20"
