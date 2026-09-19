@@ -27,10 +27,10 @@ variable "environment" {
 }
 
 module "server" {
-  source   = "./modules/server"
-  count    = var.server_count
-  name     = "citadel-${var.environment}-${count.index}"
-  ssh_key  = var.ssh_public_key
+  source  = "./modules/server"
+  count   = var.server_count
+  name    = "citadel-${var.environment}-${count.index}"
+  ssh_key = var.ssh_public_key
 }
 
 output "server_ids" {
