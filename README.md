@@ -447,3 +447,60 @@ Copyright (c) Citadel Cloud Management
 <sub>Built with Claude Code. Powered by 265 autonomous agents. $0/month software cost.</sub>
 
 </div>
+
+<!-- project-structure -->
+## Project structure
+
+```text
+├── .antigravity/
+├── .claude/
+├── .codegen/
+├── .codex/
+├── .continue/
+├── .cursor/
+├── .daytona/
+├── .devin/
+├── .factory/
+├── .github/
+├── .jules/
+├── .windsurf/
+├── backbone/
+│   ├── agents/
+│   ├── data/
+│   ├── governance/
+│   ├── memory/
+│   ├── observability/
+│   ├── orchestrator/
+│   ├── policies/
+│   ├── rag/
+│   └── … 10 more
+├── backend/
+│   ├── app/
+│   ├── tests/
+│   ├── CLAUDE.md
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── alembic.ini
+│   └── pyproject.toml
+├── bin/
+│   └── cli.js
+├── compliance/
+│   ├── automation/
+│   ├── checklists/
+│   ├── evidence/
+│   ├── frameworks/
+│   ├── policies/
+│   └── README.md
+├── docs/
+│   ├── adr/
+│   ├── agents/
+│   ├── references/
+│   ├── runbooks/
+│   ├── templates/
+… (truncated)
+```
+
+<!-- architecture -->
+## Architecture
+
+![Architecture diagram](docs/architecture.svg)

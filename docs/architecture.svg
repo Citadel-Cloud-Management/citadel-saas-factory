@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 888 748" width="888" height="748" role="img" aria-label="citadel-saas-factory architecture">
+<title>citadel-saas-factory architecture</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="888" height="748" fill="#ffffff"/>
+<text x="24" y="34" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="600" fill="#0f172a">citadel-saas-factory</text>
+<text x="24" y="56" font-family="Segoe UI,Arial,sans-serif" font-size="13" fill="#475569">Top-level components. Stack: Python, TypeScript, Terraform, HTML. Generated from the repository layout.</text>
+<rect x="24" y="80" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="38" y="104" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">docs/</text>
+<text x="38" y="126" font-family="Consolas,monospace" font-size="12" fill="#334155">87 files</text>
+<text x="38" y="144" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="38" y="162" font-family="Consolas,monospace" font-size="12" fill="#334155">adr</text>
+<text x="38" y="180" font-family="Consolas,monospace" font-size="12" fill="#334155">agents</text>
+<text x="38" y="198" font-family="Consolas,monospace" font-size="12" fill="#334155">agents.md</text>
+<rect x="312" y="80" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="326" y="104" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">starter-kit/</text>
+<text x="326" y="126" font-family="Consolas,monospace" font-size="12" fill="#334155">52 files</text>
+<text x="326" y="144" font-family="Consolas,monospace" font-size="12" fill="#334155">.claude</text>
+<text x="326" y="162" font-family="Consolas,monospace" font-size="12" fill="#334155">.env.example</text>
+<text x="326" y="180" font-family="Consolas,monospace" font-size="12" fill="#334155">.github</text>
+<text x="326" y="198" font-family="Consolas,monospace" font-size="12" fill="#334155">.gitignore</text>
+<rect x="600" y="80" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="614" y="104" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">backend/</text>
+<text x="614" y="126" font-family="Consolas,monospace" font-size="12" fill="#334155">44 files</text>
+<text x="614" y="144" font-family="Consolas,monospace" font-size="12" fill="#334155">CLAUDE.md</text>
+<text x="614" y="162" font-family="Consolas,monospace" font-size="12" fill="#334155">Dockerfile</text>
+<text x="614" y="180" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="614" y="198" font-family="Consolas,monospace" font-size="12" fill="#334155">alembic.ini</text>
+<rect x="24" y="242" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="38" y="266" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">backbone/</text>
+<text x="38" y="288" font-family="Consolas,monospace" font-size="12" fill="#334155">42 files</text>
+<text x="38" y="306" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="38" y="324" font-family="Consolas,monospace" font-size="12" fill="#334155">__init__.py</text>
+<text x="38" y="342" font-family="Consolas,monospace" font-size="12" fill="#334155">__main__.py</text>
+<text x="38" y="360" font-family="Consolas,monospace" font-size="12" fill="#334155">agents</text>
+<rect x="312" y="242" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="326" y="266" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">infrastructure/</text>
+<text x="326" y="288" font-family="Consolas,monospace" font-size="12" fill="#334155">38 files</text>
+<text x="326" y="306" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="326" y="324" font-family="Consolas,monospace" font-size="12" fill="#334155">agent-protocols</text>
+<text x="326" y="342" font-family="Consolas,monospace" font-size="12" fill="#334155">ansible</text>
+<text x="326" y="360" font-family="Consolas,monospace" font-size="12" fill="#334155">helm</text>
+<rect x="600" y="242" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="614" y="266" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">frontend/</text>
+<text x="614" y="288" font-family="Consolas,monospace" font-size="12" fill="#334155">25 files</text>
+<text x="614" y="306" font-family="Consolas,monospace" font-size="12" fill="#334155">CLAUDE.md</text>
+<text x="614" y="324" font-family="Consolas,monospace" font-size="12" fill="#334155">Dockerfile</text>
+<text x="614" y="342" font-family="Consolas,monospace" font-size="12" fill="#334155">next-env.d.ts</text>
+<text x="614" y="360" font-family="Consolas,monospace" font-size="12" fill="#334155">next.config.js</text>
+<rect x="24" y="404" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="38" y="428" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">scripts/</text>
+<text x="38" y="450" font-family="Consolas,monospace" font-size="12" fill="#334155">21 files</text>
+<text x="38" y="468" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="38" y="486" font-family="Consolas,monospace" font-size="12" fill="#334155">bootstrap.sh</text>
+<text x="38" y="504" font-family="Consolas,monospace" font-size="12" fill="#334155">deploy.sh</text>
+<text x="38" y="522" font-family="Consolas,monospace" font-size="12" fill="#334155">detect-business.sh</text>
+<rect x="312" y="404" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="326" y="428" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">compliance/</text>
+<text x="326" y="450" font-family="Consolas,monospace" font-size="12" fill="#334155">19 files</text>
+<text x="326" y="468" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="326" y="486" font-family="Consolas,monospace" font-size="12" fill="#334155">automation</text>
+<text x="326" y="504" font-family="Consolas,monospace" font-size="12" fill="#334155">checklists</text>
+<text x="326" y="522" font-family="Consolas,monospace" font-size="12" fill="#334155">evidence</text>
+<rect x="600" y="404" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="614" y="428" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">security/</text>
+<text x="614" y="450" font-family="Consolas,monospace" font-size="12" fill="#334155">16 files</text>
+<text x="614" y="468" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="614" y="486" font-family="Consolas,monospace" font-size="12" fill="#334155">ai-security-by-design.html</text>
+<text x="614" y="504" font-family="Consolas,monospace" font-size="12" fill="#334155">ai-security-framework.md</text>
+<text x="614" y="522" font-family="Consolas,monospace" font-size="12" fill="#334155">falco</text>
+<rect x="24" y="566" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="38" y="590" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">gitops/</text>
+<text x="38" y="612" font-family="Consolas,monospace" font-size="12" fill="#334155">10 files</text>
+<text x="38" y="630" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="38" y="648" font-family="Consolas,monospace" font-size="12" fill="#334155">argocd</text>
+<text x="38" y="666" font-family="Consolas,monospace" font-size="12" fill="#334155">base</text>
+<text x="38" y="684" font-family="Consolas,monospace" font-size="12" fill="#334155">overlays</text>
+<rect x="312" y="566" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="326" y="590" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">models/</text>
+<text x="326" y="612" font-family="Consolas,monospace" font-size="12" fill="#334155">10 files</text>
+<text x="326" y="630" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="326" y="648" font-family="Consolas,monospace" font-size="12" fill="#334155">catalog.yaml</text>
+<text x="326" y="666" font-family="Consolas,monospace" font-size="12" fill="#334155">embeddings.yaml</text>
+<text x="326" y="684" font-family="Consolas,monospace" font-size="12" fill="#334155">engines</text>
+<rect x="600" y="566" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="614" y="590" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">monitoring/</text>
+<text x="614" y="612" font-family="Consolas,monospace" font-size="12" fill="#334155">7 files</text>
+<text x="614" y="630" font-family="Consolas,monospace" font-size="12" fill="#334155">README.md</text>
+<text x="614" y="648" font-family="Consolas,monospace" font-size="12" fill="#334155">alertmanager</text>
+<text x="614" y="666" font-family="Consolas,monospace" font-size="12" fill="#334155">grafana</text>
+<text x="614" y="684" font-family="Consolas,monospace" font-size="12" fill="#334155">loki</text>
+</svg>
